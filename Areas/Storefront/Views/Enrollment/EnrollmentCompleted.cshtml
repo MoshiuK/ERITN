@@ -1,0 +1,35 @@
+﻿@model AccessManagement.Framework.Enrollment.IEnrollmentProcess
+@using AccessManagement.Framework.Tenants
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+}
+
+@{
+  var theme = (TenantTheme)ViewBag.Theme;
+}
+
+<div class="row storefront-enroll page-header">
+  <div class="col-md-12">
+    <h3 class="title">ENROLLMENT COMPLETE</h3>
+  </div>
+</div>
+
+<div class="row storefront-enroll general-section border-bottom">
+  <div class="col-md-12">
+    <h4 class="subtitle">Thank you for your participation in the @theme.BrandCaption.</h4>
+    <p>
+      Your enrollment is complete and we've sent a confirmation email to @Model.DisplayEmail for you.
+    </p>
+    <p>
+      Now that you are enrolled, we will work to get your expedited access approved.  The approval process usually takes less than 24 hours, but
+      it can take a few days during busy periods.
+    </p>
+    <p>
+      We will send you another email when you are approved for expedited access or if we need any additional information during the approval process.
+    </p>
+    <div class="m-t-lg"></div>
+    <h4>Thanks again!</h4>
+    <small class="text-muted">The @theme.BrandCaption Team.</small>
+    <div class="m-t-lg"></div>
+  </div>
+</div>

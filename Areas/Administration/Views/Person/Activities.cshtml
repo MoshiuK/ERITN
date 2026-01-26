@@ -1,0 +1,31 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.ActivityPageViewModel
+@{
+  Layout = "_PersonTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    @if (Model.PageOfContent.Metadata.TotalCount == 0)
+    {
+      var nothingToSee = new NotFoundPane("No activity available.", new FaGlyph("list", GlyphStyles.X5, cssClasses: "text-info"), "There was no recent activity recorded for this person.");
+      @Html.DisplayFor(_ => nothingToSee)
+    }
+    else
+    {
+      <div class="timeline timeline-center">
+        @foreach (var entry in Model.PageOfContent.Data)
+        {
+          @Html.DisplayFor(_ => entry)
+        }
+      </div>
+    }
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    @Html.DisplayFor(m => m.Pager)
+  </div>
+</div>

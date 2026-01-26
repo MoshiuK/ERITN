@@ -1,0 +1,17 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.JumbotronSectionDefinition
+@{
+  var navId = string.IsNullOrEmpty(Model.NavCaption) ? string.Empty : $"id=page-{Model.NavCaption.ToLowerInvariant()}";
+  var inverse = Model.IsBackgroundInverse ? "brand-inverse" : string.Empty;
+}
+<div @navId class="storefront-landing @inverse">
+  <div class="jumbotron-section" style="background: url('@Model.BackgroundSplash') 0 0 no-repeat">
+    <div>
+      <h1>@Html.DisplayFor(m => m.Title)</h1>
+      <h2>@Html.DisplayFor(m => m.Subtitle)</h2>
+    </div>
+    @if (Model.IsSignUpShown)
+    {
+      @Html.DisplayFor(m => m.SignUpViewDefinition)
+    }
+  </div>
+</div>

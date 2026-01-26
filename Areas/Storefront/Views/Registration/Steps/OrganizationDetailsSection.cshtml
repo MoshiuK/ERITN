@@ -1,0 +1,43 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.RegisterPageViewModel
+<section>
+  <div class="well well-sm description">
+    <h4>@Html.ValueFor(m => m.PageContent.OrganizationDetailsStep.Title)</h4>
+    <p>@Html.ValueFor(m => m.PageContent.OrganizationDetailsStep.Description)</p>
+  </div>
+  <div class="organization-details row">
+    <div class="col-md-offset-3 col-md-6">
+      <div class="form-group">
+        @Html.LabelFor(m => m.OrganizationName, Model.PageContent.OrganizationDetailsStep.OrganizationNameCaption)
+        @Html.EditorFor(m => m.OrganizationName)
+        @Html.ValidationMessageFor(m => m.OrganizationName)
+      </div>
+      <div class="form-group">
+        @Html.LabelFor(m => m.OrganizationLocation, Model.PageContent.OrganizationDetailsStep.LocationCaption)
+        @Html.EditorFor(m => m.OrganizationLocation)
+        @Html.ValidationMessageFor(m => m.OrganizationLocation)
+        
+        @Html.HiddenFor(m => m.OrganizationPlaceId)
+      </div>
+      @if (Model.PageContent.OrganizationDetailsStep.IsLogoCollected)
+      {
+        <div class="form-group">
+          @Html.LabelFor(m => m.OrganizationLogo, Model.PageContent.OrganizationDetailsStep.LogoCaption)
+          @Html.EditorFor(m => m.OrganizationLogo)
+          @Html.ValidationMessageFor(m => m.OrganizationLogo)
+        </div>
+      }
+      <div class="form-group">
+        @Html.LabelFor(m => m.PrimaryContact.Name)
+        @Html.EditorFor(m => m.PrimaryContact.Name)
+      </div>
+      <div class="form-group">
+        @Html.LabelFor(m => m.PrimaryContact.Email)
+        @Html.EditorFor(m => m.PrimaryContact.Email)
+      </div>
+      <div class="form-group">
+        @Html.LabelFor(m => m.PrimaryContact.Phone)
+        @Html.EditorFor(m => m.PrimaryContact.Phone)
+      </div>
+    </div>
+  </div>
+</section>

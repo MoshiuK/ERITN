@@ -1,0 +1,2010 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Juillet.Azure</name>
+    </assembly>
+    <members>
+        <member name="T:Juillet.Azure.AutofacRegistrationExtensions">
+            <summary>
+            Registration methods to register components in this assembly with the <see cref="T:Autofac.ContainerBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.AutofacRegistrationExtensions.RegisterCloudDataStorageAccountConnectionProvider(Autofac.ContainerBuilder,System.String)">
+            <summary>
+            Registers the cloud data storage account connection provider.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="connectionName">Name of the connection.</param>
+        </member>
+        <member name="M:Juillet.Azure.AutofacRegistrationExtensions.RegisterCloudDiagnosticsStorageAccountConnectionProvider(Autofac.ContainerBuilder,System.String)">
+            <summary>
+            Registers the cloud diagnostics storage account connection provider.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="connectionName">Name of the connection.</param>
+        </member>
+        <member name="M:Juillet.Azure.AutofacRegistrationExtensions.RegisterCloudStorageMetadata(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the cloud storage metadata.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.Azure.AutofacRegistrationExtensions.RegisterCloudConfigurationManager(Autofac.ContainerBuilder,System.String,System.String)">
+            <summary>
+            Registers the cloud configuration manager, configuration item azure table and cloud configuration store.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="environmentTag">The environment tag.</param>
+            <param name="instanceTag">The instance tag.</param>
+        </member>
+        <member name="M:Juillet.Azure.AutofacRegistrationExtensions.RegisterAppServiceConfigurationManager(Autofac.ContainerBuilder,System.String,System.String)">
+            <summary>
+            Registers the application service configuration manager.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="environmentTag">The environment tag.</param>
+            <param name="instanceTag">The instance tag.</param>
+        </member>
+        <member name="M:Juillet.Azure.AutofacRegistrationExtensions.RegisterAvatarStorage(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the avatar storage.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.Azure.AutofacRegistrationExtensions.RegisterMessageNotificationStorage(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the message notification storage.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="T:Juillet.Azure.AzureExtensionMethods">
+            <summary>
+            Extension methods for types in or used by the Windows Azure SDK.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.AzureExtensionMethods.ValidateMetadata(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Validates the metadata in the name value collection.
+            </summary>
+            <param name="nameValueCollection">The NVC.</param>
+        </member>
+        <member name="T:Juillet.Azure.AzureRuntimeEnvironment">
+            <summary>
+            Support class for getting Azure runtime environment information for web apps and web jobs.
+            </summary>
+            <remarks>
+            Based on details at https://github.com/projectkudu/kudu/wiki/Azure-runtime-environment 
+            and at https://github.com/projectkudu/kudu/wiki/Web-Jobs#environment-settings.
+            </remarks>
+        </member>
+        <member name="P:Juillet.Azure.AzureRuntimeEnvironment.WebSiteName">
+            <summary>
+            Gets the name of the web site.
+            </summary>
+            <value>
+            The name of the web site.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.AzureRuntimeEnvironment.WebSiteHost">
+            <summary>
+            Gets the web site host.
+            </summary>
+            <value>
+            The web site host.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.AzureRuntimeEnvironment.WebSiteInstance">
+            <summary>
+            Gets the web site instance.
+            </summary>
+            <value>
+            The web site instance.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.AzureRuntimeEnvironment.HomeFolder">
+            <summary>
+            Gets the home folder.
+            </summary>
+            <value>
+            The home folder.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.AzureRuntimeEnvironment.AppDataFolder">
+            <summary>
+            Gets the application data folder.
+            </summary>
+            <value>
+            The application data folder.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.AzureRuntimeEnvironment.TempFolder">
+            <summary>
+            Gets the temporary folder.
+            </summary>
+            <value>
+            The temporary folder.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.AzureRuntimeEnvironment.WebJobPath">
+            <summary>
+            Gets the web job path.
+            </summary>
+            <value>
+            The web job path.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.AzureRuntimeEnvironment.WebJobDataPath">
+            <summary>
+            Gets the web job data path.
+            </summary>
+            <value>
+            The web job data path.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.AzureRuntimeEnvironment.WebJobName">
+            <summary>
+            Gets the name of the web job.
+            </summary>
+            <value>
+            The name of the web job.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.AzureRuntimeEnvironment.GetEnvironmentVariableOrDefault(System.String,System.String)">
+            <summary>
+            Gets the value of the specified environment variable or uses the default value.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns>The value of the specified environment variable or the default value.</returns>
+        </member>
+        <member name="T:Juillet.Azure.AzureUtilities">
+            <summary>
+            Utility methods and reusable code for working with Azure.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.AzureUtilities.MaxStringPropertySizeInBytes">
+            <summary>
+            The maximum size of a string property in table storage, in bytes.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.AzureUtilities.MaxStringPropertySizeInChars">
+            <summary>
+            The maximum size of a string property in table storage, in chars.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.AzureUtilities.ContainerNameRegexPattern">
+            <summary>
+            Regular expression for evaluating a valid storage name.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.AzureUtilities.MetadataNameRegexPattern">
+            <summary>
+            Regular expression for evaluating a valid metadata name.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.AzureUtilities.ValidateBlobContainerName(System.String)">
+            <summary>
+            Validates the name for storage account, table, queue or blob.  The name must be alphanumeric,
+            contain no spaces, with only the '-' character used as a separator.
+            </summary>
+            <remarks>
+            Naming rules are explained at: <![CDATA[http://msdn.microsoft.com/en-us/library/windowsazure/dd135715.aspx]]>.
+            </remarks>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:Juillet.Azure.AzureUtilities.ValidateBlobName(System.String)">
+            <summary>
+            Validates the name of a BLOB.  A blob name can contain any combination of characters, but reserved URL characters must be properly escaped. 
+            A blob name must be at least one character long and cannot be more than 1,024 characters long.
+            </summary>
+            <remarks>
+            Naming rules are explained at: <![CDATA[http://msdn.microsoft.com/en-us/library/windowsazure/dd135715.aspx]]>.
+            </remarks>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:Juillet.Azure.AzureUtilities.ValidateMetadataName(System.String)">
+            <summary>
+            Validates the name of the metadata.  Metadata names must adhere to the naming rules for C# identifiers.
+            </summary>
+            <remarks>
+            Naming rules are explained at: <![CDATA[http://msdn.microsoft.com/en-us/library/windowsazure/dd135715.aspx]]>.
+            </remarks>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:Juillet.Azure.AzureUtilities.ValidateTablePartitionKey(System.String)">
+            <summary>
+            Validates the table partition key.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <exception cref="T:System.ArgumentNullException">partitionKey - An Azure partition key cannot be null or blank.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">partitionKey - An Azure partition key must be between 1-512 characters.</exception>
+            <exception cref="T:System.ArgumentException">An Azure partition key cannot contain the characters /, #, ?, \\.</exception>
+        </member>
+        <member name="M:Juillet.Azure.AzureUtilities.IsValidTablePartitionKey(System.String)">
+            <summary>
+            Determines whether the specified partition key is a valid table partition key.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <returns>
+              <c>true</c> if the specified partition key is a valid table partition key; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Juillet.Azure.Configuration.CloudConfigurationStore">
+            <summary>
+            Manages configuration for the application backed by table storage.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.CloudConfigurationStore.Map(Juillet.Azure.Configuration.ConfigurationItemRow)">
+            <summary>
+            Maps the specified row to a <see cref="T:Juillet.Configuration.ConfigurationItem"/>.
+            </summary>
+            <param name="row">The row.</param>
+            <returns>The configuration item</returns>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.CloudConfigurationStore.#ctor(Juillet.Azure.Storage.IAzureTable{Juillet.Azure.Configuration.ConfigurationItemRow})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Configuration.CloudConfigurationStore"/> class.
+            </summary>
+            <param name="configTable">The configuration table.</param>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.CloudConfigurationStore.GetSetting(System.String,System.String)">
+            <summary>
+            Gets the setting for the specified environment and key.
+            </summary>
+            <param name="environment">The environment.</param>
+            <param name="key">The key.</param>
+            <returns>
+            The configuration item associated with the specified environment and key.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.CloudConfigurationStore.GetAllSettings(System.String)">
+            <summary>
+            Gets all configuration settings.
+            </summary>
+            <param name="environment"></param>
+            <returns>
+            All configuration settings in the environment.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.CloudConfigurationStore.Update(System.String,System.Collections.Generic.IEnumerable{Juillet.Configuration.ConfigurationItem})">
+            <summary>
+            Updates the specified configuration items.
+            </summary>
+            <param name="environment">The environment.</param>
+            <param name="configurationItems">The configuration items.</param>
+            <returns>
+            The number of configuration items updates.
+            </returns>
+        </member>
+        <member name="T:Juillet.Azure.Configuration.ConfigurationItemRow">
+            <summary>
+            Represents a row in the runtime configuration table.
+            </summary>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.ConfigurationItemRow.IsReadOnly">
+            <summary>
+            Gets or sets a value indicating whether this instance is read only.
+            </summary>
+            <value>
+            <c>true</c> if this instance is read only; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.ConfigurationItemRow.IsPrivate">
+            <summary>
+            Gets or sets a value indicating whether this instance is private.
+            </summary>
+            <value>
+            <c>true</c> if this instance is private; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.ConfigurationItemRow.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="T:Juillet.Azure.Configuration.AppServiceConfigurationManager">
+            <summary>
+            This implementation of <see cref="T:Juillet.Configuration.IConfigurationManager"/> is intended for use in tools or testing where
+            the full runtime is not needed (or available).  This class delegates to <see cref="T:Juillet.Configuration.IConfigurationManager"/>.
+            </summary>
+            <seealso cref="!:CloudConfigurationManager" />
+        </member>
+        <member name="M:Juillet.Azure.Configuration.AppServiceConfigurationManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Configuration.AppServiceConfigurationManager"/> class.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.AppServiceConfigurationManager.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Configuration.AppServiceConfigurationManager"/> class.
+            </summary>
+            <param name="environmentTag">The environment tag.</param>
+            <param name="instanceTag">The instance tag.</param>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.AppServiceConfigurationManager.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:System.String"/> with the specified key.
+            </summary>
+            <value>
+            The <see cref="T:System.String"/>.
+            </value>
+            <param name="key">The key.</param>
+            <returns></returns>
+            <exception cref="T:System.Configuration.ConfigurationException"></exception>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.AppServiceConfigurationManager.Environment">
+            <summary>
+            Gets the environment tag for this configuration.
+            </summary>
+            <value>
+            The environment tag for this configuration.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.AppServiceConfigurationManager.InstanceTag">
+            <summary>
+            Gets the instance tag.
+            </summary>
+            <value>
+            The instance tag.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.AppServiceConfigurationManager.GetAllSettings">
+            <summary>
+            Gets all configuration settings.
+            </summary>
+            <returns>
+            All configuration settings in the environment.
+            </returns>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.AppServiceConfigurationManager.LastRefreshedUtc">
+            <summary>
+            Gets the last refreshed date time UTC.
+            </summary>
+            <value>
+            The last refreshed date time UTC.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.AppServiceConfigurationManager.Refresh">
+            <summary>
+            Refreshes this instance.
+            </summary>
+        </member>
+        <member name="T:Juillet.Azure.Configuration.LocalCacheConfigurationManager">
+            <summary>
+            A <see cref="T:Juillet.Configuration.IConfigurationManager"/> that loads settings from an <see cref="T:Juillet.Configuration.IConfigurationStore"/> and 
+            caches the result in memory (for the life of this instance) and also on a temporary file on disk.
+            </summary>
+            <remarks>
+            Use the indexer method to get the latest configuration value.  The <see cref="!:CloudConfigurationManager.GetSetting(string,bool)"/>
+            method is used to get any overriden values, then the cache is checked.
+            </remarks>
+            <seealso cref="T:Juillet.Configuration.IConfigurationManager" />
+        </member>
+        <member name="F:Juillet.Azure.Configuration.LocalCacheConfigurationManager.CacheFileAppSettingKey">
+            <summary>
+            The cache file application setting key.
+            </summary>
+            <remarks>
+            Intended for developers to put in their local app config so they can extend the lifetime of
+            the cache file.  This will avoid going remote each time the application starts.
+            </remarks>
+        </member>
+        <member name="F:Juillet.Azure.Configuration.LocalCacheConfigurationManager.DefaultCacheFileValidityPeriod">
+            <summary>
+            The default cache file validity period
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.LocalCacheConfigurationManager.#ctor(System.String,System.String,Juillet.Configuration.IConfigurationStore)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Configuration.LocalCacheConfigurationManager" /> class.
+            </summary>
+            <param name="environment">The environment.</param>
+            <param name="instanceTag">The instance tag. Used to distinguish different instances that use the same environment, 
+            for example website and webjob, or multiple instances of website or webjob.</param>
+            <param name="backingStore">The backing store.</param>
+            <exception cref="T:System.ArgumentNullException">The environment name is required.
+            or
+            The backing store is required.</exception>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.LocalCacheConfigurationManager.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:System.String"/> with the specified key.
+            </summary>
+            <value>
+            The <see cref="T:System.String"/>.
+            </value>
+            <param name="key">The key.</param>
+            <returns></returns>
+            <exception cref="T:System.Configuration.ConfigurationException">Thrown if the key does not exist.</exception>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.LocalCacheConfigurationManager.Environment">
+            <summary>
+            Gets the environment tag for this configuration.
+            </summary>
+            <value>
+            The environment tag for this configuration.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Configuration.LocalCacheConfigurationManager.LastRefreshedUtc">
+            <summary>
+            Gets the last refreshed date time UTC.
+            </summary>
+            <value>
+            The last refreshed date time UTC.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.LocalCacheConfigurationManager.Refresh">
+            <summary>
+            Refreshes this instance.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Configuration.LocalCacheConfigurationManager.GetAllSettings">
+            <summary>
+            Gets all configuration settings.
+            </summary>
+            <returns>
+            All configuration settings in the environment.
+            </returns>
+        </member>
+        <member name="T:Juillet.Azure.JuilletCloudConstants">
+            <summary>
+            Constants used by the library
+            </summary>
+        </member>
+        <member name="T:Juillet.Azure.JuilletCloudConstants.Tables">
+            <summary>
+            Constants that relate to Azure Tables.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.JuilletCloudConstants.Tables.ConfigurationSettings">
+            <summary>
+            The configuration settings table name.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.JuilletCloudConstants.Tables.MessageNotifications">
+            <summary>
+            The message notifications table name.
+            </summary>
+        </member>
+        <member name="T:Juillet.Azure.JuilletCloudConstants.ConnectionStringNames">
+            <summary>
+            Constants that relate to connection strings.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.JuilletCloudConstants.ConnectionStringNames.CloudStorageAccount">
+            <summary>
+            The cloud storage account connection name.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.JuilletCloudConstants.ConnectionStringNames.DiagnosticsStorageAccount">
+            <summary>
+            The diagnostics storage account connection name.
+            </summary>
+        </member>
+        <member name="T:Juillet.Azure.Storage.AddMessageSettings">
+            <summary>
+            Encapsulate extended settings for adding a message to the queue.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.Storage.AddMessageSettings.Default">
+            <summary>
+            The default settings.
+            </summary>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AddMessageSettings.TimeToLive">
+            <summary>
+            Gets or sets the time to live.
+            </summary>
+            <value>
+            The time to live.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AddMessageSettings.InitialVisibilityDelay">
+            <summary>
+            Gets or sets the initial visibility delay.
+            </summary>
+            <value>
+            The initial visibility delay.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AddMessageSettings.Options">
+            <summary>
+            Gets or sets the options.
+            </summary>
+            <value>
+            The options.
+            </value>
+        </member>
+        <member name="T:Juillet.Azure.Storage.AvatarStorage">
+            <summary>
+            Avatar storage using Azure blobs.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AvatarStorage.BuildBlobName(System.String,System.Guid,Juillet.Profile.AvatarSizes)">
+            <summary>
+            Builds the full name of the blob file in storage.
+            </summary>
+            <param name="categoryCode">The category code.</param>
+            <param name="objectId">The object identifier.</param>
+            <param name="size">The size.</param>
+            <returns>A string of the form "categorycode/objectid/size.png".</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AvatarStorage.#ctor(Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.AvatarStorage"/> class.
+            </summary>
+            <param name="provider">The provider.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AvatarStorage.#ctor(Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.AvatarStorage" /> class.
+            </summary>
+            <param name="provider">The provider.</param>
+            <param name="avatarContainerName">Name of the avatar container.</param>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AvatarStorage.SetNoCacheHeader">
+            <summary>
+            Gets or sets a value indicating whether [set no cache header].
+            </summary>
+            <value>
+              <c>true</c> if [set no cache header]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AvatarStorage.AvatarStorageContainerName">
+            <summary>
+            Gets the name of the avatar storage container.
+            </summary>
+            <value>
+            The name of the avatar storage container.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AvatarStorage.StoreAvatarAsync(Juillet.Profile.AvatarSpec)">
+            <summary>
+            Stores the avatar asynchronous.
+            </summary>
+            <param name="spec">The spec.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AvatarStorage.GenerateAndStoreAvatarAsync(System.Guid,System.String,System.String)">
+            <summary>
+            Generates the and store avatar asynchronous.
+            </summary>
+            <param name="objectId">The object identifier.</param>
+            <param name="categoryCode">The category code.</param>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AvatarStorage.GetAvatarInfoAsync(System.String,System.Guid)">
+            <summary>
+            Gets the avatar information asynchronous.
+            </summary>
+            <param name="categoryCode">The category code.</param>
+            <param name="objectId">The object identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AvatarStorage.GetAvatarInfo(System.String,System.Guid)">
+            <summary>
+            Gets the avatar information.
+            </summary>
+            <param name="categoryCode">The category code.</param>
+            <param name="objectId">The object identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AvatarStorage.RemoveAvatarAsync(System.String,System.Guid)">
+            <summary>
+            Removes an avatar, asynchronously.
+            </summary>
+            <param name="categoryCode">The category code.</param>
+            <param name="objectId">The object identifier.</param>
+            <returns>True if the avatar was removed, false otherwise.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AvatarStorage.CopyAvatarAsync(System.String,System.Guid,System.String,System.Guid)">
+            <summary>
+            Copies an avatar from the source to the destination, asynchronously.
+            </summary>
+            <param name="srcCategoryCode">The source category code.</param>
+            <param name="srcObjectId">The source object identifier.</param>
+            <param name="destCategoryCode">The dest category code.</param>
+            <param name="destObjectId">The dest object identifier.</param>
+            <returns>
+            True if the avatar was copied, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Juillet.Azure.Storage.AzureQueue`1">
+            <summary>
+            Implementation of the <see cref="T:Juillet.Azure.Storage.IAzureQueue`1" /> interface to provide generic access to an Azure queue.
+            </summary>
+            <typeparam name="TMessage">The type of the message.</typeparam>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureQueue`1.#ctor(Juillet.Azure.Storage.IAzureStorageMetadata)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.AzureQueue`1"/> class.
+            </summary>
+            <param name="metadata">The metadata.</param>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureQueue`1.QueueName">
+            <summary>
+            Gets the name of the queue.
+            </summary>
+            <value>
+            The name of the queue.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureQueue`1.QueueClient">
+            <summary>
+            Gets the queue client.
+            </summary>
+            <value>
+            The queue client.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureQueue`1.AddMessage(`0,Juillet.Azure.Storage.AddMessageSettings)">
+            <summary>
+            Adds a message to the message queue.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureQueue`1.PeekMessage">
+            <summary>
+            Peeks at the next message in the message queue.
+            </summary>
+            <returns>A message or null if no message is available.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureQueue`1.PeekMessages(System.Int32)">
+            <summary>
+            Peeks at the next set of messages in the message queue.
+            </summary>
+            <param name="maxMessagesToReturn">The maximum messages to return.</param>
+            <returns>A collection of messages, or an empty collection if there are no messages available.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureQueue`1.GetMessage(Juillet.Azure.Storage.GetMessageSettings)">
+            <summary>
+            Gets the message.
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureQueue`1.GetMessages(System.Int32,Juillet.Azure.Storage.GetMessageSettings)">
+            <summary>
+            Gets a collection of messages.
+            </summary>
+            <param name="maxMessagesToReturn">The maximum messages to return.</param>
+            <param name="settings">The settings.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureQueue`1.DeleteMessage(System.String,System.String)">
+            <summary>
+            Deletes the message.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="popReceipt">The pop receipt.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureQueue`1.GetApproximateMessageCount">
+            <summary>
+            Gets an approximate count of the number of messages in a queue.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Juillet.Azure.Storage.AzureQueueMessage`1">
+            <summary>
+            Wrapper for a message retrieved from a queue.
+            </summary>
+            <typeparam name="TMessage">The type of the message.</typeparam>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureQueueMessage`1.#ctor(`0,System.String,System.String,System.Int32,System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.AzureQueueMessage`1"/> class.
+            </summary>
+            <param name="content">The content.</param>
+            <param name="id">The identifier.</param>
+            <param name="popReceipt">The pop receipt.</param>
+            <param name="dequeueCount">The dequeue count.</param>
+            <param name="expirationTime">The expiration time.</param>
+            <param name="insertionTime">The insertion time.</param>
+            <param name="nextVisibleTime">The next visible time.</param>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureQueueMessage`1.Content">
+            <summary>
+            Gets or sets the content.
+            </summary>
+            <value>
+            The content.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureQueueMessage`1.Id">
+            <summary>
+            Gets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureQueueMessage`1.PopReceipt">
+            <summary>
+            Gets the pop receipt.
+            </summary>
+            <value>
+            The pop receipt.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureQueueMessage`1.DequeueCount">
+            <summary>
+            Gets the dequeue count.
+            </summary>
+            <value>
+            The dequeue count.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureQueueMessage`1.ExpirationTime">
+            <summary>
+            Gets the expiration time.
+            </summary>
+            <value>
+            The expiration time.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureQueueMessage`1.InsertionTime">
+            <summary>
+            Gets the insertion time.
+            </summary>
+            <value>
+            The insertion time.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureQueueMessage`1.NextVisibleTime">
+            <summary>
+            Gets the next visible time.
+            </summary>
+            <value>
+            The next visible time.
+            </value>
+        </member>
+        <member name="T:Juillet.Azure.Storage.AzureStorageMetadata">
+            <summary>
+            An implementation of the <see cref="T:Juillet.Azure.Storage.AzureStorageMetadataAttribute"/> class that provides metadata information
+            for table entities marked up with the <see cref="T:Juillet.Azure.Storage.IAzureStorageMetadata"/> attribute.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadata.#ctor(System.Collections.Generic.IEnumerable{Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.AzureStorageMetadata" /> class.
+            </summary>
+            <param name="connectionProviders">The connection providers.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadata.SetResourceName``1(System.String)">
+            <summary>
+            Sets the name of the resource.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="resourceName">Name of the resource.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadata.GetResourceName``1">
+            <summary>
+            Gets the name of the resource.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <returns>The name of the resource</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadata.GetTableServiceClient``1">
+            <summary>
+            Gets the cloud storage account.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <returns>The cloud storage account associated with the entity.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadata.SetConnectionName``1(System.String)">
+            <summary>
+            Sets the name of the connection.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="connectionName">Name of the connection.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadata.EnsureResourceCreatedAsync``1">
+            <summary>
+            Ensures the table created asynchronous.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <returns>True of the table is created, false otherwise.</returns>
+        </member>
+        <member name="T:Juillet.Azure.Storage.AzureStorageMetadataAttribute">
+            <summary>
+            Use this attribute to annotate an entity that will be stored using azure resource settings.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadataAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.AzureStorageMetadataAttribute" /> class.
+            </summary>
+            <param name="resourceName">Name of the storage resource (queue, table, blob container).</param>
+            <param name="connectionName">Name of the connection.</param>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureStorageMetadataAttribute.ResourceName">
+            <summary>
+            Gets or sets the name of the storage resource (queue, blob container, table).
+            </summary>
+            <value>
+            The name of the storage resource (queue, blob container, table).
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureStorageMetadataAttribute.StorageAccountConnectionName">
+            <summary>
+            Gets or sets the name of the storage account connection.
+            </summary>
+            <value>
+            The name of the storage account connection.
+            </value>
+        </member>
+        <member name="T:Juillet.Azure.Storage.AzureStorageMetadataExtensions">
+            <summary>
+            Extension methods for the <see cref="T:Juillet.Azure.Storage.IAzureStorageMetadata"/> class.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadataExtensions.EnsureQueueResourceCreatedAsync``1(Juillet.Azure.Storage.IAzureStorageMetadata)">
+            <summary>
+            Ensures the queue resource is created.
+            </summary>
+            <typeparam name="T">The type associated with the queue</typeparam>
+            <param name="metadata">The metadata.</param>
+            <returns>
+            True if the resource was created, false otherwise
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadataExtensions.EnsureBlobResourceCreatedAsync``1(Juillet.Azure.Storage.IAzureStorageMetadata)">
+            <summary>
+            Ensures the queue resource is created.
+            </summary>
+            <typeparam name="T">The type associated with the queue</typeparam>
+            <param name="metadata">The metadata.</param>
+            <returns>
+            True if the resource was created, false otherwise
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureStorageMetadataExtensions.EnsureTableResourceCreatedAsync``1(Juillet.Azure.Storage.IAzureStorageMetadata)">
+            <summary>
+            Ensures the table resource is created.
+            </summary>
+            <typeparam name="T">The type associated with the table.</typeparam>
+            <param name="metadata">The metadata.</param>
+            <returns>
+            True if the resource was created, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Juillet.Azure.Storage.AzureTable`1">
+            <summary>
+            Implementation of <see ref="IAzureTable"/> to provide generic access to Azure table storage.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.#ctor(Juillet.Azure.Storage.IAzureStorageMetadata)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.AzureTable`1" /> class.
+            </summary>
+            <param name="metadata">The metadata.</param>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureTable`1.TableName">
+            <summary>
+            Gets the name of the table associated with this class.
+            </summary>
+            <value>
+            The name of the table.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.AzureTable`1.TableClient">
+            <summary>
+            Gets the table client.
+            </summary>
+            <value>
+            The table client.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.All">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEnumerable`1" /> for all entities in the storage table.
+            </summary>
+            <returns>
+            All the entities in the table.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.AllAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.AllPartition(System.String)">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEnumerable`1" /> for all entities in the specified partition.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <returns>
+            The collection of entities in the specified partition.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.AllPartitionAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Queries the entire table (all partitions and rows) for entities matching the specified expression.
+            </summary>
+            <param name="expression">The expression.</param>
+            <returns>
+            The collection of entities in the table matching the expression.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.QueryPartition(System.String,System.String)">
+            <summary>
+            Queries the partition.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <param name="expression">The expression.</param>
+            <returns>
+            The collection of entities in the specified partition matching the expression.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.QueryPartitionAsync(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.Get(System.String,System.String)">
+            <summary>
+            Gets the entity matching specified partition and row keys.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <param name="rowKey">The row key.</param>
+            <returns>The entity.</returns>
+            <exception cref="T:Juillet.Exceptions.ObjectNotFoundException">Thrown if a matching entity does not exist.</exception>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.GetAsync(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.Find(System.String,System.String)">
+            <summary>
+            Finds the entity matching the specified partition and row keys.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <param name="rowKey">The row key.</param>
+            <returns>The entity or null if not found.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.FindAsync(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.Insert(`0)">
+            <summary>
+            Adds the specified entity.
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.InsertAsync(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.Insert(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the specified entities.
+            </summary>
+            <param name="entities">The entities.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.InsertAsync(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.InsertOrReplace(`0)">
+            <summary>
+            Adds or update the specified entity.
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.InsertOrReplaceAsync(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.InsertOrReplace(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Add or update the specified collection of entites.
+            </summary>
+            <param name="entities">The entities.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.InsertOrReplaceAsync(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.Delete(`0)">
+            <summary>
+            Deletes the specified entity.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns>True if the entity was deleted.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.DeleteAsync(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.Delete(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Deletes the specified entities.
+            </summary>
+            <param name="entities">The entities.</param>
+            <returns>True if any entity was deleted.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.Replace(`0)">
+            <summary>
+            Update the entity.
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.ReplaceAsync(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.Replace(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Updates the specified entities.
+            </summary>
+            <param name="entities">The entities.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.AzureTable`1.ReplaceAsync(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc />
+        </member>
+        <member name="T:Juillet.Azure.Storage.CloudAccountConnectionProviderBase">
+            <summary>
+            Base class for concrete connection providers to extend and reuser
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.CloudAccountConnectionProviderBase.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.CloudAccountConnectionProviderBase"/> class.
+            </summary>
+            <param name="connectionStringName">Name of the connection.</param>
+            <param name="stateKey">The state key.</param>
+            <exception cref="T:System.Configuration.ConfigurationErrorsException"></exception>
+        </member>
+        <member name="M:Juillet.Azure.Storage.CloudAccountConnectionProviderBase.#ctor(System.String,System.String,Azure.Storage.Blobs.BlobServiceClient)">
+            <summary>
+            Internal constructor, to facilite unit tests. 
+            </summary>
+            <param name="connectionStringName">Name of the connection string.</param>
+            <param name="stateKey">The state key.</param>
+            <param name="storageAccount">The storage account.</param>
+        </member>
+        <member name="P:Juillet.Azure.Storage.CloudAccountConnectionProviderBase.ConnectionStringName">
+            <summary>
+            Gets the name of the connection.
+            </summary>
+            <value>
+            The name of the connection.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.CloudAccountConnectionProviderBase.StorageAccount">
+            <summary>
+            Gets the storage account.
+            </summary>
+            <value>
+            The storage account.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.CloudAccountConnectionProviderBase.TableAccount">
+            <summary>
+            Gets the <see cref="T:Azure.Data.Tables.TableServiceClient"/> instance used to interact with the Azure Table service.
+            </summary>
+        </member>
+        <member name="P:Juillet.Azure.Storage.CloudAccountConnectionProviderBase.QueueAccount">
+            <summary>
+            Gets the <see cref="T:Azure.Storage.Queues.QueueServiceClient"/> instance associated with the current account.
+            </summary>
+        </member>
+        <member name="T:Juillet.Azure.Storage.CloudDiagnosticsStorageAccountStateProvider">
+            <summary>
+            Contributes a <see cref="!:CloudStorageAccount"/> to the runtime context state.
+            </summary>
+            <seealso cref="T:Juillet.Runtime.IRuntimeContextStateProvider" />
+            <seealso cref="T:Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider" />
+        </member>
+        <member name="F:Juillet.Azure.Storage.CloudDiagnosticsStorageAccountStateProvider.DiagnosticsStorageAccountStateKey">
+            <summary>
+            The runtime context state key for the diagnostics storage account provider.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.CloudDiagnosticsStorageAccountStateProvider.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.CloudDiagnosticsStorageAccountStateProvider" /> class.
+            </summary>
+            <exception cref="T:System.Configuration.ConfigurationErrorsException"></exception>
+        </member>
+        <member name="T:Juillet.Azure.Storage.CloudDataStorageAccountConnectionProvider">
+            <summary>
+            An implemenation of the <see cref="T:Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider"/> interface that can 
+            create <see cref="T:Azure.Storage.Blobs.BlobServiceClient"/> instances.
+            objects.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.Storage.CloudDataStorageAccountConnectionProvider.DataStorageAccountStateKey">
+            <summary>
+            The runtime context state key for the data storage account provider.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.CloudDataStorageAccountConnectionProvider.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.CloudDataStorageAccountConnectionProvider"/> class.
+            </summary>
+            <param name="connectionStringName">Name of the connection.</param>
+            <param name="stateKey">The state key.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.CloudDataStorageAccountConnectionProvider.#ctor(System.String,Azure.Storage.Blobs.BlobServiceClient)">
+            <summary>
+            Internal constructor to facilitate unit tests.
+            </summary>
+            <param name="connectionStringName">Name of the connection string.</param>
+            <param name="account">The account.</param>
+        </member>
+        <member name="T:Juillet.Azure.Storage.GetMessageSettings">
+            <summary>
+            Encapsulates settings for how we get messages from a queue.
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.Storage.GetMessageSettings.Default">
+            <summary>
+            The default
+            </summary>
+        </member>
+        <member name="P:Juillet.Azure.Storage.GetMessageSettings.VisibilityTimeout">
+            <summary>
+            Gets or sets the visibility timeout.
+            </summary>
+            <value>
+            The visibility timeout.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.GetMessageSettings.Options">
+            <summary>
+            Gets or sets the options.
+            </summary>
+            <value>
+            The options.
+            </value>
+        </member>
+        <member name="T:Juillet.Azure.Storage.IAzureQueue`1">
+            <summary>
+            Defines the interface to a queue.
+            </summary>
+            <typeparam name="TMessage">The type of the message.</typeparam>
+        </member>
+        <member name="P:Juillet.Azure.Storage.IAzureQueue`1.QueueName">
+            <summary>
+            Gets the name of the queue.
+            </summary>
+            <value>
+            The name of the queue.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureQueue`1.AddMessage(`0,Juillet.Azure.Storage.AddMessageSettings)">
+            <summary>
+            Adds a message to the message queue.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureQueue`1.PeekMessage">
+            <summary>
+            Peeks at the next message in the message queue.
+            </summary>
+            <returns>A message or null if no message is available.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureQueue`1.PeekMessages(System.Int32)">
+            <summary>
+            Peeks at the next set of messages in the message queue.
+            </summary>
+            <param name="maxMessagesToReturn">The maximum messages to return.</param>
+            <returns>
+            A collection of messages, or an empty collection if there are no messages available.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureQueue`1.GetMessage(Juillet.Azure.Storage.GetMessageSettings)">
+            <summary>
+            Gets a message from the message queue.
+            </summary>
+            <param name="settings">The settings.</param>
+            <returns>
+            <returns>A message or null if no message is available.</returns>
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureQueue`1.GetMessages(System.Int32,Juillet.Azure.Storage.GetMessageSettings)">
+            <summary>
+            Gets a collection of messages.
+            </summary>
+            <param name="maxMessagesToReturn">The maximum messages to return.</param>
+            <param name="settings">The settings.</param>
+            <returns>A collection of messages, or an empty collection if there are no messages available.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureQueue`1.DeleteMessage(System.String,System.String)">
+            <summary>
+            Deletes a message from the queue.
+            </summary>
+            <param name="messageId">The message identifier.</param>
+            <param name="popReceipt">The pop receipt.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureQueue`1.GetApproximateMessageCount">
+            <summary>
+            Gets an approximate count of the number of messages in a queue.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Juillet.Azure.Storage.IAzureStorageMetadata">
+            <summary>
+            Defines the interface to an object that handles <see cref="T:Juillet.Azure.Storage.IAzureQueue`1"/> and <see cref="T:Juillet.Azure.Storage.IAzureTable`1"/> registrations.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureStorageMetadata.SetResourceName``1(System.String)">
+            <summary>
+            Sets the name of the resource used with the specified entity type.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="resourceName">Name of the resource.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureStorageMetadata.GetResourceName``1">
+            <summary>
+            Gets the name of the resource.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <returns>
+            The name of the table.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureStorageMetadata.EnsureResourceCreatedAsync``1">
+            <summary>
+            Ensures the resource for the specified entity type is created.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <returns>
+            True if the resource was created.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureStorageMetadata.GetQueueServiceClient``1">
+            <summary>
+            Gets the cloud storage account associated with the specified entity type.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <returns>
+            The cloud storage account used by the specified entity.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureStorageMetadata.GetTableServiceClient``1">
+            <summary>
+            Get the table service client associated with the specified entity type.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <returns>
+            The cloud storage account used by the specified entity.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureStorageMetadata.GetBlobServiceClient``1">
+            <summary>
+            Gets the blob service client associated with the specified entity type.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <returns>The blob service client used by the specified entity.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureStorageMetadata.SetConnectionName``1(System.String)">
+            <summary>
+            Sets the name of the connection to use for the specified type..
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="connectionName">Name of the connection.</param>
+        </member>
+        <member name="T:Juillet.Azure.Storage.IAzureTable`1">
+            <summary>
+            Defines the interface to an Azure table.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="P:Juillet.Azure.Storage.IAzureTable`1.TableName">
+            <summary>
+            Gets the name of the table.
+            </summary>
+            <value>
+            The name of the table.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.All">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEnumerable`1" /> for all entities in the storage table.
+            </summary>
+            <returns>All the entities in the table.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.AllAsync">
+            <summary>
+            Gets the collection of all entities in the table, asynchronously.
+            </summary>
+            <returns>
+            A task that returns the collection of all entities in the table
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.AllPartition(System.String)">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEnumerable`1"/> for all entities in the specified partition.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <returns>The collection of entities in the specified partition.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.AllPartitionAsync(System.String)">
+            <summary>
+            Gets the collection of all entities in the partition that matches the specified key, asynchronously.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <returns>A task that returns the collection of entities in the specified partition.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.Query(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Queries the entire table (all partitions and rows) for entities matching the specified expression.
+            </summary>
+            <param name="filter">The expression.</param>
+            <returns>The collection of entities in the table matching the expression.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.QueryAsync(System.String)">
+            <summary>
+            Queries the entire table (all partitions and rows) for entities matching the specified expression, asynchronously.
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.QueryPartition(System.String,System.String)">
+            <summary>
+            Queries the specified partition for entities matching the specified expression.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <param name="filter">The filter.</param>
+            <returns>The collection of entities in the specified partition matching the expression.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.QueryPartitionAsync(System.String,System.String)">
+            <summary>
+            Queries the specified partition for entities matching the specified expression, asynchronously.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <param name="expression">The expression.</param>
+            <returns>A task that returns the collection of entities in the specified partition matching the expression.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.Get(System.String,System.String)">
+            <summary>
+            Gets an entity by its partition and row keys.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <param name="rowKey">The row key.</param>
+            <returns>The entity.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.GetAsync(System.String,System.String)">
+            <summary>
+            Finds an entity by its partition and row keys, asynchronously.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <param name="rowKey">The row key.</param>
+            <returns>A task that returns the entity, or null if not found.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.Find(System.String,System.String)">
+            <summary>
+            Finds an entity by its partition and row keys.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <param name="rowKey">The row key.</param>
+            <returns>The entity, or null if not found.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.FindAsync(System.String,System.String)">
+            <summary>
+            Finds an entity by its partition and row keys, asynchronously.
+            </summary>
+            <param name="partitionKey">The partition key.</param>
+            <param name="rowKey">The row key.</param>
+            <returns>A task that returns the entity, or null if not found.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.Insert(`0)">
+            <summary>
+            Inserts the specified entity.
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.InsertAsync(`0)">
+            <summary>
+            Inserts the spectified entity, asynchronously.
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.Insert(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Inserts the specified entities.
+            </summary>
+            <param name="entities">The entities.</param>
+            <returns>The number of successful inserts.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.InsertAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Inserts the the specified entities, asynchronously.
+            </summary>
+            <param name="entities">The entities.</param>
+            <returns>A task that returns the number of successful inserts.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.InsertOrReplace(`0)">
+            <summary>
+            Inserts or replaces the entity.
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.InsertOrReplaceAsync(`0)">
+            <summary>
+            Inserts or replaces the entity, asynchronously.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.InsertOrReplace(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the or update.
+            </summary>
+            <param name="entities">The entities.</param>
+            <returns>The number of successful inserts/replacements.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.InsertOrReplaceAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Inserts the or replace asynchronous.
+            </summary>
+            <param name="entities">The entities.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.Delete(`0)">
+            <summary>
+            Deletes the specified entity.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns>True if the entity was deleted, false otherwise.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.DeleteAsync(`0)">
+            <summary>
+            Deletes the specified entity, asynchronously.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns>A task that returns true if the entity is deleted, false otherwise.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.Delete(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Deletes the specified entities.
+            </summary>
+            <param name="entities">The entities.</param>
+            <returns>The number of entities that were deleted, false otherwise.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.DeleteAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Deletes the specified entities, asynchronously.
+            </summary>
+            <param name="entities">The entities.</param>
+            <returns>A task that returns the number of entities that were deleted.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.Replace(`0)">
+            <summary>
+            Replace the specified entity.
+            </summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.ReplaceAsync(`0)">
+            <summary>
+            Replace the specified entity, asynchronously.
+            </summary>
+            <param name="entity">The entity.</param>
+            <returns>A task that replaces the entity.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.Replace(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Replaces the specified entities.
+            </summary>
+            <param name="entities">The entities.</param>
+            <returns>The number of entities that were replaced</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.IAzureTable`1.ReplaceAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Replaces the specifies entities, asynchronously.
+            </summary>
+            <param name="entities">The entities.</param>
+            <returns>A task that returns the number of entities replaced.</returns>
+        </member>
+        <member name="T:Juillet.Azure.Storage.ICloudDiagnosticsAccountConnectionProvider">
+            <summary>
+            This interface provides an abstraction over connecting to the diagnostic storage account.
+            </summary>
+            <remarks>
+            Applications may use several storage accounts to store different types of data; this abstraction is inteded for diagnostics.
+            <para>
+            A simple application may store account connection information in the application configuration file (e.g. Web.config) whereas
+            a complex application may dynamically load account information (from a database or configuration repository).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Juillet.Azure.Storage.ICloudDiagnosticsAccountConnectionProvider.GetBlobServiceClient">
+            <summary>
+            Create an instance of the diagnostics cloud storage account
+            </summary>
+            <returns>A new storage account.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.ICloudDiagnosticsAccountConnectionProvider.GetTableServiceClient">
+            <summary>
+            Create an instance of the diagnostics cloud storage account for tables.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.ICloudDiagnosticsAccountConnectionProvider.GetQueueServiceClient">
+            <summary>
+            create an instance of the diagnostics cloud storage account for queues.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Juillet.Azure.Storage.ICloudDiagnosticsAccountConnectionProvider.ConnectionName">
+            <summary>
+            Gets the name of the connection associated with this provider.
+            </summary>
+            <value>
+            The name of the connection associated with this provider.
+            </value>
+        </member>
+        <member name="T:Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider">
+            <summary>
+            This interface provides an abstraction around which storage accounts are used with different <see cref="T:Juillet.Azure.Storage.IAzureTable`1"/>s.
+            </summary>
+            <remarks>
+            Applications may use several storage accounts to store different types of data; this abstraction allows the <see cref="T:Juillet.Azure.Storage.AzureTable`1"/>
+            class to select one particular account over another.
+            <para>
+            A simple application may store account connection information in the application configuration file (e.g. Web.config) whereas
+            a complex application may dynamically load account information (from a database or configuration repository). 
+            </para>
+            <para>
+            This interface is intended to be used to isolate the <see cref="T:Juillet.Azure.Storage.AzureTable`1"/> from details of the storage 
+            account and underlying connection.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider.ConnectionName">
+            <summary>
+            Gets the name of the connection.
+            </summary>
+            <value>
+            The name of the connection.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider.ConnectToBlobServiceClient">
+            <summary>
+            Connects this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider.ConnectToTableServiceClient">
+            <summary>
+            Gets the table service client.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.ICloudDataStorageAccountConnectionProvider.ConnectToQueueServiceClient">
+            <summary>
+            Gets the queue service client.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Juillet.Azure.Storage.MessageNotificationRow">
+            <summary>
+            Represents a row in the user message notification table.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.MessageNotificationRow.BuildQueryByMessageId(System.TimeSpan,System.Guid)">
+            <summary>
+            Builds the table query for lookup by message id, within the lookback period.
+            </summary>
+            <param name="lookbackPeriod">The lookback period.</param>
+            <param name="messageId">The message identifier.</param>
+            <returns>The table query for lookup by message id, within the lookback period.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.MessageNotificationRow.BuildQuerySinceLookbackPeriod(System.TimeSpan)">
+            <summary>
+            Builds the query since lookback period.
+            </summary>
+            <param name="lookbackPeriod">The lookback period.</param>
+            <returns>
+            The table query for all entities inserted after the specified lookback period.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.MessageNotificationRow.BuildRowKey(System.DateTimeOffset,System.Guid)">
+            <summary>
+            Builds the row key from the notification occurred date and the message id.
+            </summary>
+            <param name="occurredAtUtc">The occurred at UTC.</param>
+            <param name="messageId">The message identifier.</param>
+            <returns>The row key</returns>
+        </member>
+        <member name="P:Juillet.Azure.Storage.MessageNotificationRow.MessageId">
+            <summary>
+            Gets or sets the message identifier.
+            </summary>
+            <value>
+            The message identifier.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.MessageNotificationRow.NotificationType">
+            <summary>
+            Gets or sets the type of the notification.
+            </summary>
+            <value>
+            The type of the notification.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.MessageNotificationRow.State">
+            <summary>
+            Gets or sets the state.
+            </summary>
+            <value>
+            The state.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.MessageNotificationRow.OccurredAtUtc">
+            <summary>
+            Gets or sets the occurred at UTC.
+            </summary>
+            <value>
+            The occurred at UTC.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.MessageNotificationRow.DisplayTitle">
+            <summary>
+            Gets or sets the display title.
+            </summary>
+            <value>
+            The display title.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.MessageNotificationRow.DisplayDescription">
+            <summary>
+            Gets or sets the display description.
+            </summary>
+            <value>
+            The display description.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.MessageNotificationRow.SenderDisplayName">
+            <summary>
+            Gets or sets the display name of the sender.
+            </summary>
+            <value>
+            The display name of the sender.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.MessageNotificationRow.PropertiesDictionaryJson">
+            <summary>
+            Gets or sets the properties.
+            </summary>
+            <value>
+            The properties.
+            </value>
+        </member>
+        <member name="T:Juillet.Azure.Storage.MessageNotificationStorage">
+            <summary>
+            An implementation of <see cref="T:Juillet.Notifications.IMessageNotificationStorage"/> that stores message notifications in Azure table storage.
+            </summary>
+            <seealso cref="T:Juillet.Notifications.IMessageNotificationStorage" />
+        </member>
+        <member name="M:Juillet.Azure.Storage.MessageNotificationStorage.#ctor(Juillet.Azure.Storage.IAzureTable{Juillet.Azure.Storage.MessageNotificationRow})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.MessageNotificationStorage"/> class.
+            </summary>
+            <param name="table">The table.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.MessageNotificationStorage.InsertMessageAsync(Juillet.Notifications.MessageNotification)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.MessageNotificationStorage.DeleteMessageAsync(System.String,System.Guid,System.TimeSpan)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.MessageNotificationStorage.GetRecentMessagesAsync(System.String,System.TimeSpan,System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Azure.Storage.MessageNotificationStorage.GetMessageAsync(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Juillet.Azure.Storage.SimpleBlobStore">
+            <summary>
+            Encapsulates access to a simple blob store.
+            </summary>
+            <remarks>
+            <code>
+             // Connection string for account should be in the application settings:
+             &lt;appSettings&gt;
+               &lt;add key="myaccountconnection" value="UseDevelopmentStorage=True" /&gt;
+             &lt;/appSettings&gt;
+            
+             // store to: (account).blob.core.windows.net/photos/johnsmith
+             storage = new SimpleBlobStore("myaccountconnection", "photos");
+             storage.Save("johnsmith", File.ReadAllBytes("johnsmith.jpg"), "image/jpeg");
+             
+             // store to: (account).blob.core.windows.net/photos/highres/johnsmith
+             storage = new SimpleBlobStore("myaccountconnection", "photos", "highres");
+             storage.Save("johnsmith", File.ReadAllBytes("johnsmith_large.jpg"), "image/jpeg");
+             
+             // store to: (account).blob.core.windows.net/photos/thumbnails/64x64/johnsmith
+             storage = new SimpleBlobStore("myaccountconnection", "photos", "thumbnails/64x64");
+             storage.Save("johnsmith", File.ReadAllBytes("johnsmith_thumb.jpg"), "image/jpeg");
+             
+             // list from: (account).blob.core.windows.net/photos/thumbnails
+             storage = new SimpleBlobStore("myaccountconnection", "photos", "thumbnails");
+             var photos = storage.ListAll();
+             
+             // load from: (account).blob.core.windows.net/photos/johnsmith
+             storage = new SimpleBlobStore"myaccountconnection", ("photos");
+             byte[] photo = storage.Load("johnsmith");
+             
+             // load from: (account).blob.core.windows.net/photos/highres/johnsmith
+             storage = new SimpleBlobStore("myaccountconnection", "photos", "highres");
+             using (FileStream fs = new FileStream("photo.jpg"))
+             {
+               storage.Load("johnsmith", fs);
+             }
+            </code>
+            </remarks>
+        </member>
+        <member name="F:Juillet.Azure.Storage.SimpleBlobStore.BinaryContentType">
+            <summary>
+            Binary content type
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.Storage.SimpleBlobStore.XmlContentType">
+            <summary>
+            XML content type
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.Storage.SimpleBlobStore.TextContentType">
+            <summary>
+            Text content type
+            </summary>
+        </member>
+        <member name="F:Juillet.Azure.Storage.SimpleBlobStore.blobContainer">
+            <summary>
+            Gets the BLOB container.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.SimpleBlobStore" /> class.
+            </summary>
+            <param name="accountSetting">The account setting.</param>
+            <param name="blobContainerName">Name of the BLOB container.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.SimpleBlobStore" /> class.
+            </summary>
+            <param name="accountSetting">The account setting.</param>
+            <param name="blobContainerName">Name of the BLOB container.</param>
+            <param name="pathStem">The stem of the path to blobs in this container.  May be null or empty.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Azure.Storage.SimpleBlobStore"/> class.
+            </summary>
+            <param name="accountSetting">The account setting.</param>
+            <param name="blobContainerName">Name of the BLOB container.</param>
+            <param name="pathStem">The stem of the path to blobs in this container.  May be null or empty.</param>
+            <param name="contentType">Type of the content.</param>
+        </member>
+        <member name="P:Juillet.Azure.Storage.SimpleBlobStore.DefaultContentType">
+            <summary>
+            Gets or sets the default type of the content.
+            </summary>
+            <value>
+            The default type of the content.
+            </value>
+        </member>
+        <member name="P:Juillet.Azure.Storage.SimpleBlobStore.PathStem">
+            <summary>
+            Gets the stem of the path to blobs in this container.
+            </summary>
+            <value>
+            The stem of the path to blobs in this container.
+            </value>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Save(System.String,System.Byte[])">
+            <summary>
+            Saves the blob content to a blob with the specified name and using the default mime content type.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="content">The content.</param>
+            <returns>A reference to the blob that was saved.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Save(System.String,System.IO.Stream)">
+            <summary>
+            Saves the blob content to a blob with the specified name and using the default mime content type.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="stream">The stream.</param>
+            <returns>A reference to the blob that was saved.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Save(System.String,System.Byte[],System.String)">
+            <summary>
+            Saves the blob content to a blob with the specified name and using the specified mime content type.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="content">The content.</param>
+            <param name="contentMimeType">Type of the content MIME.</param>
+            <returns>A reference to the blob that was saved.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Save(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Saves the blob content to a blob with the specified name and using the specified mime content type.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="stream">The stream.</param>
+            <param name="contentMimeType">The MIME type of the content.</param>
+            <returns>A reference to the blob that was saved.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Load(System.String)">
+            <summary>
+            Loads the specified name.
+            </summary>
+            <param name="name">The name.</param>
+            <returns>The contents of the blob.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Load(System.String,System.String@)">
+            <summary>
+            Loads the specified name.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="contentType">Type of the content.</param>
+            <returns>The contents of the blob.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Load(System.String,System.IO.Stream,System.String@)">
+            <summary>
+            Loads the specified name.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="outputStream">The output stream.</param>
+            <param name="contentType">Type of the content.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Load(System.String,System.IO.Stream)">
+            <summary>
+            Loads the specified name.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="outputStream">The output stream.</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.ListAll(System.Boolean)">
+            <summary>
+            Lists all blobs in the container.
+            </summary>
+            <param name="recurse">if set to <c>true</c> use recursion.</param>
+            <returns>
+            The collection of all the blob names in the container.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Delete(System.String)">
+            <summary>
+            Deletes the blob with the specified name.
+            </summary>
+            <param name="name">The name.</param>
+            <returns>True of the blob existed and was successfully deleted, false otherwise.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.Exists(System.String)">
+            <summary>
+            Checks if a blob with the specified name exists.
+            </summary>
+            <param name="name">The name.</param>
+            <returns>True if the blob exists, false otherwise.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.LoadCore(System.String,System.IO.Stream,System.String@,System.Boolean)">
+            <summary>
+            Core load method downloads the blob content to the stream.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="stream">The stream.</param>
+            <param name="contentType">Type of the content.</param>
+            <param name="fetchAttributes">if set to <c>true</c> [fetch attributes].</param>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.SaveCore(System.String,System.Byte[],System.IO.Stream,System.String)">
+            <summary>
+            Core save method uploads the blob content from a stream or byte array, whichever is not null..
+            </summary>
+            <param name="name">The name.</param>
+            <param name="arrayContent">Content of the array.</param>
+            <param name="streamContent">Content of the stream.</param>
+            <param name="contentMimeType">Type of the content MIME.</param>
+            <returns>The reference to the blob.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.GetBlobReference(System.String,System.String@)">
+            <summary>
+            Gets the BLOB reference.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="blobReferenceUri">The BLOB reference URI.</param>
+            <returns>A reference to the blob</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.SimpleBlobStore.BuildBlobReferenceUri(System.String)">
+            <summary>
+            Builds the BLOB reference URI.
+            </summary>
+            <param name="name">The name.</param>
+            <returns>The blob reference, including the root path if one is specified.</returns>
+        </member>
+        <member name="T:Juillet.Azure.Storage.StorageExtensions">
+            <summary>
+            Extension methods for storage types.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.StorageExtensions.ToAzureQueueMessage``1(Azure.Storage.Queues.Models.QueueMessage)">
+            <summary>
+            Convert a <see cref="T:Azure.Storage.Queues.Models.QueueMessage"/> to an <see cref="T:Juillet.Azure.Storage.AzureQueueMessage`1"/>.
+            </summary>
+            <typeparam name="TMessage">The type of the message.</typeparam>
+            <param name="msg">The cloud queue message read from the storage queue.</param>
+            <returns>The <see cref="T:Azure.Storage.Queues.Models.QueueMessage"/> populated from the specified <see cref="T:Juillet.Azure.Storage.AzureQueueMessage`1"/>.</returns>
+        </member>
+        <member name="T:Juillet.Azure.Storage.TableStorageUtilities">
+            <summary>
+            Provides utility functions for working with Azure Table Storage.
+            </summary>
+        </member>
+        <member name="M:Juillet.Azure.Storage.TableStorageUtilities.CombineToPartitionKey(System.String,System.String)">
+            <summary>
+            Combines to strings to form a valid (escaped) partition key.
+            </summary>
+            <param name="head">The head.</param>
+            <param name="tail">The tail.</param>
+            <returns>
+            The combined partition key, comprising the head, key separator and tail portions.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.TableStorageUtilities.EscapedFirst(System.String)">
+            <summary>
+            Escapes the original string as though it was the first segment of a key.
+            </summary>
+            <param name="original">The original string.</param>
+            <returns>The escaped string.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.TableStorageUtilities.Escape(System.String)">
+            <summary>
+            Escapes characters in the specified string.
+            </summary>
+            <param name="original">The original string.</param>
+            <returns>
+            An escaped version of the original string.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.TableStorageUtilities.IsInvalidKeyCharacter(System.Char)">
+            <summary>
+            Determines whether the character is an invalid key character.
+            </summary>
+            <remarks>
+            Some characters can cause problems when they are contained in columns that are 
+            included in queries. We are very defensive here and escape a wide range of 
+            characters for key columns (as the key columns are present in most queries)
+            </remarks>
+            <param name="c">The character.</param>
+            <returns>
+              <c>true</c> if the specified character is an invalid key character]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.TableStorageUtilities.CharToEscapeSequence(System.Char)">
+            <summary>
+            Converts the char to an escaped sequence.
+            </summary>
+            <param name="c">The c.</param>
+            <returns>The escaped character as a string prefixed by the escape character.</returns>
+        </member>
+        <member name="M:Juillet.Azure.Storage.TableStorageUtilities.NextComparisonString(System.String)">
+            <summary>
+            Calculates the next comparison string for the specifies key
+            </summary>
+            <remarks>
+            The table storage system currently does not support the <c>StartsWith()</c> operation in 
+            queries. As a result we transform <c>s.StartsWith(substring)</c> into <c>s.CompareTo(substring) > 0 &amp;&amp; 
+            s.CompareTo(NextComparisonString(substring)) &lt; 0</c> we assume that comparison on the 
+            service side is as ordinal comparison
+            </remarks>
+            <param name="s">The string</param>
+            <returns>The next string in a comparison.</returns>
+            <exception cref="T:System.ArgumentException">Thrown if the string is null, empty or too large.</exception>
+        </member>
+        <member name="M:Juillet.Azure.Storage.TableStorageUtilities.ExtractException(Azure.RequestFailedException)">
+            <summary>
+            Extracts a well known exception from the specified storage exception.
+            </summary>
+            <param name="ex">The original exception.</param>
+            <returns>A higher level exception, or null if a more meaningful exception cannot be extracted.</returns>
+        </member>
+    </members>
+</doc>

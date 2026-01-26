@@ -1,0 +1,33 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.RegistrationSummaryCard
+
+<div class="card">
+  <div class="card-title">
+    <h4>@Html.DisplayNameForModel()</h4>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-2">
+        @Html.DisplayFor(m => m.Avatar)        
+      </div>
+      <div class="col-md-10">
+        <h3>@Html.DisplayFor(m => m.OrganizationName)</h3>
+      </div>
+    </div>
+    <div class="row m-t-sm">
+      <div class="col-md-12">
+        <table class="table">
+          <tbody>
+          <tr>
+            <td>@Html.LabelFor(m => m.ReferenceId)</td>
+            <td>@Html.DisplayFor(m => m.ReferenceId)</td>
+          </tr>
+          <tr>
+            <td>@Html.LabelFor(m => m.RegistrantEmail)</td>
+            <td>@Html.DisplayFor(m => m.RegistrantEmail)</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>       
+  </div>
+</div>

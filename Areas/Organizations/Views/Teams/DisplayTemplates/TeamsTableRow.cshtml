@@ -1,0 +1,26 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Teams.TeamsTableRow
+<tr>
+  <td>
+    @Html.DisplayFor(m => m.Avatar)
+  </td>
+  <td>
+    <a href="@Url.Action("Members", "Teams", new {id = Html.ValueFor(m => m.Team.CorrelationId)})" class="undecorated-link">
+      @Html.DisplayFor(m => m.Team.Name)
+    </a>
+    <p>
+      <em class="text-muted">@Html.DisplayFor(m => m.Team.Description)</em>
+    </p>
+  </td>
+  <td>
+    @Html.DisplayFor(m => m.AccessLevel)
+  </td>
+  <td>
+    @Html.DisplayFor(m => m.TransitLocation.Name)
+  </td>
+  <td>
+    @Html.DisplayFor(m => m.TransitPurpose.Name)
+  </td>
+  <td class="text-right">
+    <span>@Model.Team.TeamMembers.Count.ToString("N0")</span>
+  </td>
+</tr>

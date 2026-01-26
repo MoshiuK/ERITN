@@ -1,0 +1,59 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.AdministrationImportViewModel
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+<div class="col-md-12">
+  <h3>
+    Please review the imported user information below.
+  </h3>
+  <h4>
+    Optionally, add member photos.
+    <small>A total of @(Model.MemberList.Count) members have been found in the csv.</small>
+  </h4>
+</div>
+
+<div class="col-md-12">
+  @using (Html.BeginForm("ConfirmImport", "Organization"))
+  {
+    @Html.HiddenFor(m => m.OrganizationDbId)
+    @Html.HiddenFor(m => m.OrganizationCorrelationId)
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-success btn-md pull-right">@Html.GlyphFa("check") Complete Import</button>
+      <br />
+      @Html.EditorFor(m => Model.MemberList)
+    </div>
+  }
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/dropzone/dropzone.js"></script>
+  <script>
+    // Sets up a drop zone for each member - drop zone id equals the member Correlation Id
+  var ids = @Html.Raw(Json.Encode(Model.MemberList.Select(s => new { s.CorrelationId })));
+  for (var i = 0; i < ids.length; i++) {
+    var id = ids[i].CorrelationId;
+    $("div#" + id).dropzone({
+      url: "SaveDropzoneJsUploadedFiles",
+      acceptedFiles: "image/*",
+      init: function () {
+        this.on("success", function (file, response) {
+          $(".dz-details").hide();
+          $(".dz-progress").hide();
+          $(".dz-error-message").hide();
+          $(".dz-success-mark").hide();
+          $(".dz-error-mark").hide();
+          $(".photo-heading").hide();
+        });
+
+        this.on("sending", function (file, xhr, formData) {
+          $(".dz-progress").hide();
+          formData.append("memberId", this.element.id);
+        });
+      }
+    });
+  }
+  </script>
+}

@@ -1,0 +1,12 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.FeaturesSectionDefinition
+@{
+  Layout = "_LandingPageSectionLayout.cshtml";
+
+  var topMargin = Model.HasDefaultHeader ? "m-t-sm" : string.Empty;
+}
+<div class="features-section @topMargin">
+  @foreach (var feature in Model.Features)
+  {
+    @Html.DisplayFor(_ => feature)  
+  }
+</div>

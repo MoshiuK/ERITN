@@ -1,0 +1,19 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.EventLocationViewModel
+<tr>
+  <td class="eventlocation-item">
+    @Html.DisplayFor(m => m.Avatar)
+    @Html.DisplayFor(m => m.EventLocationInfo.LocationName)
+  </td>
+  <td>
+    @Html.DisplayFor(m => m.EventLocationInfo.CredentialTypes)
+  </td>
+  <td class="text-center">
+    @using (Html.BeginForm("RemoveEventLocation", "Event", new { id = ViewBag.eventId }, FormMethod.Post, null))
+    {
+      @Html.AntiForgeryToken()
+      <input type="hidden" name="location" id="location" value="@Model.EventLocationInfo.LocationId"/>
+      <button type="submit" class="btn btn-danger">@Html.GlyphFa("trash-o")</button>
+    }
+  </td>
+</tr>

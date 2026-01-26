@@ -1,0 +1,166 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Payments.PaymentViewModel
+<br />
+@Html.HiddenFor(m => m.TutorialsUrl)
+<div class="col-md-12 strong">
+  <span>@ViewBag.ValidationError</span>
+</div>
+
+<div class="table col-md-12">
+  <div class="row">
+    <h2>
+      @(Model.OrganizationName) SUBSCRIPTION
+      @if (Model.TenantProductId.HasValue)
+      {
+        @Html.ActionLink("+ ADD ORDER", "AddOrder", "Payment", new { tenantProductId = Model.TenantProductId.Value }, new { id = "addOrder", @class = "btn btn-default pull-right" })
+      }
+      else
+      {
+        @*Only the last product ordered can be reordered. In this case there was no last product ordered so the button is disabled.*@
+        @Html.ActionLink("+ ADD ORDER", "AddOrder", "Payment", new { id = "addOrder", @class = "disabled btn btn-default pull-right" })
+      }
+    </h2>
+  </div>
+</div>
+<div class="col-md-12">
+  <h4>
+    Orders
+    <small class="pull-right">
+      [
+      @foreach (var year in Model.AllYears)
+      {
+        if (Model.SelectedYear != year)
+        {
+          @Html.ActionLink(year.ToString(), "Index", new { yearFilter = year })
+          <span>  | </span>
+        }
+        else
+        {
+          <b>@(year) |</b>
+        }
+      }
+      @Html.ActionLink("All", "Index", null, new {id = "allOrders"})
+      ]
+    </small>
+  </h4>
+</div>
+
+<table id="ordersTable" class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ORDER DATE</th>
+      <th scope="col">TERM</th>
+      <th scope="col">PRODUCT NAME</th>
+      <th class="text-right" scope="col">PER PERSON PER MONTH</th>
+      <th class="text-right" scope="col"># PERSONNEL</th>
+      <th class="text-right" scope="col">TOTAL</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var order in Model.Orders)
+    {
+      <tr>
+        <td>
+          @Html.DisplayFor(_ => order.OrderDate)
+        </td>
+        <td>
+          @Html.DisplayFor(_ => order.Term)
+        </td>
+        <td>
+          @Html.DisplayFor(_ => order.ProductPurchased)
+        </td>
+        <td class="text-right">
+          @Html.DisplayFor(_ => order.PricePerPersonPerMonth)
+        </td>
+        <td class="text-right">
+          @Html.DisplayFor(_ => order.EmergencyPersonnelCount)
+        </td>
+        <td class="text-right">
+          @Html.DisplayFor(_ => order.Total)
+        </td>
+      </tr>
+    }
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="text-right">
+        <strong>
+          @Html.DisplayFor(_ => Model.TotalOrderPersonnel)
+        </strong>
+      </td>
+      <td class="text-right">
+        <strong>
+          @Html.DisplayFor(_ => Model.OrdersGrandTotal)
+        </strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<div class="col-md-12">
+  <h4>
+    Balance Statement
+  </h4>
+</div>
+
+<div>
+  <button id="detailsButton" type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">View Details</button>
+  <div id="demo" class="collapse">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">PERIOD</th>
+          <th scope="col">AMOUNT</th>
+          <th scope="col">STATUS</th>
+          <th scope="col">PERSONNEL</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var statement in Model.Statements)
+        {
+          <tr>
+            <td>
+              @Html.DisplayFor(_ => statement.Period)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => statement.Amount)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => statement.Status)
+            </td>
+            <td align="right">
+              @Html.DisplayFor(_ => statement.PersonnelCount)
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h3>BILLING CONTACT</h3>
+<div class="col-md-12">
+  <strong>@Html.DisplayFor(m => m.BusinessContactName)</strong>
+</div>
+<div class="col-md-12">
+  <small>@Html.DisplayFor(m => m.StreetAddress)</small>
+</div>
+
+<br />
+<hr />
+
+<h3>SUPPORT</h3>
+<div class="col-md-12">
+  <i>Questions or Concerns? Please contact the support team <a href="mailto:@(Model.ContactEmail)?Subject=@(Model.OrganizationName)%20Payments%20Question" target="_top">@(Model.ContactEmail)</a>.</i>
+</div>
+
+
+@section scripts
+{
+  @if (!Model.HasCompletedPaymentTour)
+  {
+    <script type="text/javascript" src="~/Scripts/spstour.js"></script>
+  }
+}

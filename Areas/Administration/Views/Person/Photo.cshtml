@@ -1,0 +1,49 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.PersonPhotoSettings
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "_PersonTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading">
+        <h4 class="heading-inline-block">@Html.GlyphFa("user-circle-o") Photo</h4>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-4 profile-image-container">
+            @Html.LabelFor(m => m.Avatar)
+            @Html.DisplayFor(m => m.Avatar)
+            @using (Html.BeginForm("RemovePhoto", "Person", new { id = Model.AvatarEditAndUpload.Id }, FormMethod.Post))
+            {
+              @Html.AntiForgeryToken()
+
+              <div class="m-t-lg">
+                <button type="submit" class="btn btn-danger">@Html.GlyphFa("trash-o") Remove Photo</button>
+              </div>
+            }
+          </div>
+          <div class="col-md-8">
+            @using (Html.BeginForm("Photo", "Person", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+            {
+              @Html.AntiForgeryToken()
+
+              @Html.LabelFor(m => m.AvatarEditAndUpload)
+              @Html.EditorFor(m => m.AvatarEditAndUpload)
+
+              <div class="pull-right m-t-lg">
+                <button type="submit" class="btn btn-primary btn-lg">Update</button>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.person.photo.js"></script>
+}

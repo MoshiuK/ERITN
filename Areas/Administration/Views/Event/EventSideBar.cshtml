@@ -1,0 +1,43 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.EventSideBarViewModel
+
+<div class="row">
+  <div class="m-b-md m-t-lg">
+    @Html.LabelFor(m => m.Active, new { @class = "sidebar-caption" })
+    @if (Model.Active)
+    {
+      <div class="label label-sidebar-status active">ACTIVE</div>
+    }
+    else
+    {
+      <div class="label label-sidebar-status inactive">INACTIVE</div>
+    }
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    @Html.LabelFor(m => m.CreatedOn, new { @class = "sidebar-caption" })
+    <span class="sidebar-value">@Html.DisplayFor(m => m.CreatedOn)</span>
+    <span class="sidebar-value">@Html.DisplayFor(m => m.CreatedBy)</span>
+  </div>
+</div>
+
+@if (Model.OperationalOn.HasValue)
+{
+  <div class="row">
+    <div class="col-sm-12">
+      @Html.LabelFor(m => m.OperationalOn, new {@class = "sidebar-caption"})
+      <span class="sidebar-value">@Html.DisplayFor(m => m.OperationalOn)</span>
+    </div>
+  </div>
+}
+
+@if (Model.ConcludedOn.HasValue)
+{
+  <div class="row">
+    <div class="col-sm-12">
+      @Html.LabelFor(m => m.ConcludedOn, new { @class = "sidebar-caption" })
+      <span class="sidebar-value">@Html.DisplayFor(m => m.ConcludedOn)</span>
+    </div>
+  </div>
+}

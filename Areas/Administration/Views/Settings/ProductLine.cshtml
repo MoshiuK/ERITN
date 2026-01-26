@@ -1,0 +1,19 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Settings.ProductViewModel
+
+<tr>
+  <td class="text-center">
+    @Html.DisplayFor(m => m.ProductName)
+  </td>
+  <td class="text-center">
+    @Html.DisplayFor(m => m.PriceAsFloat)
+  </td>
+  <td class="text-center">
+    @Html.DisplayFor(m => m.SubscriptionTerm)
+  </td>
+  <td class="text-center">
+    @Html.DisplayFor(m => m.ActiveOrdersCount)
+  </td>
+  <td class="text-center pull-right">
+      <a class="btn btn-sm btn-info pull-right" href="@Url.Action("EditProduct", "Settings", new { productId = Model.ProductId })">Edit Product</a>
+  </td>
+</tr>

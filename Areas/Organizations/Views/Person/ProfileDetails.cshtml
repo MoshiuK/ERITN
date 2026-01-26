@@ -1,0 +1,64 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Person.ProfileDetailsPageViewModel
+@{
+  Layout = "_PersonLayout.cshtml";
+}
+
+<div class="row m-t-lg">
+  <div class="col-md-offset-1 col-md-3">
+    <h3>@Html.DisplayNameFor(m => m.CurrentPhoto)</h3>
+    <div class="well well-sm text-center">
+      @Html.DisplayFor(m => m.CurrentPhoto)
+    </div>
+    <div class="m-t-sm">
+      @Html.DialogLink("Remove Photo", "#confirmRemovePhotoDialog", new { @class = "btn btn-danger"})
+    </div>
+    <div class="m-t-sm">
+      <small>
+        @Html.ActionLink("Download photo to your computer.","DownloadImage", new { id = Model.MemberId }, null)
+      </small>
+    </div>
+  </div>
+  <div class="col-md-offset-2 col-md-5">
+    <h3>@Html.DisplayNameFor(m => m.NewPhoto)</h3>
+    <div id="photoAlertDiv" class="alert alert-danger" role="alert">
+      The photo you've selected is too large. Please select a file under 3.5MB.
+    </div>
+    @using (Html.BeginForm("ChangePhoto", "Person", FormMethod.Post, new {enctype = "multipart/form-data" }))
+    {
+      @Html.AntiForgeryToken()
+      @Html.EditorFor(m => m.NewPhoto)
+
+      <div class="m-t-md">
+        <button id ="uploadPhotoBtn" type="submit" class="btn btn-success pull-right">@Html.GlyphFa("upload") Upload Photo</button>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="row m-t-lg">
+  <div class="col-md-offset-1 col-md-10">
+    <h3>@Html.DisplayNameFor(m => m.Contact)</h3>
+    @using (Html.BeginForm("ChangeContact", "Person", new { id = Model.MemberId }, FormMethod.Post))
+    {
+      @Html.AntiForgeryToken()
+      @Html.EditorFor(m => m.Contact)
+
+      <div class="m-t-lg">
+        <button type="submit" class="btn btn-success pull-right">Update Contact Information</button>
+      </div>
+    }
+  </div>
+</div>
+
+@Html.Dialog("confirmRemovePhotoDialog", Url.Action("ConfirmRemovePhotoDialog"))
+@using (Html.BeginForm("RemovePhoto", "Person", new {id = Model.MemberId}, FormMethod.Post, new { id = "removePhotoFormId" }))
+{
+  @Html.AntiForgeryToken()
+}
+
+@section pagescripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.person.profile.js"></script>
+}

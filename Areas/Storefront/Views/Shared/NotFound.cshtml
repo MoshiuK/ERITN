@@ -1,0 +1,18 @@
+﻿@using AccessManagement.Web.Areas.Storefront
+@model Juillet.Web.Mvc.NotFoundPane
+
+<div class="text-center">
+  <h1>We're sorry.</h1>
+  <h3>We could not find what you were looking for.</h3>
+  @Html.DisplayFor(m => m)
+  
+  <div class="alert alert-warning m-t-xl text-left">
+    <p><strong>What can you do from here?</strong></p>
+    <ul class="m-t-sm">
+      <li>You can hit the back button in your browser and try the last step again.</li>
+      <li>You can @Html.ActionLink("go back to the home page", "Index", "Home", StorefrontAreaRegistration.AreaRouteValues, new { @class = "brand-unstyled-link"}) and start again from there.</li>
+    </ul>
+    <p class="m-t-md">We apologize for the inconvenience.</p>
+  </div>
+</div>
+

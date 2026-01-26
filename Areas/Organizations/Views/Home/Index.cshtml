@@ -1,0 +1,117 @@
+﻿@using AccessManagement.Framework.Tenants
+@using AccessManagement.Web.Areas.Organizations
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Dashboard.DashboardPageViewModel
+
+@{
+  var theme = (TenantTheme)ViewBag.Theme;
+}
+@if (!Model.HasCompletedEnrollmentTour && !Model.HasClosedSettingsReview)
+{
+  <div id="defaultSettingsAlert" class="alert alert-info alert-dismissible m-t" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Welcome! - A quick note about your organization settings.</strong>
+    <div>
+      We will use the following defaults when enrolling your personnel.
+    </div>
+    <div class="table">
+      <div class="row">
+        <div class="m-l col-md-2">
+          • Access Level
+        </div>
+        <div class="col-md-3">
+          <strong>@Html.DisplayFor(m => m.DefaultAccessLevel)</strong>
+        </div>
+      </div>
+      <div class="row">
+        <div class="m-l col-md-2">
+          • Location
+        </div>
+        <div class="col-md-3">
+          <strong>@Html.DisplayFor(m => m.DefaultLocation)</strong>
+        </div>
+      </div>
+      <div class="row">
+        <div class="m-l col-md-2">
+          • Purpose
+        </div>
+        <div class="col-md-3">
+          <strong>@Html.DisplayFor(m => m.DefaultPurpose)</strong>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    Something missing or not right? @Html.ActionLink("Change these settings.", "Enrollment", "Settings")
+  </div>
+}
+
+<div class="row">
+  <div class="col-md-10">
+    <h2 class="text-info">@theme.BrandCaption</h2>
+    <h4 class="text-info">@Html.DisplayFor(m => m.Organization.Name) Dashboard</h4>
+  </div>
+  <div id="myOrganizationAvatarContainer" class="col-md-2">
+    <a href="@Url.Action("Index", "Settings", OrganizationsAreaRegistration.AreaRouteValues)">
+      @Html.DisplayFor(m => m.Avatar)
+    </a>
+  </div>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-4">
+    @Html.DisplayFor(m => m.MemberSummary)
+  </div>
+  <div class="col-md-4">
+    @Html.DisplayFor(m => m.EnrollmentsPending)
+  </div>
+  <div class="col-md-4">
+    @Html.DisplayFor(m => m.VerificationsPending)
+  </div>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-6">
+    @Html.DisplayFor(m => m.ActionsSummary)
+  </div>
+  <div class="col-md-6">
+    @Html.DisplayFor(m => m.MessagesSummary)
+  </div>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-4">
+    @Html.DisplayFor(m => m.ReportsSummary)
+  </div>
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+  </div>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-12">
+    @Html.DisplayFor(m => m.ActivitySummary)
+  </div>
+</div>
+
+@section scripts
+{
+  <script>
+    $('#defaultSettingsAlert').on('closed.bs.alert', function () {
+      $.ajax({
+        url: "/Organizations/Home/UpdateTourMemento",
+        method: "POST",
+        data: { tourCompleted: "OrganizationDefaults" }
+      }).done(function () { });
+    });
+  </script>
+
+  <script src="~/Scripts/Chart.bundle.min.js"></script>
+  <script type="text/javascript" src="~/Scripts/pages/organizations.home.dashboard.js"></script>
+  @if (!Model.HasCompletedHomeTour)
+  {
+    @Html.HiddenFor(m => m.TutorialsUrl)
+    <script type="text/javascript" src="~/Scripts/spstour.js"></script>
+  }
+}

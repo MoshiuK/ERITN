@@ -1,0 +1,80 @@
+﻿@using AccessManagement.Models.Reports
+@using Juillet.SystemExtensions
+@using Juillet.Web.Mvc.Html
+
+@{
+  var options = (ReportOptions) Model.Specification.Options;
+  var columns = (IReadOnlyCollection<AccessManagement.Web.ViewModels.Framework.Reports.TableReportColumn>) Model.Columns;
+
+  var orderByListItems = new[] {new SelectListItem
+  {
+    Text = @"(none)",
+    Value = string.Empty,
+    Selected = string.IsNullOrEmpty(options.OrderBy)
+  }}.Union(
+    columns.Where(c => c.IsSortable).Select(c => new SelectListItem
+    {
+      Text = c.DisplayName,
+      Value = c.Key,
+      Selected = c.Key == options.OrderBy,
+    })).ToArray();
+  var thenOrderByListItems = new[] {new SelectListItem
+  {
+    Text = @"(none)",
+    Value = string.Empty,
+    Selected = string.IsNullOrEmpty(options.ThenOrderBy)
+  }}.Union(
+    columns.Where(c => c.IsSortable).Select(c => new SelectListItem
+    {
+      Text = c.DisplayName,
+      Value = c.Key,
+      Selected = c.Key == options.ThenOrderBy,
+    })).ToArray();
+  var groupByListItems = new[] {new SelectListItem
+  {
+    Text = @"(none)",
+    Value = string.Empty,
+    Selected = string.IsNullOrEmpty(options.GroupBy)
+  }}.Union(
+    columns.Where(c => c.IsGroupable).Select(c => new SelectListItem
+    {
+      Text = c.DisplayName,
+      Value = c.Key,
+      Selected = c.Key == options.GroupBy
+    })).ToArray();
+}
+<div id="optionsSideBar" class="report-viewer-sidebar">
+  <button id="toggleSideBarButton" data-collapsed="False" type="button" class="btn btn-sm btn-link sidebar-button-visible">@Html.GlyphFa("angle-double-left") Hide Options</button>
+  <div class="report-viewer-sidebar-container">
+    <div class="p-w-sm">
+      <h5><strong>Sort Order</strong></h5>
+      <small class="text-muted">Order by</small>
+      @Html.DropDownListFor(_ => options.OrderBy, orderByListItems, new { @class = "form-control select2-component" })
+      <small class="text-muted">Then order by</small>
+      @Html.DropDownListFor(_ => options.ThenOrderBy, thenOrderByListItems, new { @class = "form-control select2-component" })
+    </div>
+    @*<div class="p-w-sm">
+      <h5><strong>Grouping</strong></h5>
+      <small class="text-muted">Group by</small>
+      @Html.DropDownListFor(_ => options.GroupBy, groupByListItems, new { @class = "form-control select2-component" })
+    </div>*@
+    <div class="p-w-sm">
+      <h5><strong>Columns</strong></h5>
+      <ul class="list-unstyled">
+        @foreach (var col in columns)
+        {
+          <li>
+            <div class="checkbox awesomecheckbox-component">
+              <input class="form-control styled report-column-picker" type="checkbox" 
+                     data-column-selector="[visibility-@col.Key.ToSearchable()]"
+                     data-column-key="@col.Key"
+                     name="column-cbx-@col.Key" 
+                     value="true" checked="checked">
+              <label for="column-cbx-@col.Key">@col.DisplayName</label>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</div>

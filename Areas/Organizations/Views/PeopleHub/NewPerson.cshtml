@@ -1,0 +1,152 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Person.NewPerson
+@using Juillet.Web.Mvc
+@{
+  var returnUrl = (string)ViewBag.ReturnUrl ?? Url.Action("People", "PeopleHub");
+}
+@Html.Partial("Breadcrumbs", (NavBar)ViewBag.Breadcrumbs)
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-primary">@ViewBag.Title</h2>
+  </div>
+</div>
+
+<div class="col-lg-offset-2 col-md-8">
+  @if (ViewBag.AvailableEmergencyPersonnel > 0 && ViewBag.TotalEmergencyPersonnel >= ViewBag.AvailableEmergencyPersonnel)
+  {
+    var warningText = $"You have exceeded your limit of enrolled members by {ViewBag.TotalEmergencyPersonnel - ViewBag.AvailableEmergencyPersonnel}. You only have only purchased enough licenses for {ViewBag.AvailableEmergencyPersonnel} enrolled member. ";
+    if (ViewBag.TotalEmergencyPersonnel == ViewBag.AvailableEmergencyPersonnel)
+    {
+      warningText = $"You are at your limit of {ViewBag.AvailableEmergencyPersonnel} members. ";
+    }
+    <div class="alert alert-danger">
+      @warningText @("Please purchase more member slots by clicking this ") @Html.ActionLink("link", "Index", "Payment")
+      @(" and clicking the Add Order button.")
+    </div>
+  }
+</div>
+
+<div class="panel">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-8">
+        <h3>
+          New Enrollment
+        </h3>
+        <p>
+          Provide the information below to add someone to the list of emergency personnel enrolled in your organization.  You can add a photo
+          and other details later.
+        </p>
+      </div>
+    </div>
+
+
+    @using (Html.BeginForm("NewPerson", "PeopleHub", null, FormMethod.Post, new { id="newPersonForm", enctype = "multipart/form-data" }))
+    {
+      @Html.AntiForgeryToken()
+
+      <div class="row">
+        <div class="col-md-offset-1 col-md-8">
+          <div class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.EditorFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+          </div>
+          <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.EditorFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
+          </div>
+          <div class="form-group">
+            @Html.LabelFor(m => m.Phone) <span class="text-muted">(optional)</span>
+            @Html.EditorFor(m => m.Phone)
+            @Html.ValidationMessageFor(m => m.Phone)
+          </div>
+          <div class="form-group">
+            @Html.LabelFor(m => m.PhotoFile) <span class="text-muted">(optional)</span>
+            @Html.EditorFor(m => m.PhotoFile)
+            @Html.ValidationMessageFor(m => m.PhotoFile)
+            <div class="help-block m-b-md">
+              <small>
+                Use a passport style photograph with dimensions 400x400. Maximum size 4MB.<br/> Preferred image formats: JPEG, PNG.
+              </small>
+            </div>
+          </div>
+          <div class="alert alert-danger hidden" id="alertDiv">
+            <p id="message">
+              &nbsp;
+            </p>
+          </div>
+          <div class="form-group">
+            @Html.LabelFor(m => m.PrimaryPhotoId, new { @class = "control-label" })
+            @Html.DropDownListFor(m => m.PrimaryPhotoId, Model.AvailablePrimaryPhotoIds, new { id = "primaryIdSelect", @class = "form-control select2-component" })
+            <div class="help-block m-b-md">
+              <small>
+                A government issued photo ID (driver's license, passport, military ID, etc.) is recommended as the primary photo ID to make
+                available to law enforcement for inspection.
+              </small>
+            </div>
+          </div>
+          <div id="photoSizeAlertDiv" class="alert alert-danger">
+            <p id="sizeMessage">&nbsp;</p>
+          </div>
+          <div class="form-group">
+            @Html.LabelFor(m => m.SecondaryPhotoId, new { @class = "control-label" })
+            @Html.DropDownListFor(m => m.SecondaryPhotoId, Model.AvailableSecondaryPhotoIds, new { id = "secondaryIdSelect", @class = "form-control select2-component" })
+            <div class="help-block m-b-md">
+              <small>
+                A photo is not required on your secondary ID, but it is highly recommended.  Law enforcement may deny access unless a
+                secondary photo ID is available for inspection.
+              </small>
+            </div>
+            <div class="form-group">
+              @Html.LabelFor(m => m.OrganizationRelationship)
+              @Html.EditorFor(m => m.OrganizationRelationship)
+              @Html.ValidationMessageFor(m => m.OrganizationRelationship)
+            </div>
+            <div class="well">
+              <p>
+                <strong>Security Notice</strong><br>
+                This information is used by emergency managers and law enforcement to evaluate access to restricted zones.
+                Providing incorrect information is a security risk.
+              </p>
+            </div>
+            <div class="form-group">
+              @Html.LabelFor(m => m.VerifyAttributes)
+              @Html.EditorFor(m => m.VerifyAttributes)
+              <div class="help-block m-b-md">
+                <small>
+                  This information can be verified later if you are unable to verify it now.  However, this person will not receive
+                  access passes until their information is verified.
+                </small>
+              </div>
+            </div>
+            <div class="m-t-lg pull-right">
+              <button id="createButton" type="button" class="btn btn-success btn-lg" data-color="green">Create</button>
+              <a class="btn btn-default m-l-lg" href="@returnUrl">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+@section scripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.peoplehub.newperson.js"></script>
+  <script>
+    $('#photoSizeAlertDiv').hide();
+    $(document).ready(function () {
+      $('#PhotoFile').bind('change', function () {
+        if (this.files[0].size > 3780000) {
+          $('#sizeMessage').html('The photo you selected is too large. Please select a photo less than 3 MB.');
+          $('#photoSizeAlertDiv').show().delay(2000).fadeOut();
+          // Reset the input.
+          $('#PhotoFile').wrap('<form>').closest('form').get(0).reset();
+          $('#PhotoFile').unwrap();
+        }
+      });
+    });
+  </script>
+}

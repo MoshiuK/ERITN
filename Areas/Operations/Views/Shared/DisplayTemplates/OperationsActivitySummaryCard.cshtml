@@ -1,0 +1,46 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.ActivitySummary
+
+<div class="row">
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.Errors)
+      </small> <br />
+      <span id="Errors">
+        @Html.DisplayFor(m => m.Errors)
+      </span>
+    </h3>
+  </div>
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.CredentialsIssued)
+      </small> <br />
+      <span id="CredentialsIssued">
+        @Html.DisplayFor(m => m.CredentialsIssued)
+      </span>
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.Warnings)
+      </small> <br />
+      <span id="Warnings">
+        @Html.DisplayFor(m => m.Warnings)
+      </span>
+    </h3>
+  </div>
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.CredentialsDelivered)
+      </small> <br />
+      <span id="CredentialsDelivered">
+        @Html.DisplayFor(m => m.CredentialsDelivered)
+      </span>
+    </h3>
+  </div>
+</div>

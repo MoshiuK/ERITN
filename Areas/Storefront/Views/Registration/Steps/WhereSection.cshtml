@@ -1,0 +1,58 @@
+﻿@using AccessManagement.Definitions
+@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.RegisterPageViewModel
+
+<section>
+  <div class="well well-sm description">
+    <h4>@Html.ValueFor(m => m.PageContent.TransitLocationsStep.Title)</h4>
+    <p>
+      @Html.ValueFor(m => m.PageContent.TransitLocationsStep.Description)
+    </p>
+  </div>
+  <div class="organization-where">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="text-muted text-center">
+          You can change your choices or add more locations later.
+        </p>
+      </div>
+    </div>
+    @if (Model.PageContent.TransitLocationsStep.LocationsListStyle == CheckboxListStyles.CheckboxImageTiles)
+    {
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          @foreach (var location in Model.AvailableTransitLocations)
+          {
+            @Html.Partial("Steps/_TransitLocationImageTile", location)
+          }
+        </div>
+      </div>
+    }
+    else if (Model.PageContent.TransitLocationsStep.LocationsListStyle == CheckboxListStyles.MultiValueSelect)
+    {
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <select id="transitLocationsSelect" name="@Html.NameFor(m => m.TransitLocations)">
+          @foreach (var location in Model.AvailableTransitLocations)
+          {
+            <option value="@location.Id">@location.Name</option>
+          }
+          </select>
+        </div>
+      </div>
+    }
+    else
+    {
+      <div class="transit-checkbox-list row">
+        <div class="col-md-offset-5 col-md-6">
+          @foreach (var location in Model.AvailableTransitLocations)
+          {
+            <div class="checkbox checkbox-success">
+              <input id="chbx-@location.Id" type="checkbox" name="@Html.NameFor(m => m.TransitLocations)" value="@location.Id"/>
+              <label for="chbx-@location.Id">@location.Name</label>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

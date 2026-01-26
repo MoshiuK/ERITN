@@ -1,0 +1,131 @@
+﻿@using AccessManagement.Web.Areas.Operations
+@model AccessManagement.Web.ViewModels.Home.PartnerPageViewModel
+
+@{
+  Layout = "~/Views/Shared/_NoBrandLayout.cshtml";
+}
+
+<div>
+  <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
+    <tbody>
+      <tr>
+        <td align="center" valign="top">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+              <tr>
+                <td align="center" bgcolor="#a3cef1" valign="top" style="background-color:#a3cef1;padding-right:30px;padding-left:30px">
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:400px">
+                    <tbody>
+                      <tr>
+                        <td align="center" valign="top" style="padding-top:40px;padding-bottom:40px">
+                          <img alt="MailChimp" src="https://spsonldvue.blob.core.windows.net/theme/truentry/truentry-banner-224x56-white-on-transparent.png">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td align="center" bgcolor="#a3cef1" valign="top" style="background-color:#a3cef1;padding-right:30px;padding-left:30px">
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <td align="center" valign="top">
+                          <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px">
+                            <tbody>
+                              <tr>
+                                <td align="center" valign="top">
+                                  <table align="center" bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#ffffff;border-collapse:separate;border-top-left-radius:4px; border-top-right-radius: 4px;margin-bottom: -1px">
+                                    <tbody>
+                                      <tr>
+                                        <td align="center" valign="top" width="100%" style="padding-top:40px;padding-bottom:0">&nbsp;</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td align="center" valign="top">
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <td align="center" valign="top">
+                          <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:700px">
+                            <tbody>
+                              <tr>
+                                <td align="right" valign="top" width="30">
+                                  <img alt=" " src="https://spsonldvue.blob.core.windows.net/theme/truentry/truentry-paper.jpg" width="30" role="presentation" style="display:block">
+                                </td>
+                                <td valign="top" width="100%" style="padding-right:70px;padding-left:40px">
+                                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="450">
+                                    <tbody>
+                                      @foreach (var card in Model.Cards)
+                                      {
+                                        <tr>
+                                          <td align="left" valign="top" style="padding-bottom:40px">
+                                            @Html.DisplayFor(_ => card)
+                                          </td>
+                                        </tr>
+                                      }
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="partner-join-pane">
+  <div class="row">
+    <div class="col-md-12">
+      <p>
+        Interested in partner opportunities?  <a href="https://www.truentry.com/contact/" target="_blank">Contact us about becoming a partner.</a>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <a href="https://www.truentry.com" target="_blank">
+        <img class="logo" src="https://spsonldvue.blob.core.windows.net/theme/truentry/truentry-banner-400x100-original.png" alt="TruEntry" />
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <small>
+        Service provided by Tru<strong>Entry</strong>, LLC.
+      </small>
+    </div>
+  </div>
+  @if (HttpContext.Current.IsDebuggingEnabled)
+  {
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-unstyled">
+          <li>@Html.ActionLink("DevOps Sign In", "SignIn", "Home", OperationsAreaRegistration.AreaRouteValues, new { @class = "btn btn-sm btn-link" })</li>
+        </ul>
+      </div>
+    </div>
+  }
+</div>
+

@@ -1,0 +1,17 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Operations.ViewModels.Events.EventsSidebar
+
+<div class="event navbar">
+    <ul class="nav nav-pills nav-stacked">
+        @foreach (var e in Model.Events)
+        {
+            <li class="@(e.Id == Model.CurrentlySelectedEventId ? "active" : string.Empty)">
+                <a href="@Url.Action("Index", "Events", new { activeEventId = e.CorrelationId })">
+                    @Html.GlyphFa("bolt", GlyphStyles.Default)
+                    @(e.Name)
+                    <p class="pull-right">@Html.GlyphFa("arrow-right", GlyphStyles.Default)</p>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,31 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.PendingVerification
+
+<div class="card">
+  <div class="card-title"><strong>@Html.DisplayFor(m => m.Name)</strong>
+    <span class="pull-right"><small class="text-muted">Pending since:</small>@Html.DisplayFor(m => m.PendingSince)</span>
+  </div>   
+  <div class="card-content card-300px-scrollable">
+    @foreach (var item in Model.Properties)
+    {
+      <div class="row">
+        <div class="col-md-1 text-right">@Html.DisplayFor(_ => item.Glyph)</div>
+        <div class="col-md-11">
+          <p>
+            <strong>@Html.DisplayFor(_ => item.PropertyName)</strong><br />
+            @Html.DisplayFor(_ => item.PropertyValueLine)
+          </p>
+        </div>
+      </div>
+    }
+  </div>
+  <div class="card-footer">
+    <div class="text-center m-sm">
+      @using (Html.BeginForm("Verify", "PeopleHub", new {id = Model.MemberId}, FormMethod.Post))
+      {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">@Html.GlyphFa("check-square-o") Verify All</button>
+      }
+    </div>    
+  </div>
+</div>

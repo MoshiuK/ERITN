@@ -1,0 +1,38 @@
+﻿@using System.Web.Mvc.Html
+@using AccessManagement.Framework.Events
+@using AccessManagement.Web.Areas.Organizations.ViewModels.EventHub
+@using Juillet.Web.Mvc
+@{
+  Layout = "../Shared/_OrganizationsLayout.cshtml";
+  var sideBar = (EventHubSideBar)ViewBag.SideBar ?? new EventHubSideBar(Guid.Empty, String.Empty);
+  var breadcrumbs = (NavBar)ViewBag.Breadcrumbs ?? new NavBar();
+  var titleBar = (OrganizationEmergencyEvent)ViewBag.TitleBar;
+}
+
+@section styles
+{
+  @RenderSection("pagestyles", false)
+}
+
+<div class="events-hub">
+  @Html.Partial("Breadcrumbs", breadcrumbs)
+  @Html.Partial("EventTitleBar", titleBar)
+
+  <div class="row m-b-sm">
+    <div class="col-md-2">
+      @Html.Partial("EventHubSideBar", sideBar)
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-12 events-hub events-hub-body">
+          @RenderBody()
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts
+{
+  @RenderSection("pagescripts", false)
+}

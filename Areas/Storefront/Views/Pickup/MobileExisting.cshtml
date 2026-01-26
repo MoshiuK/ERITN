@@ -1,0 +1,54 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Pickup.SendToMobilePageViewModel
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+}
+
+<div class="row storefront-pickup credential-collect-section border-bottom m-b-lg">
+  <div class="col-md-12">
+    <div class="m-t-sm m-b-sm">
+      @Html.GlyphFa("chevron-circle-left") @Html.ActionLink("Back to credential options", "Index", new { id = Model.TicketId, n = Model.Nonce })
+    </div>
+    <div class="row m-b-lg">
+      <div class="col-md-2">
+        <div class="big-icon">
+          @Html.GlyphFa("mobile", GlyphStyles.X5)
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            <h4 class="title">MOBILE CREDENTIALS</h4>
+            <p>
+              We will send your transit credentials using the phone number we have on file (ending <strong>@Html.ValueFor(m => m.NumberEnding)</strong>). @Html.ActionLink("This is not my mobile phone number.", "MobileUpdate", new {id = Model.TicketId, nonce = Model.Nonce})
+            </p>
+            <p>
+              <strong>Important:</strong> Standard message rates apply to the messages you receive.
+            </p>
+            <p>
+              The message includes a link where you can <strong>download your digital pass</strong> to your phone and a <strong>barcode image</strong> that 
+              can be scanned by law enforcement as you enter restricted areas or encounter checkpoints.
+            </p>
+            <p>
+              <strong>Note:</strong> You need internet access on your phone to download your digital pass.
+            </p>
+          </div>
+        </div>
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            @using (Html.BeginForm("SendToMobile", "Pickup"))
+            {
+              @Html.AntiForgeryToken()
+              @Html.HiddenFor(m => m.TicketId)
+              @Html.HiddenFor(m => m.Nonce)
+
+              <button class="btn btn-primary btn-lg" type="submit" role="button">
+                @Html.GlyphFa("mobile", GlyphStyles.Large) &nbsp;Send to my phone
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

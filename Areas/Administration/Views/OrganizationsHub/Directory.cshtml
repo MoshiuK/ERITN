@@ -1,0 +1,89 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.DirectoryPageViewModel
+@using AccessManagement.Web.Mvc;
+@using Juillet.Web.Mvc;
+@using Juillet.Web.Mvc.Html;
+@using AccessManagement.Web.Areas.Storefront;
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+}
+
+@{
+  var startPosition = (Model.PageOfContent.Metadata.TotalCount == 0) ? 0 : Model.PageOfContent.Metadata.StartPosition;
+  var endPosition = Model.PageOfContent.Metadata.EndPosition;
+  var total = Model.PageOfContent.Metadata.TotalCount;
+  var initialSelectionTag = Model.InitialSelection.HasValue ? string.Format("data-sps-initial-selection={0}", Model.InitialSelection.Value) : string.Empty;
+}
+
+@Html.Dialog("emailRegistrationDialog", Url.Action("EmailRegistrationDialog"))
+@Html.Dialog("copyRegistrationLinkDialog", Url.Action("CopyRegistrationLinkDialog"))
+
+<div class="row">
+  <div class="col-md-10">
+    <div class="panel">
+      <div class="panel-body">
+        <span class="text-muted small pull-right">Last refreshed <i class="fa fa-clock-o"></i> <time data-juillet-currenttime></time></span>
+        <h2>Find Organization</h2>
+        @Html.Partial("Forms/FilterForm", Model.Filter)
+        <div>
+          <span class="pull-right small text-muted">Showing @startPosition - @endPosition of @total items.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="text-center m-t-lg">
+      <button type="button" class="btn btn-primary btn-lg m-t-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @Html.GlyphFa("plus")<br />New Organization
+      </button>
+      <ul class="dropdown-menu">
+        <li>@Html.DialogLink("Invitation to register", "#emailRegistrationDialog")</li>
+        <li>@Html.DialogLink("Copy registration link", "#copyRegistrationLinkDialog")</li>
+        <li role="separator" class="divider"></li>
+        <li>
+          <a href="@Url.Action("Index", "Registration", new {area = StorefrontAreaRegistration.Name})"
+             target="_blank">
+            Open registration form
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="resultsPane">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><small>ORGANIZATION</small></th>
+                <th class="fw-80 text-center"><small>Enrolled / Available</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              @{
+                foreach (var item in Model.PageOfContent.Data)
+                {
+                  @Html.Partial("DirectorySummaryLine", item);
+                }
+              }
+            </tbody>
+
+          </table>
+        </div>
+        @Html.DisplayFor(m => m.Pager)
+      </div>
+    </div>
+  </div>
+  <div id="detailPane" class="col-md-5" @initialSelectionTag>
+  </div>
+</div>
+
+@section pagescripts
+{
+  @Html.ScriptForGooglePlacesAutoComplete()
+  <script src="~/Scripts/Chart.bundle.min.js"></script>
+  <script src="~/Scripts/pages/administration.organizations.directory.js"></script>
+}

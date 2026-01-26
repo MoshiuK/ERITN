@@ -1,0 +1,37 @@
+﻿@using AccessManagement.Web.Areas.Organizations.ViewModels.Reports
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Models.Reports.MemberReportSpecification
+
+<div class="report-specification">
+  <div class="row m-b-sm">
+    <div class="col-md-8">
+      @Html.LabelFor(m => m.Criteria)
+      <textarea id="criteriaTextArea" rows="4" readonly="readonly" class="form-control" disabled="disabled">
+@Model.Criteria.ToFilterString()
+</textarea>
+      <small>
+        <a href="@Url.Action("Index")" class="btn btn-link">
+          @Html.GlyphFa("arrow-circle-left", GlyphStyles.FixedWidth)Back to Reports
+        </a>
+      </small>
+    </div>
+    <div class="col-md-4 m-t-lg">
+      <div class="btn-group">
+        <button type="button" class="btn btn-inverse border-black dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          @Html.GlyphFa("calendar") Time Span <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          @foreach (DateTimeRangeMenuItem item in ViewBag.TimeSpanItems)
+          {
+            @item.Render()
+          }
+        </ul>
+      </div>
+      <button id="editCriteriaButton" type="button" class="btn btn-inverse border-black">@Html.GlyphFa("filter") Edit Criteria</button>
+      <button id="runReportButton" type="button" class="btn btn-primary btn-lg m-l-md">@Html.GlyphFa("refresh") Run Report</button>
+      <div class="">
+        <span id="timeSpanCaption" class="text-muted"></span>
+      </div>
+    </div>
+  </div>
+</div>

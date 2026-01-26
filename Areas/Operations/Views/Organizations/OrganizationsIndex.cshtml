@@ -1,0 +1,57 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Operations.ViewModels.Organizations.OrganizationsIndexPageViewModel
+
+<div class="row m-b-sm">
+  <div class="col-md-12">
+    <ul class="nav nav-pills">
+      <li role="presentation" class="active">@Html.ActionLink("Organizations", "OrganizationsIndex")</li>
+      <li role="presentation" class="">@Html.ActionLink("Registrations", "RegistrationsIndex")</li>
+    </ul>    
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body"></div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>@Html.GlyphFa("circle-o")</th>
+          <th>Name</th>
+          <th>Reference ID</th>
+          <th>Business Contact</th>
+          <th>Street Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var org in Model.PageOfOrganizations.Data)
+        {
+          <tr>
+            <td>
+              @{
+                var style = org.Active ? "text-success" : "text-muted";
+                var glyph = org.Active ? "circle" : "circle-o";
+              }
+              <span class="@style">@Html.GlyphFa(glyph)</span>
+            </td>
+            <td>
+              @Html.DisplayFor(_ => org.Name)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => org.RegistrationReferenceId)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => org.Profile.BusinessContactName)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => org.Profile.StreetAddress)
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

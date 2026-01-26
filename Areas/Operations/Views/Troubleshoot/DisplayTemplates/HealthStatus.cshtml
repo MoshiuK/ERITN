@@ -1,0 +1,22 @@
+﻿@using Juillet.Health
+@using Juillet.Web.Mvc.Html
+@model HealthStatus?
+@switch (Model)
+{
+  case HealthStatus.Ok:
+  case HealthStatus.True:
+  case HealthStatus.Enabled:
+    <span class="text-success">@Html.GlyphFa("check")</span>
+    break;
+  case HealthStatus.Warning:
+    <span class="text-warning">@Html.GlyphFa("exclamation")</span>
+    break;
+  case HealthStatus.Error:
+  case HealthStatus.False:
+  case HealthStatus.Disabled:
+    <span class="text-danger">@Html.GlyphFa("fire")</span>
+    break;
+  default:
+    <span class="text-danger">@Html.GlyphFa("circle-o")</span>
+    break;
+}

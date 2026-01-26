@@ -1,0 +1,58 @@
+﻿//
+// Theme for the TruEntry landing page
+//
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import "theme/common-variables.less";
+
+.container {
+    background-color: @white;
+    height: 100%;
+}
+
+.jumbotron {
+    background-color: @trublue;
+    color: @white;
+}
+
+.partner-join-pane {
+    border-top: 1px solid @trublue;
+    padding-top: 8px;
+    height: 80px;
+    color: @trudarkblue;
+    margin-top: 35px;
+    .logo {
+        height: 30px;
+    }
+}
+
+.footer {
+  background-color: inherit;
+}
+
+//
+// juillet updates
+//
+
+// when no toolbar is available do not use a workspace margin
+.layout-root.browser .workspace {
+  margin-top: 0px;
+}
+
+// base.less
+
+a.undecorated-link {
+  color: inherit;
+}
+
+a.undecorated-link:hover {
+  text-decoration: none;
+}
+
+body {
+  font-family: @default-font-family;
+  background-color: @default-page-background-color;
+  font-size: @default-font-size;
+  color: @default-text-color;
+  overflow-x: hidden;
+}
+

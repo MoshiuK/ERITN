@@ -1,0 +1,11 @@
+﻿@using Juillet.SystemExtensions
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Reports.MemberTableReportRow
+<tr>
+  @foreach (var prop in Model.GetType().GetProperties())
+  {
+    var colAttr = $"visibility-{prop.Name.ToSearchable()}";
+    <td @colAttr>
+      @prop.GetValue(Model)
+    </td>
+  }
+</tr>

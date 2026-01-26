@@ -1,0 +1,82 @@
+﻿/*
+    Landing page theme
+*/
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
+}
+.workspace {
+  width: 100%;
+  background-color: #e7ecef;
+}
+#toolbar {
+  background-color: #222;
+  border-color: #080808;
+}
+#toolbar .navbar-brand {
+  padding: 2px 160px 2px 8px;
+}
+#toolbar .navbar-brand img {
+  max-height: 46px;
+}
+#toolbar .navbar-nav > .open > a,
+#toolbar .navbar-nav > .open > a:focus,
+#toolbar .navbar-nav > .open > a:hover {
+  color: white;
+  background-color: inherit;
+}
+#toolbar .toolbar-profile {
+  color: #9d9d9d;
+}
+#toolbar .toolbar-profile:hover {
+  color: white;
+}
+.page-heading {
+  background-color: white;
+  padding: 0 15px;
+  margin-bottom: 10px;
+}
+.page-heading .h1,
+.page-heading .h2,
+.page-heading .h3,
+.page-heading h1,
+.page-heading h2,
+.page-heading h3 {
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+.page-heading .breadcrumb {
+  background-color: inherit;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.social-buttons-container a {
+  color: white;
+}
+.fw-175 {
+  width: 175px;
+}
+.fw-200 {
+  width: 200px;
+}
+.fw-350 {
+  width: 350px;
+}
+ul.tag-list {
+  padding: 0;
+  margin: 0;
+}
+ul.tag-list li {
+  font-size: small;
+  background-color: #f3f3f4;
+  padding: 5px 12px;
+  color: inherit;
+  border-radius: 2px;
+  border: 1px solid #e7eaec;
+  margin-right: 5px;
+  margin-top: 5px;
+  display: block;
+  float: left;
+}

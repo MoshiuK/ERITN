@@ -1,0 +1,43 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Person.PersonActivityViewModel
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "_PersonLayout.cshtml";
+  var pinCssClass = "timeline-pin-default";
+}
+
+<div class="timeline timeline-center">
+  @foreach (var activity in Model.Activities)
+  {
+    switch (activity.CssClass)
+    {
+      case BootstrapBrands.Success:
+        pinCssClass = "timeline-pin-success";
+        break;
+      case BootstrapBrands.Info:
+        pinCssClass = "timeline-pin-info";
+        break;
+      case BootstrapBrands.Warning:
+        pinCssClass = "timeline-pin-warning";
+        break;
+      case BootstrapBrands.Danger:
+        pinCssClass = "timeline-pin-danger";
+        break;
+    }
+
+    var date = activity.ActivityOccurredAt.ToLocalTime().ToShortDateString();
+    var time = activity.ActivityOccurredAt.ToLocalTime().ToShortTimeString();
+    <div class="timeline-block">
+      <div class="timeline-pin @pinCssClass">
+        @Html.GlyphFa(activity.Icon)
+      </div>
+      <div class="timeline-content">
+        <h4>@Html.DisplayFor(_ => activity.ActivityType)</h4>
+        <p>@Html.Raw(activity.Remarks)</p>
+        <div class="timeline-occurred">
+          <span>@Html.DisplayFor(_ => date)</span>
+          <span>@Html.DisplayFor(_ => time)</span>
+        </div>
+      </div>
+    </div>
+  }
+</div>

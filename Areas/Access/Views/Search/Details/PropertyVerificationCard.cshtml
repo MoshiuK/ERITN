@@ -1,0 +1,10 @@
+﻿@model AccessManagement.Framework.Credentials.CredentialSummary
+<div class="card">
+  <div class="card-heading">
+    <div class="card-title"><h4>Verified Attributes</h4></div>
+  </div>
+  <div class="card-content">
+    @Html.Partial("Partials/_AttributesTable", Model.Attributes)
+  </div>
+</div>
+

@@ -1,0 +1,8 @@
+﻿@using AccessManagement.Web.Areas.Administration.ViewModels
+@using AccessManagement.Models.Core
+@model IReadOnlyCollection<AvailabilityOf<AccessLevel>>
+  
+@foreach (var accessLevel in Model)
+{
+  @Html.DisplayFor(_ => accessLevel, "AccessLevel")
+}

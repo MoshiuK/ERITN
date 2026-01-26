@@ -1,0 +1,24 @@
+﻿@using Juillet.Web.Mvc.Html
+@using (Html.BeginForm("Undiscover", "Tenants", new {id = ViewBag.TenantId}, FormMethod.Post))
+{
+  @Html.AntiForgeryToken()
+
+
+  <div class="card card-danger">
+    <div class="card-content">
+      <h3 class="text-white">Remove</h3>
+      <p class="text-white">
+        If you no longer want this tenant to be available to external applications you can un-publish its discovery information.
+      </p>
+      <p class="text-white">
+        <strong>
+          NOTE:  This will break any applications that depend on this discovery data in very ugly ways.  Are you certain?
+        </strong>
+      </p>
+    </div>
+    <div class="card-footer text-center">
+      <button type="submit" class="btn btn-lg btn-white">@Html.GlyphFa("trash-o") Remove Now</button>
+    </div>
+  </div>
+
+}

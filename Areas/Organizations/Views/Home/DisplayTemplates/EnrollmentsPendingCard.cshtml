@@ -1,0 +1,29 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Dashboard.EnrollmentsPendingCard
+<div id="enrollmentsPendingCard" class="card">
+  <div class="card-content">
+    <div class="metric">
+      <div class="metric-glyph">@Html.GlyphFa("envelope-o", GlyphStyles.X5)</div>
+      <div class="metric-text">
+        <span># Enrollments Pending</span>
+        <h2>@Html.DisplayFor(m => m.PendingCount)</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h5 class="text-muted">Waiting for enrollment</h5>
+        <ul class="list-unstyled organizations-mru-list">
+          @foreach (var m in Model.PendingMembers)
+          {
+            <li class="brand-unstyled-link">
+              @Html.ActionLink(m.Annotation, "Index", "Enrollments", new { id = m.Id }, null)
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer card-footer-separator">
+    <small><a href="@Url.Action("Index", "Enrollments")">View Page @Html.GlyphFa("arrow-circle-right")</a></small>
+  </div>
+</div>

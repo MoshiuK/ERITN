@@ -1,0 +1,15 @@
+﻿@using AccessManagement.Web.Areas.Administration.ViewModels.Clearinghouse
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Clearinghouse.PublishOutcome
+@switch (Model)
+{
+  case PublishOutcome.Succeeded:
+    <span class="text-success">@Html.GlyphFa("calendar-check-o")</span>
+    break;
+  case PublishOutcome.Failed:
+    <span class="text-danger">@Html.GlyphFa("calendar-times-o")</span>
+    break;
+  default:
+    <span class="text-muted">@Html.GlyphFa("calendar-o")</span>
+    break;
+}

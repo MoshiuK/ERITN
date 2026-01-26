@@ -1,0 +1,19 @@
+﻿@using Juillet.Web.Mvc
+@model NavBar
+<div class="row m-t-sm">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+      @foreach (var nav in Model.Items)
+      {
+        if (nav.Selected)
+        {
+          <li class="active">@nav.Caption</li>
+        }
+        else
+        {
+          <li>@nav.AnchorTag(Url)</li>
+        }
+      }
+    </ol>
+  </div>
+</div>

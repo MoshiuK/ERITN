@@ -1,0 +1,31 @@
+﻿@using AccessManagement.Models.Enrollment
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Enrollments.EnrollmentTypeGlyphInfo
+@{
+  var icon = "file-text-o";
+  var type = (EnrollmentTypes) Model.EnrollmentType.Id;
+  switch (type)
+  {
+    case EnrollmentTypes.SelfService:
+      icon = Model.Status == EnrollmentStatus.Started ? "envelope-open-o" : "envelope-o";
+      break;
+    case EnrollmentTypes.IncomingEnrollmentChannel:
+      icon = "database";
+      break;
+  }
+
+  var colorCss = "text-muted";
+  switch (Model.Status)
+  {
+    case EnrollmentStatus.Pending:
+      colorCss = "text-warning";
+      break;
+    case EnrollmentStatus.Started:
+      colorCss = "text-success";
+      break;
+    case EnrollmentStatus.Enrolled:
+      colorCss = "";
+      break;
+  }
+}
+<span class="@colorCss" title="@Html.ValueFor(m => m.EnrollmentType.Name)">@Html.GlyphFa(icon)</span>

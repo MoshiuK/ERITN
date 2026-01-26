@@ -1,0 +1,3461 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Juillet.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Juillet.AutofacRegistrationExtensions">
+            <summary>
+            Registration methods to register components in this assembly with the <see cref="T:Autofac.ContainerBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterHttpContextBase(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the HTTP context base per dependency.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterHttpContextAccessor(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the HTTP context accessor as a singleton.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterHttpRuntimeContextStateProvider(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the HTTP runtime context state provider as a singleton.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterServicePrincipalStateProvider(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the service principal state provider.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterRouteTableRoutes(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the static route table routes <see cref="P:System.Web.Routing.RouteTable.Routes"/> as a singleton.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterModelBinderBinders(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the static model binders <see cref="P:System.Web.ModelBinding.ModelBinders.Binders"/> as a singleton.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterHealthProvider(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the health provider as a singleton.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterApplicationRuntime(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the application runtime as a singleton.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterScopeTelemetryClient(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the scope telemetry client, per request.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterAutoMapperMappings(Autofac.ContainerBuilder,System.Boolean)">
+            <summary>
+            Registers the AutoMapper mappings.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="assertConfigurationIsValid">if set to <c>true</c> [assert configuration is valid].</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterNotificationTypes(Autofac.ContainerBuilder)">
+            <summary>
+            Registers concrete <see cref="T:Juillet.Notifications.INotificationChannel"/> and <see cref="T:Juillet.Notifications.NotificationRecipient"/> objects from 
+            the notification package.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="M:Juillet.AutofacRegistrationExtensions.RegisterMemoryNotificationCacheManager(Autofac.ContainerBuilder)">
+            <summary>
+            Registers the memory notification cache manager as a singleton.
+            </summary>
+            <param name="builder">The builder.</param>
+        </member>
+        <member name="T:Juillet.Diagnostics.BootstrapTraceCode">
+            <summary>
+            Defines trace code for understanding application traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.Unknown">
+            <summary>
+            Specifies an unknown traces code.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ApplicationStart">
+            <summary>
+            Specifies application start traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ApplicationError">
+            <summary>
+            Specifies application error traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ApplicationEnd">
+            <summary>
+            Specifies application end traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ApplicationOther">
+            <summary>
+            Specifies other application  traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ModuleDiscovery">
+            <summary>
+            Specifies module discovery traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.IoC">
+            <summary>
+            Specifies Inversion of Control traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ConfigAspNetMvc">
+            <summary>
+            Specifies ASP.NET MVC configuration traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ConfigWebApi">
+            <summary>
+            Specifies web API configuration traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ConfigDatabase">
+            <summary>
+            Specifies database configuration traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ConfigCloud">
+            <summary>
+            Specifies cloud configuration traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ConfigModule">
+            <summary>
+            Specifies module configuration traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.BootstrapTraceCode.ConfigOther">
+            <summary>
+            Specifies other configuration traces.
+            </summary>
+        </member>
+        <member name="T:Juillet.Diagnostics.DiagnosticsUtility">
+            <summary>
+            Utility class for writing application traces consistently.
+            </summary>
+        </member>
+        <member name="M:Juillet.Diagnostics.DiagnosticsUtility.TraceBootstrap(Juillet.Diagnostics.BootstrapTraceCode,System.String)">
+            <summary>
+            Trace a bootstrap message.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Juillet.Diagnostics.DiagnosticsUtility.TraceRuntime(Juillet.Diagnostics.RuntimeTraceCode,System.String)">
+            <summary>
+            Trace a runtime message.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Juillet.Diagnostics.DiagnosticsUtility.TraceVerbose(Juillet.Diagnostics.RuntimeTraceCode,System.String)">
+            <summary>
+            Trace a verbose runtime message.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Juillet.Diagnostics.DiagnosticsUtility.TraceVerboseWithCallerInfo(Juillet.Diagnostics.RuntimeTraceCode,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Traces the verbose with caller information.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="message">The message.</param>
+            <param name="callerFilePath">The caller file path.</param>
+            <param name="callerMemberName">Name of the caller member.</param>
+            <param name="callerLineNumber">The caller line number.</param>
+        </member>
+        <member name="M:Juillet.Diagnostics.DiagnosticsUtility.TracePerformance(Juillet.Diagnostics.PerformanceTraceCode,System.String)">
+            <summary>
+            Trace a performance message.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Juillet.Diagnostics.DiagnosticsUtility.TraceSecurity(Juillet.Diagnostics.SecurityTraceCode,System.String)">
+            <summary>
+            Traces a security message.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:Juillet.Diagnostics.PerformanceTraceCode">
+            <summary>
+            Defines the performance trace codes.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.PerformanceTraceCode.Unknown">
+            <summary>
+            Specifies performance unknown traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.PerformanceTraceCode.ApplicationStart">
+            <summary>
+            Specifies performance traces for application start.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.PerformanceTraceCode.ApplicationEnd">
+            <summary>
+            Specifies performance traces for application end.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.PerformanceTraceCode.Authentication">
+            <summary>
+            Specifies performance traces for a authentication.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.PerformanceTraceCode.WebServiceCall">
+            <summary>
+            Specifies performance traces for a web service call.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.PerformanceTraceCode.WebServiceImpl">
+            <summary>
+            Specifies performance traces for a web service implementation.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.PerformanceTraceCode.DatabaseCall">
+            <summary>
+            Specifies performance traces for a database call.
+            </summary>
+        </member>
+        <member name="T:Juillet.Diagnostics.RuntimeTraceCode">
+            <summary>
+            Defines the runtime trace codes.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.Unknown">
+            <summary>
+            Specifies unknown runtime traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.ApplicationStart">
+            <summary>
+            Specifies runtime traces for application start.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.ApplicationEnd">
+            <summary>
+            Specifies runtime traces for application end.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.Default">
+            <summary>
+            Specifies default runtime traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.RemotingLayer">
+            <summary>
+            Specifies runtime traces for a remoting layer.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.Controller">
+            <summary>
+            Specifies runtime traces for a controller.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.BusinessLayer">
+            <summary>
+            Specifies runtime traces for a business layer.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.DomainObject">
+            <summary>
+            Specifies runtime traces for a domain object.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.DomainService">
+            <summary>
+            Specifies runtime traces for a domain service.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.DataLayer">
+            <summary>
+            Specifies runtime traces for a data layer.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.DatabaseAccess">
+            <summary>
+            Specifies runtime traces for a database access.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.NoSqlAccess">
+            <summary>
+            Specifies runtime traces for a NoSQL access.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.Infrastructure">
+            <summary>
+            Specifies runtime traces for infrastructure.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.Mapping">
+            <summary>
+            Specifies runtime traces for mapping.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.Utilities">
+            <summary>
+            Specifies runtime traces for utilities.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.Cache">
+            <summary>
+            Specifies runtime traces for a cache.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.RuntimeTraceCode.Security">
+            <summary>
+            Specifies runtime traces for a security object.
+            </summary>
+        </member>
+        <member name="T:Juillet.Diagnostics.ScopeTelemetryClient">
+            <summary>
+            Uses the current <see cref="T:System.Web.HttpContext"/> to establish a context for a telemetry client.
+            </summary>
+            <seealso cref="T:Juillet.Diagnostics.IScopeTelemetryClient" />
+        </member>
+        <member name="M:Juillet.Diagnostics.ScopeTelemetryClient.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Diagnostics.ScopeTelemetryClient"/> class.
+            </summary>
+        </member>
+        <member name="M:Juillet.Diagnostics.ScopeTelemetryClient.TrackEvent(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})">
+            <summary>
+            Collect a telemetry event.
+            </summary>
+            <param name="eventName">Name of the event.</param>
+            <param name="properties">Named string values you can use to search and classify events.</param>
+            <param name="metrics">Measurements associated with this event.</param>
+        </member>
+        <member name="M:Juillet.Diagnostics.ScopeTelemetryClient.TrackMetric(System.String,System.Double)">
+            <summary>
+            Collect the specified metric for telemetry.
+            </summary>
+            <param name="metricName">Name of the metric.</param>
+            <param name="val">The value.</param>
+        </member>
+        <member name="M:Juillet.Diagnostics.ScopeTelemetryClient.TrackException(System.Exception,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})">
+            <summary>
+            Collect an exception for telemetry.
+            </summary>
+            <param name="exception">The exception.</param>
+            <param name="properties">The properties.</param>
+            <param name="metrics">The metrics.</param>
+        </member>
+        <member name="T:Juillet.Diagnostics.SecurityTraceCode">
+            <summary>
+            Defines the security trace codes.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.SecurityTraceCode.Unknown">
+            <summary>
+            Specifies an unknown security trace.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.SecurityTraceCode.InvalidObjectIdentifier">
+            <summary>
+            Specifies a security trace for an invalid object identifier.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.SecurityTraceCode.SignInFailed">
+            <summary>
+            Specifies a security trace for a sign in failed.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.SecurityTraceCode.SignOutFailed">
+            <summary>
+            Specifies a security trace for a sign out failed.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.SecurityTraceCode.PasswordChanged">
+            <summary>
+            Specifies a security trace for a password changed.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.SecurityTraceCode.ObjectActivated">
+            <summary>
+            Specifies a security trace for an object activated.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.SecurityTraceCode.ObjectDeactivated">
+            <summary>
+            Specifies a security trace for an object deactivated.
+            </summary>
+        </member>
+        <member name="T:Juillet.Diagnostics.TraceCodes">
+            <summary>
+            Defines the trace code constants for the platform.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Unknown">
+            <summary>
+            Trace Code constant for unknown
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.ApplicationStart">
+            <summary>
+            Trace Code constant for application start
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.ApplicationError">
+            <summary>
+            Trace Code constant for application error
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.ApplicationEnd">
+            <summary>
+            Trace Code constant for application end
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.ApplicationOther">
+            <summary>
+            Trace Code constant for application other
+            </summary>
+        </member>
+        <member name="T:Juillet.Diagnostics.TraceCodes.Bootstrap">
+            <summary>
+            Trace code constants for application bootstrap.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Bootstrap.ModuleDiscovery">
+            <summary>
+            Trace Code constant for module discovery.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Bootstrap.IoC">
+            <summary>
+            Trace Code constant for inversion of control.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Bootstrap.ConfigAspNetMvc">
+            <summary>
+            Trace Code constant for ASP.NET MVC configuration.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Bootstrap.ConfigWebApi">
+            <summary>
+            Trace Code constant for web API configuration.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Bootstrap.ConfigDatabase">
+            <summary>
+            Trace Code constant for database configuration.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Bootstrap.ConfigCloud">
+            <summary>
+            Trace Code constant for cloud configuration.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Bootstrap.ConfigModule">
+            <summary>
+            Trace Code constant for module configuration.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Bootstrap.ConfigOther">
+            <summary>
+            Trace Code constant for other configuration.
+            </summary>
+        </member>
+        <member name="T:Juillet.Diagnostics.TraceCodes.Performance">
+            <summary>
+            Trace code constants for performance.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Performance.Authentication">
+            <summary>
+            Trace Code constant for authentication.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Performance.WebServiceCall">
+            <summary>
+            Trace Code constant for web service call
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Performance.WebServiceImpl">
+            <summary>
+            Trace Code constant for web service implementation
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Performance.DatabaseCall">
+            <summary>
+            Trace Code constant for database call
+            </summary>
+        </member>
+        <member name="T:Juillet.Diagnostics.TraceCodes.Runtime">
+            <summary>
+            Trace code constants for runtime.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.Default">
+            <summary>
+            Default Trace Code constant for runtime traces.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.RemotingLayer">
+            <summary>
+            Trace Code constant for remoting layer.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.Controller">
+            <summary>
+            Trace Code constant for controller.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.BusinessLayer">
+            <summary>
+            Trace Code constant for business layer.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.DomainObject">
+            <summary>
+            Trace Code constant for domain object.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.DomainService">
+            <summary>
+            Trace Code constant for domain service.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.DataLayer">
+            <summary>
+            Trace Code constant for data layer
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.DatabaseAccess">
+            <summary>
+            Trace Code constant for database access
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.NoSqlAccess">
+            <summary>
+            Trace Code constant for NoSQL access
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.Infrastructure">
+            <summary>
+            Trace Code constant for infrastructure.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.Mapping">
+            <summary>
+            Trace Code constant for mapping.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.Utilities">
+            <summary>
+            Trace Code constant for utilities.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.Cache">
+            <summary>
+            Trace Code constant for cache.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Runtime.SecurityObject">
+            <summary>
+            Trace Code constant for security objects.
+            </summary>
+        </member>
+        <member name="T:Juillet.Diagnostics.TraceCodes.Security">
+            <summary>
+            Trace code constants for security.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Security.InvalidObjectIdentifier">
+            <summary>
+            Trace Code constant for invalid object identifier.
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Security.SignInFailed">
+            <summary>
+            Trace Code constant for sign in failed
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Security.SignOutFailed">
+            <summary>
+            Trace Code constant for sign out failed
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Security.PasswordChanged">
+            <summary>
+            Trace Code constant for password changed
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Security.ObjectActivated">
+            <summary>
+            Trace Code constant for object activated
+            </summary>
+        </member>
+        <member name="F:Juillet.Diagnostics.TraceCodes.Security.ObjectDeactivated">
+            <summary>
+            Trace Code constant for object deactivated
+            </summary>
+        </member>
+        <member name="M:Juillet.Diagnostics.TraceCodes.GetTraceCodeName(System.Int32)">
+            <summary>
+            Gets the name of the trace code.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Juillet.Diagnostics.TracePerformanceScope">
+            <summary>
+            Support class to trace performance of a section of code.
+            </summary>
+            <remarks>
+            <example>
+              using (var scope = new TracePerformanceScope(code, tag))
+              {
+                 // do something interesting
+              }
+            </example>
+            </remarks>
+        </member>
+        <member name="M:Juillet.Diagnostics.TracePerformanceScope.#ctor(Juillet.Diagnostics.PerformanceTraceCode,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Diagnostics.TracePerformanceScope"/> class.
+            </summary>
+            <param name="code">The code.</param>
+            <param name="tag">The tag.</param>
+        </member>
+        <member name="P:Juillet.Diagnostics.TracePerformanceScope.Elapsed">
+            <summary>
+            Gets the elapsed time.
+            </summary>
+            <value>
+            The elapsed time.
+            </value>
+        </member>
+        <member name="M:Juillet.Diagnostics.TracePerformanceScope.System#IDisposable#Dispose">
+            <summary>
+            Stops the stopwatch and writes the elapsed time to the performance trace.
+            </summary>
+        </member>
+        <member name="T:Juillet.Health.DefaultHealthProvider">
+            <summary>
+            Default implementation of the health provider.
+            </summary>
+        </member>
+        <member name="M:Juillet.Health.DefaultHealthProvider.#ctor(System.Collections.Generic.IEnumerable{Juillet.Health.IHealthProbe})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Health.DefaultHealthProvider"/> class.
+            </summary>
+            <param name="probes">The probes.</param>
+        </member>
+        <member name="M:Juillet.Health.DefaultHealthProvider.CollectHealthSummaryAsync">
+            <summary>
+            Collects the health summary asynchronously.
+            </summary>
+            <returns>
+            A task that return the health summary.
+            </returns>
+        </member>
+        <member name="M:Juillet.Health.DefaultHealthProvider.IncrementUnhandledErrors">
+            <summary>
+            Increments the number of unhandled errors.
+            </summary>
+            <returns>The current unhandled error exception count.</returns>
+        </member>
+        <member name="M:Juillet.Health.DefaultHealthProvider.GetMemoryUsed">
+            <summary>
+            Gets the memory used from the current process.
+            </summary>
+            <returns>The private memory size of the process, or null if there is an error.</returns>
+        </member>
+        <member name="T:Juillet.Health.HealthConnectivityDetail">
+            <summary>
+            Represents a connectivity health item.
+            </summary>
+        </member>
+        <member name="P:Juillet.Health.HealthConnectivityDetail.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+            <value>
+            The display name.
+            </value>
+        </member>
+        <member name="P:Juillet.Health.HealthConnectivityDetail.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>
+            The status.
+            </value>
+        </member>
+        <member name="T:Juillet.Health.HealthStatus">
+            <summary>
+            Represents a health status
+            </summary>
+        </member>
+        <member name="F:Juillet.Health.HealthStatus.Ok">
+            <summary>
+            Specified ok status
+            </summary>
+        </member>
+        <member name="F:Juillet.Health.HealthStatus.Warning">
+            <summary>
+            Specified warning status
+            </summary>
+        </member>
+        <member name="F:Juillet.Health.HealthStatus.Error">
+            <summary>
+            Specified error status
+            </summary>
+        </member>
+        <member name="F:Juillet.Health.HealthStatus.True">
+            <summary>
+            Specified true status
+            </summary>
+        </member>
+        <member name="F:Juillet.Health.HealthStatus.False">
+            <summary>
+            Specified false status
+            </summary>
+        </member>
+        <member name="F:Juillet.Health.HealthStatus.Enabled">
+            <summary>
+            Specified enabled status
+            </summary>
+        </member>
+        <member name="F:Juillet.Health.HealthStatus.Disabled">
+            <summary>
+            Specified disabled status
+            </summary>
+        </member>
+        <member name="F:Juillet.Health.HealthStatus.None">
+            <summary>
+            Specifies no status
+            </summary>
+        </member>
+        <member name="T:Juillet.Health.HealthSummary">
+            <summary>
+            Represents health model for the application
+            </summary>
+        </member>
+        <member name="P:Juillet.Health.HealthSummary.ConnectivityDetails">
+            <summary>
+            Gets or sets the connectivity details.
+            </summary>
+            <value>
+            The connectivity details.
+            </value>
+        </member>
+        <member name="P:Juillet.Health.HealthSummary.MemoryUsed">
+            <summary>
+            Gets or sets the memory used.
+            </summary>
+            <value>
+            The memory used.
+            </value>
+        </member>
+        <member name="P:Juillet.Health.HealthSummary.UnhandledErrorCount">
+            <summary>
+            Gets or sets the unhandled error count.
+            </summary>
+            <value>
+            The unhandled error count.
+            </value>
+        </member>
+        <member name="T:Juillet.Health.IHealthProbe">
+            <summary>
+            Defines the interface to an object that probes health of a service.
+            </summary>
+        </member>
+        <member name="P:Juillet.Health.IHealthProbe.DisplayName">
+            <summary>
+            Gets the display name for the service.
+            </summary>
+            <value>
+            The display name for the service.
+            </value>
+        </member>
+        <member name="M:Juillet.Health.IHealthProbe.GetConnectivityStatusAsync">
+            <summary>
+            Gets the connectivity status asynchronously.
+            </summary>
+            <returns>A task that returns the connectivity status</returns>
+        </member>
+        <member name="T:Juillet.Health.IHealthProvider">
+            <summary>
+            Defines the interface to a health provider.
+            </summary>
+        </member>
+        <member name="M:Juillet.Health.IHealthProvider.CollectHealthSummaryAsync">
+            <summary>
+            Collects the health summary asynchronously.
+            </summary>
+            <returns>A task that return the health summary.</returns>
+        </member>
+        <member name="M:Juillet.Health.IHealthProvider.IncrementUnhandledErrors">
+            <summary>
+            Increments the number of unhandled errors.
+            </summary>
+            <returns>The current unhandled errors count.</returns>
+        </member>
+        <member name="T:Juillet.Mapping.DeserializeDictionaryResolver">
+            <summary>
+            AutoMapper resolver to deserialize a <code>Dictionary &lt;string, string&gt;</code> from a <code>byte[]</code>.
+            </summary>
+        </member>
+        <member name="M:Juillet.Mapping.DeserializeDictionaryResolver.Resolve(System.Byte[],System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},AutoMapper.ResolutionContext)">
+            <summary>
+            Implementors use source object to provide a destination object.
+            </summary>
+            <param name="source">Source object</param>
+            <param name="destination">Destination object, if exists</param>
+            <param name="destMember">Destination member</param>
+            <param name="context">The context of the mapping</param>
+            <returns>
+            Result, typically build from the source resolution result
+            </returns>
+        </member>
+        <member name="T:Juillet.Mapping.GenericArrayFromBytesResolver`1">
+            <summary>
+            Deserializes an array of claim relations from a byte array.
+            </summary>
+            <typeparam name="TArrayType">The type of the array type.</typeparam>
+        </member>
+        <member name="M:Juillet.Mapping.GenericArrayFromBytesResolver`1.Resolve(System.Byte[],`0[],`0[],AutoMapper.ResolutionContext)">
+            <summary>
+            Core method for resolving the source object to the return object.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="destination">Destination object, if exists</param>
+            <param name="destMember">Destination member</param>
+            <param name="context">The context of the mapping</param>
+            <returns>
+            An object of the target type.
+            </returns>
+        </member>
+        <member name="T:Juillet.Mapping.GenericArrayToBytesResolver`1">
+            <summary>
+            Serializes an array of the specified type to a JSON encoded byte array.
+            </summary>
+            <typeparam name="TArrayType">The type of the array type.</typeparam>
+        </member>
+        <member name="M:Juillet.Mapping.GenericArrayToBytesResolver`1.Resolve(`0[],System.Byte[],System.Byte[],AutoMapper.ResolutionContext)">
+            <summary>
+            Implementors use source object to provide a destination object.
+            </summary>
+            <param name="source">Source object</param>
+            <param name="destination">Destination object, if exists</param>
+            <param name="destMember">Destination member</param>
+            <param name="context">The context of the mapping</param>
+            <returns>
+            Result, typically build from the source resolution result
+            </returns>
+        </member>
+        <member name="T:Juillet.Mapping.SerializeDictionaryResolver">
+            <summary>
+            Automapper resolver to serialize a <code>Dictionary&lt;string, string%gt;</code> to a JSON encoded <code>byte[]</code>.
+            </summary>
+        </member>
+        <member name="M:Juillet.Mapping.SerializeDictionaryResolver.Resolve(System.Collections.Generic.Dictionary{System.String,System.String},System.Byte[],System.Byte[],AutoMapper.ResolutionContext)">
+            <summary>
+            Implementors use source object to provide a destination object.
+            </summary>
+            <param name="source">Source object</param>
+            <param name="destination">Destination object, if exists</param>
+            <param name="destMember">Destination member</param>
+            <param name="context">The context of the mapping</param>
+            <returns>
+            Result, typically build from the source resolution result
+            </returns>
+        </member>
+        <member name="T:Juillet.Notifications.CorrelatedRecipient">
+            <summary>
+            Represents a recipient that is identified by a correlation ID.
+            </summary>
+            <remarks>
+            A <see cref="T:Juillet.Notifications.CorrelatedRecipient"/> has a message notification channel to keep a persistent record
+            of a message.
+            </remarks>
+            <seealso cref="T:Juillet.Notifications.NotificationRecipient" />
+        </member>
+        <member name="M:Juillet.Notifications.CorrelatedRecipient.#ctor(Juillet.Notifications.MessageNotificationChannel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.CorrelatedRecipient"/> class.
+            </summary>
+            <param name="messageNotificationChannel">The message notification channel.</param>
+        </member>
+        <member name="M:Juillet.Notifications.CorrelatedRecipient.GetDeliveryChannels(Juillet.Notifications.NotificationTypes)">
+            <summary>
+            Gets the delivery channels for this recipient.
+            </summary>
+            <param name="notificationType">Type of the notification.</param>
+            <returns>
+            The collection of delivery channels that the specified notification type should be sent on, for the concrete recipient.
+            </returns>
+        </member>
+        <member name="P:Juillet.Notifications.CorrelatedRecipient.CorrelationId">
+            <summary>
+            Gets or sets the correlation identifier.
+            </summary>
+            <value>
+            The correlation identifier.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.CorrelatedRecipient.IdentityKey">
+            <summary>
+            Gets a unique key associated with the recipient identity.
+            </summary>
+            <value>
+            The unique key for the recipient identity.
+            </value>
+            <remarks>
+            <list type="bullet">
+              <item>
+                <description>For Users this is the User Correlation ID.</description>
+              </item>
+              <item>
+                <description>For Admins this is the user name (UPN).</description>
+              </item>
+              <item>
+                <description>For groups, this could be a group ID.</description>
+              </item>
+            </list>
+            This key is used as the partition key in message storage.
+            </remarks>
+        </member>
+        <member name="T:Juillet.Notifications.IMessageNotificationStorage">
+            <summary>
+            Defines the interface to the message notification database.
+            </summary>
+        </member>
+        <member name="M:Juillet.Notifications.IMessageNotificationStorage.InsertMessageAsync(Juillet.Notifications.MessageNotification)">
+            <summary>
+            Inserts the message into storage, asynchronously.
+            </summary>
+            <param name="messageNotification">The message notification.</param>
+            <returns>A task that returns the notification data that has been stored.</returns>
+        </member>
+        <member name="M:Juillet.Notifications.IMessageNotificationStorage.DeleteMessageAsync(System.String,System.Guid,System.TimeSpan)">
+            <summary>
+            Deletes the messagefrom storage, asynchronously.
+            </summary>
+            <param name="identityKey">The identity key.</param>
+            <param name="messageId">The message identifier.</param>
+            <param name="timeToUndeliver">The time to undeliver.</param>
+            <returns>
+            A task that returns true if the message was deleted, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.IMessageNotificationStorage.GetRecentMessagesAsync(System.String,System.TimeSpan,System.Int32,System.Int32)">
+            <summary>
+            Gets the recent messages asynchronous.
+            </summary>
+            <param name="identityKey">The identity key.</param>
+            <param name="lookbackPeriod">The lookback period.</param>
+            <param name="pageIndex">Index of the page.</param>
+            <param name="pageSize">Size of the page.</param>
+            <returns>
+            The page of messages for the specified lookback period.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.IMessageNotificationStorage.GetMessageAsync(System.String,System.String)">
+            <summary>
+            Gets the message with the specified ID.
+            </summary>
+            <param name="identityKey">The identity key.</param>
+            <param name="notificationKey">The notification key.</param>
+            <returns>
+            The message
+            </returns>
+        </member>
+        <member name="T:Juillet.Notifications.INotificationCacheManager">
+            <summary>
+            Defines the interface to a distributed cache for notifications in order to provide web users toasts with notification content and a count of messages.
+            </summary>
+            <remarks>
+            The domain model (particularly the back end) puts messages for the current session in the cache;
+            the application tier of the website reads from the cache and displays messages therein on the UI.
+            </remarks>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.PutToastAsync(System.String,Juillet.Notifications.MessageNotificationData)">
+            <summary>
+            Puts the entry in the toast cache.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <param name="value">The value.</param>
+            <returns>
+            A task to put the payload in the cache, returns true if it works, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.PutToast(System.String,Juillet.Notifications.MessageNotificationData)">
+            <summary>
+            Puts the entry in the toast cache.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <param name="value">The value.</param>
+            <returns>
+            True if item was added, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.DeleteToastsAsync(System.String)">
+            <summary>
+            Deletes all entries from the toast cache.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            True if the toasts were deleted, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.DeleteToasts(System.String)">
+            <summary>
+            Deletes all entries from the toast cache.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            True if toasts wer deleted, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.GetToastsAsync(System.String)">
+            <summary>
+            Get list of session toast messages matching the specified key.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            The collection of toasts, may be empty, will never be null.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.GetToasts(System.String)">
+            <summary>
+            Get list of session toast messages matching the specified key.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            The collection of toasts, may be empty, will never be null.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.IncrementUnreadMessageNotificationCountAsync(System.String)">
+            <summary>
+            Increments the unread notification message count for the specified session.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            The count of unread message notifications after applying the increment.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.IncrementUnreadMessageNotificationCount(System.String)">
+            <summary>
+            Increments the unread notification message count for the specified session.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            The count of unread message notifications after applying the increment.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.TakeUnreadMessageNotificationCountAsync(System.String)">
+            <summary>
+            Gets the unread notification message count for the specified session and resets it to 0.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            The count of unread message notifications.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.TakeUnreadMessageNotificationCount(System.String)">
+            <summary>
+            Gets the unread notification message count for the specified session and resets it to 0.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            The count of unread message notifications.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.ResetUnreadMessageNotificationCountAsync(System.String)">
+            <summary>
+            Resets the unread notification message count for the specified session.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            True if the unread message notifications count was reset.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationCacheManager.ResetUnreadMessageNotificationCount(System.String)">
+            <summary>
+            Resets the unread notification message count for the specified session.
+            </summary>
+            <param name="cacheKey">The cache key.</param>
+            <returns>
+            True if the unread message notifications count was reset.
+            </returns>
+        </member>
+        <member name="T:Juillet.Notifications.INotificationChannel">
+            <summary>
+            Defines the interface to a notification channel.
+            </summary>
+            <remarks>
+            A <see cref="T:Juillet.Notifications.INotificationChannel"/> is an abstraction for for delivering notifications.
+            Notifications can be delivered as SMS messages, Emails, Slack updates, in-app toasts, etc.
+            <para>
+            A notification is delivered to the channel, it is the responsibility of the channel to deliver
+            it to the recipient.
+            </para>
+            <para>
+            Some channels may allow a message to be undelivered (deleted before the recipient has seen it).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationChannel.DeliverAsync(Juillet.Notifications.Notification)">
+            <summary>
+            Delivers the notification on the channel, asynchronously.
+            </summary>
+            <param name="notification">The notification.</param>
+            <returns>True if the message was delivered on the channel, false otherwise.</returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationChannel.UndeliverAsync(Juillet.Notifications.NotificationRecipient,System.Guid)">
+            <summary>
+            Undelivers a notification, if possible, asynchronously.
+            </summary>
+            <param name="recipient">The recipient.</param>
+            <param name="notificationId">The notification identifier.</param>
+            <returns>
+            True if the message was undelivered from the channel, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Juillet.Notifications.INotificationService">
+            <summary>
+            Defines the interface to a domain notification service, for sending notifications from the domain 
+            to the human user of the application.
+            </summary>
+            <remarks>
+            Notifications are intended to be messages from the domain to the user interface, they are (intentionally) 
+            different to domain events; although it would be normal for notification to be sent in response to a 
+            domain event occurring.
+            </remarks>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationService.SendAsync(Juillet.Notifications.Notification)">
+            <summary>
+            Sends a notification asynchronously.
+            </summary>
+            <param name="notification">The notification.</param>
+            <returns>A task to perform the operation, the task returns the number of channels the notification was sent on.</returns>
+        </member>
+        <member name="M:Juillet.Notifications.INotificationService.RescindAsync(Juillet.Notifications.NotificationRecipient,System.Guid)">
+            <summary>
+            Rescinds the specified notification, if possble, asynchronously.
+            </summary>
+            <param name="recipient">The recipient.</param>
+            <param name="notificationId">The notification identifier.</param>
+            <returns>
+            A task to perform the operation, the task returns the number of channels the notification was rescinded from.
+            </returns>
+        </member>
+        <member name="T:Juillet.Notifications.MemoryNotificationCacheManager">
+            <summary>
+            Implementation of the <see cref="T:Juillet.Notifications.INotificationCacheManager"/> backed by <see cref="T:System.Runtime.Caching.MemoryCache"/>.
+            </summary>
+            <seealso cref="T:Juillet.Notifications.INotificationCacheManager" />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.CreateToastKey(System.String)">
+            <summary>
+            Creates the cache key for a toast using the session ID.
+            </summary>
+            <param name="originalKey">The original key.</param>
+            <returns>The cache key for a toast.</returns>
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.CreateNotificationCountKey(System.String)">
+            <summary>
+            Creates the cache key for the notifications count.
+            </summary>
+            <param name="originalKey">The original key.</param>
+            <returns>The cache key for the notifications count.</returns>
+        </member>
+        <member name="T:Juillet.Notifications.MemoryNotificationCacheManager.CountSlot">
+            <summary>
+            Wrapper for a counter value.
+            </summary>
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.CountSlot.#ctor(System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.MemoryNotificationCacheManager.CountSlot"/> class.
+            </summary>
+            <param name="init">The initial value.</param>
+        </member>
+        <member name="P:Juillet.Notifications.MemoryNotificationCacheManager.CountSlot.Value">
+            <summary>
+            Gets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.CountSlot.Increment">
+            <summary>
+            Increments the counter value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.CountSlot.Reset">
+            <summary>
+            Resets the counter value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.MemoryNotificationCacheManager"/> class.
+            </summary>
+        </member>
+        <member name="P:Juillet.Notifications.MemoryNotificationCacheManager.TimeToLive">
+            <summary>
+            Gets or sets the time to live.
+            </summary>
+            <value>
+            The time to live.
+            </value>
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.PutToastAsync(System.String,Juillet.Notifications.MessageNotificationData)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.PutToast(System.String,Juillet.Notifications.MessageNotificationData)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.DeleteToastsAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.DeleteToasts(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.GetToastsAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.GetToasts(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.IncrementUnreadMessageNotificationCountAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.IncrementUnreadMessageNotificationCount(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.TakeUnreadMessageNotificationCountAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.TakeUnreadMessageNotificationCount(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.ResetUnreadMessageNotificationCountAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.MemoryNotificationCacheManager.ResetUnreadMessageNotificationCount(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Juillet.Notifications.MessageNotification">
+            <summary>
+            Represents a message notification.
+            </summary>
+            <remarks>
+            A message notification has similar characteristics to an email or internal messaging system.
+            </remarks>
+            <seealso cref="T:Juillet.Notifications.Notification" />
+        </member>
+        <member name="M:Juillet.Notifications.MessageNotification.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.MessageNotification"/> class.
+            </summary>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotification.State">
+            <summary>
+            Gets or sets the state of this message.
+            </summary>
+            <value>
+            The state of this message.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotification.SenderDisplayName">
+            <summary>
+            Gets or sets the display name of the sender.
+            </summary>
+            <value>
+            The display name of the sender.
+            </value>
+        </member>
+        <member name="T:Juillet.Notifications.MessageNotificationChannel">
+            <summary>
+            A <see cref="T:Juillet.Notifications.MessageNotificationChannel"/> delivers notifications to the message store.
+            </summary>
+            <remarks>
+            This channel stores a persistent record of the message and updates the new message 
+            count in notification cache.
+            </remarks>
+            <seealso cref="T:Juillet.Notifications.INotificationChannel" />
+        </member>
+        <member name="M:Juillet.Notifications.MessageNotificationChannel.#ctor(Juillet.Runtime.IRuntimeContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.MessageNotificationChannel" /> class.
+            </summary>
+            <param name="runtimeContext">The rca.</param>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationChannel.TimeToUndeliver">
+            <summary>
+            Gets or sets the time to undeliver.
+            </summary>
+            <value>
+            The time to undeliver.
+            </value>
+        </member>
+        <member name="M:Juillet.Notifications.MessageNotificationChannel.DeliverAsync(Juillet.Notifications.Notification)">
+            <summary>
+            Delivers the notification on the channel, asynchronously.
+            </summary>
+            <param name="notification">The notification.</param>
+            <returns>
+            True if the message was delivered on the channel, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.MessageNotificationChannel.UndeliverAsync(Juillet.Notifications.NotificationRecipient,System.Guid)">
+            <summary>
+            Undelivers a notification, if possible, asynchronously.
+            </summary>
+            <param name="recipient">The recipient.</param>
+            <param name="notificationId">The notification identifier.</param>
+            <returns>
+            True if the message was undelivered from the channel, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Juillet.Notifications.MessageNotificationData">
+            <summary>
+            Encapsulates the data stored in a row of the <see cref="T:Juillet.Notifications.IMessageNotificationStorage"/>
+            and a toast entry in <see cref="T:Juillet.Notifications.INotificationCacheManager"/>.
+            </summary>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationData.Id">
+            <summary>
+            Gets or sets the unique ID for this notification.
+            </summary>
+            <remarks>This is the RowKey in Azure Table Storage.</remarks>
+            <value>
+            The unique ID for this notification.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationData.MessageId">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationData.State">
+            <summary>
+            Gets or sets the state of this message.
+            </summary>
+            <value>
+            The state of this message.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationData.SenderDisplayName">
+            <summary>
+            Gets or sets the display name of the sender.
+            </summary>
+            <value>
+            The display name of the sender.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationData.NotificationType">
+            <summary>
+            Gets or sets the type of the notification.
+            </summary>
+            <value>
+            The type of the notification.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationData.OccurredAtUtc">
+            <summary>
+            Gets or sets the occurred at UTC.
+            </summary>
+            <value>
+            The occurred at UTC.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationData.DisplayTitle">
+            <summary>
+            Gets or sets the display title.
+            </summary>
+            <value>
+            The display title.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationData.DisplayDescription">
+            <summary>
+            Gets or sets the display description.
+            </summary>
+            <value>
+            The display description.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.MessageNotificationData.Properties">
+            <summary>
+            Gets or sets the properties.
+            </summary>
+            <value>
+            The properties.
+            </value>
+        </member>
+        <member name="T:Juillet.Notifications.MessageNotificationStates">
+            <summary>
+            Defines the states of a <see cref="T:Juillet.Notifications.MessageNotification" />.
+            </summary>
+        </member>
+        <member name="F:Juillet.Notifications.MessageNotificationStates.Unread">
+            <summary>
+            Specifies a message is unread.
+            </summary>
+        </member>
+        <member name="F:Juillet.Notifications.MessageNotificationStates.Read">
+            <summary>
+            Specifies a message is read
+            </summary>
+        </member>
+        <member name="T:Juillet.Notifications.Notification">
+            <summary>
+            Represents a notification from the domain to the application user.
+            </summary>
+            <remarks>
+            A notification has a unique ID that can be used to track its delivery through the system.
+            A notification can be transient, meaning its role and purpose is short lived and (in general)
+            is not saved.  A transient message is intended for lightweight notifications like updating progress 
+            bars or performing UX refreshes, not something that would be saved for later.
+            </remarks>
+        </member>
+        <member name="M:Juillet.Notifications.Notification.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.Notification"/> class.
+            </summary>
+            <param name="isTransient">if set to <c>true</c> [is transient].</param>
+        </member>
+        <member name="P:Juillet.Notifications.Notification.Id">
+            <summary>
+            Gets or sets the notification identifier.
+            </summary>
+            <value>
+            The notification identifier.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.Notification.IsTransient">
+            <summary>
+            Gets or sets a value indicating whether this instance is transient.
+            </summary>
+            <value>
+            <c>true</c> if this instance is transient; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.Notification.Recipient">
+            <summary>
+            Gets or sets the recipient.
+            </summary>
+            <value>
+            The recipient.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.Notification.Payload">
+            <summary>
+            Gets or sets the payload.
+            </summary>
+            <value>
+            The payload.
+            </value>
+        </member>
+        <member name="T:Juillet.Notifications.NotificationChannelBase">
+            <summary>
+            A commmon case class for concrete <see cref="T:Juillet.Notifications.INotificationChannel"/> implementations to extend and reuse.
+            </summary>
+            <seealso cref="T:Juillet.Notifications.INotificationChannel" />
+        </member>
+        <member name="M:Juillet.Notifications.NotificationChannelBase.#ctor(Juillet.Runtime.IRuntimeContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.NotificationChannelBase" /> class.
+            </summary>
+            <param name="runtimeContext">The rca.</param>
+        </member>
+        <member name="M:Juillet.Notifications.NotificationChannelBase.Resolve``1">
+            <summary>
+            Resolves an instance of the specified type using the current runtime context.
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <returns>An instance of the specified type using the current runtime context.</returns>
+        </member>
+        <member name="P:Juillet.Notifications.NotificationChannelBase.NotificationCacheManager">
+            <summary>
+            Gets the notification cache manager.
+            </summary>
+            <value>
+            The notification cache manager.
+            </value>
+        </member>
+        <member name="M:Juillet.Notifications.NotificationChannelBase.DeliverAsync(Juillet.Notifications.Notification)">
+            <summary>
+            Delivers the notification on the channel, asynchronously.
+            </summary>
+            <param name="notification">The notification.</param>
+            <returns>
+            True if the message was delivered on the channel, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.NotificationChannelBase.UndeliverAsync(Juillet.Notifications.NotificationRecipient,System.Guid)">
+            <summary>
+            Undelivers a notification, if possible, asynchronously.
+            </summary>
+            <param name="recipient">The recipient.</param>
+            <param name="notificationId">The notification identifier.</param>
+            <returns>
+            True if the message was undelivered from the channel, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Juillet.Notifications.NotificationException">
+            <summary>
+            Throws when an error occurs working with notifications.
+            </summary>
+            <seealso cref="T:System.ApplicationException" />
+        </member>
+        <member name="M:Juillet.Notifications.NotificationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.NotificationException"/> class.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+        </member>
+        <member name="M:Juillet.Notifications.NotificationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.NotificationException"/> class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+        </member>
+        <member name="T:Juillet.Notifications.NotificationPayload">
+            <summary>
+            Represents a notification payload.
+            </summary>
+        </member>
+        <member name="P:Juillet.Notifications.NotificationPayload.NotificationType">
+            <summary>
+            Gets or sets the type of the notification.
+            </summary>
+            <value>
+            The type of the notification.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.NotificationPayload.OccurredAtUtc">
+            <summary>
+            Gets or sets the occurred at UTC.
+            </summary>
+            <value>
+            The occurred at UTC.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.NotificationPayload.DisplayTitle">
+            <summary>
+            Gets or sets the display title.
+            </summary>
+            <value>
+            The display title.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.NotificationPayload.DisplayDescription">
+            <summary>
+            Gets or sets the display description.
+            </summary>
+            <value>
+            The display description.
+            </value>
+        </member>
+        <member name="P:Juillet.Notifications.NotificationPayload.Properties">
+            <summary>
+            Gets or sets the properties.
+            </summary>
+            <value>
+            The properties.
+            </value>
+        </member>
+        <member name="T:Juillet.Notifications.NotificationRecipient">
+            <summary>
+            Represents a recipient of a notification.
+            </summary>
+            <remarks>
+            A recipient may have many different delivery channels they like to recieve notifications on.
+            <para>
+            A recipient may be a user, a group or a broadcast message for all dealers.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Juillet.Notifications.NotificationRecipient.SessionId">
+            <summary>
+            Gets or sets the session ID if there is a session associated with the recipient.  This may be null.
+            </summary>
+            <value>
+            The session ID or null if there is no session associated with the recipient.
+            </value>
+        </member>
+        <member name="M:Juillet.Notifications.NotificationRecipient.GetDeliveryChannels(Juillet.Notifications.NotificationTypes)">
+            <summary>
+            Gets the delivery channels for this recipient.
+            </summary>
+            <param name="notificationType">Type of the notification.</param>
+            <returns>The collection of delivery channels that the specified notification type should be sent on, for the concrete recipient.</returns>
+        </member>
+        <member name="P:Juillet.Notifications.NotificationRecipient.IdentityKey">
+            <summary>
+            Gets a unique key associated with the recipient identity.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><description>For Users this is the User Correlation ID.</description></item>
+            <item><description>For Admins this is the user name (UPN).</description></item>
+            <item><description>For groups, this could be a group ID.</description></item>
+            </list>
+            This key is used as the partition key in message storage.  
+            </remarks>
+            <value>
+            The unique key for the recipient identity.
+            </value>
+        </member>
+        <member name="T:Juillet.Notifications.NotificationService">
+            <summary>
+            An implementation of the <see cref="T:Juillet.Notifications.INotificationService"/>.
+            </summary>
+            <remarks>
+            Sends and recinds messages to or from the delivery channels associated with the recipient of a notification.
+            </remarks>
+            <seealso cref="T:Juillet.Notifications.INotificationService" />
+        </member>
+        <member name="M:Juillet.Notifications.NotificationService.SendAsync(Juillet.Notifications.Notification)">
+            <inheritdoc />
+        </member>
+        <member name="M:Juillet.Notifications.NotificationService.RescindAsync(Juillet.Notifications.NotificationRecipient,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="T:Juillet.Notifications.NotificationServiceExtensions">
+            <summary>
+            Convenience methods for working with the <see cref="T:Juillet.Notifications.INotificationService"/>.
+            </summary>
+        </member>
+        <member name="M:Juillet.Notifications.NotificationServiceExtensions.SendMessageAsync(Juillet.Notifications.INotificationService,System.String,System.String,Juillet.Notifications.NotificationRecipient,Juillet.Notifications.NotificationTypes,System.String)">
+            <summary>
+            Sends the message with the specified title and message to the specified recipient, asynchronously.
+            </summary>
+            <param name="notificationService">The notification service.</param>
+            <param name="title">The title.</param>
+            <param name="message">The message.</param>
+            <param name="recipient">The recipient.</param>
+            <param name="type">The type.</param>
+            <param name="senderDisplayName">Display name of the sender.</param>
+            <returns>A task that sends the message to the recipient and returns the number of channels the message was delivered on.</returns>
+        </member>
+        <member name="T:Juillet.Notifications.NotificationTypes">
+            <summary>
+            Defines the type of notification that is being sent.
+            </summary>
+        </member>
+        <member name="F:Juillet.Notifications.NotificationTypes.Control">
+            <summary>
+            Specifies a control notification.
+            </summary>
+        </member>
+        <member name="F:Juillet.Notifications.NotificationTypes.Information">
+            <summary>
+            Specifies an information notification.
+            </summary>
+        </member>
+        <member name="F:Juillet.Notifications.NotificationTypes.Success">
+            <summary>
+            Specifies a success notification.
+            </summary>
+        </member>
+        <member name="F:Juillet.Notifications.NotificationTypes.Warning">
+            <summary>
+            Specifies a warning notification.
+            </summary>
+        </member>
+        <member name="F:Juillet.Notifications.NotificationTypes.Error">
+            <summary>
+            Specfies an error notification.
+            </summary>
+        </member>
+        <member name="T:Juillet.Notifications.IdentityRecipient">
+            <summary>
+            Represents a recipient that is a single active user in the system.  Use this recipient when the user is currently signed in and can get real time notifications through the application.
+            </summary>
+            <remarks>
+            A <see cref="T:Juillet.Notifications.IdentityRecipient"/> has 2 built in channels and a collection of extra channels where a notification can be delivered.
+            <list type="bullet">
+            <item><description>The <see cref="T:Juillet.Notifications.MessageNotificationChannel"/> is used to keep a persistent record of the notification and update the unread message counter on the UX.</description></item>
+            <item><description>The <see cref="T:Juillet.Notifications.ToastNotificationChannel"/> is used to send a live notification to the UX.</description></item>
+            <item><description>The extra channels allow notifications to be extended to support other delivery mechanisms (SMS, Slack, etc.).</description></item>
+            </list>
+            </remarks>
+            <seealso cref="T:Juillet.Notifications.NotificationRecipient" />
+        </member>
+        <member name="M:Juillet.Notifications.IdentityRecipient.#ctor(Juillet.Notifications.MessageNotificationChannel,Juillet.Notifications.ToastNotificationChannel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.IdentityRecipient" /> class.
+            </summary>
+            <param name="messageChannel">The message channel.</param>
+            <param name="toastChannel">The toast channel.</param>
+        </member>
+        <member name="P:Juillet.Notifications.IdentityRecipient.IdentityKey">
+            <summary>
+            Gets the unique key associated with the concrete recipient.
+            </summary>
+            <value>
+            The unique key.
+            </value>
+            <remarks>
+            This is used as the partition key in message storage.
+            </remarks>
+        </member>
+        <member name="P:Juillet.Notifications.IdentityRecipient.Identity">
+            <summary>
+            Gets or sets the user identifier.
+            </summary>
+            <value>
+            The user identifier.
+            </value>
+        </member>
+        <member name="M:Juillet.Notifications.IdentityRecipient.AddDeliveryChannel(Juillet.Notifications.NotificationTypes,Juillet.Notifications.INotificationChannel)">
+            <summary>
+            Adds a delivery channel for this user recipient for a particular notification type.
+            </summary>
+            <param name="notificationType">Type of the notifications that will be sent to the channel.</param>
+            <param name="channel">The channel.</param>
+        </member>
+        <member name="M:Juillet.Notifications.IdentityRecipient.GetDeliveryChannels(Juillet.Notifications.NotificationTypes)">
+            <summary>
+            Gets the delivery channels for this recipient.
+            </summary>
+            <param name="notificationType">Type of the notification.</param>
+            <returns>
+            The collection of delivery channels that the specified notification type should be sent on, for the concrete recipient.
+            </returns>
+        </member>
+        <member name="T:Juillet.Notifications.ToastNotificationChannel">
+            <summary>
+            Represents a notification channel that delivers a toast message to a client.
+            </summary>
+            <seealso cref="T:Juillet.Notifications.INotificationChannel" />
+        </member>
+        <member name="M:Juillet.Notifications.ToastNotificationChannel.#ctor(Juillet.Runtime.IRuntimeContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Notifications.ToastNotificationChannel" /> class.
+            </summary>
+            <param name="runtimeContext">The rca.</param>
+        </member>
+        <member name="M:Juillet.Notifications.ToastNotificationChannel.DeliverAsync(Juillet.Notifications.Notification)">
+            <summary>
+            Delivers the notification on the channel, asynchronously.
+            </summary>
+            <param name="notification">The notification.</param>
+            <returns>
+            True if the message was delivered on the channel, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Juillet.Notifications.ToastNotificationChannel.UndeliverAsync(Juillet.Notifications.NotificationRecipient,System.Guid)">
+            <summary>
+            Undelivers a notification, if possible, asynchronously.
+            </summary>
+            <param name="recipient">The recipient.</param>
+            <param name="notificationId">The notification identifier.</param>
+            <returns>
+            True if the message was delivered on the channel, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Juillet.Profile.AvatarInfo">
+            <summary>
+            Encapsulates info about an avatar blob.
+            </summary>
+        </member>
+        <member name="F:Juillet.Profile.AvatarInfo.DefaultCategoryCode">
+            <summary>
+            The default category code
+            </summary>
+        </member>
+        <member name="M:Juillet.Profile.AvatarInfo.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Profile.AvatarInfo"/> class.
+            </summary>
+        </member>
+        <member name="P:Juillet.Profile.AvatarInfo.ObjectId">
+            <summary>
+            Gets or sets the object identifier.
+            </summary>
+            <value>
+            The object identifier.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarInfo.CategoryCode">
+            <summary>
+            Gets or sets the category of avatar.
+            </summary>
+            <value>
+            The category.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarInfo.Thumbnail">
+            <summary>
+            Gets or sets the thumbnail.
+            </summary>
+            <value>
+            The thumbnail.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarInfo.Small">
+            <summary>
+            Gets or sets the small.
+            </summary>
+            <value>
+            The small.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarInfo.Medium">
+            <summary>
+            Gets or sets the medium.
+            </summary>
+            <value>
+            The medium.
+            </value>
+        </member>
+        <member name="M:Juillet.Profile.AvatarInfo.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:Juillet.Profile.AvatarInfo.Equals(Juillet.Profile.AvatarInfo)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Juillet.Profile.AvatarInfo.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Juillet.Profile.AvatarInfo.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="T:Juillet.Profile.AvatarSizes">
+            <summary>
+            Defines the sizes of avatar available.
+            </summary>
+        </member>
+        <member name="F:Juillet.Profile.AvatarSizes.Thumbnail">
+            <summary>
+            Specifies thumbnail size, 50x50.
+            </summary>
+        </member>
+        <member name="F:Juillet.Profile.AvatarSizes.Small">
+            <summary>
+            Specifies small size, 200x200.
+            </summary>
+        </member>
+        <member name="F:Juillet.Profile.AvatarSizes.Medium">
+            <summary>
+            Specifies medium size, 500x500.
+            </summary>
+        </member>
+        <member name="T:Juillet.Profile.AvatarSpec">
+            <summary>
+            Encapsulates the information needed to create a new avatar.
+            </summary>
+        </member>
+        <member name="P:Juillet.Profile.AvatarSpec.ObjectId">
+            <summary>
+            Gets or sets the object identifier.
+            </summary>
+            <value>
+            The object identifier.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarSpec.CategoryCode">
+            <summary>
+            Gets or sets the category code.
+            </summary>
+            <value>
+            The category code.
+            </value>
+            <remarks>
+            A short code used to separate avatars into different "folders".  This string should be save to use as a 
+            segment in the image path (i.e. no special characters) and it is never intended for display purposes
+            (other part of a URL) so suggest a two character code, e.g. "ur" for "User" or "gy" for "Geography".
+            </remarks>
+        </member>
+        <member name="P:Juillet.Profile.AvatarSpec.ImageStream">
+            <summary>
+            Gets or sets the stream to read image data from.
+            </summary>
+            <value>
+            The image stream.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarSpec.ContentType">
+            <summary>
+            Gets or sets the content type of the image.
+            </summary>
+            <value>
+            The type of the content.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarSpec.ContentLength">
+            <summary>
+            Gets or sets the length of the content.
+            </summary>
+            <value>
+            The length of the content.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarSpec.Crop">
+            <summary>
+            Gets or sets the cropping dimensions.
+            </summary>
+            <value>
+            The cropping dimensions.
+            </value>
+        </member>
+        <member name="T:Juillet.Profile.AvatarUtilities">
+            <summary>
+            Utilities for working with avatars.
+            </summary>
+        </member>
+        <member name="F:Juillet.Profile.AvatarUtilities.Randomizer">
+            <summary>
+            A randomizer
+            </summary>
+        </member>
+        <member name="F:Juillet.Profile.AvatarUtilities.InternalTileColors">
+            <summary>
+            The tile colors to select from when generating a tile.
+            </summary>
+        </member>
+        <member name="M:Juillet.Profile.AvatarUtilities.ExtractTileAcronym(System.String)">
+            <summary>
+            Extracts an acronym from a name using various heuristics.
+            </summary>
+            <remarks>
+            For example: "Acme Security" would return "AS".
+            </remarks>
+            <param name="name">The name.</param>
+            <returns>An acronym for the name</returns>
+        </member>
+        <member name="M:Juillet.Profile.AvatarUtilities.Crop(System.IO.Stream,System.IO.Stream,Juillet.Profile.AvatarDimensions)">
+            <summary>
+            Crops the specified input according to the specified dimensions and writes the resulting image to the output stream.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="output">The output.</param>
+            <param name="cropDimensions">The crop dimensions.</param>
+        </member>
+        <member name="M:Juillet.Profile.AvatarUtilities.Resize(System.IO.Stream,System.IO.Stream,System.Int32,System.Int32)">
+            <summary>
+            Resizes the specified input to the width and height specified.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="output">The output.</param>
+            <param name="newWidth">The new width.</param>
+            <param name="newHeight">The new height.</param>
+        </member>
+        <member name="M:Juillet.Profile.AvatarUtilities.RandomTileColor">
+            <summary>
+            Returns a random color from one of the approved tile colors.
+            </summary>
+            <returns>A random color</returns>
+        </member>
+        <member name="M:Juillet.Profile.AvatarUtilities.RandomTileHtmlColor">
+            <summary>
+            Get a randoms tile color as a HTML string.
+            </summary>
+            <returns>The html string (with leading #) of a random color.</returns>
+        </member>
+        <member name="M:Juillet.Profile.AvatarUtilities.ColorFromText(System.String)">
+            <summary>
+            Parse a colors from its text representation.
+            </summary>
+            <param name="text">The text value. Starts with '#', assume a HTML color; Starts with 'rgba' assume a CSS color.</param>
+            <returns>The parsed color, or Color.Black if the text cannot be parsed.</returns>
+        </member>
+        <member name="P:Juillet.Profile.AvatarUtilities.TileColors">
+            <summary>
+            Gets the collection of suggested tile colors.
+            </summary>
+            <value>
+            The set of suggested tile colors.
+            </value>
+        </member>
+        <member name="M:Juillet.Profile.AvatarUtilities.GenerateTile(System.String,System.Drawing.Color,System.Int32)">
+            <summary>
+            Generates a tile image.
+            </summary>
+            <param name="acronym">The acronym to put on the tile.</param>
+            <param name="bgColor">Color of the bg.</param>
+            <param name="tileSize">Size of the tile, by default 300.</param>
+            <returns>
+            A stream containing the image.
+            </returns>
+        </member>
+        <member name="T:Juillet.Profile.IAvatarStorage">
+            <summary>
+            Defines the interface to an object that stores and retrieves avatars.
+            </summary>
+        </member>
+        <member name="M:Juillet.Profile.IAvatarStorage.StoreAvatarAsync(Juillet.Profile.AvatarSpec)">
+            <summary>
+            Stores the avatar, replacing an existing one if necessary.
+            </summary>
+            <param name="spec">The spec.</param>
+            <returns>Information about the stored avatar.</returns>
+        </member>
+        <member name="M:Juillet.Profile.IAvatarStorage.GenerateAndStoreAvatarAsync(System.Guid,System.String,System.String)">
+            <summary>
+            Generates and stores a default avatar picking a background color at random and 
+            using the specified name to create acronym that is drawn on the background.
+            </summary>
+            <param name="objectId">The object identifier.</param>
+            <param name="category">The category.</param>
+            <param name="name">The name that will be used to generate an acronym for the avatar image.</param>
+            <returns>Information about the stored avatar.</returns>
+        </member>
+        <member name="M:Juillet.Profile.IAvatarStorage.GetAvatarInfoAsync(System.String,System.Guid)">
+            <summary>
+            Gets the information about an avatar, asynchronously.
+            </summary>
+            <param name="category">The category.</param>
+            <param name="objectId">The object identifier.</param>
+            <returns>Information about an avatar</returns>
+        </member>
+        <member name="M:Juillet.Profile.IAvatarStorage.GetAvatarInfo(System.String,System.Guid)">
+            <summary>
+            Gets the information about an avatar.
+            </summary>
+            <param name="category">The category.</param>
+            <param name="objectId">The object identifier.</param>
+            <returns>Information about an avatar</returns>
+        </member>
+        <member name="M:Juillet.Profile.IAvatarStorage.RemoveAvatarAsync(System.String,System.Guid)">
+            <summary>
+            Removes an avatar.
+            </summary>
+            <param name="category">The category.</param>
+            <param name="objectId">The object identifier.</param>
+            <returns>True if the avatar was removed, false otherwise.</returns>
+        </member>
+        <member name="M:Juillet.Profile.IAvatarStorage.CopyAvatarAsync(System.String,System.Guid,System.String,System.Guid)">
+            <summary>
+            Copies an avatar from the source to the destination, asynchronously.
+            </summary>
+            <param name="srcCategoryCode">The source category code.</param>
+            <param name="srcObjectId">The source object identifier.</param>
+            <param name="destCategoryCode">The dest category code.</param>
+            <param name="destObjectId">The dest object identifier.</param>
+            <returns>
+            True if the avatar was copied, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Juillet.Profile.AvatarDimensions">
+            <summary>
+            Represents the dimensions of an image.
+            </summary>
+        </member>
+        <member name="P:Juillet.Profile.AvatarDimensions.X">
+            <summary>
+            Gets or sets the x.
+            </summary>
+            <value>
+            The x.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarDimensions.Y">
+            <summary>
+            Gets or sets the y.
+            </summary>
+            <value>
+            The y.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarDimensions.Width">
+            <summary>
+            Gets or sets the width.
+            </summary>
+            <value>
+            The width.
+            </value>
+        </member>
+        <member name="P:Juillet.Profile.AvatarDimensions.Height">
+            <summary>
+            Gets or sets the height.
+            </summary>
+            <value>
+            The height.
+            </value>
+        </member>
+        <member name="M:Juillet.Profile.AvatarDimensions.Normalize(System.Int32,System.Int32)">
+            <summary>
+            Normalizes the specified maximum width.
+            </summary>
+            <param name="maxWidth">The maximum width.</param>
+            <param name="maxHeight">The maximum height.</param>
+        </member>
+        <member name="M:Juillet.Profile.AvatarDimensions.GetEqualityComponents">
+            <summary>
+            When overriden in a derived class, returns all components of a value objects which constitute its identity.
+            </summary>
+            <returns>
+            An ordered list of equality components.
+            </returns>
+        </member>
+        <member name="M:Juillet.Profile.AvatarDimensions.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:Juillet.SystemExtensions.ModelBindingExtensions">
+            <summary>
+            Extensions for working with model binding.
+            </summary>
+        </member>
+        <member name="M:Juillet.SystemExtensions.ModelBindingExtensions.ExtractErrorMessages(System.Web.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Extracts the error messages from a dictionary of model state.
+            </summary>
+            <param name="modelState">State of the model.</param>
+            <returns>A comma separated list of the model state errors.</returns>
+        </member>
+        <member name="M:Juillet.SystemExtensions.ModelBindingExtensions.HasErrors(System.Web.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Determines whether the model state has errors.
+            </summary>
+            <param name="modelState">State of the model.</param>
+            <returns>
+              <c>true</c> if the specified model state has errors; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Juillet.SystemExtensions.ModelBindingExtensions.DumpErrorMessages(System.Web.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Dumps the error messages from a dictionary of model state.
+            </summary>
+            <param name="modelState">State of the model.</param>
+            <returns>A dump of all the model state errors.</returns>
+        </member>
+        <member name="T:Juillet.SystemExtensions.HttpRequestMessageExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Net.Http.HttpRequestMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Juillet.SystemExtensions.HttpRequestMessageExtensions.Dump(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Dumps a <see cref="T:System.Net.Http.HttpRequestMessage"/> to a string.
+            </summary>
+            <param name="httpRequest">The HTTP request to format.</param>
+            <returns>
+            The response, as a single string suitable for trace message.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">httpRequest</exception>
+        </member>
+        <member name="M:Juillet.SystemExtensions.HttpRequestMessageExtensions.GetContentHeaders(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Get the content headers of an HtttRequestMessage.
+            </summary>
+            <param name="request">The request message.</param>
+            <returns>The content headers.</returns>
+        </member>
+        <member name="T:Juillet.SystemExtensions.HttpResponseMessageExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="M:Juillet.SystemExtensions.HttpResponseMessageExtensions.Dump(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Dumps a <see cref="T:System.Net.Http.HttpResponseMessage"/> to a string for trace messages.
+            </summary>
+            <param name="httpResponse">The HTTP response to format.</param>
+            <returns>
+            The response, as a single string suitable for trace message.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">httpResponse</exception>
+        </member>
+        <member name="M:Juillet.SystemExtensions.HttpResponseMessageExtensions.GetContentHeaders(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Get the content headers of an HttpResponseMessage.
+            </summary>
+            <param name="response">The response message.</param>
+            <returns>The content headers.</returns>
+        </member>
+        <member name="T:Juillet.SystemExtensions.NameValueCollectionExtensions">
+            <summary>
+            Extension methods for a name value collection.
+            </summary>
+        </member>
+        <member name="M:Juillet.SystemExtensions.NameValueCollectionExtensions.ToQueryString(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Converts the name value collection to a query string.
+            </summary>
+            <param name="nvc">The name value collection.</param>
+            <returns>The items in the name value collection formatted as a query string.</returns>
+        </member>
+        <member name="M:Juillet.SystemExtensions.NameValueCollectionExtensions.Dump(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Dumps the specified <see cref="T:System.Collections.Specialized.NameValueCollection"/> to a string.
+            </summary>
+            <remarks>
+            This is intended for debugging and tracing only.
+            </remarks>
+            <param name="nvc">The NVC.</param>
+            <returns>The contents of the collection as a string.</returns>
+        </member>
+        <member name="T:Juillet.Utilities.IPasswordGenerator">
+            <summary>
+            Defines the interface to a password generator.
+            </summary>
+        </member>
+        <member name="M:Juillet.Utilities.IPasswordGenerator.GenerateRandomStrongPassword(System.Int32)">
+            <summary>
+            Generates a random strong password.
+            </summary>
+            <param name="length">The length.</param>
+            <returns>A random string password.</returns>
+        </member>
+        <member name="T:Juillet.Utilities.PasswordGenerator">
+            <summary>
+            A basic password generator.
+            </summary>
+        </member>
+        <member name="M:Juillet.Utilities.PasswordGenerator.GenerateRandomStrongPassword(System.Int32)">
+            <summary>
+            Generates a random strong password.
+            </summary>
+            <param name="length">The length.</param>
+            <returns>
+            A random string password.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The password length must be between 8 and 32 characters.</exception>
+        </member>
+        <member name="T:Juillet.Web.Api.ApiExtensions">
+            <summary>
+            Extension methods for API types.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.ApiExtensions.ToPagedCollection``1(Juillet.Entity.PageOf{``0})">
+            <summary>
+            Converts a <see cref="T:Juillet.Entity.PageOf`1"/> type to a <see cref="T:Juillet.Web.Api.PagedCollection`1"/> object.
+            </summary>
+            <typeparam name="TResource">The type of the resource.</typeparam>
+            <param name="page">The page.</param>
+            <returns>The page collection.</returns>
+        </member>
+        <member name="T:Juillet.Web.Api.CommonHttpStatusCodes">
+            <summary>
+            Defines the subset of <see cref="T:System.Net.HttpStatusCode"/>s that are commonly used.
+            </summary>
+            <remarks>
+            In general, do not return status codes other than those included in this file.
+            </remarks>
+        </member>
+        <member name="F:Juillet.Web.Api.CommonHttpStatusCodes.OK">
+            <summary>
+            Specifies OK.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.CommonHttpStatusCodes.Created">
+            <summary>
+            Specifies Created
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.CommonHttpStatusCodes.NotModified">
+            <summary>
+            Specifies Not Modified
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.CommonHttpStatusCodes.BadRequest">
+            <summary>
+            Specifies BadRequest
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.CommonHttpStatusCodes.Unauthorized">
+            <summary>
+            Specifies Unauthorized
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.CommonHttpStatusCodes.NotFound">
+            <summary>
+            Specifies Not Found
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.CommonHttpStatusCodes.InternalServerError">
+            <summary>
+            Specifies Internal Server Error
+            </summary>
+        </member>
+        <member name="T:Juillet.Web.Api.Defaults">
+            <summary>
+            Represents common default values.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.Defaults.ItemsPerPage">
+            <summary>
+            The number of items per page when paging results.
+            </summary>
+        </member>
+        <member name="T:Juillet.Web.Api.FromQueryParamModelBinder">
+            <summary>
+            A model binder that attempts to bind a model using query parameters, specifically with use with the <see cref="T:Juillet.Web.Api.FromQueryParamAttribute"/>
+            or the <see cref="T:Newtonsoft.Json.JsonPropertyAttribute"/>.
+            </summary>
+            <seealso cref="!:Http.ModelBinding.CustomModelBinderAttribute" />
+            <seealso cref="!:Http.ModelBinding.IModelBinder" />
+        </member>
+        <member name="M:Juillet.Web.Api.FromQueryParamModelBinder.GetBinder">
+            <summary>
+            Retrieves the associated model binder.
+            </summary>
+            <returns>
+            A reference to an object that implements the <see cref="T:System.Web.Http.ModelBinding.IModelBinder" /> interface.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.FromQueryParamModelBinder.BindModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext)">
+            <summary>
+            Binds the model to a value by using the specified controller context and binding context.
+            </summary>
+            <param name="actionContext">The action context.</param>
+            <param name="bindingContext">The binding context.</param>
+            <returns>
+            true if model binding is successful; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:Juillet.Web.Api.NameValuePairExtensions">
+            <summary>
+            Extension methods for the <see cref="T:Juillet.Web.Api.NameValuePair"/> type.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.NameValuePairExtensions.ToNameValueCollection(System.Collections.Generic.IEnumerable{Juillet.Web.Api.NameValuePair})">
+            <summary>
+            Converts the <see cref="T:Juillet.Web.Api.NameValuePair"/> collection to a <see cref="T:System.Collections.Specialized.NameValueCollection"/>.
+            </summary>
+            <param name="pairs">The pairs.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Juillet.Web.Api.NameValuePairExtensions.ToNameValuePairArray(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Converts the name value collection to an array of <see cref="T:Juillet.Web.Api.NameValuePair"/>.
+            </summary>
+            <param name="nvc">The NVC.</param>
+            <returns>The array of <see cref="T:Juillet.Web.Api.NameValuePair"/> or null if hte name value collection is null.</returns>
+        </member>
+        <member name="T:Juillet.Web.Api.QueryStrings">
+            <summary>
+            Encapsulates idioms around query strings.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.QueryStrings.SearchParamKey">
+            <summary>
+            The search parameter key.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.QueryStrings.FieldsParamKey">
+            <summary>
+            The fields query parameter key.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.QueryStrings.OffsetParamKey">
+            <summary>
+            The offset parameter key
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.QueryStrings.LimitParamKey">
+            <summary>
+            The limit parameter key
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.QueryStrings.FilterParamKey">
+            <summary>
+            The filter parameter key
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.QueryStrings.Search(System.String[])">
+            <summary>
+            Creates a search query parameter of the form <code>q=expr1+expr2...</code> from the specified expressions.
+            </summary>
+            <param name="expressions">The expressions.</param>
+            <returns>A search query parameter</returns>
+        </member>
+        <member name="M:Juillet.Web.Api.QueryStrings.Fields(System.String[])">
+            <summary>
+            Creates a fields query parameter of the form <code>fields=field0,field1...</code> from the specified fields.
+            </summary>
+            <param name="fields">The fields.</param>
+            <returns>A <code>fields</code> query parameter.</returns>
+        </member>
+        <member name="M:Juillet.Web.Api.QueryStrings.Page(System.Int32,System.Int32)">
+            <summary>
+            Creates limit and offset query parameters of the form <code>offset=0&amp;limit=25</code> from the specified values.
+            </summary>
+            <param name="offset">The offset.</param>
+            <param name="limit">The limit.</param>
+            <returns>The limit and offset paging parameters.</returns>
+        </member>
+        <member name="T:Juillet.Web.Api.QueryStrings.Filter">
+            <summary>
+            Support functions for working with filter expressions of the form <code>prop1:val1,prop2:val2</code>.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.QueryStrings.Filter.IncludeInactiveToken">
+            <summary>
+            The include inactive token
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.QueryStrings.Filter.IncludeInactive(System.String,System.Boolean)">
+            <summary>
+            Determined if a filter expression has the IncludesInactive flag.
+            </summary>
+            <param name="filterExpr">The filter expr.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns>
+            True if the <see cref="F:Juillet.Web.Api.QueryStrings.Filter.IncludeInactiveToken" /> filter is specified.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.QueryStrings.Filter.ExtractCriteriaValue``1(System.String,System.String,``0,System.Func{System.String,``0,``0})">
+            <summary>
+            Parses a filter expression of the form <code>prop1:val1,prop2:val2</code> and extracts the property with the specified token.
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <param name="filterExpr">The filter expr.</param>
+            <param name="token">The token.</param>
+            <param name="defaultValue">The default value.</param>
+            <param name="convertFunc">The convert function.</param>
+            <returns>The property value from the expression.</returns>
+        </member>
+        <member name="T:Juillet.Web.Api.UnhandledWebErrorExceptionHandler">
+            <summary>
+            A top level WebApi <see cref="T:System.Web.Http.ExceptionHandling.ExceptionHandler"/> for catching unhandled exceptions and returning a JSON response 
+            with a <see cref="T:Juillet.Web.Api.WebErrorResult"/>.
+            </summary>
+            <remarks>
+            This class intercepts errors that would otherwise be propagated to HTTP server (e.g. IIS) or other hosting 
+            environment (e.g. OWIN).  The default handling is typicaly to return HTTP Status Code 500 and a generic message.
+            This class extracts the exception and packages it into a JSON response of <see cref="T:Juillet.Web.Api.WebErrorResult"/> data.
+            <para>
+            See detailed documentation of working with the <see cref="T:System.Web.Http.ExceptionHandling.ExceptionHandler"/> class at
+            https://docs.microsoft.com/en-us/aspnet/web-api/overview/error-handling/web-api-global-error-handling
+            </para>
+            <para>
+            Register it in WebApi configuration by replacing the <see cref="T:System.Web.Http.ExceptionHandling.IExceptionHandler"/> service; not adding another, 
+            since there can be only one.
+            <example>
+            HttpConfiguration config ... // in Global.asax.cs or App_Start support class
+            config.Services.Replace(typeof(IExceptionHandler), new UnhandledWebErrorExceptionHandler());
+            </example>
+            </para>
+            </remarks>
+            <seealso cref="T:System.Web.Http.ExceptionHandling.ExceptionHandler" />
+        </member>
+        <member name="M:Juillet.Web.Api.UnhandledWebErrorExceptionHandler.#ctor(Juillet.Web.IApplicationRuntime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.UnhandledWebErrorExceptionHandler"/> class.
+            </summary>
+            <param name="applicationRuntime">The application runtime.</param>
+        </member>
+        <member name="M:Juillet.Web.Api.UnhandledWebErrorExceptionHandler.Handle(System.Web.Http.ExceptionHandling.ExceptionHandlerContext)">
+            <summary>
+            When overridden in a derived class, handles the exception synchronously.
+            </summary>
+            <param name="context">The exception handler context.</param>
+        </member>
+        <member name="T:Juillet.Web.Api.WebApiControllerBase">
+            <summary>
+            A base class for Web Api controllers to extend and reuse.
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="M:Juillet.Web.Api.WebApiControllerBase.#ctor(Juillet.Runtime.IRuntimeContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.WebApiControllerBase"/> class with the current runtime context.
+            </summary>
+            <param name="runtimeContext">The runtime context.</param>
+        </member>
+        <member name="M:Juillet.Web.Api.WebApiControllerBase.GetRuntimeContext">
+            <summary>
+            Gets the runtime context.
+            </summary>
+            <returns>The runtime context.</returns>
+            <exception cref="T:System.InvalidOperationException">If the runtime context is not available, usually because the controller was 
+            not initialied with the correct constructor.  Subclasses must pass down the <see cref="T:Juillet.Runtime.IRuntimeContext"/> from their own contructor.</exception>
+        </member>
+        <member name="P:Juillet.Web.Api.WebApiControllerBase.Authority">
+            <summary>
+            Gets the authority (e.g. https://www.mysite.com:8081/) from the current request URI.
+            </summary>
+            <value>
+            The authority from the current request URI.
+            </value>
+        </member>
+        <member name="M:Juillet.Web.Api.WebApiControllerBase.Resolve``1">
+            <summary>
+            Resolves a service using the runtime context.
+            </summary>
+            <typeparam name="TService">The type of the service.</typeparam>
+            <returns>The implementation of the service returned by the runtime context.</returns>
+        </member>
+        <member name="P:Juillet.Web.Api.WebApiControllerBase.Mapper">
+            <summary>
+            Gets the mapper.
+            </summary>
+            <value>
+            The mapper.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.WebApiControllerBase.TelemetryClient">
+            <summary>
+            Gets the telemetry client.
+            </summary>
+            <value>
+            The telemetry client.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.WebApiControllerBase.ServicePrincipalInfo">
+            <summary>
+            Gets the service principal information.
+            </summary>
+            <value>
+            The service principal information.
+            </value>
+        </member>
+        <member name="M:Juillet.Web.Api.WebApiControllerBase.WebErrorResult(System.Net.HttpStatusCode,System.Guid,System.Int32,System.String,System.String)">
+            <summary>
+            Returns a <see cref="T:System.Web.Http.IHttpActionResult"/> populated with a <see cref="M:Juillet.Web.Api.WebApiControllerBase.WebErrorResult(System.Net.HttpStatusCode,System.Guid,System.Int32,System.String,System.String)"/>.
+            </summary>
+            <param name="httpStatusCode">The HTTP status code.</param>
+            <param name="errorCorrelationId">The error correlation identifier.</param>
+            <param name="errorCode">The error code.</param>
+            <param name="message">The message.</param>
+            <param name="moreInfo">The more information.</param>
+            <returns>A <see cref="T:System.Web.Http.IHttpActionResult"/> populated with a <see cref="M:Juillet.Web.Api.WebApiControllerBase.WebErrorResult(System.Net.HttpStatusCode,System.Guid,System.Int32,System.String,System.String)"/>.</returns>
+        </member>
+        <member name="M:Juillet.Web.Api.WebApiControllerBase.ToAbsoluteUrl(System.String,System.Uri)">
+            <summary>
+            Convert the specified URL to an absolute URL relative to the current request.
+            </summary>
+            <param name="url">The URL.</param>
+            <param name="fallbackVanityUri">The fallback vanity URI.</param>
+            <returns>The specified URL as an absolute URL based on the current request.</returns>
+        </member>
+        <member name="T:Juillet.Web.Api.WebErrorActionResult">
+            <summary>
+            An implementation of <see cref="T:System.Web.Http.IHttpActionResult"/> that returns a <see cref="T:Juillet.Web.Api.WebErrorResult"/> message response.
+            </summary>
+            <seealso cref="T:System.Web.Http.IHttpActionResult" />
+        </member>
+        <member name="M:Juillet.Web.Api.WebErrorActionResult.#ctor(System.Net.Http.HttpRequestMessage,System.Net.HttpStatusCode,System.Guid,System.Int32,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.WebErrorActionResult"/> class.
+            </summary>
+            <param name="request">The request.</param>
+            <param name="httpStatusCode">The HTTP status code.</param>
+            <param name="errorCorrelationId">The error correlation identifier.</param>
+            <param name="errorCode">The error code.</param>
+            <param name="message">The message.</param>
+            <param name="moreInfo">The more information.</param>
+        </member>
+        <member name="M:Juillet.Web.Api.WebErrorActionResult.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Creates an <see cref="T:System.Net.Http.HttpResponseMessage" /> asynchronously.
+            </summary>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>
+            A task that, when completed, contains the <see cref="T:System.Net.Http.HttpResponseMessage" />.
+            </returns>
+        </member>
+        <member name="T:Juillet.Web.Api.WebErrorResultExceptionFilter">
+            <summary>
+            A Web API exception filter that traps errors and creates <see cref="T:Juillet.Web.Api.WebErrorResult"/> responses.
+            </summary>
+            <remarks>
+            <para>
+            This class is integrated with <see cref="T:Autofac.Integration.WebApi.IAutofacExceptionFilter"/>, not the traditional <see cref="T:System.Web.Http.Filters.ExceptionFilterAttribute"/>
+            so that dependencies can be injected with Autofac.
+            </para>
+            </remarks>
+            <seealso cref="T:Autofac.Integration.WebApi.IAutofacExceptionFilter" />
+        </member>
+        <member name="M:Juillet.Web.Api.WebErrorResultExceptionFilter.CreateWebErrorResponse(System.Net.HttpStatusCode,System.String,System.Guid,System.String)">
+            <summary>
+            Creates the web error response.
+            </summary>
+            <param name="statusCode">The status code.</param>
+            <param name="message">The message.</param>
+            <param name="correlationId">The correlation identifier.</param>
+            <param name="moreInfo">The more information.</param>
+            <returns>
+            A <see cref="T:System.Net.Http.HttpResponseMessage" /> with a <see cref="T:Juillet.Web.Api.WebErrorResult" />.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.WebErrorResultExceptionFilter.#ctor(Juillet.Diagnostics.IScopeTelemetryClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.WebErrorResultExceptionFilter"/> class.
+            </summary>
+            <param name="telemetryClient">The telemetry client.</param>
+        </member>
+        <member name="M:Juillet.Web.Api.WebErrorResultExceptionFilter.OnExceptionAsync(System.Web.Http.Filters.HttpActionExecutedContext,System.Threading.CancellationToken)">
+            <summary>
+            Called when an exception is thrown.
+            </summary>
+            <param name="actionExecutedContext">The context for the action.</param>
+            <param name="cancellationToken">A cancellation token for signaling task ending.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Juillet.Web.Api.WebErrorResultExceptionFilter.AllowMultiple">
+            <summary>
+            Gets a value indicating whether multiple filters are allowed.
+            </summary>
+            <value>
+              Always <c>true</c>.
+            </value>
+        </member>
+        <member name="M:Juillet.Web.Api.WebErrorResultExceptionFilter.AddHandler(System.Type,System.Action{System.Web.Http.Filters.HttpActionExecutedContext,System.Guid})">
+            <summary>
+            Adds a handler for the specified exception type.
+            </summary>
+            <param name="type">The exception type.</param>
+            <param name="handler">The handler.</param>
+        </member>
+        <member name="M:Juillet.Web.Api.WebErrorResultExceptionFilter.RemoveHandler(System.Type)">
+            <summary>
+            Removes a handler for the specified exception type.
+            </summary>
+            <param name="type">The type.</param>
+        </member>
+        <member name="T:Juillet.Web.ApplicationRuntime">
+            <summary>
+            Implementation of the <see cref="T:Juillet.Web.IApplicationRuntime" /> interface.
+            </summary>
+            <seealso cref="T:Juillet.Web.IApplicationRuntime" />
+        </member>
+        <member name="M:Juillet.Web.ApplicationRuntime.#ctor(Juillet.Health.IHealthProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.ApplicationRuntime"/> class.
+            </summary>
+            <param name="healthProvider">The health provider.</param>
+        </member>
+        <member name="M:Juillet.Web.ApplicationRuntime.SetApplicationType(System.Type)">
+            <summary>
+            Sets the application type.
+            </summary>
+            <remarks>
+            In a HTTP application, this would be the type of the application in Global.asax.cs.
+            In a Console application, this would be the type of the program mainline in Program.cs.
+            </remarks>
+            <param name="appType">Type of the application.</param>
+        </member>
+        <member name="M:Juillet.Web.ApplicationRuntime.SetRootContainer(Autofac.IContainer)">
+            <summary>
+            Sets the root container.
+            </summary>
+            <param name="rootContainer">The container.</param>
+        </member>
+        <member name="M:Juillet.Web.ApplicationRuntime.SetServerPathProvider(Juillet.Web.IServerPathProvider)">
+            <summary>
+            Sets the server path provider.
+            </summary>
+            <param name="serverPaths">The server path provider.</param>
+        </member>
+        <member name="M:Juillet.Web.ApplicationRuntime.SetTelemetryClient(Juillet.Diagnostics.IScopeTelemetryClient)">
+            <summary>
+            Sets the telemetry client.
+            </summary>
+            <param name="client">The telemetry client.</param>
+        </member>
+        <member name="M:Juillet.Web.ApplicationRuntime.Juillet#Web#IApplicationRuntime#IncrementUnhandledErrors">
+            <summary>
+            Increments the number of unhandled errors.
+            </summary>
+        </member>
+        <member name="P:Juillet.Web.ApplicationRuntime.Juillet#Web#IApplicationRuntime#Version">
+            <summary>
+            Gets the version.
+            </summary>
+            <value>
+            The version.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ApplicationRuntime.ApplicationName">
+            <summary>
+            Gets the name of the application.
+            </summary>
+            <value>
+            The name of the application.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ApplicationRuntime.Copyright">
+            <summary>
+            Gets the application copyright.
+            </summary>
+            <value>
+            The application copyright.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ApplicationRuntime.Juillet#Web#IApplicationRuntime#Container">
+            <summary>
+            Gets the root IoC container.
+            </summary>
+            <value>
+            The root IoC container.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ApplicationRuntime.Juillet#Web#IApplicationRuntime#Server">
+            <summary>
+            Gets the server path provider.
+            </summary>
+            <value>
+            The server path provider.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ApplicationRuntime.Juillet#Web#IApplicationRuntime#TelemetryClient">
+            <summary>
+            Gets the telemetry client.
+            </summary>
+            <value>
+            The telemetry client.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.CommonClaimTypes">
+            <summary>
+            Defines a list of commonly used claim types.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonClaimTypes.DirectoryObjectId">
+            <summary>
+            The directory object identifier claim type.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonClaimTypes.Name">
+            <summary>
+            The name claim type.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonClaimTypes.NameIdentifier">
+            <summary>
+            The name identifier claim type.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonClaimTypes.UserName">
+            <summary>
+            The user name claim type.
+            </summary>
+        </member>
+        <member name="T:Juillet.Web.CommonMimeContentTypes">
+            <summary>
+            Defines a list of commonly used MIME content types.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.SuffixToTypeMap">
+            <summary>
+            The suffix to type map
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ContentTypeToFileExtension">
+            <summary>
+            The type to file extension map (reverse of SuffixToTypeMap), take the first value when more than one match.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.CommonMimeContentTypes.FromFileExtension(System.String,System.String)">
+            <summary>
+            Gets the media content type (MIME type) for the specified file extension.
+            </summary>
+            <param name="extension">The extension.</param>
+            <param name="whenNotMatched">The media type to use if the extension is not matched, "application/octet-stream" by default.</param>
+            <returns>The media content type (MIME type) for the specified file extension, or the specified default if the extension is not matched.</returns>
+        </member>
+        <member name="M:Juillet.Web.CommonMimeContentTypes.ToFileExtension(System.String,System.String)">
+            <summary>
+            Get the file extension (without a period '.') for the specified media content type (MIME type).
+            </summary>
+            <param name="contentType">The content type.</param>
+            <param name="whenNotMatched">The file extension to use if the content type is not matched, "dat" by default.</param>
+            <returns>The file extension for the specified media content type (MIME type), or the specified default if the content type is not matched.</returns>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.Json">
+            <summary>
+            Specifies data in JSON format.  Synonym for <see cref="F:Juillet.Web.CommonMimeContentTypes.ApplicationJson"/>.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.TextPlain">
+            <summary>
+            Specifies data in plain text.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.TextHtml">
+            <summary>
+            Specifies data in HTML text.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.TextXml">
+            <summary>
+            Specifies data in XML text.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.TextCss">
+            <summary>
+            Specifies data in CSS text.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ApplicationJson">
+            <summary>
+            Specifies data in JSON format.  Synonym for <see cref="F:Juillet.Web.CommonMimeContentTypes.Json"/>.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ApplicationOctet">
+            <summary>
+            Specifies data in binary.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ApplicationPdf">
+            <summary>
+            Specifies PDF data.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ApplicationZip">
+            <summary>
+            Specifies Zip compressed data.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ApplicationJavaScript">
+            <summary>
+            The JavaScript data.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ApplicationExcel">
+            <summary>
+            Specifies Microsoft Excel document.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ApplicationWord">
+            <summary>
+            Specifies Microsoft Word document.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ImageBmp">
+            <summary>
+            Specifies image data in PNG format.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ImagePng">
+            <summary>
+            Specifies image data in PNG format.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ImageIco">
+            <summary>
+            Specifies image data in ICO format.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ImageGif">
+            <summary>
+            Specifies image data in GIF format.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ImageTiff">
+            <summary>
+            Specifies image data in TIFF format.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.CommonMimeContentTypes.ImageJpeg">
+            <summary>
+            Specifies image data in JPEG format.
+            </summary>
+        </member>
+        <member name="T:Juillet.Web.HttpContextAccessor">
+            <summary>
+            Uses the static HttpContext object to obtain the current context.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.HttpContextAccessor.Current">
+            <summary>
+            Get the currents HTTP context.
+            </summary>
+            <returns>
+            The current HTTP context.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.HttpContextAccessor.GetStaticHttpContext">
+            <summary>
+            Gets the static HTTP context.
+            </summary>
+            <returns>The http context.</returns>
+        </member>
+        <member name="T:Juillet.Web.HttpRequestUserAgentInfo">
+            <summary>
+            Encapsulates the user agent information from a HTTP request.
+            </summary>
+            <remarks>
+            This is intended to be used for audit purposes.
+            </remarks>
+        </member>
+        <member name="M:Juillet.Web.HttpRequestUserAgentInfo.Extract(System.Web.HttpContextBase)">
+            <summary>
+            Extracts the information from the specified HTTP context.
+            </summary>
+            <param name="httpContext">The HTTP context.</param>
+            <returns>The <see cref="T:Juillet.Web.HttpRequestUserAgentInfo"/> for the request if the request was extracted.  Default values otherwise.</returns>
+        </member>
+        <member name="P:Juillet.Web.HttpRequestUserAgentInfo.IpAddress">
+            <summary>
+            Gets or sets the ip address.
+            </summary>
+            <value>
+            The ip address.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.HttpRequestUserAgentInfo.UserAgent">
+            <summary>
+            Gets or sets the user agent.
+            </summary>
+            <value>
+            The user agent.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.HttpRequestUserAgentInfo.IsAuthenticated">
+            <summary>
+            Gets or sets a value indicating whether this instance is authenticated.
+            </summary>
+            <value>
+              <c>true</c> if this instance is authenticated; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.HttpRequestUserAgentInfo.UserHostName">
+            <summary>
+            Gets or sets the name of the user host.
+            </summary>
+            <value>
+            The name of the user host.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.HttpRequestUserAgentInfo.Languages">
+            <summary>
+            Gets or sets the languages.
+            </summary>
+            <value>
+            The languages.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.HttpRuntimeContextStateProvider">
+            <summary>
+            Contributes the current <see cref="T:System.Web.HttpContextBase"/> to the <see cref="T:Juillet.Runtime.RuntimeContext"/>
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.HttpRuntimeContextStateProvider.HttpContextStateKey">
+            <summary>
+            The HTTP context state key
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.HttpRuntimeContextStateProvider.#ctor(Juillet.Web.IHttpContextAccessor,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.HttpRuntimeContextStateProvider" /> class.
+            </summary>
+            <param name="httpContextAccessor">The HTTP context accessor.</param>
+            <param name="stateKey">The state key.</param>
+        </member>
+        <member name="M:Juillet.Web.HttpRuntimeContextStateProvider.Get``1(System.String)">
+            <summary>
+            Gets the HTTP Context state.
+            </summary>
+            <typeparam name="TState">The type of the state <see cref="T:System.Web.HttpContextBase"/>.</typeparam>
+            <param name="key">The key used for HTTP context state.</param>
+            <returns>A function that returns the state, or null if not found.</returns>
+        </member>
+        <member name="T:Juillet.Web.IApplicationRuntime">
+            <summary>
+            Defines the interface to the application runtime.
+            </summary>
+            <remarks>
+            <para>
+            The application runtime object is intented to be the core of the application once it is running providing
+            access to the globals/statics in a consistent way and through a single interface.
+            </para>
+            <para>
+            If there are runtime objects (such as background threads) as part of the application, this is a good place to 
+            keep references to them.
+            </para>
+            <para>
+            The application runtime is intended to be registered as a singleton in IoC container.  While IoC provides a great 
+            deal of help with getting access to services this provides an interface that is consistent across console, 
+            HTTP server and cloud.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Juillet.Web.IApplicationRuntime.IncrementUnhandledErrors">
+            <summary>
+            Increments the number of unhandled errors.
+            </summary>
+            <returns>The latest count of unhandled errors.</returns>
+        </member>
+        <member name="P:Juillet.Web.IApplicationRuntime.Version">
+            <summary>
+            Gets the version.
+            </summary>
+            <value>
+            The version.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.IApplicationRuntime.ApplicationName">
+            <summary>
+            Gets the name of the application.
+            </summary>
+            <value>
+            The name of the application.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.IApplicationRuntime.Copyright">
+            <summary>
+            Gets the application copyright.
+            </summary>
+            <value>
+            The application copyright.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.IApplicationRuntime.Container">
+            <summary>
+            Gets the root IoC container.
+            </summary>
+            <value>
+            The root IoC container.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.IApplicationRuntime.Server">
+            <summary>
+            Gets the server path provider.
+            </summary>
+            <value>
+            The server path provider.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.IApplicationRuntime.TelemetryClient">
+            <summary>
+            Gets the telemetry client.
+            </summary>
+            <value>
+            The telemetry client.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.IHttpContextAccessor">
+            <summary>
+            Defines the interface to an object that can provide the current HttpContext.
+            </summary>
+            <remarks>This accessor interface provides an abstraction over the
+            raw HttpContext object to facilitate unit testing.</remarks>
+        </member>
+        <member name="M:Juillet.Web.IHttpContextAccessor.Current">
+            <summary>
+            Get the currents HTTP context.
+            </summary>
+            <returns>The current HTTP context.</returns>
+        </member>
+        <member name="T:Juillet.Web.IServerPathProvider">
+            <summary>
+            Defines an abstraction over the physical path of the server hosting this process.
+            </summary>
+            <remarks>
+            This abstraction is intended to be facilitate unit testing as well as different hosting environments.
+            </remarks>
+        </member>
+        <member name="M:Juillet.Web.IServerPathProvider.GetServerPath(System.String)">
+            <summary>
+            Gets the physical path to a resource for this server process.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The physical path to a resource for this server process.</returns>
+        </member>
+        <member name="T:Juillet.Web.Mvc.ActionLinkViewModel">
+            <summary>
+            Represents the view model for an action link.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Mvc.ActionLinkViewModel.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Mvc.ActionLinkViewModel"/> class.
+            </summary>
+            <param name="linkText">The link text.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="controllerName">Name of the controller.</param>
+        </member>
+        <member name="M:Juillet.Web.Mvc.ActionLinkViewModel.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Mvc.ActionLinkViewModel"/> class.
+            </summary>
+            <param name="linkText">The link text.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="areaName">Name of the area.</param>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionLinkViewModel.LinkText">
+            <summary>
+            Gets or sets the link text.
+            </summary>
+            <value>
+            The link text.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionLinkViewModel.ActionName">
+            <summary>
+            Gets or sets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionLinkViewModel.ControllerName">
+            <summary>
+            Gets or sets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionLinkViewModel.RouteValues">
+            <summary>
+            Gets or sets the route values.
+            </summary>
+            <value>
+            The route values.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionLinkViewModel.HtmlAttributes">
+            <summary>
+            Gets or sets the HTML attributes.
+            </summary>
+            <value>
+            The HTML attributes.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.Mvc.ActionModel">
+            <summary>
+            Represents the model for an action.
+            </summary>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionModel.Caption">
+            <summary>
+            Gets or sets the caption.
+            </summary>
+            <value>
+            The caption.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionModel.Uri">
+            <summary>
+            Gets or sets the action URI.
+            </summary>
+            <value>
+            The action URI.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.Mvc.ActionPath">
+            <summary>
+            Represents the path for an action.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Mvc.ActionPath.NoAction">
+            <summary>
+            Represents no action in a url, typically referenced <code>href="#"</code> in an action link.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Mvc.ActionPath.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Mvc.ActionPath"/> class representing any action on a controller.
+            </summary>
+            <param name="controller">The controller.</param>
+        </member>
+        <member name="M:Juillet.Web.Mvc.ActionPath.#ctor(System.String,System.String,System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Mvc.ActionPath" /> class.
+            </summary>
+            <param name="action">The action.</param>
+            <param name="controller">The controller.</param>
+            <param name="area">The area.</param>
+            <param name="queryParameters">The query parameters.</param>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionPath.Action">
+            <summary>
+            Gets or sets the action.
+            </summary>
+            <value>
+            The action.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionPath.Controller">
+            <summary>
+            Gets or sets the controller.
+            </summary>
+            <value>
+            The controller.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionPath.Area">
+            <summary>
+            Gets or sets the area.
+            </summary>
+            <value>
+            The area.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.ActionPath.QueryParameters">
+            <summary>
+            Gets or sets the query parameters.
+            </summary>
+            <value>
+            The query parameters.
+            </value>
+        </member>
+        <member name="M:Juillet.Web.Mvc.ActionPath.AreaRouteValue">
+            <summary>
+            Renders the area route value.
+            </summary>
+            <returns>The area route value.</returns>
+        </member>
+        <member name="M:Juillet.Web.Mvc.ActionPath.ToRelativeUrl(Juillet.Web.Mvc.ActionPath)">
+            <summary>
+            Converts the action path to a relative URL, rendered with a leading slash '/'.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The relative Url</returns>
+        </member>
+        <member name="T:Juillet.Web.Mvc.Pager">
+            <summary>
+            Represents the view model for a pager.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Mvc.Pager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Mvc.Pager"/> class.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Mvc.Pager.#ctor(Juillet.Web.Mvc.ActionPath,Juillet.Web.Api.PagedCollectionMetadata,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Mvc.Pager"/> class.
+            </summary>
+            <param name="pageActionPath">The page action path.</param>
+            <param name="metadata">The metadata.</param>
+            <param name="contiuationLimit">The contiuation limit.</param>
+        </member>
+        <member name="M:Juillet.Web.Mvc.Pager.#ctor(Juillet.Web.Mvc.ActionPath,System.Int32,System.Int32,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Mvc.Pager" /> class.
+            </summary>
+            <param name="pageActionPath">The page action path.</param>
+            <param name="pageIndex">Index of the page.</param>
+            <param name="pageSize">Size of the page.</param>
+            <param name="totalPageCount">The total page count.</param>
+            <param name="continuationLimit">The continuation limit.</param>
+        </member>
+        <member name="P:Juillet.Web.Mvc.Pager.ShowPagerFirstLast">
+            <summary>
+            Gets or sets a value indicating whether the first page and last page buttons should be shown.
+            </summary>
+            <value>
+              <c>true</c> if the first page and last page buttons should be shown; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.Pager.UseContinuationLimit">
+            <summary>
+            Gets a value indicating whether [use continuation limit].
+            </summary>
+            <value>
+              <c>true</c> if [use continuation limit]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.Pager.ContinuationLimit">
+            <summary>
+            Gets or sets the continuation limit.
+            </summary>
+            <value>
+            The continuation limit.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.Pager.PageActionPath">
+            <summary>
+            Gets or sets the page action path.
+            </summary>
+            <value>
+            The page action path.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.Pager.FilterExpression">
+            <summary>
+            Gets or sets the filter expression.
+            </summary>
+            <value>
+            The filter expression.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.Pager.TotalPageCount">
+            <summary>
+            Gets or sets the total page count.
+            </summary>
+            <value>
+            The total page count.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.Pager.PageIndex">
+            <summary>
+            Gets or sets the index of the page.
+            </summary>
+            <value>
+            The index of the page.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.Pager.PageSize">
+            <summary>
+            Gets or sets the size of the page.
+            </summary>
+            <value>
+            The size of the page.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Mvc.Pager.PageParamPrefix">
+            <summary>
+            Gets or sets the page parameter prefix.
+            </summary>
+            <value>
+            The page parameter prefix.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.ServerPathProvider">
+            <summary>
+            Default implementation of the server path provider interface that 
+            uses the server path of the current HTTP context.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.ServerPathProvider.GetServerPath(System.String)">
+            <summary>
+            Gets the physical path to a resource for this server process.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>
+            The physical path to a resource for this server process.
+            </returns>
+        </member>
+        <member name="T:Juillet.Web.ServicePrincipalInfo">
+            <summary>
+            Encapsulate information about the service principal calling a web service.
+            </summary>
+            <remarks>
+            Multi-tenant services require certain user and tenant specific context information
+            in order to appropriately protect and partition service data between tenants.  This class represents
+            information about the (typically remote) caller.
+            </remarks>
+        </member>
+        <member name="P:Juillet.Web.ServicePrincipalInfo.UserDisplayName">
+            <summary>
+            Gets or sets the display name of the caller.
+            </summary>
+            <value>
+            The display name of the caller.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ServicePrincipalInfo.UserGivenName">
+            <summary>
+            Gets or sets the given name of the caller.
+            </summary>
+            <value>
+            The given name of the caller.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ServicePrincipalInfo.UserSurname">
+            <summary>
+            Gets or sets the surname of the caller.
+            </summary>
+            <value>
+            The surname of the caller.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ServicePrincipalInfo.UserDirectory">
+            <summary>
+            Gets or sets the user directory of the caller.
+            </summary>
+            <value>
+            The user directory of the caller.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ServicePrincipalInfo.UserIdInDirectory">
+            <summary>
+            Gets or sets the user identifier of the caller in the specified directory.
+            </summary>
+            <value>
+            The user identifier of the caller in the specified directory.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ServicePrincipalInfo.UserPrincipalName">
+            <summary>
+            Gets or sets the user principal name (UPN) of the caller.
+            </summary>
+            <value>
+            The user principal name (UPN) of the caller.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ServicePrincipalInfo.Username">
+            <summary>
+            Gets or sets the username of the caller.
+            </summary>
+            <value>
+            The username of the caller.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.ServicePrincipalInfo.ApplicationId">
+            <summary>
+            Gets or sets the application identifier of the caller.
+            </summary>
+            <value>
+            The application identifier of the caller.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.ServicePrincipalStateProvider">
+            <summary>
+            Contributes information about the calling service principal to the current runtime context.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.ServicePrincipalStateProvider.StateProviderKey">
+            <summary>
+            The state provider key for service principle state provider.
+            </summary>
+        </member>
+    </members>
+</doc>

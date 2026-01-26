@@ -1,0 +1,55 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Operations.ViewModels.System.AccessLevelsPageViewModel
+
+<div class="row m-b-md">
+  <div class="col-md-12">
+    @Html.ActionLink("Add New Access Level", "NewAccessLevel", null, new { @class = "btn btn-primary"})
+  </div>
+</div>
+
+@foreach (var item in Model.AccessLevels)
+{
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>
+            @Html.DisplayFor(_ => item.Name)
+            @if (item.IsStandard)
+            {
+              <span class="text-success">@Html.GlyphFa("certificate")</span>
+            }
+          </h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            @Html.DisplayFor(_ => item.Description)
+            The ID for this access level is <code> @Html.DisplayFor(_ => item.CorrelationId)</code>
+          </p>
+          @foreach (var tenant in item.Tenants)
+          {
+            <div class="row m-t-sm">
+              <div class="col-md-4">
+                <strong>@Html.DisplayFor(_ => tenant.Annotation)</strong>
+              </div>
+              <div class="col-md-1">
+                @{
+                  var caption = tenant.Selected ? "Disable" : "Enable";
+                  var style = tenant.Selected ? "red" : "green";
+                }
+                <button sps-action="toggle-selection" class="ladda-button" 
+                        data-tenant="@tenant.Id" data-accesslevel="@item.CorrelationId" data-selected="@tenant.Selected"
+                        data-style="expand-right" data-size="xs" data-color="@style">@caption <span class="ladda-label"></span></button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/operations.system.accesslevels.js"></script>
+}

@@ -1,0 +1,22 @@
+﻿@using AccessManagement.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationAdvancedSettings
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+      <h3>@Html.GlyphFa("cogs") Advanced Organization Settings</h3>
+  </div>
+</div>
+
+@Html.Partial(
+  "Advanced/DistributionChannelsForm", 
+  Model.CustomDistributionChannels, 
+  new ViewDataDictionary{{ "OrganizationId", Model.CorrelationId }})
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.organizations.advanced.js"></script>
+}

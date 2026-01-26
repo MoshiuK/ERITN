@@ -1,0 +1,217 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Payments.AddOrderViewModel
+@using Juillet.Web.Mvc.Html
+
+<script src="https://js.stripe.com/v3/"></script>
+<br />
+
+<div class="row border-bottom">
+  <div class="col-md-12 text-center">
+    <div class="pull-left">
+      <div class="m-t-sm">
+        <a class="m-t-sm" href="@Url.Action("Index", "Payment")">@Html.GlyphFa("arrow-circle-left") Back to Payments</a>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="col-md-12">
+  <form action="Payment" method="POST" id="payment-form">
+    @Html.AntiForgeryToken()
+    @Html.Hidden("productId", Model.TenantProductId)
+    @Html.Hidden("isOnlinePayment", Model.IsOnlinePayment)
+
+    @Html.Partial("_PaymentOptionsHeader", Model)
+
+    <div class="row m-t-md">
+      <div class="col-md-offset-2 col-md-8">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li class="active" role="presentation"><a href="#onlinePayment" aria-controls="onlinePayment" role="tab" data-toggle="tab">Online Payment</a></li>
+          <li role="presentation"><a href="#invoicePayment" aria-controls="invoicePayment" role="tab" data-toggle="tab">Invoice</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-body">
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="onlinePayment">
+                <div class="row">
+                  @Html.Partial("_OnlinePayment", Model)
+                </div>
+                <div id="card-errors" role="alert"></div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="invoicePayment">
+                <div class="row">
+                  @Html.Partial("_InvoicePayment", Model)
+                </div>
+              </div>
+              @Html.HiddenFor(m => m.EffectiveDate)
+              @*TODO Consider an effectiveDate for prepayment
+                <div class="row">
+                @Html.LabelFor(m => m.EffectiveDate) <br />
+                <small>(Must be today or later)</small> <br />
+                @Html.EditorFor(m => m.EffectiveDate)
+                </div>*@
+            </div>
+          </div>
+          <button id="submitButton" class="btn btn-lg btn-primary pull-right">Submit Payment</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    @* Prevent effective date from being a date in the past.
+      $('#EffectiveDate').on('change', function () {
+      const now = Date.parse('@DateTime.Now.ToUniversalTime().Date.ToString("r")');
+      if (Date.parse($("#EffectiveDate").val()) < now) {
+        $('#submitButton').prop('disabled', true);
+      } else {
+        $('#submitButton').prop('disabled', false);
+      }
+    });*@
+
+    var unitPrice = document.getElementById("UnitPrice");
+    const quantityVal = document.getElementById("Quantity");
+    var termLength = document.getElementById("SubscriptionTermMonths").value;
+    var total = document.getElementById("Quantity").value * unitPrice.value * .01 * termLength;
+    document.getElementById("totalPrice").innerHTML =
+      total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+    quantityVal.addEventListener('change',
+      function() {
+        total = document.getElementById("Quantity").value * unitPrice.value * .01 * termLength;
+        document.getElementById("totalPrice").innerHTML =
+          total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      });
+
+    // Create a Stripe client.
+    const publicKey = '@ViewBag.PublicKey';
+    var stripe = window.Stripe(publicKey);
+
+    // Create an instance of Elements.
+    const elements = stripe.elements();
+
+    // Custom styling can be passed to options when creating an Element.
+    // (Note that this demo uses a wider set of styles than the guide below.)
+    const style = {
+      base: {
+        color: '#000000',
+        lineHeight: '18px',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    };
+
+    // Create an instance of the card Element.
+    var cardNumber = elements.create('cardNumber', { style: style });
+    const cardExpiry = elements.create('cardExpiry', { style: style });
+    const cardCvc = elements.create('cardCvc', { style: style });
+    // Add an instance of the card Element into the `card-element` <div>.
+    cardNumber.mount('#cardNumber');
+    cardExpiry.mount('#cardExpiry');
+    cardCvc.mount('#cardCvc');
+
+    // Handle real-time validation errors from the card Element.
+    cardNumber.addEventListener('change',
+      function(event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+
+    cardExpiry.addEventListener('change',
+      function(event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+
+    cardCvc.addEventListener('change',
+      function(event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+
+    // Handle form submission.
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if ($("#onlinePayment").attr('class') === "tab-pane active") {
+          document.getElementById("isOnlinePayment").value = true;
+        } else {
+          document.getElementById("isOnlinePayment").value = false;
+          stripeTokenHandler(null);
+          return;
+      }
+
+        const name = document.querySelector('input[name="name"]').value;
+        const addressZip = document.querySelector('input[name="address_zip"]').value;
+        stripe.createToken(cardNumber, { name: name, address_zip: addressZip }).then(function(result) {
+          if (result.error) {
+            // Inform the user if there was an error.
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+          } else {
+            // Send the token to your server.
+            stripeTokenHandler(result.token.id);
+          }
+        });
+      });
+
+    function stripeTokenHandler(tokenId) {
+      // Insert the token ID into the form so it gets submitted to the server
+      const paymentForm = document.getElementById('payment-form');
+      if (tokenId != null) {
+        const hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', tokenId);
+        paymentForm.appendChild(hiddenInput);
+      }
+      if ($("#invoicePayment").attr('class') === "tab-pane active") {
+        if (isInvoiceValid()) {
+          paymentForm.submit();
+        }
+      }
+      else {
+        // Online payment - validation already completed.
+        paymentForm.submit();
+      }
+    }
+
+    function isInvoiceValid() {
+      var isValid = ($('#payment-form').validate().element($('#Phone')));
+      isValid = ($('#payment-form').validate().element($('#InvoiceName'))) ? isValid : false;
+      isValid = ($('#payment-form').validate().element($('#InvoiceStreetAddress1'))) ? isValid : false;
+      isValid = ($('#payment-form').validate().element($('#InvoiceCity'))) ? isValid : false;
+      isValid = ($('#payment-form').validate().element($('#InvoiceState'))) ? isValid : false;
+      isValid = ($('#payment-form').validate().element($('#ZipCode'))) ? isValid : false;
+
+      return isValid;
+    }
+  });
+</script>

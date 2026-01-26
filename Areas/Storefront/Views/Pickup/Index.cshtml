@@ -1,0 +1,140 @@
+﻿@using AccessManagement.Framework.Tenants
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Storefront.ViewModels.Pickup.IndexPageViewModel
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+}
+
+@{
+  var theme = (TenantTheme)ViewBag.Theme;
+}
+<div class="row storefront-pickup page-header">
+  <div class="col-md-6">
+    <h3 class="title">ACCESS CREDENTIALS</h3>
+  </div>
+  <div class="col-md-6">
+    <img class="pull-right m-t-sm" src="https://spsonldvue.blob.core.windows.net/public/images/pickup-header-item.png" alt="Access Credentials" />
+  </div>
+</div>
+
+<div class="row storefront-pickup credential-number-section border-bottom">
+  <div class="col-md-12">
+    <h4 class="subtitle">Thank you for your participation in the @theme.BrandCaption.</h4>
+    <h4 class="subtitle">Your credentials are ready.</h4>
+    <h3 class="title">Credential Number: @Html.DisplayFor(m => m.CredentialNumber)</h3>
+  </div>
+</div>
+
+<div class="row storefront-pickup get-credentials-section border-bottom">
+  <div class="col-md-12">
+    <h4 class="title">How would you like to get your credentials?</h4>
+    <div class="row m-t-md m-b-lg">
+      <div class="col-md-4">
+        <div class="get-credentials-item">
+          <div class="big-icon">
+            @Html.GlyphFa("mobile", GlyphStyles.X5)
+          </div>
+          <p>Send your credentials to your mobile device.</p>
+          @Html.ActionLink("Mobile", "Mobile", new { id = Model.TicketId, nonce = Model.Nonce }, new { @class = "btn btn-success" })
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="get-credentials-item">
+          <div class="big-icon">
+            @Html.GlyphFa("print", GlyphStyles.X5)
+          </div>
+          <p>Print your credentials and carry them with you.</p>
+          @Html.ActionLink("Print at Home or at Work", "Download", new { id = Model.TicketId, nonce = Model.Nonce }, new { @class = "btn btn-success" })
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="get-credentials-item">
+          <div class="big-icon">
+            @Html.GlyphFa("building-o", GlyphStyles.X5)
+          </div>
+          <p>Collect your credentials from your organization coordinator.</p>
+          @Html.ActionLink("Organization Coordinator", "Collect", new { id = Model.TicketId, nonce = Model.Nonce }, new { @class = "btn btn-success" })
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row storefront-pickup credential-details-section border-bottom">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="title">Credential Details</h4>
+      </div>
+    </div>
+    <div class="row m-b-sm">
+      <div class="col-md-9">
+        <small class="text-muted">@Html.DisplayNameFor(m => m.EventName)</small>
+        <h2 class="event-name">@Html.DisplayFor(m => m.EventName)</h2>
+        <div class="row m-t-sm">
+          <div class="col-md-2">
+            <img class="full-width img-thumbnail" src="@Html.ValueFor(m => m.Jurisdiction.ImageUri)" alt="@Html.ValueFor(m => m.Jurisdiction.Name)"/>
+          </div>
+          <div class="col-md-10">
+            <small class="text-muted">@Html.DisplayNameFor(m => m.Jurisdiction)</small>
+            <h3>@Html.ValueFor(m => m.Jurisdiction.Name)</h3>
+          </div>
+        </div>
+        <div class="row m-t-sm">
+          <div class="col-md-2">
+            <img class="full-width img-thumbnail" src="@Html.ValueFor(m => m.OrganizationAvatar.Small.AbsoluteUri)" alt="@Html.ValueFor(m => m.Organization.Name)"/>
+          </div>
+          <div class="col-md-10">
+            <small class="text-muted">@Html.DisplayNameFor(m => m.Organization)</small>
+            <h3>@Html.DisplayFor(m => m.Organization.Name)</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <small class="text-muted">@Html.DisplayNameFor(m => m.AccessLevel)</small>
+        @Html.DisplayFor(m => m.AccessLevel)
+      </div>
+    </div>
+    <div class="row m-t-sm">
+      <div class="col-md-12">
+        <table class="table table-condensed table-hover">
+          <thead>
+          <tr>
+            <th>DETAILS</th>
+            <th>VALUE</th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var row in Model.Properties.OrderBy(p => p.Key))
+          {
+            <tr>
+              <td>@row.Key</td>
+              <td>@row.Value</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row storefront-pickup credential-contact-section border-bottom m-b-lg">
+  <div class="col-md-12">
+    <p class="m-t-md">
+      Need help with your credentials? <a href="@theme.LinksFaq" target="_blank">Read our FAQ</a>.
+      Other questions? The Organization coordinator at <strong>@Html.DisplayFor(m => m.Organization.Name)</strong>
+      is <strong>@Html.DisplayFor(m => m.Organization.Profile.BusinessContactName)</strong>.
+    </p>
+    <small class="m-t-md">
+      <strong>Note:</strong> The @theme.BrandCaption does not approve access, but instead coordinates with appropriate local government/emergency
+      personnel to receive approvals for reentry of your organization to relevant locations. Per your registration, your organization has requested
+      access for specified locations and access levels. Detailed information about the requirements for access can be found on our web site
+      (<a href="@theme.LinksHome" target="_blank">@theme.LinksHome</a>) or via the appropriate statewide/local government instructions.
+    </small>
+    <ul class="list-inline m-t-sm">
+      <li><a href="@theme.LinksHome" target="_blank">@theme.BrandCaption.ToUpperInvariant()</a> &nbsp;|</li>
+      <li><a href="@theme.LinksContactUs" target="_blank">CONTACT</a></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Teams.TeamLogo
+@{
+  var returnUrl = ViewBag.ReturnUrl ?? Request.UrlReferrer?.ToString() ?? Url.Action("Index", "PeopleHub");
+}
+<div class="team-page">
+  
+  <div class="row m-t-sm">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li>@Html.ActionLink("People", "Index", "PeopleHub")</li>
+        <li>@Html.ActionLink("Teams", "Index", "Teams")</li>
+        <li class="active">@ViewBag.Title</li>
+      </ol>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12 m-h-15">
+      <h2 class="text-primary heading-inline-block">Change @ViewBag.Title</h2>
+    </div>
+  </div>
+  
+  @using (Html.BeginForm("Logo", "Teams", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+  {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.TeamId)
+    <div class="row m-t-lg">
+      <div class="col-md-12">
+        @Html.EditorFor(m => m.AvatarEditor)
+      </div>
+    </div>
+
+    <div class="row m-b-lg">
+      <div class="col-md-offset-4 col-md-4 pull-right">
+        <a href="@returnUrl" class="btn btn-link btn-lg">Cancel</a>
+        <button type="submit" class="btn btn-primary btn-lg">Update</button>
+      </div>
+    </div>
+  }
+ 
+</div>
+
+@section scripts
+{
+  <script type="text/javascript">
+    var editor = Juillet.Web.Mvc.avatarEditorProperty("@Html.NameFor(m => m.AvatarEditor)");
+  </script>
+}

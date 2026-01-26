@@ -1,0 +1,95 @@
+﻿@using AccessManagement.Framework.Objects
+@using AccessManagement.Web.Areas.Organizations.ViewModels.PeopleHub
+@using Juillet.Web.Mvc.Html
+@model PeopleTableRow
+
+@helper RenderNameColumn()
+{
+  var opacity = Model.Status == PeopleTableRowStatus.Inactive ? "opacity: 0.6" : "";
+
+  <img class="tiny-profile-image" style="@opacity" alt="@Html.ValueFor(m => m.DisplayName)" src="@Html.ValueFor(m => m.Avatar)" />
+  <a class="brand-unstyled-link" href="@Url.Action("Index", "Person", new { id = Model.Id })">
+    @Html.DisplayFor(m => m.DisplayName)
+  </a>
+  <span class="row-job-title">
+    <small>@Html.DisplayFor(m => m.MembershipType)</small>
+    @if (Model.Purpose != null)
+    {
+      <br />
+      <small>@Model.Purpose.Name (ESF @Model.Purpose.Esf.ToString("D"))</small>
+    }
+  </span>
+}
+
+<tr data-member-id="@Html.ValueFor(m => m.Id)" data-member-searchable-name="@Html.ValueFor(m => m.SearchableName)">
+  <td>
+    @{
+      var borderStyle = "flag-border-muted";
+      switch (Model.Status)
+      {
+        case PeopleTableRowStatus.NotReadyToRespond:
+          borderStyle = "flag-border-danger";
+          break;
+        case PeopleTableRowStatus.ReadyToRespond:
+          borderStyle = "flag-border-success";
+          break;
+        case PeopleTableRowStatus.AttentionRequired:
+          borderStyle = "flag-border-warning";
+          break;
+      }
+      <div class="flag-border flag-border-wide @borderStyle">
+        @RenderNameColumn()
+        @if (Model.Status == PeopleTableRowStatus.AttentionRequired)
+        {
+          <span class="text-warning" title="@Html.ValueFor(m => m.Warning)">@Html.GlyphFa("exclamation-triangle")</span>
+        }
+      </div>
+    }
+  </td>
+  <td>
+    @if (Model.Credentials.Count > 0)
+    {
+      <div class="dropdown">
+        <div class="btn btn-sm btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          @Html.GlyphFa("id-badge")
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+          <li>
+            <div>
+              @Html.DisplayFor(m => m.Credentials, "ActiveCredential")
+            </div>
+          </li>
+        </ul>
+      </div>
+    }
+  </td>
+  <td>
+    <a href="@Url.Action("Access", "Person", new {Model.Id})">
+      @Html.DisplayFor(m => m.AccessLevel)
+    </a>
+  </td>
+  <td>
+    <a href="@Url.Action("Access", "Person", new {Model.Id})">
+      @Html.DisplayFor(m => m.TransitLocation.Name)
+    </a>
+  </td>
+  <td>
+    <div class="dropdown">
+      <div class="btn btn-sm btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @Html.GlyphFa("ellipsis-h")
+      </div>
+      <ul class="dropdown-menu" aria-labelledby="dLabel">
+        <li>@Html.ActionLink("Details", "Detail", new { id = Html.ValueFor(m => m.Id) })</li>
+        <li>@Html.ActionLink("Credentials", "Credentials", new { id = Html.ValueFor(m => m.Id) })</li>
+        <li>@Html.ActionLink("Activity", "Activity", new { id = Html.ValueFor(m => m.Id) })</li>
+        <li role="separator" class="divider"></li>
+        <li>
+          @Html.Partial("Widgets/ChangeActivationDropDownItem", new GuidWith<bool>(Model.Id, Model.Status != PeopleTableRowStatus.Inactive))
+        </li>
+        <li>
+          @Html.Partial("Widgets/DeleteDropDownItem", Model.Id)
+        </li>
+      </ul>
+    </div>
+  </td>
+</tr>

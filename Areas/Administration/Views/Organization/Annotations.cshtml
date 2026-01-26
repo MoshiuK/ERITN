@@ -1,0 +1,137 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationAnnotationsViewModel
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div id="tagsPanel" data-organization-id="@Html.ValueFor(m => m.OrganizationId)" class="panel panel-default">
+      <div class="panel-heading">
+        <div class="h4 heading-inline-block">
+          @Html.GlyphFa("tags") Tags <div class="pull-right"> <small class="text-muted">Apply any tags to this organization.</small></div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            @Html.EditorFor(m => m.Tags, "TagsEditor")
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div id="capsPanel" data-organization-id="@Html.ValueFor(m => m.OrganizationId)" class="panel panel-default">
+      <div class="panel-heading">
+        <div class="h4 heading-inline-block">
+          @Html.GlyphFa("wrench") Core Capabilities
+          <div class="pull-right">
+            <small class="text-muted">
+              Apply any core capabilities this organization provides.
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            @Html.EditorFor(m => m.Capabilities, "CapsEditor")
+          </div>
+        </div>
+      </div>
+      <div class="row m-b-sm">
+        <div class="col-md-12">
+          <small class="pull-right m-r-sm">
+            <a href="https://www.fema.gov/core-capabilities" target="_blank">More information about FEMA Core Capabilities @Html.GlyphFa("external-link")</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div id="contactsPanel" data-organization-id="@Html.ValueFor(m => m.OrganizationId)" class="panel panel-default">
+      <div class="panel-heading">
+        <div class="h4 heading-inline-block">
+          @Html.GlyphFa("address-book") Additional Contacts
+          <div class="pull-right">
+            <small class="text-muted">
+              Provide any additional contacts for the organization.
+            </small>
+            <button data-sps-action="edit-contact"
+                    data-contact-id="-1"
+                    class="btn btn-sm btn-default">@Html.GlyphFa("plus")</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>NAME</th>
+                  <th>CONTACT</th>
+                  <th class="fw-80"></th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach (var c in Model.Contacts)
+                {
+                  <tr>
+                    <td>
+                      <span>@c.Name</span><br />
+                      <small class="text-muted">@c.Title</small>
+                    </td>
+                    <td>
+                      @if (!string.IsNullOrEmpty(c.Email))
+                      {
+                        @Html.DisplayFor(_ => c.Email) <br />
+                      }
+                      @if (!string.IsNullOrEmpty(c.Phone))
+                      {
+                        @Html.DisplayFor(_ => c.Phone)
+                      }
+                    </td>
+                    <td>
+                      <button class="btn btn-circle btn-sm btn-default"
+                              data-sps-action="edit-contact"
+                              data-contact-id="@c.ContactId">
+                        @Html.GlyphFa("pencil")
+                      </button>
+                      @using (Html.BeginForm("DeleteContactAnnotation", "Organization", new { id = Model.OrganizationId }, FormMethod.Post, new { @class = "inline-block" }))
+                      {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("contactId", c.ContactId)
+
+                        <button type="submit" class="btn btn-circle btn-sm btn-danger">
+                          @Html.GlyphFa("times")
+                        </button>
+                      }
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="edit-contact-annotation-dialog" 
+     data-organization-id="@Model.OrganizationId"
+     data-modal-uri="@Url.Action("ContactAnnotationDialog", new { id = Model.OrganizationId })"
+     class="modal" role="dialog"></div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.organization.annotations.js"></script>
+}

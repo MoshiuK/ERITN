@@ -1,0 +1,40 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Reports.OrganizationEnrollmentReportsViewModel
+@{
+  var enrollmentsDiff = Model.AllNewMembers - Model.EnrollmentCountThisWeek;
+  var grandTotal = 0;
+}
+<tr>
+  <td>@Html.DisplayFor(m => m.OrganizationName)</td>
+  <td class="text-muted text-right">@Html.DisplayFor(m => m.EnrollmentCountThisWeek)</td>
+  <td class="text-muted text-right">@Html.DisplayFor(m => enrollmentsDiff)</td>
+  <td class="text-right"><strong>@Html.DisplayFor(m => m.AllNewMembers)</strong></td>
+  <td class="text-right">
+    @foreach (var order in Model.OrderSummary)
+    {
+      grandTotal += order.ProductSales;
+      <strong>@Html.DisplayFor(_ => order.ProductName)</strong>
+      <br />
+      <small>
+        @Html.DisplayFor(_ => order.Quantity)
+        <span> seats x </span>
+        @Html.DisplayFor(_ => order.Term)
+        <span> months x </span>
+        @Html.DisplayFor(_ => order.Price)
+        <span> per month = </span>
+      </small>
+      @($"{order.ProductSales / 100d:#.00}")
+      <br/>
+    }
+    <hr/>
+    <strong>Grand Total</strong>
+    @($"{grandTotal / 100d:#.00}")
+  </td>
+  @if (Model.LastEnrollmentDate != null)
+  {
+    <td>@Html.DisplayFor(m => m.LastEnrollmentDate)</td>
+  }
+  else
+  {
+    <td></td>
+  }
+</tr>

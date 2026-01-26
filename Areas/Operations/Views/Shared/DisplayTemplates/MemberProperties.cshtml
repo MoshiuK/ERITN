@@ -1,0 +1,72 @@
+﻿@model AccessManagement.Models.Core.MemberProperty
+
+@{
+  bool verifications = Model.Verifications.Any();
+}
+
+<div class="well">
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.Id)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.Id)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.MemberId)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.MemberId)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.PropertyTypeId)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.PropertyTypeId)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.PendingVerificationSince)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.PendingVerificationSince)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.ValueForDisplay)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.ValueForDisplay)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.ValueAsString)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.ValueAsString)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.ValueAsBytes)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.ValueAsBytes)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.Verifications)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(_ => verifications)
+    </div>
+  </div>
+</div>

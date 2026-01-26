@@ -1,0 +1,56 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.Tenants.AdministratorViewModel
+<div class="card">
+  <div class="card-content">
+      <h3><i class="fa fa-database"></i> TruEntry Database Record</h3>
+    @if (Model.HasDatabaseInfo)
+    {
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+            <tbody>
+            @foreach (var prop in Model.DatabaseProperties)
+            {
+              <tr>
+                <td>@prop.Item1</td>
+                <td>@prop.Item2</td>
+              </tr>
+            }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+    else
+    {
+      <div class="row">
+        <div class="col-md-12">
+          <div class="text-center">
+            <span class="text-danger"><i class="fa fa-warning fa-5x"></i></span>
+            <h4>No information in our database for this administrator.</h4>
+          </div>
+          <div class="text-justify m-t-sm">
+            <p class="text-muted">
+              You can remove the record from Active Directory if the administrator should no longer be associated with the tenants.
+              Alternatively, if the administrator is correct in Active Directory, click <strong>Sync</strong> below to create an
+              entry in our database.
+            </p>
+          </div>
+        </div>
+      </div>
+    }
+    <div class="row m-t-md">
+      <div class="col-md-12">
+        <h5>Synchronization</h5>
+        <p class="text-muted">
+          Copy information for this administrator from Active Directory to our database.  You can do this safely at any time and as often as necessary.
+        </p>
+        @using (Html.BeginForm("SyncAdministrator", "Tenants", new { id = Model.TenantId, adminId = Model.Id }, FormMethod.Post, new {}))
+        {
+          @Html.AntiForgeryToken()
+          <button type="submit" class="btn btn-warning"><i class="fa fa-exchange"></i> Sync</button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+

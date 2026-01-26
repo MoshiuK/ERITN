@@ -1,0 +1,17 @@
+﻿@model IReadOnlyCollection<AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.EventLocationViewModel>
+<span class="text-muted"><small>@Model.Count locations</small></span>
+<table class="table">
+  <thead>
+  <tr>
+    <th>LOCATION</th>
+    <th>CREDENTIALS SUPPORTED</th>
+    <th class="fw-80">ACTIONS</th>
+  </tr>
+  </thead>
+  <tbody>
+  @foreach (var item in Model.OrderBy(m => m.EventLocationInfo.LocationName))
+  {
+    @Html.DisplayFor(_ => item, "EventLocationsTableRow", new { eventId = ViewBag.eventId })
+  }
+  </tbody>
+</table>

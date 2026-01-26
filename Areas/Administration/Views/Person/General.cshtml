@@ -1,0 +1,24 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.PersonGeneralSettings
+@{
+  Layout = "_PersonTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        @using (Html.BeginForm("General", "Person", null, FormMethod.Post, new { id = "generalSettingsForm" }))
+        {
+          @Html.AntiForgeryToken()
+
+          @Html.HiddenFor(m => m.CorrelationId)
+          @Html.EditorForModel()
+
+          <div class="pull-right m-t-md">
+            <button type="submit" class="btn btn-primary btn-lg">Update</button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

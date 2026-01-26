@@ -1,0 +1,11 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Dashboard.MessagesSummaryCard
+<div id="messagesSummaryCard" class="card">
+  <div class="card-title">
+    <a href="@Url.Action("Notifications")" class="btn btn-link">
+      <h5>Unread Messages <small>(for @User.Identity.Name)</small></h5>
+    </a>
+  </div>
+  <div class="card-content">
+    @Html.DisplayFor(m => m.Messages, "MessageNotificationDataCollection")
+  </div>
+</div>

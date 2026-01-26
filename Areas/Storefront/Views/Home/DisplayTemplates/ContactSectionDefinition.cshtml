@@ -1,0 +1,26 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.ContactSectionDefinition
+@{
+  Layout = "_LandingPageSectionLayout.cshtml";
+}
+
+<div class="contact-section">
+  <div class="row">
+    <div class="col-md-offset-2 col-md-4">
+      <h4>@Html.DisplayFor(m => m.OrganizationName)</h4>
+      <address>@Html.DisplayFor(m => m.Address)</address>
+      <p><i class="fa fa-phone"></i> @Html.DisplayFor(m => m.PrimaryPhone)</p>
+      <p><i class="fa fa-envelope"></i> @Html.DisplayFor(m => m.PrimaryEmail)</p>
+    </div>
+    <div class="col-md-offset-2 col-md-4">
+      <div class="m-t-md">
+        <a href="mailto:@Model.PrimaryEmail" class="btn btn-default">Send us Email</a>
+      </div>
+      @if (Model.ContactUsPage != null)
+      {
+        <div class="m-t-md">
+          @Html.DisplayFor(m => m.ContactUsPage)
+        </div>
+      }
+    </div>
+  </div>
+</div>

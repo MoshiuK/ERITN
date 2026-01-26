@@ -1,0 +1,45 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.FinancialSummary
+<div class="row">
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.PaymentAmountReceived)
+      </small> <br />
+      <span id="PaymentAmountReceived">
+        @Html.DisplayFor(m => m.PaymentAmountReceived)
+      </span>
+    </h3>
+  </div>
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.OutstandingOrders)
+      </small> <br />
+      <span id="OutstandingOrders">
+        @Html.DisplayFor(m => m.OutstandingOrders)
+      </span>
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.FreeOrganizations)
+      </small> <br />
+      <span id="FreeOrganizations">
+        @Html.DisplayFor(m => m.FreeOrganizations)
+      </span>
+    </h3>
+  </div>
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.FreeOrganizationMemberships)
+      </small> <br />
+      <span id="FreeOrganizationMemberships">
+        @Html.DisplayFor(m => m.FreeOrganizationMemberships)
+      </span>
+    </h3>
+  </div>
+</div>

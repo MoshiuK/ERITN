@@ -1,0 +1,7 @@
+﻿@model AccessManagement.Framework.Objects.GuidWith<bool>
+@using (Html.BeginForm("ChangeActivation", "PeopleHub", new {id = Model.Id, active = !Model.Data}, FormMethod.Post))
+{
+  @Html.AntiForgeryToken()
+  var caption = Model.Data ? "Disable" : "Enable";
+  <button type="submit" class="btn btn-link btn-dropdown">@caption</button>
+}

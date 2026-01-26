@@ -1,0 +1,41 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.ViewModels.Framework.Activity.ActivityBrowser
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            @using (Html.BeginForm("Activities", "Activity", FormMethod.Get, new {@class = "form-inline"}))
+            {
+              @Html.DropDownListFor(m => m.ActivityFilter.EventType, Model.EventTypeCodes, new {@class = "select2-component fw-350"})
+              @Html.EditorFor(m => m.ActivityFilter.After)
+              @Html.EditorFor(m => m.ActivityFilter.Before)
+
+              <button type="submit" class="btn btn-primary">@Html.GlyphFa("filter") Filter</button>
+              <a class="btn btn-default" href="@Url.Action("Activities")">Clear Filter</a>
+            }
+          </div>
+        </div>
+        <div class="text-muted text-right"><small>Found @Html.DisplayFor(m => m.Page.Metadata.TotalCount) items. Showing items @Html.DisplayFor(m => m.Page.Metadata.StartPosition) - @Html.DisplayFor(m => m.Page.Metadata.EndPosition).</small></div>
+        <table class="table table-condensed table-striped">
+          <thead>
+          <tr>
+            <th class="fw-100">Event Type</th>
+            <th class="fw-175">Occurred</th>
+            <th>Remarks</th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var item in Model.Page.Data)
+          {
+            @Html.DisplayFor(_ => item, "ActivityTableRow")
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

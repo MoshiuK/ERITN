@@ -1,0 +1,17 @@
+﻿@using Juillet.Web.Mvc
+@model Juillet.Web.Mvc.Navigation.NavigationItem
+<div class="card">
+  <div class="card-title">
+    <h4>@Html.DisplayFor(m => m.Caption)</h4>
+  </div>
+  <div class="card-content">
+    <ul class="list-unstyled">
+      @foreach (var link in Model.ChildItems)
+      {
+        <li>
+          @link.AnchorTag(this.Url)
+        </li>
+      }
+    </ul>
+  </div>
+</div>

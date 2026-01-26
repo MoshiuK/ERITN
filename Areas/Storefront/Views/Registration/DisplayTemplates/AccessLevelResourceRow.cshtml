@@ -1,0 +1,34 @@
+﻿@model AccessManagement.Framework.Tenants.AccessLevelResource
+@{
+  var checkBoxId = "chbx-" + Model.Id.ToString("N");
+}
+<div class="row">
+  <div class="col-md-offset-2 col-md-9">
+    <div class="access-level access-level-border-left @Model.CssStyle">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="access-level-select checkbox checkbox-primary">
+            <input type="checkbox" id="@checkBoxId" name="AccessTiers" value="@Model.Id"/>
+            <label for="@checkBoxId">Request <em>@Model.Name</em> access for one or more of your personnel.</label>
+          </div>
+        </div>
+      </div>
+      <div class="row m-l-sm">
+        <div class="col-md-3">
+          <div class="access-level-label moniker @Model.CssStyle">
+            <span class="h2">@Html.ValueFor(m => m.LevelMoniker)</span>
+            <span class="h3">@Html.ValueFor(m => m.ColorMoniker)</span>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="access-level-label description @Model.CssStyle">
+            <p>
+              <strong>@Html.ValueFor(m => m.Name)</strong>
+              @Html.ValueFor(m => m.Description)
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

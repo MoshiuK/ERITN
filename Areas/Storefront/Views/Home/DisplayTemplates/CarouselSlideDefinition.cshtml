@@ -1,0 +1,11 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.CarouselSlideDefinition
+@{
+  var isActive = ViewBag.IsActiveSlide ?? false;
+  var activeClass = isActive ? "active" : string.Empty;
+}
+<div class="item @activeClass">
+  <img alt="@Model.Caption" src="@Model.ImageUrl"/>
+  <div class="carousel-caption">
+    <h3>@Html.DisplayFor(m => m.Caption)</h3>
+  </div>
+</div>

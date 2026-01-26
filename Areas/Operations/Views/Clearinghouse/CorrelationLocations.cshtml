@@ -1,0 +1,73 @@
+﻿@using AccessManagement.Web.Areas.Operations.ViewModels.Clearinghouse
+@using AccessManagement.Framework.Cerra
+@using AccessManagement.Models.Core
+@using Juillet.Web.Mvc.Html
+@model IReadOnlyCollection<CorrelationPair<TransitLocation, CerraJurisdictionInfo>>
+
+@Html.Partial("TopNavBar", TopNavBarActivePages.CorrelationLocations)
+
+<div class="card">
+  <div class="card-content">
+    <table class="table">
+      <thead>
+      <tr>
+        <th class="pw-50">SPS LOCATIONS</th>
+        <th class="text-center">ACTION</th>
+        <th class="pw-50">CLEARINGHOUSE JURISDICTIONS</th>
+      </tr>
+      </thead>
+      <tbody>
+      @foreach (var pair in Model)
+      {
+        <tr>
+          @if (pair.SpsValue == null)
+          {
+            <td>
+              <span class="text-muted"><em>Does not exist in SPS.</em></span>
+            </td>
+            <td>
+              @using (Html.BeginForm("PullJurisdiction", "Clearinghouse", new { id = pair.ChValue.Id }, FormMethod.Post))
+              {
+                @Html.AntiForgeryToken()
+
+                <button type="submit" class="btn btn-sm btn-primary">@Html.GlyphFa("chevron-left")</button>
+              }
+            </td>
+          }
+          else
+          {
+            <td>
+              @Html.DisplayFor(_ => pair.SpsValue)
+            </td>
+            if (pair.ChValue != null)
+            {
+              <td class="text-center">
+                @using (Html.BeginForm("DeleteJurisdiction", "Clearinghouse", new {id = pair.SpsValue.Id}, FormMethod.Post))
+                {
+                  @Html.AntiForgeryToken()
+
+                  <button type="submit" class="btn btn-sm btn-danger">@Html.GlyphFa("times")</button>
+                }
+              </td>
+            }
+            else
+            {
+              <td></td>
+            }
+          }
+          <td>
+            @if (pair.ChValue == null)
+            {
+              <span class="text-muted"><em>Does not exist in clearinghouse.</em></span>
+            }
+            else
+            {
+              @Html.DisplayFor(_ => pair.ChValue)
+            }
+          </td>
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</div>

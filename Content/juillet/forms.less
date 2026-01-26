@@ -1,0 +1,36 @@
+﻿@import "variables.less";
+
+// validation
+.field-validation-error {
+  color: @state-danger-text;
+  font-size: small;
+}
+
+// errors
+.has-error {
+  .btn-file,.btn-file:hover,btn-file:focus {
+    background-color: @state-danger-bg;
+    color: @state-danger-text;
+    border-color: @state-danger-text;
+  }
+  .btn-file:hover,btn-file:focus{
+    background-color: darken(@state-danger-bg, 5%);
+  }
+  /*.form-control::-ms-input-placeholder { 
+    color: @state-danger-text;
+  }*/
+  .form-control:-ms-input-placeholder {
+    color: @state-danger-text;
+  }
+  .form-control::-webkit-input-placeholder { 
+    color: @state-danger-text;
+  }
+  .form-control:-moz-placeholder { 
+    color: @state-danger-text;
+    opacity:  1;
+  }
+  .form-control::-moz-placeholder { 
+    color: @state-danger-text;
+    opacity:  1;
+  }
+}

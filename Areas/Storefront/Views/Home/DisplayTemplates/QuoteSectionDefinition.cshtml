@@ -1,0 +1,11 @@
+﻿@using AccessManagement.Definitions.Storefront.LandingPages
+@model QuoteSectionDefinition
+@switch (Model.Style)
+{
+  case QuoteSectionStyles.Formal:
+    @Html.Partial("DisplayTemplates/FormalQuoteSectionDefinition", Model)
+    break;
+  case QuoteSectionStyles.Informal:
+    @Html.Partial("DisplayTemplates/InformalQuoteSectionDefinition", Model)
+    break;
+}

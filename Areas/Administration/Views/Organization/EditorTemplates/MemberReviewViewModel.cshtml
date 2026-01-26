@@ -1,0 +1,151 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.MemberReviewViewModel
+@using Juillet.Web.Mvc.Html
+<div class="form-group">
+  @Html.HiddenFor(m => m.AccessLevelId)
+  @Html.HiddenFor(m => m.LocationId)
+  @Html.HiddenFor(m => m.PurposeId)
+  @Html.HiddenFor(m => m.SearchableName)
+  @Html.HiddenFor(m => m.Active)
+  @Html.HiddenFor(m => m.CreatedBy)
+  @Html.HiddenFor(m => m.CreatedOn)
+  @Html.HiddenFor(m => m.CorrelationId)
+  @Html.HiddenFor(m => m.NotifyByEmailAllowed)
+  @Html.HiddenFor(m => m.NotifyByPhoneAllowed)
+  @Html.HiddenFor(m => m.UpdatedBy)
+  @Html.HiddenFor(m => m.UpdatedOn)
+  @Html.HiddenFor(m => m.Deleted)
+  @Html.HiddenFor(m => m.HasAvatar)
+  @Html.HiddenFor(m => m.ReferenceId)
+
+  <div class="card event-card">
+    <div class="col-md-12">
+      <div class="card-content">
+        <div class="row">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.Name)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.Name)
+            @Html.HiddenFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+          </div>
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.PrimaryEmail)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.PrimaryEmail)
+            @Html.HiddenFor(m => m.PrimaryEmail, new { htmlAttributes = new { @class = "form-control" } })
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.PrimaryPhone)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.PrimaryPhone)
+            @Html.HiddenFor(m => m.PrimaryPhone, new { htmlAttributes = new { @class = "form-control" } })
+          </div>
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.AccessLevel)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.AccessLevel)
+            @Html.HiddenFor(m => m.AccessLevel, new { htmlAttributes = new { @class = "form-control" } })
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.Location)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.Location)
+            @Html.HiddenFor(m => m.Location, new { htmlAttributes = new { @class = "form-control" } })
+          </div>
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.Purpose)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.Purpose)
+            @Html.HiddenFor(m => m.Purpose, new { htmlAttributes = new { @class = "form-control" } })
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.BadgeProperty)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.BadgeProperty.ValueAsString)
+            @Html.HiddenFor(m => m.BadgeProperty.ValueAsString, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.BadgeProperty.PropertyTypeId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.BadgeProperty.PendingVerificationSince, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.BadgeProperty.ValueForDisplay, new { htmlAttributes = new { @class = "form-control" } })
+            @if (Model.BadgeVerifications != null)
+            {
+              @Html.EditorFor(m => m.BadgeVerifications)
+            }
+          </div>
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.DriversLicenseProperty)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.DriversLicenseProperty.ValueAsString)
+            @Html.HiddenFor(m => m.DriversLicenseProperty.ValueAsString, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.DriversLicenseProperty.PropertyTypeId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.DriversLicenseProperty.PendingVerificationSince, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.DriversLicenseProperty.ValueForDisplay, new { htmlAttributes = new { @class = "form-control" } })
+            @if (Model.DriverLicenseVerifications != null)
+            {
+              @Html.EditorFor(m => m.DriverLicenseVerifications)
+            }
+          </div>
+        </div>
+        <div class="hidden">
+          <div class="col-md-4">
+            @Html.LabelFor(m => m.AffiliationProperty)
+          </div>
+          <div class="col-md-8">
+            @Html.DisplayFor(m => m.AffiliationProperty.ValueAsString)
+            @Html.HiddenFor(m => m.AffiliationProperty.ValueAsString, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.AffiliationProperty.PropertyTypeId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.AffiliationProperty.PendingVerificationSince, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.AffiliationProperty.ValueForDisplay, new { htmlAttributes = new { @class = "form-control" } })
+            @if (Model.AffiliationVerifications != null)
+            {
+              @Html.EditorFor(m => m.AffiliationVerifications)
+            }
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.PassportProperty)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.PassportProperty.ValueAsString)
+            @Html.HiddenFor(m => m.PassportProperty.ValueAsString, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.PassportProperty.PropertyTypeId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.PassportProperty.PendingVerificationSince, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.PassportProperty.ValueForDisplay, new { htmlAttributes = new { @class = "form-control" } })
+            @if (Model.PassportVerifications != null)
+            {
+              @Html.EditorFor(m => m.PassportVerifications)
+            }
+          </div>
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.Affiliation)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.Affiliation)
+            @Html.HiddenFor(m => m.AffiliationId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(m => m.Affiliation, new { htmlAttributes = new { @class = "form-control" } })
+          </div>
+        </div>
+
+        @*Photo Drop Zone*@
+        <div id="@(Model.CorrelationId)" class="row jumbotron">
+          <h4 class="photo-heading">
+            @Html.GlyphFa("picture-o") <small>Drag User Photo Here</small>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

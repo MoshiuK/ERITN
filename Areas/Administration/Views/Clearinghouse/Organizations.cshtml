@@ -1,0 +1,45 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Clearinghouse.OrganizationsPageViewModel
+@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-4">
+    @Html.DisplayFor(m => m.Schedule, "PublishScheduleCard")
+  </div>
+  <div class="col-md-8">
+    @Html.Partial("OrganizationsManifestSummaryCard", Model.Manifest)
+
+    <div class="card card-danger">
+      <div class="card-content">
+        <h4 class="text-white">Security Settings</h4>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-white">
+              Communications with the CERRA Clearinghouse are protected using shared access links and an API key. These security
+              features can be regenerated / recycled when they expire or if there is a concern they have been compromised.
+            </p>
+            <p class="text-white">
+              Always coordinate security key changes with Clearinghouse support.  The <strong>@Html.DisplayNameFor(m => m.Manifest.ServiceApiUri)</strong>
+              and <strong>@Html.DisplayNameFor(m => m.Manifest.ApiKey)</strong> should be provided.
+            </p>
+          </div>
+        </div>
+        <div class="row m-t-md">
+          <div class="col-md-offset-8 col-md-4">
+            <a class="dialog-link btn btn-white" data-toggle="modal" data-target="#resetSecurityKeys">@Html.GlyphFa("key") Reset Security Keys</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@Html.Dialog("resetSecurityKeys", Url.Action("OrganizationsResetSecurityKeysDialog"))
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administrations.clearinghouse.organizations.js"></script>
+}

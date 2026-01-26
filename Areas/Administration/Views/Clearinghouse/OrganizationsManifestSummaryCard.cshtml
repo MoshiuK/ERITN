@@ -1,0 +1,80 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Clearinghouse.OrganizationsManifestViewModel
+<div class="card">
+  <div class="card-title">
+      <h4>Organization Registration Manifest</h4>
+  </div>
+  <div class="card-content">
+    <div class="form-group">
+      <label>@Html.DisplayNameFor(m => m.ServiceApiUri)</label>
+      <div class="input-group">
+        <input id="@Html.IdFor(m => m.ServiceApiUri)" class="form-control" readonly="readonly" type="text" value="@Html.DisplayFor(m => m.ServiceApiUri)">
+        <span class="input-group-btn">
+          <button class="btn btn-primary clipboard-button" type="button" for="@Html.IdFor(m => m.ServiceApiUri)">@Html.GlyphFa("clipboard")</button>
+        </span>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link btn-sm pull-right" href="@Html.ValueFor(m => m.ServiceApiUri)" download="download">Download Manifest</a>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>@Html.DisplayNameFor(m => m.ApiKey)</label>
+      <div class="input-group">
+        <input id="@Html.IdFor(m => m.ApiKey)" class="form-control" readonly="readonly" type="text" value="@Html.DisplayFor(m => m.ApiKey)">
+        <span class="input-group-btn">
+          <button class="btn btn-primary clipboard-button" type="button" for="@Html.IdFor(m => m.ApiKey)">@Html.GlyphFa("clipboard")</button>
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>@Html.DisplayNameFor(m => m.MasterUri)</label>
+      <input class="form-control" readonly="readonly" type="text" value="@Html.DisplayFor(m => m.MasterUri)">
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link btn-sm pull-right" href="@Html.ValueFor(m => m.MasterUri)" download="download">Download Master</a>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>@Html.DisplayNameFor(m => m.GetUriFormat)</label>
+      <input class="form-control" readonly="readonly" type="text" value="@Html.DisplayFor(m => m.GetUriFormat)">
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link btn-sm pull-right" href="@Html.ValueFor(m => m.GetUriTestLink)" download="download">Download a sample</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>@Html.DisplayNameFor(m => m.ServiceApiVersion)</label>
+          <p>@Html.DisplayFor(m => m.ServiceApiVersion)</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>@Html.DisplayNameFor(m => m.ProtocolVersion)</label>
+          <p>@Html.DisplayFor(m => m.ProtocolVersion)</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>@Html.DisplayNameFor(m => m.ValidUntil)</label>
+          @{
+            var daysFromToday = Math.Max(0, (int)Model.ValidUntil.Subtract(DateTimeOffset.UtcNow).TotalDays);
+          }
+          <p>
+            @Html.DisplayFor(m => m.ValidUntil)
+            @if (daysFromToday < 30)
+            {
+              <span class="text-warning">@Html.GlyphFa("exclamation-triangle")</span>
+              <span class="pull-right label label-warning">@daysFromToday days from now</span>
+            }
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

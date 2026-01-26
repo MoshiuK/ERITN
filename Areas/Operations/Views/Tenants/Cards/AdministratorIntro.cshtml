@@ -1,0 +1,44 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.Tenants.AdministratorViewModel
+<div class="card">
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <img src="@Model.AvatarUri" alt="avatar" class="img-lg"/>
+      </div>
+      <div class="col-md-9">
+        <h3>@Html.DisplayFor(m => m.DisplayName)</h3>
+        <h5><i class="fa fa-user"></i> @Html.DisplayFor(m => m.UserName)</h5>
+        <h5><i class="fa fa-envelope-o"></i><a href="mailto:@Model.Email"> @Html.DisplayFor(m => m.Email)</a></h5>
+        <i class="fa fa-hashtag"></i> <code>@Html.DisplayFor(m => m.Id)</code>
+      </div>
+    </div>
+    <div class="row m-t-lg">
+      <div class="col-md-12">
+        <span>Member of @Model.Groups.Count group(s)</span>
+        <ul class="list-unstyled border-top">
+          @foreach (var grp in Model.Groups)
+          {
+            <li><span><i class="fa fa-users"></i> @grp.Name</span></li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="row m-t-lg">
+      <div class="col-md-12">
+        <span>Additional properties</span>
+        <table class="table">
+          <tbody>
+          @foreach (var prop in Model.Properties)
+          {
+            <tr>
+              <td>@prop.Item1</td>
+              <td>@prop.Item2</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

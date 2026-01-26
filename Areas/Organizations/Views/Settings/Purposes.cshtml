@@ -1,0 +1,47 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Settings.TransitPurposeSettingsViewModel
+@using Juillet.Web.Mvc.Html
+@{
+    Layout = "_SettingsLayout.cshtml";
+    var i = 0;
+}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="panel">
+            <h2>@ViewBag.Title</h2>
+            <div class="m-t-lg">
+                <div class="checkbox-inline-list row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("Purposes", "Settings"))
+                        {
+                            @Html.AntiForgeryToken();
+                            <ul class="list-unstyled">
+                                @foreach (var purpose in Model.TransitPurposes)
+                                {
+                                    var valueName = Html.NameFor(m => m.TransitPurposes) + "[" + i + "].Value";
+                                    var textName = Html.NameFor(m => m.TransitPurposes) + "[" + i + "].Text";
+                                    var selectedName = Html.NameFor(m => m.TransitPurposes) + "[" + i + "].Selected";
+                                    var state = purpose.IsAvailable ? "checked" : "";
+                                    <li>
+                                        <div class="checkbox checkbox-success">
+                                            <input type="hidden" name="@valueName" value="@purpose.Resource.CorrelationId" />
+                                            <input type="hidden" name="@textName" value="@Html.ValueFor(m => purpose.Resource.Name)" />
+                                            <input id="chbx-@purpose.Resource.CorrelationId" type="checkbox" name="@selectedName" value=@purpose.IsAvailable.ToString() @state />
+                                            <label for="chbx-@purpose.Resource.CorrelationId">@purpose.Resource.Name</label>
+                                        </div>
+                                    </li>
+
+                                    i++;
+                                }
+                            </ul>
+
+                            <div class="pull-right m-t-lg">
+                                <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

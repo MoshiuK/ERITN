@@ -1,0 +1,60 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.Members.MembersViewModel
+
+@{
+  var startPosition = (Model.PageOfContent.Metadata.TotalCount == 0) ? 0 : Model.PageOfContent.Metadata.StartPosition;
+  var endPosition = Model.PageOfContent.Metadata.EndPosition;
+  var total = Model.PageOfContent.Metadata.TotalCount;
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <span class="text-muted small pull-right">Last refreshed <i class="fa fa-clock-o"></i> <time data-juillet-currenttime></time></span>
+        <h2>Find Members</h2>
+        @Html.Partial("Forms/FilterForm", Model.Filter)
+        <div>
+          <span class="pull-right small text-muted">Showing @startPosition - @endPosition of @total items.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="resultsPane">
+          <table class="table">
+            <thead>
+              <tr>
+                <th><small>Active</small></th>
+                <th><small>Deleted</small></th>
+                <th><small>HasAvatar</small></th>
+                <th><small>Member Id</small></th>
+                <th><small>Member Name</small></th>
+                <th><small>Organization Name</small></th>
+                <th><small>Assigned Access Level</small></th>
+                <th><small>Assigned Location</small></th>
+                <th><small>Assigned Purpose</small></th>
+                <th><small>Tenant</small></th>
+                <th><small>Created On</small></th>
+                <th><small>Details</small></th>
+              </tr>
+            </thead>
+            <tbody>
+            @{
+              foreach (var item in Model.PageOfContent.Data)
+              {
+                @Html.Partial("DisplayTemplates/MemberTableRow", item);
+              }
+            }
+            </tbody>
+          </table>
+        </div>
+        @Html.DisplayFor(m => m.Pager)
+      </div>
+    </div>
+  </div>
+</div>

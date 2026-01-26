@@ -1,0 +1,35 @@
+﻿@using AccessManagement.Web.ViewModels.Body
+@{
+  if (this.ViewBag.Title == null)
+  {
+    PageHeaderViewModel header = this.ViewBag.Header;
+    if (header != null)
+    {
+      this.ViewBag.Title = header.Title;
+    }
+  }
+
+  Layout = "~/Areas/Operations/Views/Shared/_OperationsLayout.cshtml";
+}
+
+@section styles {
+  @RenderSection("pagestyles", required: false)
+}
+
+@Html.Partial("Bars/PageTitleBar")
+
+@if (ViewBag.DebugString != null)
+{
+<div class="row">
+  <div class="col-md-12">
+    <span class="text-muted"><small>DEBUG: @DateTime.UtcNow.ToString("O") - session variable count = @this.Session.Count</small></span>
+    <pre>@ViewBag.DebugString</pre>
+  </div>
+</div>
+}
+
+@RenderBody()
+
+@section scripts {
+  @RenderSection("pagescripts", required: false)
+}

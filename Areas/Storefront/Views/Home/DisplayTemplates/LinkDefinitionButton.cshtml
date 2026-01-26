@@ -1,0 +1,9 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.LinkDefinition
+@if (string.IsNullOrEmpty(Model.Target))
+{
+  <a href="@Model.Href" class="btn btn-info" role="button">@Model.Content</a>
+}
+else
+{
+  <a href="@Model.Href" target="@Model.Target" class="btn btn-info" role="button">@Model.Content</a>
+}

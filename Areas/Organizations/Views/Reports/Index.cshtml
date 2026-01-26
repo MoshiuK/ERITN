@@ -1,0 +1,16 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Reports.ReportsPageViewModel
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-primary">Reports</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    @Html.DisplayFor(m => m.MemberReports)
+  </div>
+  <div class="col-md-6">
+    @Html.DisplayFor(m => m.CredentialsReports)
+  </div>
+</div>

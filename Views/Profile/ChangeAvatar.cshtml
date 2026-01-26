@@ -1,0 +1,38 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.ViewModels.Profile.ChangeAvatar
+@{
+  Layout = "~/Views/Shared/_MinimalBrandLayout.cshtml";
+}
+<div class="page-jumbotitle">
+  <h1>@ViewBag.Title</h1>
+  <h4 class="page-jumbotitle-info">
+    Change your profile photo by uploading a file on your computer or creating a personalized tile.
+  </h4>
+</div>
+
+@using (Html.BeginForm("ChangeAvatar", "Profile", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+  @Html.AntiForgeryToken()
+
+  <div class="row">
+    <div class="col-md-12">
+      @Html.EditorFor(m => m.AvatarEditAndUpload)
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <a class="btn btn-link btn-lg" href="@Url.Action("Index")">
+        @Html.GlyphFa("arrow-left") &nbsp;Back to Profile
+      </a>
+      <button type="submit" class="btn btn-primary btn-lg">Set Profile Image</button>
+    </div>
+  </div>
+}
+
+@section scripts
+{ 
+  <script type="text/javascript">
+    var editor = Juillet.Web.Mvc.avatarEditorProperty("@Html.NameFor(m => m.AvatarEditAndUpload)");
+  </script>
+}

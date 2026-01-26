@@ -1,0 +1,99 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.EventOperationsViewModel
+@{
+  Layout = "_EventTabLayout.cshtml";
+}
+
+@if (Model.ConcludedOn.HasValue)
+{
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="row m-b-lg">
+            <div class="col-md-12 text-center">
+              @if (Model.OperationalOn.HasValue)
+              {
+                <h4>This event was activated <time data-juillet-utctolocal="@Model.OperationalOn.Value.ToString("O")"></time>.</h4>
+              }
+              <h4>This event was concluded <time data-juillet-utctolocal="@Model.ConcludedOn.Value.ToString("O")"></time>.</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>METRIC</th>
+                  <th>VALUE <span class="text-muted"><small>(estimated)</small></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Metrics)
+                {
+                  <tr>
+                    <td>@item.Caption</td>
+                    <td>@item.FormattedValue</td>
+                  </tr>
+                }
+                </tbody>
+              </table>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+else
+{
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-body">
+          @if (Model.OperationalOn.HasValue)
+          {
+            <div class="row m-b-lg">
+              <div class="col-md-8 text-center">
+                <h4>This event was activated <time data-juillet-utctolocal="@Model.OperationalOn.Value.ToString("O")"></time>.</h4>
+              </div>
+              <div class="col-md-4 text-center">
+                <div class="pull-right m-t-md">
+                  <a href="@Url.Action("Conclude", new {id = Model.CorrelationId})" class="btn btn-danger btn-lg">@Html.GlyphFa("step-forward") Conclude Event</a>
+                </div>
+              </div>
+            </div>
+          }
+          else
+          {
+            <div class="row m-b-lg">
+              <div class="col-md-8 text-center">
+                <h4>This event is has not been activated.</h4>
+              </div>
+              <div class="col-md-4 text-center">
+                <a href="@Url.Action("Activate", new {id = Model.CorrelationId})" class="btn btn-success btn-lg">@Html.GlyphFa("bullhorn") Activate Event</a>
+              </div>
+            </div>
+          }
+          <table class="table">
+            <thead>
+            <tr>
+              <th>METRIC</th>
+              <th>VALUE <span class="text-muted"><small>(estimated)</small></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Metrics)
+            {
+              <tr>
+                <td>@item.Caption</td>
+                <td>@item.FormattedValue</td>
+              </tr>
+            }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+}

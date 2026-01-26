@@ -1,0 +1,27 @@
+﻿@model IReadOnlyCollection<AccessManagement.Models.Infrastructure.SystemActivity>
+<div class="card">
+  <div class="card-title bg-primary">
+    <h4>Activities</h4>
+  </div>
+  <div class="card-content">
+    @if (Model.Count > 0)
+    { 
+      <table class="table">
+
+        <tbody>
+        @foreach (var row in Model)
+        {
+          <tr>
+            <td>@row.Remarks</td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    }
+    else
+    {
+      <em class="text-muted">No activities found.</em>
+    }
+  </div>
+</div>
+

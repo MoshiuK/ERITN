@@ -1,0 +1,54 @@
+﻿@using AccessManagement.Web.ViewModels.Framework.Activity
+@model ActivityShortcuts
+
+@{
+  var controllerName = Model.ActivitiesAction.Controller;
+  var actionName = Model.ActivitiesAction.Action;
+}
+<div class="row">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-content">
+        @foreach (var metric in Model.Today)
+        {
+          <div class="row">
+            <div class="col-md-12">
+              <h4>@Html.ActionLink(metric.Caption, actionName, controllerName, new ActivityFilter { After = DateTime.UtcNow.Date }, null)</h4>
+              <h1>@metric.Value</h1>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-content">
+        @foreach (var metric in Model.LastSevenDays)
+        {
+          <div class="row">
+            <div class="col-md-12">
+              <h4>@Html.ActionLink(metric.Caption, actionName, controllerName, new ActivityFilter { After = DateTime.UtcNow.Date.AddDays(-7) }, null)</h4>
+              <h1>@metric.Value</h1>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-content">
+        @foreach (var metric in Model.LastThirtyDays)
+        {
+          <div class="row">
+            <div class="col-md-12">
+              <h4>@Html.ActionLink(metric.Caption, actionName, controllerName, new ActivityFilter { After = DateTime.UtcNow.Date.AddDays(-30) }, null)</h4>
+              <h1>@metric.Value</h1>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

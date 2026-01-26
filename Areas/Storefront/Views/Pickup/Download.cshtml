@@ -1,0 +1,90 @@
+﻿@using Juillet.Web.Mvc.Html
+@using Juillet.Web.Mvc.Navigation
+@model AccessManagement.Web.Areas.Storefront.ViewModels.Pickup.DownloadPageViewModel
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+}
+
+<div class="row storefront-pickup credential-download-section border-bottom">
+  <div class="col-md-12">
+    <div class="m-t-sm m-b-sm">
+      @Html.GlyphFa("chevron-circle-left") @Html.ActionLink("Back to credential options", "Index", new { id = Model.TicketId, n = Model.Nonce })
+    </div>
+    <div class="row m-b-lg">
+      <div class="col-md-2">
+        <div class="big-icon">
+          @Html.GlyphFa("print", GlyphStyles.X5)
+        </div>
+      </div>
+      <div class="col-md-8">
+        <h4 class="title">Print at home or at work</h4>
+        <ol>
+          <li>Download <strong>all</strong> of the access documents listed below to your computer.</li>
+          <li>Print each document on white, letter sized (8.5" x 11") paper.  Use your print settings to <strong>scale documents to fit on one page</strong>.</li>
+          <li>Always travel to or thru restricted zones with these documents <strong>and 2 photo IDs</strong>.</li>
+        </ol>
+        @{
+          var counter = 1;
+          var limit = Model.DownloadLinks.Count;
+          foreach (var link in Model.DownloadLinks)
+          {
+            var targetAttr = link.Target == NavigationTarget.Blank ? "target='_blank'" : "";
+
+            <div class="row m-t-md">
+              <div class="col-md-offset-1 col-md-10">
+                <a class="full-width btn btn-success btn-lg"
+                   href="@link.Href"
+                   @targetAttr
+                   download="@link.Id">
+                  @link.Glyph.Render() @link.Caption <strong class="pull-right">@counter of @limit</strong>
+                </a>
+                <small>@Html.GlyphFa("external-link") <em><a @targetAttr href="@link.Href">@link.Href</a></em></small>
+              </div>
+            </div>
+            counter++;
+          }
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row storefront-pickup print-digitalpass-section border-bottom">
+  <div class="col-md-12">
+    <div class="row m-t-md m-b-lg">
+      <div class="col-md-2">
+        <div class="big-icon">
+          @Html.GlyphFa("qrcode", GlyphStyles.X5)
+        </div>
+      </div>
+      <div class="col-md-8">
+        <h4 class="title">Print digital pass</h4>
+        <p>
+          <strong>A new window will open that is suitable for printing.</strong>
+        </p>
+        <p>
+          Print your digital pass for access to restricted zones <em>only</em> where electronic verification is available.
+          Always travel with 2 photo IDs and your access documents.
+        </p>
+        <div class="row">
+          <div class="col-md-offset-1 col-md-5">
+            <a href="@Url.Action("PrintDigitalPass", new {id = Model.TicketId, nonce = Model.Nonce})" class="btn btn-success btn-lg" target="_blank">Print Digital Pass</a>
+          </div>
+        </div>
+        <small class="text-muted">
+          A digital pass is not a substitute for printed access documents and may not be accepted
+          in all areas.
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts
+{
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("[data-toggle='popover']").popover();
+    });
+  </script>
+}

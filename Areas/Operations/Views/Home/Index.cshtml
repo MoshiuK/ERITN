@@ -1,0 +1,152 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.OperationsHomePageViewModel
+<div class="table">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-title">
+          <h5>Summary</h5>
+        </div>
+        <div class="card-content">
+          @Html.Partial("DisplayTemplates/OperationsTenantSummaryCard", Model.TenantSummary)
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-title">
+            <h5>Financial</h5>
+            <div class="card-tools">
+              <button sps-action="reload-card" data-card-action="GetFinancialSummary" data-days="30" class="btn btn-default">30 Days</button>
+              <button sps-action="reload-card" data-card-action="GetFinancialSummary" data-days="90" class="btn btn-primary">90 Days</button>
+            </div>
+          </div>
+          <div class="card-content">
+            @Html.Partial("DisplayTemplates/OperationsFinancialSummaryCard", Model.FinancialSummary)
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">
+            <h5>Activity</h5>
+            <div class="card-tools">
+              <button sps-action="reload-card" data-card-action="GetActivitySummary" data-days="30" class="btn btn-default">30 Days</button>
+              <button sps-action="reload-card" data-card-action="GetActivitySummary" data-days="90" class="btn btn-primary">90 Days</button>
+            </div>
+          </div>
+          <div class="card-content">
+            @Html.Partial("DisplayTemplates/OperationsActivitySummaryCard", Model.ActivitySummary)
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-title">
+            <h5>Registration</h5>
+            <div class="card-tools">
+              <button sps-action="reload-card" data-card-action="GetRegistrationSummary" data-days="30" class="btn btn-default">30 Days</button>
+              <button sps-action="reload-card" data-card-action="GetRegistrationSummary" data-days="90" class="btn btn-primary">90 Days</button>
+            </div>
+          </div>
+          <div class="card-content">
+            @Html.Partial("DisplayTemplates/OperationsRegistrationSummaryCard", Model.RegistrationSummary)
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">
+            <h5>Enrollment</h5>
+            <div class="card-tools">
+              <button sps-action="reload-card" data-card-action="GetEnrollmentSummary" data-days="30" class="btn btn-default">30 Days</button>
+              <button sps-action="reload-card" data-card-action="GetEnrollmentSummary" data-days="90" class="btn btn-primary">90 Days</button>
+            </div>
+          </div>
+          <div class="card-content">
+            @Html.Partial("DisplayTemplates/OperationsEnrollmentSummaryCard", Model.EnrollmentSummary)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <h5>
+        Registrations
+        <small id="RegistrationYear">
+          @this.ViewBag.RegistrationYear
+        </small>
+      </h5>
+      <div class="card-tools">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="fa fa-filter"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+          @foreach (var year in ViewBag.RegistrationYears)
+          {
+            <li>
+              <button class="btn btn-link" sps-action="reload-reg-table" data-year="@year">@year</button>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="card-content">
+      @Html.Partial("DisplayTemplates/OperationsRegistrationsTable", Model.OperationsRegistrationTable)
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <h5>
+        Credential Activity
+        <small id="ActivityYear">
+          @this.ViewBag.ActivityYear
+        </small>
+      </h5>
+      <div class="card-tools">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="fa fa-filter"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+          @foreach (var year in ViewBag.ActivityYears)
+          {
+            <li>
+              <button class="btn btn-link" sps-action="reload-activity-table" data-year="@year">@year</button>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="card-content">
+      @Html.Partial("DisplayTemplates/OperationsActivityTable", Model.OperationsActivityTable)
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <h5>
+        Financial
+        <small id="FinancialYear">
+          @this.ViewBag.FinancialYear
+        </small>
+      </h5>
+      <div class="card-tools">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="fa fa-filter"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+          @foreach (var year in ViewBag.FinancialYears)
+          {
+            <li>
+              <button class="btn btn-link" sps-action="reload-fin-table" data-year="@year">@year</button>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="card-content">
+      @Html.Partial("DisplayTemplates/OperationsFinancialTable", Model.OperationsFinancialTable)
+    </div>
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/operations.home.index.js"></script>
+}

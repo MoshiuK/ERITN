@@ -1,0 +1,44 @@
+﻿@using Juillet.Web.Mvc.Html
+@model IReadOnlyCollection<AccessManagement.Models.Core.PropertyType>
+@{
+  var propertyTypeGroups = Model.GroupBy(pt => pt.Category);
+}
+<table class="table">
+  <thead>
+  <tr>
+    <th class="fw-150">ID</th>
+    <th>NAME</th>
+  </tr>
+  </thead>
+  <tbody>
+  @foreach (var grp in propertyTypeGroups)
+  {
+    <tr class="info">
+      <td colspan="2">
+        <span class="text-info">@grp.Key category attributes</span>
+      </td>
+    </tr>
+
+    foreach (var item in grp)
+    {
+      <tr>
+        <td>
+          <div class="input-group">
+            <input id="pt-@item.Id" class="form-control" readonly="readonly" type="text" value="@item.Id">
+            <span class="input-group-btn">
+              <button class="btn btn-primary clipboard-button" type="button" for="pt-@item.Id">@Html.GlyphFa("clipboard")</button>
+            </span>
+          </div>
+        </td>
+        <td>
+          <div>
+            <strong>@item.Name</strong>
+            <small class="text-muted pull-right">@item.ValueType</small>
+          </div>
+          <small class="text-muted">@item.Description</small> <br/>
+        </td>
+      </tr>
+    }
+  }
+  </tbody>
+</table>

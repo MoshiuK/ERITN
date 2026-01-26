@@ -1,0 +1,23 @@
+﻿@model AccessManagement.Framework.Enrollment.IEnrollmentProcess
+@{
+  Layout = "_EnrollmentLayout.cshtml";
+}
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel">
+      <div class="panel-body">
+        @Html.Partial("Details/PageHeader", Model)
+        @Html.Partial("Details/HeaderProperties", Model)
+        @if (Model.MemberId.HasValue)
+        {
+          @Html.Action("EnrollmentMemberAlert", "Enrollments", new { memberId = Model.MemberId.Value })
+        }
+        @Html.Action("EnrollmentActivityTable", "Enrollments", new { id = Model.CorrelationId })
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    @Html.Partial("Details/EnrollmentTypeSideBar", Model)
+    @Html.Partial("Details/EnrollmentDocuments", Model)
+  </div>
+</div>

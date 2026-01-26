@@ -1,0 +1,35 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.EventsPageViewModel
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+}
+<div class="pull-right">
+  <a class="btn btn-primary btn-lg" href="@Url.Action("NewEvent")">
+    @Html.GlyphFa("plus") Create New Event
+  </a>
+</div>
+
+<table class="table m-t-md">
+  <thead>
+  <tr>
+    <th class="fw-300">EMERGENCY EVENTS</th>
+    <th>STATUS</th>
+    <th>OPERATIONAL</th>
+    <th>LOCATIONS</th>
+  </tr>
+  </thead>
+  <tbody>
+  @foreach (var row in Model.PageOfContent.Data)
+  {
+    <tr>
+      <td>
+        @Html.DisplayFor(_ => row.EventType)
+        <a class="undecorated-link" href="@Url.Action("Index", "Event", new { id = row.CorrelationId })">@row.Name</a>
+      </td>
+      <td>@row.Status</td>
+      <td>@row.OperationalOn</td>
+      <td>@Html.DisplayFor(_ => row.Locations, "EventLocations")</td>
+    </tr>
+  }
+  </tbody>
+</table>

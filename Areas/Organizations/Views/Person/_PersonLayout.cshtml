@@ -1,0 +1,29 @@
+﻿@using AccessManagement.Web.Areas.Organizations.ViewModels.Person
+@using Juillet.Web.Mvc
+@{
+  Layout = "../Shared/_OrganizationsLayout.cshtml";
+
+  PersonTitleBar titleBar = ViewBag.PersonTabs;
+  NavBar breadcrumbs = ViewBag.Breadcrumbs ?? new NavBar();
+}
+
+<div class="person-page">
+
+  @Html.Partial("Breadcrumbs", breadcrumbs)
+  @Html.Partial("PersonTitleBar", titleBar)
+
+  <div class="row">
+    <div class="col-md-12">
+      @RenderBody()
+    </div>
+  </div>
+</div>
+
+@section styles
+{
+  @RenderSection("pagestyles", false)
+}
+@section scripts
+{
+  @RenderSection("pagescripts", false)
+}

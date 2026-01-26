@@ -1,0 +1,33 @@
+﻿@using AccessManagement.Web.Areas.Administration.ViewModels.Organizations
+@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "../Shared/_AdministrationLayout.cshtml";
+  var menuBar = (NavBar)ViewBag.MenuBar ?? new NavBar();
+  var sideBar = (OrganizationSideBarViewModel) ViewBag.SideBar;
+}
+
+<div class="row border-bottom">
+  <div class="col-md-12 text-center">
+    <div class="pull-left"><div class="m-t-sm">
+        <a class="m-t-sm" href="@Url.Action("Index", "OrganizationsHub")">@Html.GlyphFa("arrow-circle-left") Back to Organization Directory</a>
+      </div>
+    </div>
+    <h1>@ViewBag.Title</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2 sidebar">
+    @Html.Partial("StackedNavBar", menuBar)
+    @Html.Partial("OrganizationSideBar", sideBar)
+  </div>
+  <div class="col-md-10 m-t-sm">
+    @RenderBody()
+  </div>
+</div>
+
+@section scripts
+{
+  @RenderSection("pagescripts", false)
+}

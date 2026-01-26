@@ -1,0 +1,36 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.OrganizationMembershipsViewModel
+@{
+  Layout = "_PersonTabLayout.cshtml";
+}
+<div class="row m-b-sm">
+  <div class="col-md-12">
+    <h5 class="heading-inline-block">Found @Html.ValueFor(m => m.Memberships.Count) memberships.</h5>
+  </div>
+</div>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ORGANIZATION</th>
+      <th>ACCESS LEVEL</th>
+      <th>PURPOSE</th>
+      <th>LOCATION</th>
+      <th class="fw-32"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var next in Model.Memberships)
+    {
+      @Html.DisplayFor(_ => next, "MembershipTableRow")
+    }
+  </tbody>
+</table>
+
+<div id="edit-transit-settings-dialog" class="modal" role="dialog"></div>
+
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.person.organizations.js"></script>
+}

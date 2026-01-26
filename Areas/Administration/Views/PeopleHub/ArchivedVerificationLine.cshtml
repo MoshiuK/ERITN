@@ -1,0 +1,43 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.ArchivedVerification
+
+@{
+  var properties = Model.Properties.Select(p => new
+  {
+    p.Property,
+    Verifications = p.Property.Verifications.ToArray()
+  }).SelectMany(p => p.Verifications, (p, v) => new { Properties = p, Verification = v }).ToArray();
+
+  int line = 0;
+  var currentProp = 0;
+  foreach (var next in properties)
+  {
+    <tr>
+      @{
+        var col0 = line == 0 ? Model.Member.Name : string.Empty;
+        <td>@col0</td>
+
+        if (currentProp != next.Properties.Property.PropertyTypeId)
+        {
+          <td>@Html.GlyphFa(next.Properties.Property.PropertyType.UiHintGlyph)</td>
+          <td><strong>@next.Properties.Property.PropertyType.Name</strong><br/>
+            @next.Properties.Property.ValueForDisplay
+          </td>
+          currentProp = next.Properties.Property.PropertyTypeId;
+        }
+        else
+        {
+          <td></td>
+          <td></td>
+        }
+      }
+      <td>
+        <span>@next.Verification.VerifiedOn.DateTime.ToShortDateString()</span><br />
+        <small>@next.Verification.VerifiedByName</small><br/>
+        <small>@next.Verification.VerifiedByOrganizationName</small>
+      </td>
+    </tr>
+
+    line++;
+  }
+}

@@ -1,0 +1,50 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.PeopleHub.PendingVerification
+@using Juillet.Web.Mvc.Html
+
+<div class="card">
+  <div class="card-title no-padding">
+    <div class="row">
+      <div class="col-md-9">
+        <h2 class="p-w-md"><strong>@(Model.Name)</strong></h2>
+      </div>
+      <div class="col-md-3">
+        <img class="pull-right img-md" src="@(Model.Avatar.Thumbnail)" alt="profile">
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    <div>
+      @{
+        foreach (var attribute in Model.Properties)
+        {
+          @Html.DisplayFor(_ => attribute)
+        }
+      }
+    </div>
+
+    @Html.HiddenFor(m => m.MemberId)
+    <div class="row">
+      <div class="pull-right col-md-4">
+        @using (Html.BeginForm("DeclineMemberAttributes", "PeopleHub", new { id = Model.MemberId }, FormMethod.Post, new { id = "form-" + Model.MemberId }))
+        {
+          @Html.AntiForgeryToken()
+          <button action="decline-attribute-verification"
+                  data-toggle="modal"
+                  data-target="#declineattributeverification"
+                  data-form-id="#form-@Model.MemberId"
+                  class="btn btn-sm btn-danger form-control-static"
+                  role="button" type="button">
+            @Html.GlyphFa("trash") Decline Attribute Verification
+          </button>
+        }
+      </div>
+      <div class="col-md-8">
+        @using (Html.BeginForm("VerifyMemberAttributes", "PeopleHub", new { id = Model.MemberId }, FormMethod.Post, null))
+        {
+          @Html.AntiForgeryToken()
+          <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Verify All</button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

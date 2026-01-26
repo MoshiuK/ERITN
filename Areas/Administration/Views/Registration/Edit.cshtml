@@ -1,0 +1,176 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.RegistrationSummaryViewModel
+@using Juillet.Web.Mvc.Html
+@using AccessManagement.Web.Mvc
+<div class="row m-b-md">
+  <div class="col-md-12 text-center">
+    <div class="pull-left">
+      <div class="m-t-sm">
+        <a class="m-t-sm" href="@Url.Action("Registrations", "OrganizationsHub")">@Html.GlyphFa("arrow-circle-left") Back to Registrations</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+  @Html.AntiForgeryToken()
+}
+
+@using (Html.BeginForm("Edit", "Registration", null, FormMethod.Post))
+{
+  @Html.AntiForgeryToken()
+
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.OrganizationName)
+      @Html.EditorFor(m => m.OrganizationName)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.RegistrantEmail)
+      @Html.EditorFor(m => m.RegistrantEmail)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.OrganizationAddress)
+      @Html.EditorFor(m => m.OrganizationAddress)
+
+      @Html.HiddenFor(m => m.OrganizationLocation)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.PrimaryContactName)
+      @Html.EditorFor(m => m.PrimaryContactName)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.PrimaryContactEmail)
+      @Html.EditorFor(m => m.PrimaryContactEmail)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.PrimaryContactPhone)
+      @Html.EditorFor(m => m.PrimaryContactPhone)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.BillingAddress)
+      @Html.EditorFor(m => m.BillingAddress)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.BillingContactName)
+      @Html.EditorFor(m => m.BillingContactName)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.BillingContactEmail)
+      @Html.EditorFor(m => m.BillingContactEmail)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.BillingContactPhone)
+      @Html.EditorFor(m => m.BillingContactPhone)
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-7">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>Current Access Levels</tr>
+        </thead>
+        <tbody>
+          @foreach (var a in Model.AccessLevels)
+          {
+            <tr>
+              <td>
+                <a action="removeAccessLevel" class="btn btn-sm btn-danger" data-id="@Model.Id" data-leveltoremove="@a.Id" href="#">
+                  @Html.GlyphFa("trash")
+                </a>
+              </td>
+              <td>@a.Annotation</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="form-group col-md-5">
+      @Html.LabelFor(m => m.AvailableAccessLevels)
+      @Html.DropDownListFor(m => m.AccessLevels, (MultiSelectList)ViewBag.AvailableAccessLevels, new { multiple = "multiple", @class = "select2-component form-control" })
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-7">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>Current Transit Locations</tr>
+        </thead>
+        <tbody>
+          @foreach (var a in Model.TransitLocations)
+          {
+            <tr>
+              <td>
+                <a action="removeTransitLocation" class="btn btn-sm btn-danger" data-id="@Model.Id" data-leveltoremove="@a.Id" href="#">
+                  @Html.GlyphFa("trash")
+                </a>
+              </td>
+              <td>@a.Annotation</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="form-group col-md-5">
+      @Html.LabelFor(m => m.AvailableTransitLocations)
+      @Html.DropDownListFor(m => m.TransitLocations, (MultiSelectList)ViewBag.AvailableTransitLocations, new { multiple = "multiple", @class = "select2-component form-control" })
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-7">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>Current Transit Purposes</tr>
+        </thead>
+        <tbody>
+          @foreach (var a in Model.TransitPurposes)
+          {
+            <tr>
+              <td>
+                <a action="removeTransitPurpose" class="btn btn-sm btn-danger" data-id="@Model.Id" data-leveltoremove="@a.Id" href="#">
+                  @Html.GlyphFa("trash")
+                </a>
+              </td>
+              <td>@a.Annotation</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="form-group col-md-5">
+      @Html.LabelFor(m => m.AvailableTransitPurposes)
+      @Html.DropDownListFor(m => m.TransitPurposes, (MultiSelectList)ViewBag.AvailableTransitPurposes, new { multiple = "multiple", @class = "select2-component form-control" })
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-primary btn-lg">Update</button>
+    </div>
+  </div>
+}
+
+@section scripts
+{
+  <script src="~/Scripts/pages/administration.registration.edit.js"></script>
+
+  @Html.ScriptForGooglePlacesAutoComplete()
+}

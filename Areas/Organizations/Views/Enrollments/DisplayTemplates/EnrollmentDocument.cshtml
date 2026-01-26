@@ -1,0 +1,39 @@
+﻿@using AccessManagement.Framework
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Models.Enrollment.EnrollmentDocument
+
+@helper RenderFileGlyph(string tags)
+{
+  tags = tags ?? string.Empty;
+  switch (tags)
+  {
+    case FrameworkConstants.Enrollments.PhotographTag:
+      @Html.GlyphFa("file-image-o")
+      break;
+    case FrameworkConstants.Enrollments.EnrollmentFormTag:
+      @Html.GlyphFa("file-code-o")
+      break;
+    default:
+      @Html.GlyphFa("paperclip")
+      break;
+  }
+}
+
+<div class="file-box">
+  <div class="file">
+    <a href="#">
+      <span class="corner"></span>
+      <div class="icon" title="@Html.DisplayFor(m => m.Description)">
+        @RenderFileGlyph(Model.Tags)
+      </div>
+      <div class="file-name">
+        @Html.DisplayFor(m => m.FileName)
+        <br>
+        <small>
+          @Html.DisplayFor(m => m.LastModifiedOn)
+        </small>
+      </div>
+    </a>
+  </div>
+</div>
+

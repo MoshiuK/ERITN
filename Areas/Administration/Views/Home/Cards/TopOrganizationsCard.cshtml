@@ -1,0 +1,58 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Home.TopOrganizationsCardViewModel
+<div class="card">
+  <div class="card-heading">
+    <div class="card-title"><h3 class="heading-inline-block">Top @Html.ValueFor(m => m.PageSize) Organizations</h3>
+    <div class="pull-right"><small><a href="@Url.Action("Index", "OrganizationsHub")">All Organizations @Html.GlyphFa("arrow-circle-right")</a></small></div>
+    </div>
+  </div>
+  <div class="card-content card-hsplit-box">
+    @if (Model.Organizations.Count == 0)
+    {
+      var notFound = new NotFoundPane(
+        "No organizations found", 
+        new FaGlyph("globe", GlyphStyles.X5, cssClasses: "text-info"), 
+        "We did not find any organizations registered in your program."
+        );
+      @Html.DisplayFor(_ => notFound)
+    }
+    else
+    {
+      <div id="topOrgsMap"></div>
+    }
+    <div class="p-sm">
+      <table id="topOrgsTable" class="table table-condensed table-hover">
+        <thead>
+        <tr>
+          <th>@Html.GlyphFa("map-marker", cssClasses: "text-primary")</th>
+          <th>ORGANIZATION</th>
+          <th><span class="text-center" title="Number of Personnel">@Html.GlyphFa("users")</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var next in Model.Organizations)
+        {
+          var geoAttrs = string.Empty;
+          if (Model.HasStreetAddressGeolocation(next.Organization))
+          {
+            var latLng = Model.StreetAddressGeolocation(next.Organization);
+            geoAttrs = $"data-has-marker data-marker-lat={latLng.Item1} data-marker-lng={latLng.Item2}";
+          }
+
+          <tr @geoAttrs>
+            <td>@Model.MapMarkerGlyph(next.Organization).Render()</td>
+            <td>
+              <strong><a href="@Url.Action("Index", "Organization", new { id = next.Organization.CorrelationId })">@Html.DisplayFor(_ => next.Organization.Name)</a></strong>
+              <small class="text-muted">@Html.DisplayFor(_ => next.Organization.Profile.StreetAddress)</small>
+            </td>
+            <td>
+              <span class="text-center">@Html.DisplayFor(_ => next.MemberCount)</span>
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

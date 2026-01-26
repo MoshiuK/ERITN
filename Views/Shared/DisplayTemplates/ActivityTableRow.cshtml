@@ -1,0 +1,13 @@
+﻿@model AccessManagement.Models.Infrastructure.SystemActivity
+<tr>
+  <td>
+    @Html.DisplayFor(m => m.SystemActivityType)&nbsp;@Html.DisplayFor(m => m.ActivityCode)
+  </td>
+  <td>
+    @*<time>@Html.DisplayFor(m => m.ActivityOccurredAt)</time>*@
+    <time data-juillet-utctolocal="@Model.ActivityOccurredAt.ToLocalTime().ToString("O")">(converting to local time)</time>
+  </td>
+  <td>
+    @Html.DisplayFor(m => m.Remarks)
+  </td>
+</tr>

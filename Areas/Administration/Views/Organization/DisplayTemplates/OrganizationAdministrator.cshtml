@@ -1,0 +1,40 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationAdministrator
+
+  <div class="row">
+    <div class="col-md-2">
+    @if (Model.HasSignedIn)
+    {
+
+      @Html.DisplayFor(m => m.Avatar)
+    }
+    else
+    {
+      @Html.GlyphFa("user-circle", GlyphStyles.X4FixedWidth)
+    }
+    </div>
+    <div class="col-md-7">
+      <h2 class="heading-inline-block">@Html.DisplayFor(m => m.DisplayName)</h2>
+      <div>@Html.GlyphFa("lock") @Html.DisplayFor(m => m.UserName)</div>
+      @if (Model.HasSignedIn)
+      {
+        <div>@Html.GlyphFa("envelope-o") @Html.DisplayFor(m => m.Email)</div>
+        <div>@Html.GlyphFa("phone") @Html.DisplayFor(m => m.Phone)</div>
+      }
+      else
+      {
+        <div class="alert alert-info">This administrator has never signed into the application.</div>
+      }
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        @Html.LabelFor(m => m.CreatedOn)
+        @Html.DisplayFor(m => m.CreatedOn)
+      </div>
+      <div class="form-group">
+        @Html.LabelFor(m => m.CreatedBy)
+        @Html.DisplayFor(m => m.CreatedBy)
+      </div>
+      <button class="btn btn-danger">@Html.GlyphFa("trash") Delete</button>
+    </div>
+  </div>

@@ -1,0 +1,77 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Pickup.CollectPageViewModel
+@using AccessManagement.Framework.Tenants
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+  var theme = (TenantTheme)ViewBag.Theme;
+}
+
+<div class="row storefront-pickup credential-collect-section border-bottom m-b-lg">
+  <div class="col-md-12">
+    <div class="m-t-sm m-b-sm">
+      @Html.GlyphFa("chevron-circle-left") @Html.ActionLink("Back to credential options", "Index", new { id = Model.TicketId, n = Model.Nonce })
+    </div>
+    <div class="row m-b-lg">
+      <div class="col-md-2">
+        <div class="big-icon">
+          @Html.GlyphFa("building-o", GlyphStyles.X5)
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            <h4 class="title">TO COLLECT YOUR CREDENTIALS</h4>
+            <p>
+              <strong>@Html.ValueFor(m => m.CoordinatorName)</strong> is the @theme.BrandCaption coordinator for <strong>@Html.ValueFor(m => m.OrganizationName)</strong>.
+            </p>
+          </div>
+        </div>
+        <div class="row m-b-lg">
+          <div class="col-md-offset-2 col-md-8">
+            <div class="well">
+              <small class="text-muted">Contact details on file:</small>
+              <p>
+                @Html.ValueFor(m => m.CoordinatorName) <br />
+                @Html.ValueFor(m => m.OrganizationName) <br />
+                @Html.GlyphFa("map-marker") @Html.ValueFor(m => m.StreetAddress) <br />
+                @Html.GlyphFa("envelope") @Html.ValueFor(m => m.CoordinatorEmail) <br />
+                @Html.GlyphFa("phone") @Html.ValueFor(m => m.CoordinatorPhone)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            <ol>
+              <li>Your credentials are filed under your name or the reference number <strong>@Html.ValueFor(m => m.CredentialNumber)</strong>.</li>
+              <li>
+                Arrange a pickup time, email <a href="mailto:@Html.ValueFor(m => m.CoordinatorEmail)">@Html.ValueFor(m => m.CoordinatorEmail)</a> or
+                phone <a href="tel:@Html.ValueFor(m => m.CoordinatorPhone)">@Html.ValueFor(m => m.CoordinatorPhone)</a>.
+              </li>
+              <li>Always travel to or thru restricted zones with these documents and 2 photo IDs.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            <p>
+              <span class="text-muted">Notify @Html.ValueFor(m => m.CoordinatorName) that you will collect your credentials.</span>
+            </p>
+            <button id="collectButton" 
+                    class="btn btn-primary btn-lg" 
+                    role="button"
+                    data-loading-text="Mark for collection..."
+                    data-ticket-id="@Html.ValueFor(m => m.TicketId)"
+                    data-ticket-nonce="@Html.ValueFor(m => m.Nonce)"
+                    >@Html.GlyphFa("calendar-check-o") I will collect my credentials</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts
+{
+  <script src="~/Scripts/pages/storefront.pickup.collect.js"></script>
+}

@@ -1,0 +1,44 @@
+﻿@using System.Web.Mvc.Html
+@using AccessManagement.Web.Areas.Organizations.ViewModels.PeopleHub
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "../Shared/_OrganizationsLayout.cshtml";
+  var sideBar = (PeopleHubSideBar)ViewBag.SideBar ?? new PeopleHubSideBar();
+}
+
+<div class="people-hub">
+  <div class="row">
+    <div class="col-md-12 m-h-15">
+      <h2 class="text-primary heading-inline-block">People</h2>
+      <div class="pull-right">
+        <div class="btn-group">
+          <button id="addSomeoneButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @Html.GlyphFa("user-plus") Add Someone <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="@Url.Action("SendInvitations", "PeopleHub", new { returnUrl = Request?.Url?.ToString() })">@Html.GlyphFa("envelope") Send an invite</a></li>
+            <li><a href="@Url.Action("NewPerson", "PeopleHub", new { returnUrl = Request?.Url?.ToString() })">@Html.GlyphFa("plus") Enter a new record</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-b-sm">
+    <div class="col-md-2">
+      @Html.Partial("../Shared/PeopleHubSideBar", sideBar)
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-12 people-hub people-hub-body">
+          @RenderBody()
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts
+{
+  @RenderSection("pagescripts", false)
+}

@@ -1,0 +1,37 @@
+﻿@model IReadOnlyCollection<AccessManagement.Models.Infrastructure.SystemActivity>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Activity</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="fw-100">CODE</th>
+        <th>DATE / TIME</th>
+        <th>REMARKS</th>
+      </tr>
+      </thead>
+      <tbody>
+      @foreach (var row in Model)
+      {
+        <tr>
+          <td>@Html.DisplayFor(_ => row.ActivityCode)</td>
+          <td>@Html.DisplayFor(_ => row.ActivityOccurredAt)</td>
+          <td>
+            @Html.DisplayFor(_ => row.Remarks)
+            @if (!string.IsNullOrEmpty(row.ActivityPayloadUri))
+            {
+              <small>
+                <a href="@Url.Action("EnrollmentActivityMoreInfo", new {id = row.TargetId, payloadUri = row.ActivityPayloadUri})" target="_blank">More Information</a>
+              </small>
+            }
+          </td>
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</div>

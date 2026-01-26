@@ -1,0 +1,10 @@
+﻿@using AccessManagement.Web.Areas.Organizations
+@model IReadOnlyCollection<Juillet.Notifications.MessageNotificationData>
+<div class="card">
+  <div class="card-title bg-primary">
+    <a href="@Url.Action("Notifications", "Home", OrganizationsAreaRegistration.AreaRouteValues)"><h4 class="brand-unstyled-inverse-link">Messages</h4></a>
+  </div>
+  <div class="card-content">
+    @Html.DisplayForModel("MessageNotificationDataCollection")
+  </div>
+</div>

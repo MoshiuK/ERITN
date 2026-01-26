@@ -1,0 +1,12 @@
+﻿@model AccessManagement.Framework.Objects.GuidWith<bool>
+@using (Html.BeginForm("ChangeActivation", "PeopleHub",
+  new {
+    id = Model.Id,
+    active = !Model.Data,
+    returnUrl = this.Request.Url?.ToString()
+  }, FormMethod.Post))
+{
+  @Html.AntiForgeryToken()
+  var captionPrefix = Model.Data ? "Disable" : "Enable";
+  <button type="submit" class="btn btn-default">@captionPrefix Account</button>
+}

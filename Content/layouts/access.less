@@ -1,0 +1,25 @@
+﻿//
+// SPECIFIC CUSTOMIZATIONS TO THE ACCESS PAGE LAYOUT.
+//
+// Use this file to customize toolbars, navbars and other elements of chrome and page layout.
+//
+// NOTE: this should only be include by the top level access less file.
+//
+
+@import "../bootstrap/variables.less";
+@import "tenant-layout-base.less";
+
+.workspace {
+  width: 100%;
+  background-color: @body-bg;
+}
+
+#toolbar {
+  .navbar-brand {
+    padding: 2px 20px 2px 8px;
+
+    img {
+      max-height: 46px;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AccessManagement.Web.Areas.Operations.ViewModels.OperationsFinancialTableRow>
+@{
+  var rowCount = 0;
+}
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="enrollmentResultsPane">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><small></small></th>
+                <th class="text-right"><small>Online Payments + Invoice Payments Received</small></th>
+                <th class="text-right"><small>Most Recent Payment Received</small></th>
+                <th class="text-right"><small>Orders Pending Payment</small></th>
+                <th class="text-right"><small>Free Organizations</small></th>
+              </tr>
+            </thead>
+            <tbody>
+            @foreach (var row in Model)
+            {
+              <tr>
+                <td id="TenantName_@rowCount">
+                  @Html.DisplayFor(_ => row.TenantName)
+                </td>
+                <td id="PaymentAmount_@rowCount" class="text-right">
+                  @Html.DisplayFor(_ => row.PaymentAmount)
+                </td>
+                <td id="LastPaymentReceived_@rowCount" class="text-right">
+                  @Html.DisplayFor(_ => row.LastPaymentReceived)
+                </td>
+                <td id="OrdersPendingPayment_@rowCount" class="text-right">
+                  @Html.DisplayFor(_ => row.OrdersPendingPayment)
+                </td>
+                <td id="FreeOrganizations_@rowCount" class="text-right">
+                  @Html.DisplayFor(_ => row.FreeOrganizations)
+                </td>
+              </tr>
+              rowCount++;
+            }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

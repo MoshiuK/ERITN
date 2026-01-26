@@ -1,0 +1,16 @@
+﻿@using System.Security.Claims
+
+<h2>Member Home / Index Page</h2>
+
+@{
+  var claimsIdentity = this.User.Identity as ClaimsIdentity;
+  if (claimsIdentity != null)
+  {
+    <pre>
+    @foreach (var claim in claimsIdentity.Claims)
+    {      
+      @Html.Raw(string.Format("{0} = {1}", claim.Type, claim.Value)) <br/>
+    }
+</pre>
+  }
+}

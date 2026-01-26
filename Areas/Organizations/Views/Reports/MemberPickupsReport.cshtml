@@ -1,0 +1,36 @@
+﻿@using Juillet.Web.Mvc.Html
+@model IReadOnlyCollection<AccessManagement.Web.ViewModels.Framework.Reports.ReportDataRow>
+
+@{
+  ViewBag.ColumnCount = 3;
+}
+<div class="row">
+  <div class="col-md-12 m-h-15">
+    <a href="@Url.Action("Index")">@Html.GlyphFa("arrow-circle-left") Back to Reports</a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-primary heading-inline-block">@ViewBag.Title</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Pending Since</th>
+          <th>Access Level</th>
+        </tr>
+      </thead>
+      <tbody>
+      @foreach (var row in Model)
+      {
+        @Html.DisplayFor(_ => row.Data, row.DataTemplate)
+      }
+      </tbody>
+    </table>
+  </div>
+</div>

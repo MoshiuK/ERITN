@@ -1,0 +1,79 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.AdministratorAddOrganizationOrderViewModel
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+@using (Html.BeginForm("AddOrder", "Organization", FormMethod.Post))
+{
+  @Html.HiddenFor(m => m.OrganizationId)
+  @Html.AntiForgeryToken()
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          <h4 class="heading-inline-block">
+            @Html.GlyphFa("dollar") Add Order
+          </h4>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.EmergencyPersonnelCount)
+              @Html.TextBoxFor(m => m.EmergencyPersonnelCount, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.BilledDate)
+              @Html.EditorFor(m => m.BilledDate, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.PaidDate)
+              @Html.EditorFor(m => m.PaidDate, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.TenantProductId)
+              @Html.DropDownListFor(m => m.TenantProductId, Model.SelectProducts, new { @class = "select2-component form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.Name)
+              @Html.EditorFor(m => m.Name, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.EmailAddress)
+              @Html.EditorFor(m => m.EmailAddress, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.Phone)
+              @Html.EditorFor(m => m.Phone, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.StreetAddress1)
+              @Html.EditorFor(m => m.StreetAddress1, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.StreetAddress2)
+              @Html.EditorFor(m => m.StreetAddress2, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.City)
+              @Html.EditorFor(m => m.City, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.State)
+              @Html.EditorFor(m => m.State, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.ZipCode)
+              @Html.EditorFor(m => m.ZipCode, new { @class = "form-control" })
+            </div>
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.ExternalId)
+              @Html.EditorFor(m => m.ExternalId, new { @class = "form-control" })
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary pull-right m-r-md m-t-md">@Html.GlyphFa("plus") Add Order</button>
+}

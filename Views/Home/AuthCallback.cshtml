@@ -1,0 +1,16 @@
+﻿@model System.Security.Claims.ClaimsIdentity
+
+<h1>Auth Callback</h1>
+@if (Model == null)
+{
+  <h4>Model was null</h4>
+}
+else
+{
+  <pre>
+@foreach (var claim in Model.Claims)
+{
+  @Html.Raw(string.Format("{0} = {1}", claim.Type, claim.Value))
+}
+</pre>
+}

@@ -1,0 +1,59 @@
+﻿@using AccessManagement.Framework.Tenants
+@using Juillet.Web.Mvc
+@{
+  var theme = (TenantTheme)ViewBag.Theme;
+  IPageLayout pageLayout = ViewBag.PageLayout;
+  var layoutMode = pageLayout.NavBar.IsAvailable ? "portal" : "browser";
+  ViewBag.Container = pageLayout.Body.Container();
+}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="shortcut icon" href="@theme.ImageUrlFavicon" />
+  <title>Organizations - @ViewBag.Title - @theme.PageTitleSuffix</title>
+  @Styles.Render("~/Content/css/tenant-base")
+  @Styles.Render("~/Content/dropzonescss")
+  @Styles.Render("~/Content/bootstrap-tour")
+  @Styles.Render(theme.OrganizationsStyleBundle)
+  @Scripts.Render("~/Scripts/modernizr")
+  @Scripts.Render("~/Scripts/jquery")
+  @Html.Partial("_AiScriptPartial")
+  @RenderSection("styles", required: false)
+</head>
+<body>
+  <div id="backdropFallback" class="tour-backdrop hide "></div>
+  <div class="layout-root @layoutMode">
+    @if (pageLayout.Toolbar.IsAvailable)
+    {
+    @Html.Partial("Juillet/Chrome/Toolbar", pageLayout.Toolbar)
+    }
+
+    <div class="workspace">
+      @if (pageLayout.NavBar.IsAvailable)
+      {
+      @Html.Partial("Juillet/Chrome/NavBar", pageLayout.NavBar)
+      }
+
+      <div class="@ViewBag.Container body-content @pageLayout.Body.ContentWidth()">
+        @RenderBody()
+      </div>
+    </div>
+
+    @RenderSection("SideBar", required: false)
+    @if (pageLayout.Footer.IsAvailable)
+    {
+    @Html.Partial("Juillet/Chrome/Footer", pageLayout.Footer)
+    }
+    @Html.DeferredNotifications(pageLayout.DeferredToasts)
+    @Html.Partial("Dialogs/SignOutAfterIdleDialog")
+  </div>
+
+  @Scripts.Render("~/Scripts/jquery")
+  @Scripts.Render("~/Scripts/portal")
+  @Scripts.Render(theme.ScriptBundle)
+  @Scripts.Render("~/Scripts/app/organizations")
+  @RenderSection("scripts", required: false)
+</body>
+</html>

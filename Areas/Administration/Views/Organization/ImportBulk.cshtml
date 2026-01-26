@@ -1,0 +1,152 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.ImportBulkViewModel
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+<style>
+  .tagData {
+    width: 50px
+  }
+</style>
+
+<div class="col-md-12">
+  <h5>
+    Import enrollment data from a CSV (comma separated value) file by mapping column tags for enrollment information. Each row in the
+    file represents data for a single enrollee.
+  </h5>
+  <div class="row">
+    <div class="h4 col-md-1">
+      @Html.GlyphFa("file-o")
+    </div>
+    <div class="h4 col-md-3">
+      <strong>File Structure</strong>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          COLUMN
+        </th>
+        <th>
+          TAG
+        </th>
+        <th>
+          DESCRIPTION
+        </th>
+        <th>
+          MORE INFORMATION
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @{
+        var counter = 0;
+        foreach (var property in Model.PropertyTypes)
+        {
+          counter++;
+          <tr>
+            <td>
+              @((Char)(counter + 64))
+            </td>
+            <td class="tagData">
+              @Html.DisplayFor(_ => property.Tag)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => property.Description)
+            </td>
+            @{
+              <td colspan="2">
+                @if (!string.IsNullOrEmpty(property.Options))
+                {
+                  <a class="fa fa-info-circle" data-html="true" data-toggle="popover" title="Available Options" data-content="@(property.Options)"></a>
+                }
+              </td>
+            }
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+  <span>
+    <strong>@Html.ActionLink("Download", "DownloadSample", new {id = Model.OrganizationId})</strong> an empty CSV file with the correct column structure.
+  </span>
+  <hr />
+</div>
+
+@using (Html.BeginForm("UploadForReview", "Organization", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+  @Html.HiddenFor(m => m.OrganizationId)
+  <div class="col-md-12">
+    <div class="row">
+      <div class="h5 col-md-2">
+        @Html.GlyphFa("upload") <small>Upload a .csv file.</small>
+      </div>
+      <div class="h5 col-md-5">
+        @Html.AntiForgeryToken()
+        @Html.TextBoxFor(model => model.CSVFileInformation, null, new { type = "file", accept = ".csv", @class = "input-file" })
+      </div>
+      <div class="h5 col-md-1">
+        @Html.CheckBoxFor(m => m.AutoVerify)
+      </div>
+      <div class="h5 col-md-4">
+        @Html.LabelFor(m => m.AutoVerify)
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="col-md-12">
+    <div class="row">
+      <div class="h4 col-md-1">
+        @Html.GlyphFa("exclamation")
+      </div>
+      <div class="h4 col-md-3">
+        <strong>Import Issues</strong>
+      </div>
+      <div class="col-md-8">
+        @Html.Raw(Html.Encode(Model.Issues).Replace("\n", "<br />"))
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="row">
+      <div class="h4 col-md-1">
+        @Html.GlyphFa("envelope-o")
+      </div>
+      <div class="h4 col-md-11">
+        <strong>Import Options</strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        @Html.CheckBoxFor(m => m.AllowEmailNotifications)
+      </div>
+      <div class="col-md-11">
+        @Html.LabelFor(m => m.AllowEmailNotifications, new { @class = "small" })
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        @Html.CheckBoxFor(m => m.AllowPhoneNotifications)
+      </div>
+      <div class="col-md-11">
+        @Html.LabelFor(m => m.AllowPhoneNotifications, new { @class = "small" })
+      </div>
+    </div>
+  </div>
+  <div class="pull-right">
+    <button type="submit" class="btn btn-primary btn-lg">@Html.GlyphFa("cloud-upload") Import</button>
+  </div>
+}
+
+@section pagescripts
+{
+  <script>
+    $(document).ready(function () {
+      $('[data-toggle="popover"]').popover();
+    });
+  </script>
+}

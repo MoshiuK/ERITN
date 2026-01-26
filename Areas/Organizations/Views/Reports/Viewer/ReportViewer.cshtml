@@ -1,0 +1,9 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Reports.ReportViewer
+<div class="report-viewer">
+  @Html.EditorFor(m => m.Specification)
+  
+  <div class="report-viewer-viewport">
+    @Html.Partial("Viewer/ReportSideBar", Model)
+    @Html.Partial("Viewer/ReportTable", Model)
+  </div>
+</div>

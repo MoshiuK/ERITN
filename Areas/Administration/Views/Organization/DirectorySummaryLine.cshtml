@@ -1,0 +1,57 @@
+﻿@using Juillet.Web.Mvc.Html
+@using AccessManagement.Models.Core
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.DirectoryPageSummaryLine
+@{
+  var borderCss = Model.Active ? "flag-border-success" : "flag-border-disable";
+}
+<tr class="people-directory summary-row">
+  <td>
+    <div class="flag-border @borderCss text-center">
+      @if (Model.HasAvatar)
+      {
+        @Html.DisplayFor(m => m.Avatar)
+      }
+      else
+      {
+        <span class="text-muted">@Html.GlyphFa("user-circle-o", GlyphStyles.X3)</span>
+      }
+    </div>
+  </td>
+  <td>
+    <div class="summary-row-name">
+      <span><a data-sps-resource-id="@Model.CorrelationId" href="@Url.Action("Index", "Person", new { id = Model.CorrelationId })" data-sps-action>@Html.DisplayFor(m => m.Name)</a></span>
+      <span class="text-muted">Since @Html.Label(Model.CreatedOn.ToShortDateString())</span>
+    </div>
+  </td>
+  <td>
+    @{
+      switch ((OrganizationMembershipTypes)Model.OrganizationMembershipTypeId)
+      {
+        case OrganizationMembershipTypes.FullTimeEmployee:
+          @Html.Raw("Full time employee")
+          break;
+        case OrganizationMembershipTypes.PartTimeEmployee:
+          @Html.Raw("Part time employee")
+          break;
+        case OrganizationMembershipTypes.Contractor:
+          @Html.Raw("Contractor")
+          break;
+        case OrganizationMembershipTypes.Subcontractor:
+          @Html.Raw("Sub-contractor")
+          break;
+        case OrganizationMembershipTypes.Intern:
+          @Html.Raw("Intern")
+          break;
+        case OrganizationMembershipTypes.Volunteer:
+          @Html.Raw("Volunteer")
+          break;
+        case OrganizationMembershipTypes.Other:
+          @Html.Raw("Other")
+          break;
+      }
+    }
+  </td>
+  <td>
+    @Html.ActionLink("Edit / Details", "General", "Person", new { id = Model.CorrelationId }, new { @class = "btn btn-sm btn-info pull-right" })
+  </td>
+</tr>

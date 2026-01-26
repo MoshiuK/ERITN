@@ -1,0 +1,31 @@
+﻿@using AccessManagement.Web.Mvc
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationGeneralSettings
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        @using (Html.BeginForm("General", "Organization", null, FormMethod.Post, new { id = "generalSettingsForm" }))
+        {
+          @Html.AntiForgeryToken()
+
+          @Html.HiddenFor(m => m.CorrelationId)
+          @Html.EditorForModel()
+
+          <div class="pull-right m-t-md">
+            <button type="submit" class="btn btn-primary btn-lg">Update</button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.organizations.general.js"></script>
+  @Html.ScriptForGooglePlacesAutoComplete()
+}

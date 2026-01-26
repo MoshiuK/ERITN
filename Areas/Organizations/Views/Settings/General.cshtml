@@ -1,0 +1,91 @@
+﻿@using AccessManagement.Web.Mvc
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationGeneralSettings
+@{
+  Layout = "_SettingsLayout.cshtml";
+}
+@Html.HiddenFor(m => m.TutorialsUrl)
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2>@ViewBag.Title</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-body">
+            @using (@Html.BeginForm("General", "Settings", null, FormMethod.Post, new { id = "generalSettingsForm" }))
+            {
+              @Html.AntiForgeryToken()
+              @Html.HiddenFor(m => m.CorrelationId)
+              @Html.HiddenFor(model => model.RegistrationData.AddressLatLng)
+              @Html.HiddenFor(model => model.RegistrationData.PlaceId)
+
+              <label class="control-label" for="RegistrationData">Organization Information</label>
+              <div class="form-group">
+                @Html.LabelFor(model => model.RegistrationData.Name)
+                @Html.EditorFor(model => model.RegistrationData.Name)
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.RegistrationData.Description)
+                @Html.EditorFor(model => model.RegistrationData.Description)
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.RegistrationData.Address)
+                @Html.EditorFor(model => model.RegistrationData.Address)
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.RegistrationData.Website)
+                @Html.EditorFor(model => model.RegistrationData.Website)
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.RegistrationData.Domain)
+                @Html.EditorFor(model => model.RegistrationData.Domain)
+              </div>
+              <br />
+
+              <label class="control-label" for="BusinessContact">Business Contact</label>
+              <div class="form-group">
+                @Html.LabelFor(model => model.BusinessContact.Name)
+                @Html.EditorFor(model => model.BusinessContact.Name)
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.BusinessContact.Email)
+                @Html.EditorFor(model => model.BusinessContact.Email)
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.BusinessContact.Phone)
+                @Html.EditorFor(model => model.BusinessContact.Phone)
+              </div>
+
+              <label class="control-label" for="EmergencyContact">Emergency Contact</label>
+              <div class="form-group">
+                @Html.LabelFor(model => model.EmergencyContact.Name)
+                @Html.EditorFor(model => model.EmergencyContact.Name)
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.EmergencyContact.Email)
+                @Html.EditorFor(model => model.EmergencyContact.Email)
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.EmergencyContact.Phone)
+                @Html.EditorFor(model => model.EmergencyContact.Phone)
+              </div>
+
+              <div class="pull-right m-t-md">
+                <button type="submit" class="btn btn-primary btn-lg">Update</button>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@section pagescripts
+{
+  <script src="~/Scripts/pages/organizations.settings.general.js"></script>
+  @Html.ScriptForGooglePlacesAutoComplete()
+
+  @if (!Model.HasCompletedSettingsTour)
+  {
+    <script type="text/javascript" src="~/Scripts/spstour.js"></script>
+  }
+}

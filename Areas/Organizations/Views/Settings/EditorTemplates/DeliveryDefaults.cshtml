@@ -1,0 +1,55 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Settings.DeliveryDefaults
+
+<div class="row m-b-md">
+  <div class="col-md-12">
+    <h2>Delivery Preferences</h2>
+    <p>
+      Passes can be distributed to the organization business contact instead of to individual personnel.
+    </p>
+    @if (ViewBag.HasCustomCredentialDelivery)
+    {
+      <div class="alert alert-info">
+        <p>
+          @Html.GlyphFa("send") Your organization has a specific policy in place for delivering access documents to personnel.  You 
+          can override the policy to have all documents sent to the business contact below.
+        </p>
+        <p>
+          You can exclude personnel from using this policy by updating their delivery options in their access settings.
+        </p>
+      </div>
+    }
+  </div>
+</div>
+
+@using (Html.BeginForm("DeliveryDefaults", "Settings"))
+{
+  @Html.AntiForgeryToken()
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      @Html.EditorFor(m => m.DeliverToCoordinatorOnly)
+    </div>
+  </div>
+  <div class="row m-b-md">
+    <div class="col-md-offset-2 col-md-6">
+      <div class="well well-sm m-l-md">
+        <span>
+          <strong>@Html.DisplayFor(m => m.ContactName)</strong> <br/>
+          <a href="mailto:@Html.ValueFor(m => m.ContactEmail)">@Html.GlyphFa("envelope") @Html.ValueFor(m => m.ContactEmail)</a> <br/>
+          <a href="tel:@Html.ValueFor(m => m.ContactPhone)">@Html.GlyphFa("phone") @Html.ValueFor(m => m.ContactPhone)</a>
+        </span>
+      </div>
+      <div class="m-l-md">
+        <span class="text-danger">
+          <strong>NOTE:</strong> All passes will be sent to the business contact, <strong>not</strong> directly to personnel.
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row m-b-lg">
+    <div class="col-md-12 text-center">
+      <button type="submit" class="btn btn-lg btn-primary">Save Changes</button>
+    </div>
+  </div>
+}

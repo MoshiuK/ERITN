@@ -1,0 +1,24 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.RegistrationPageViewModel
+@{
+  Layout = "../Shared/_AdministrationLayout.cshtml";
+}
+
+<div class="row m-b-md">
+  <div class="col-md-12 text-center">
+    <div class="pull-left">
+      <div class="m-t-sm">
+        <a class="m-t-sm" href="@Url.Action("Registrations", "OrganizationsHub")">@Html.GlyphFa("arrow-circle-left") Back to Registrations</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    @Html.DisplayFor(m => m.Summary)
+  </div>
+  <div class="col-md-6">
+    @Html.DisplayFor(m => m.Status)
+  </div>
+</div>

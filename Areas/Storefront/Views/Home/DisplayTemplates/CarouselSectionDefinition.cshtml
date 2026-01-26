@@ -1,0 +1,38 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.CarouselSectionDefinition
+@{
+  Layout = "_LandingPageSectionLayout.cshtml";
+  var activeIndicatorSet = false;
+  var carouselEffect = "slide";
+}
+<div id="carousel-container" class="carousel @carouselEffect" data-ride="carousel">
+  <ol class="carousel-indicators">
+    @for (var i = 0; i < Model.Slides.Length; i++)
+    {
+      if (activeIndicatorSet)
+      {
+        <li data-target="#carousel-container" data-slide-to="@i"></li>
+      }
+      else
+      {
+        <li data-target="#carousel-container" data-slide-to="@i" class="active"></li>
+        activeIndicatorSet = true;
+      }
+    }
+  </ol>
+  
+  <div class="carousel-inner" role="listbox">
+    @for (var i = 0; i < Model.Slides.Length; i++)
+    {
+      @Html.DisplayFor(_ => Model.Slides[i], new { isActiveSlide = i == 0 })
+    }
+  </div>
+  
+  <a class="left carousel-control" href="#carousel-container" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-container" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

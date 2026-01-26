@@ -1,0 +1,18 @@
+﻿@model AccessManagement.Web.ViewModels.Body.CheckTile
+@{
+  var id = Html.ValueFor(m => m.Id);
+  var checkedAttr = Model.Checked ? "checked" : "";
+  var valueName = Html.ValueFor(m => m.InputElementName) + ".Value";
+  var textName = Html.ValueFor(m => m.InputElementName) + ".Text";
+  var selectedName = Html.ValueFor(m => m.InputElementName) + ".Selected";
+}
+<div class="checktile checkbox checkbox-success" style="background-image: url(@Html.ValueFor(m => m.ImageUrl)">
+  <input type="hidden" name="@valueName" value="@id" />
+  <input type="hidden" name="@textName" value="@Html.ValueFor(m => m.Name)" />
+  <input id="chbx-@id" type="checkbox" name="@selectedName" value="@Html.ValueFor(m => m.Checked)" @checkedAttr />
+  <label for="chbx-@id"></label>
+  <div class="checktile-caption">
+    <span>@Html.ValueFor(m => m.Name)</span>
+  </div>
+</div>
+

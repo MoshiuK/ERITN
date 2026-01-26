@@ -1,0 +1,60 @@
+﻿@using AccessManagement.Web.Areas.Organizations
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Framework.Events.DownloadCredentialArchiveSummary
+@{
+  Layout = "_EventHubLayout.cshtml";
+}
+<div class="download-progress-page">
+  <div class="row m-t-sm m-b-sm">
+    <div class="col-md-12">
+      <a href="@Url.Action("Roster", "Event", new { id = Model.EmergencyEventId, area = OrganizationsAreaRegistration.Name })">
+        @Html.GlyphFa("arrow-circle-left") Back to Full Roster
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-2 text-center">
+      <h1 class="text-primary">@Html.GlyphFa("file-archive-o")</h1>
+    </div>
+    <div class="col-md-8">
+      <h3 class="text-primary">Now working on your download...</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <div class="progress">
+        @{
+          var progressWidth = Model.PercentComplete.ToString("D") + "%";
+        }
+        <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: @progressWidth">
+          <span class="sr-only">@progressWidth</span>
+          @Html.ValueFor(m => m.PercentComplete)%
+        </div>
+      </div>
+      <p>
+        Completed @Html.ValueFor(m => m.CompletedCount) of @Html.ValueFor(m => m.TotalCount) entries with @Html.ValueFor(m => m.ErrorCount) errors.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      @Html.DisplayFor(m => m.Entries, "ArchiveEntryTable")
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 class="text-primary">...please wait.</h3>
+      <em><span id="retryTimerCaption" data-retry-count="@ViewBag.RetryCount" class="text-muted">Checking again in 10 seconds.</span></em>
+    </div>
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.event.downloadprogress.js"></script>
+}

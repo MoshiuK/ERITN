@@ -1,0 +1,52 @@
+﻿@using AccessManagement.Models.Registration
+@model AccessManagement.Framework.Registration.InvalidRegistrationStatus
+@section styles
+{
+  <style>
+    .layout-root > nav {
+      margin-bottom: 0;
+    }
+
+    .layout-root.browser .workspace {
+      margin-top: 50px;
+    }
+
+    .workspace .body-content {
+      padding: 50px;
+    }
+  </style>
+}
+@helper StatusMessage(RegistrationStatus status)
+{
+  switch (status)
+  {
+    case RegistrationStatus.Reviewing:
+      <h3>Your registration is being reviewed by our customer support team.</h3>
+      break;
+    case RegistrationStatus.Failed:
+      <h3>Your registration was abandoned or rejected.  It cannot be used.</h3>
+      break;
+    case RegistrationStatus.Registered:
+      <h3>Your organization is registered.  Your confirmation has been emailed to you.</h3>
+      break;
+    case RegistrationStatus.TimedOut:
+      <h3>Your registration has expired and cannot be used.</h3>
+      break;
+    default:
+      <h3>There is a problem with your registration and it cannot be used.</h3>
+      break;
+  }
+}
+
+<div>
+  <h1>Registration Status</h1>
+  @StatusMessage(Model.ActualStatus)
+  <h4>Registration number: @Html.DisplayFor(m => m.ReferenceId)</h4>
+  <hr />
+  <p>
+    @Html.DisplayFor(m => m.Message)
+  </p>
+</div>
+
+
+

@@ -1,0 +1,90 @@
+﻿@using AccessManagement.Web.Areas.Organizations
+@using AccessManagement.Web.Services
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.EventHub.EventActivityStream
+@{
+  Layout = "_EventHubLayout.cshtml";
+}
+
+@functions
+{
+
+  string GlyphForActivityType(int type)
+  {
+    var uiSupport = (ICredentialActivityViewSupport)ViewBag.UiSupport;
+    return uiSupport.GetGlyphFor(type);
+  }
+
+  string CssClassForActivityType(int type)
+  {
+    var uiSupport = (ICredentialActivityViewSupport)ViewBag.UiSupport;
+    var brand = uiSupport.GetBootstrapBrandFor(type);
+    var css = string.Empty;
+    switch (brand)
+    {
+      case BootstrapBrands.Success:
+        css = "bg-success";
+        break;
+      case BootstrapBrands.Info:
+        css = "bg-info";
+        break;
+      case BootstrapBrands.Warning:
+        css = "bg-warning";
+        break;
+      case BootstrapBrands.Danger:
+        css = "bg-danger";
+        break;
+    }
+    return css;
+  }
+
+}
+
+@if (Model.Items.Count > 0)
+{
+  <div class="activity-page">
+    <div class="activity-stream">
+
+      @foreach (var activity in Model.Items)
+      {
+        <div class="stream-item">
+          <div class="stream-item-badge">
+            @Html.GlyphFa(GlyphForActivityType(
+              activity.Activity.CredentialActivityTypeId),
+              cssClasses: CssClassForActivityType(activity.Activity.CredentialActivityTypeId))
+          </div>
+          <div class="stream-item-panel">
+            <div class="stream-item-info">
+              <a href="@Url.Action("Index", "Person", new { id = activity.MemberId, area = OrganizationsAreaRegistration.Name })">
+                <img src="@Html.ValueFor(_ => activity.MemberAvatar.Thumbnail)" alt="@Html.DisplayFor(_ => activity.MemberName)" />
+                <span>
+                  @Html.DisplayFor(_ => activity.MemberName)
+                </span>
+              </a>
+              <span class="timeago">
+                @Html.DisplayFor(_ => activity.TimeAgo)
+              </span>
+            </div>
+            @Html.DisplayFor(_ => activity.Activity.Remarks)
+          </div>
+        </div>
+      }
+    </div>
+
+    @Html.DisplayFor(m => m.Pager)
+  </div>
+}
+else
+{
+  <div class="activity-page">
+    <div class="row m-t-lg">
+      <div class="col-md-12">
+        <p class="text-muted">
+          <em>
+            No activity for this event.
+          </em>
+        </p>
+      </div>
+    </div>
+  </div>
+}

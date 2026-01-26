@@ -1,0 +1,29 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Settings.TransitLocationSettingsViewModel
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "_SettingsTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Transit Locations</div>
+      </div>
+      <div class="panel-body">
+        <p>
+          The transit locations listed below will be available for organizations to request access to or thru during the registration process.  If
+          a transit location is not available or is marked inactive, it will not be available during registration.
+        </p>
+        @Html.DisplayFor(m => m.TransitLocations)
+        @if (Model.IsMoreTransitLocationsShown)
+        {
+          <div class="pull-right">
+            <button data-toggle="modal" data-target="#addTransitLocationDialog" class="btn btn-primary">@Html.GlyphFa("plus") Additional Transit Locations</button>
+            @Html.Action("AddTransitLocationDialog", new { id = "addTransitLocationDialog" })
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

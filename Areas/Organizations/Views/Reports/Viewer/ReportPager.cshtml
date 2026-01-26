@@ -1,0 +1,31 @@
+﻿@model Juillet.Web.Api.PagedCollectionMetadata
+@if (Model.TotalPageCount > 1)
+{
+<nav id="reportPager" aria-label="Report paging">
+  <input id="pagingIndexField" type="hidden" name="paging.index" value="@(Model.PageNumber - 1)" />
+  <input id="pagingSizeField" type="hidden" name="paging.size" value="@Model.Limit" />
+  <ul class="pagination">
+    @if (Model.HasPrevious)
+    {
+      <li class="pager-page" data-page-index="@(Model.PageNumber - 2)" data-page-size="@Model.Limit">
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+    }
+    @for (var i = Model.PageNumber; i < Model.TotalPageCount + 1; i++)
+    {
+      var active = i == Model.PageNumber ? "active" : "";
+      <li class="pager-page @active" data-page-index="@(i - 1)" data-page-size="@Model.Limit"><a class="undecorated-link" href="#">@i.ToString("D")</a></li>
+    }
+    @if (Model.HasNext)
+    {
+      <li class="pager-page" data-page-index="@Model.PageNumber" data-page-size="@Model.Limit">
+        <a href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    }
+  </ul>
+</nav>
+}

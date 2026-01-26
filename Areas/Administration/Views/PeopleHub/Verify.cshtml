@@ -1,0 +1,63 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.PendingVerificationsPageViewModel
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+}
+
+@{
+  var startPosition = (Model.PageOfContent.Metadata.TotalCount == 0) ? 0 : Model.PageOfContent.Metadata.StartPosition;
+  var endPosition = Model.PageOfContent.Metadata.EndPosition;
+  var total = Model.PageOfContent.Metadata.TotalCount;
+}
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h4>@Html.ActionLink("Pending", "Verify", new { }) | @Html.ActionLink("Archived", "VerifyArchived", new { })</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <span class="text-muted small pull-right">Last refreshed <i class="fa fa-clock-o"></i> <time data-juillet-currenttime></time></span>
+        <h2>Find Pending Verifications</h2>
+        @Html.Partial("Forms/FilterForm", Model.Filter)
+        <div>
+          <span class="pull-right small text-muted">Showing @startPosition - @endPosition of @total items.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="well">
+  <p>
+    <strong>Security Notice</strong><br />
+    The verification requests below are used by emergency managers and law enforcement to evaluate access to restricted zones.
+    Providing incorrect information is a security risk.
+  </p>
+</div>
+
+@{
+  var array = Model.PageOfContent.Data.ToArray();
+  for (var i = 0; i < array.Length; i += 2)
+  {
+    <div class="row">
+      <div class="col-md-6">
+        @Html.Partial("PendingVerificationItem", array[i])
+      </div>
+      @if (i + 1 < array.Length)
+      {
+        <div class="col-md-6">
+          @Html.Partial("PendingVerificationItem", array[i + 1])
+        </div>        
+      }
+    </div>
+  }
+}
+
+<div class="row">
+  <div class="col-md-12">
+    @Html.DisplayFor(m => m.Pager)
+  </div>
+</div>

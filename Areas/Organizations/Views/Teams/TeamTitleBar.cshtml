@@ -1,0 +1,41 @@
+﻿@using AccessManagement.Web.Areas.Organizations.ViewModels.Teams
+@using Juillet.Web.Mvc.Html
+@model TeamTitleBar
+<div class="row team-title-bar">
+  <div class="col-md-8">
+    <div class="dropdown">
+      <div class="btn-group">
+        <div class="btn btn-lg btn-link team-title-dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <h2 class="text-primary">@Html.DisplayFor(m => m.Name) <span class="caret"></span></h2>
+        </div>
+        <ul class="dropdown-menu team-title-dropdown-menu" aria-labelledby="dLabel">
+          <li class="m-md">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="avatar-container">
+                  <a href="@Url.Action("Logo", new { id = Model.TeamId })">
+                    @Html.DisplayFor(m => m.Avatar)
+                  </a>
+                </div>
+                @Html.ActionLink("Change logo", "Logo", new { id = Model.TeamId }, new {@class = "btn btn-sm btn-link"})
+              </div>
+              <div class="col-md-6">
+                <a href="@Url.Action("Delete", new { id = Model.TeamId })" class="btn btn-danger">@Html.GlyphFa("trash-o") Delete Team</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <ul class="nav nav-pills pull-right">
+      @{
+        var settingsActiveCss = Model.ActiveTab == ActiveTitleBarTab.Settings ? "active" : string.Empty;
+        var membersActiveCss = Model.ActiveTab == ActiveTitleBarTab.Members ? "active" : string.Empty;
+      }
+      <li role="presentation" class="@membersActiveCss"><a href="@Url.Action("Members", new {id = Model.TeamId})">@Html.GlyphFa("users") Members</a></li>
+      <li role="presentation" class="@settingsActiveCss"><a href="@Url.Action("Settings", new {id = Model.TeamId})">@Html.GlyphFa("cog") Settings</a></li>
+    </ul>
+  </div>
+</div>

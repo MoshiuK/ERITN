@@ -1,0 +1,14 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Reports.ReportViewer
+
+<div class="member-report-page">
+  @Html.Partial("Viewer/ReportViewer", Model)
+</div>
+
+@Html.Partial("Viewer/CriteriaEditorDialog", Model)
+@Html.Partial("Viewer/SaveAsDialog", Model)
+
+<iframe id="downloadFrame" style="display:none"></iframe>
+@section scripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.reports.memberreportviewer.js"></script>
+}

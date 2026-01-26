@@ -1,0 +1,93 @@
+﻿@using AccessManagement.Web.Areas.Operations.ViewModels.Clearinghouse
+@using AccessManagement.Framework.Cerra
+@using AccessManagement.Models.Core
+@using Juillet.Web.Mvc.Html
+@model IReadOnlyCollection<CorrelationPair<TransitPurpose, CerraTransitPurposeType>>
+@Html.Partial("TopNavBar", TopNavBarActivePages.CorrelationPurposes)
+
+@helper PullClearinghousePurposeForm(Guid id)
+{
+  using (Html.BeginForm("PullPurpose", "Clearinghouse", new {id}, FormMethod.Post))
+  {
+    @Html.AntiForgeryToken()
+
+    <button type="submit" class="btn btn-sm btn-primary">@Html.GlyphFa("chevron-left")</button>
+  }
+}
+
+@helper DeleteSpsPurposeForm(int id)
+{ 
+  using (Html.BeginForm("DeletePurpose", "Clearinghouse", new {id}, FormMethod.Post))
+  {
+    @Html.AntiForgeryToken()
+
+    <button type="submit" class="btn btn-sm btn-danger">@Html.GlyphFa("times")</button>
+  }
+}
+
+
+<div class="card">
+  <div class="card-content">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="pw-50">SPS PURPOSE</th>
+          <th class="text-center">ESF</th>
+          <th class="text-center">ACTION</th>
+          <th class="pw-50">CLEARINGHOUSE PURPOSE</th>
+          <th class="text-center">ESF</th>
+        </tr>
+      </thead>
+      <tbody>
+      @foreach (var pair in Model)
+      {
+        <tr>
+          @if (pair.SpsValue == null)
+          {
+            <td colspan="2">
+              <span class="text-muted"><em>Does not exist in SPS.</em></span>
+            </td>
+            <td class="text-center">
+              @PullClearinghousePurposeForm(pair.ChValue.Id)
+            </td>
+          }
+          else
+          {
+            <td>
+              @Html.DisplayFor(_ => pair.SpsValue)
+            </td>
+            <td class="text-center">
+              @Html.DisplayFor(_ => pair.SpsValue.EsfCode)
+            </td>
+            if (pair.ChValue != null)
+            {
+              <td class="text-center">
+                @DeleteSpsPurposeForm(pair.SpsValue.Id)
+              </td>
+            }
+            else
+            {
+              <td></td>
+            }
+          }
+          @if (pair.ChValue == null)
+          {
+            <td colspan="2">
+              <span class="text-muted"><em>Does not exist in clearinghouse.</em></span>
+            </td>
+          }
+          else
+          {
+            <td>
+              @Html.DisplayFor(_ => pair.ChValue)
+            </td>
+            <td class="text-center">
+              @Html.DisplayFor(_ => pair.ChValue.Esf)
+            </td>
+          }
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</div>

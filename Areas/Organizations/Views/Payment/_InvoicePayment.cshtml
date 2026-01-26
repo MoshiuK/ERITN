@@ -1,0 +1,43 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Payments.AddOrderViewModel
+
+<script src="~/Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+<div class="col-md-offset-2 col-md-8">
+  <div class="form-group">
+    @Html.LabelFor(m => m.InvoiceName)
+    @Html.EditorFor(m => m.InvoiceName)
+    @Html.ValidationMessageFor(m => m.InvoiceName)
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(m => m.Phone)
+    @Html.EditorFor(m => m.Phone)
+    @Html.ValidationMessageFor(m => m.Phone)
+  </div>
+  <div class="col-md-12">
+    <h4>Billing Address</h4>
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(m => m.InvoiceStreetAddress1)
+    @Html.EditorFor(m => m.InvoiceStreetAddress1)
+    @Html.ValidationMessageFor(m => m.InvoiceStreetAddress1)
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(m => m.InvoiceStreetAddress2)
+    @Html.EditorFor(m => m.InvoiceStreetAddress2)
+    @Html.ValidationMessageFor(m => m.InvoiceStreetAddress2)
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(m => m.InvoiceCity)
+    @Html.EditorFor(m => m.InvoiceCity)
+    @Html.ValidationMessageFor(m => m.InvoiceCity)
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(m => m.InvoiceState)
+    @Html.DropDownListFor(m => m.InvoiceState, Model.SelectLocations, new { @class = "select2-component form-control" })
+    @Html.ValidationMessageFor(m => m.InvoiceState)
+  </div>
+  <div class="form-group">
+    @Html.LabelFor(m => m.ZipCode)
+    @Html.EditorFor(m => m.ZipCode)
+    @Html.ValidationMessageFor(m => m.ZipCode)
+  </div>
+</div>

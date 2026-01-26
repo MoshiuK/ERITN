@@ -1,0 +1,46 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Pickup.PickupTicketData
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+}
+
+<div class="row storefront-pickup credential-collect-section border-bottom m-b-lg">
+  <div class="col-md-12">
+    <div class="m-t-sm m-b-sm">
+      @Html.GlyphFa("chevron-circle-left") @Html.ActionLink("Back to credential options", "Index", new { id = Model.TicketId, n = Model.Nonce })
+    </div>
+    <div class="row m-b-lg">
+      <div class="col-md-2">
+        <div class="big-icon">
+          @Html.GlyphFa("mobile", GlyphStyles.X5)
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            <h4 class="title">MOBILE CREDENTIALS SENT!</h4>
+            <p>
+              Your credentials have been sent to your phone.
+            </p>
+            <p>
+              <strong>Important:</strong> Always travel with 2 photo IDs and your transit documents.
+            </p>
+            <p>
+              Thank you!
+            </p>
+          </div>
+        </div>
+        @if (ViewBag.Updated != null && ViewBag.Updated)
+        {
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-info">
+                <strong>Note:</strong> Phone number on file has been updated.
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

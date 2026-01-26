@@ -1,0 +1,26 @@
+﻿@using Juillet.SystemExtensions
+@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model IReadOnlyCollection<Juillet.Notifications.MessageNotificationData>
+@if (Model.Count > 0)
+{
+  <ul class="list-unstyled message-list">
+    @foreach (var row in Model)
+    {
+      <li class="message-list-item">
+        <div class="pull-right m-r-sm">
+          <a data-action-btn="delete" data-action-id="@row.MessageId" class="action-button" href="#" title="Delete">@Html.GlyphFa("trash-o", GlyphStyles.FixedWidth)</a>
+        </div>
+        <div class="@Html.FlagBorderCss(row.NotificationType, FlagBorderStyles.Thick)">
+          <span>@Html.DisplayFor(_ => row.DisplayTitle)</span> <small class="text-muted">@row.OccurredAtUtc.Date.TimeAgo()</small> <br />
+          <small>@Html.DisplayFor(_ => row.DisplayDescription)</small>
+        </div>
+      </li>
+    }
+  </ul>
+}
+else
+{
+  <em class="text-muted">No messages found.</em>
+}
+

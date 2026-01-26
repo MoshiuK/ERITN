@@ -1,0 +1,161 @@
+﻿@using AccessManagement.Models.Enrollment
+@using AccessManagement.Web.Areas.Organizations.ViewModels.Enrollments
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Enrollments.EnrollmentsViewModel
+@{
+  Layout = "../Shared/_PeopleHubLayout.cshtml";
+}
+
+<div class="row m-t-sm">
+  <div class="col-md-10">
+    <input id="enrollmentListFilter" class="form-control" placeholder="Filter by name or email" type="text" />
+  </div>
+  <div class="col-md-2">
+    <div class="dropdown" style="display: inline">
+      <button class="btn btn-default dropdown-toggle" type="button" id="filterDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        @Html.GlyphFa("filter")
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="filterDropDown">
+        <li>
+          <a action="filter" data-include="@EnrollmentStatus.Enrolled.ToString("G")" href="#">
+            @if (Model.Preferences.IncludeEnrolled)
+            {
+              @Html.GlyphFa("check")
+            }
+            <span>Show Enrolled</span>
+          </a>
+        </li>
+        <li>
+          <a action="filter" data-include="@EnrollmentStatus.Abandoned.ToString("G")" href="#">
+            @if (Model.Preferences.IncludeAbandoned)
+            {
+              @Html.GlyphFa("check")
+            }
+            <span>Show Abandoned</span>
+          </a>
+        </li>
+        <li>
+          <a action="filter" data-include="@EnrollmentStatus.Failed.ToString("G")" href="#">
+            @if (Model.Preferences.IncludeFailed)
+            {
+              @Html.GlyphFa("check")
+            }
+            <span>Show Failed</span>
+          </a>
+        </li>
+        <li>
+          <hr/>
+        </li>
+        <li>
+          <a action="date-filter" data-filter-tag="@EnrollmentsViewPreferences.DailyEnrollments" href="#">
+            @if (Model.Preferences.FilterByTag == EnrollmentsViewPreferences.DailyEnrollments)
+            {
+              @Html.GlyphFa("circle")
+            }
+            else
+            {
+              @Html.GlyphFa("circle-o")
+            }
+            Today's Enrollments
+          </a>
+        </li>
+        <li>
+          <a action="date-filter" data-filter-tag="@EnrollmentsViewPreferences.WeeklyEnrollments" href="#">
+            @if (Model.Preferences.FilterByTag == EnrollmentsViewPreferences.WeeklyEnrollments)
+            {
+              @Html.GlyphFa("circle")
+            }
+            else
+            {
+              @Html.GlyphFa("circle-o")
+            }
+            This Week's Enrollments
+          </a>
+        </li>
+        <li>
+          <a action="date-filter" data-filter-tag="@EnrollmentsViewPreferences.MonthlyEnrollments" href="#">
+            @if (Model.Preferences.FilterByTag == EnrollmentsViewPreferences.MonthlyEnrollments)
+            {
+              @Html.GlyphFa("circle")
+            }
+            else
+            {
+              @Html.GlyphFa("circle-o")
+            }
+            This Month's Enrollments
+          </a>
+        </li>
+        <li>
+          <a action="date-filter" data-filter-tag="@EnrollmentsViewPreferences.AllEnrollments" href="#">
+            @if (Model.Preferences.FilterByTag == EnrollmentsViewPreferences.AllEnrollments)
+            {
+              @Html.GlyphFa("circle")
+            }
+            else
+            {
+              @Html.GlyphFa("circle-o")
+            }
+            All Enrollments
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="dropdown" style="display: inline">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        @Html.GlyphFa("sort-alpha-asc")
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li>
+          <a action="order-by" data-sort-tag="@EnrollmentsViewPreferences.OrderByNameTag" href="#">
+            @if (Model.Preferences.OrderByTag == EnrollmentsViewPreferences.OrderByNameTag)
+            {
+              @Html.GlyphFa("circle")
+            }
+            else
+            {
+              @Html.GlyphFa("circle-o")
+            }
+            Order By name
+          </a>
+        </li>
+        <li>
+          <a action="order-by" data-sort-tag="@EnrollmentsViewPreferences.OrderByLastModifiedTag" href="#">
+            @if (Model.Preferences.OrderByTag == EnrollmentsViewPreferences.OrderByLastModifiedTag)
+            {
+              @Html.GlyphFa("circle")
+            }
+            else
+            {
+              @Html.GlyphFa("circle-o")
+            }
+            Order By Last Update
+          </a>
+        </li>
+        <li>
+          <a action="order-by" data-sort-tag="@EnrollmentsViewPreferences.OrderByStartedTag" href="#">
+            @if (Model.Preferences.OrderByTag == EnrollmentsViewPreferences.OrderByStartedTag)
+            {
+              @Html.GlyphFa("circle")
+            }
+            else
+            {
+              @Html.GlyphFa("circle-o")
+            }
+            Order By Start Date
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row m-t-sm">
+  <div class="col-md-12">
+    @Html.DisplayFor(m => m.Page)
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.peoplehub.enrollments.js"></script>
+}

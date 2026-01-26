@@ -1,0 +1,39 @@
+﻿@model AccessManagement.Models.Core.Member
+<h3>Member</h3>
+@{
+  var alertCss = "alert-info";
+  if (Model.Active && !Model.Deleted)
+  {
+    alertCss = "alert-success";
+  }
+  else if (Model.Deleted)
+  {
+    alertCss = "alert-danger";
+  }
+  else if (!Model.Active)
+  {
+    alertCss = "alert-warning";
+  }
+}
+<div class="alert @alertCss">
+  @if (Model.Deleted)
+  {
+    <strong>The member record associated with this enrollment has been deleted.</strong>
+  }
+  else if (!Model.Active)
+  {
+    <strong>
+      The enrollment completed but 
+      @Html.ActionLink("the associated member", "ProfileDetails", "Person", new { id = Model.CorrelationId }, null)
+      is currently inactive.
+    </strong>
+  }
+  else
+  {
+    <strong>
+      The enrollment completed and
+      @Html.ActionLink("the associated member", "ProfileDetails", "Person", new { id = Model.CorrelationId }, null)
+      is active.
+    </strong>
+  }
+</div>

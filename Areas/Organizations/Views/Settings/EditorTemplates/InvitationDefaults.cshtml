@@ -1,0 +1,35 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Settings.InvitationDefaults
+
+<div class="row m-b-lg">
+  <div class="col-md-12">
+    <h2>Invitation Preferences</h2>
+    <h4>
+      These settings will be used for personnel that are not part of a team and do not have specific access information.
+    </h4>
+  </div>
+</div>
+
+@using (Html.BeginForm("InvitationDefaults", "Settings"))
+{
+  @Html.AntiForgeryToken()
+
+<div class="row m-b-lg">
+  <div class="col-md-offset-2 col-md-5 text-right">
+    <span class="">
+      Pending enrollment invitations remain valid for
+    </span>
+  </div>
+  <div class="col-md-1">
+    @Html.TextBoxFor(m => m.ValidityDays, new { @class = "form-control" })
+  </div>
+  <div class="col-md-1">
+    <span>days.</span>
+  </div>
+</div>
+
+  <div class="row m-b-lg">
+    <div class="col-md-12 text-center">
+      <button type="submit" class="btn btn-lg btn-primary">Save Changes</button>
+    </div>
+  </div>
+}

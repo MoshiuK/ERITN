@@ -1,0 +1,179 @@
+﻿@using AccessManagement.Framework.Tenants
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.EditOrganizationLocation
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+@helper RenderAddLocationSection()
+{
+  <div class="row">
+    <div class="form-group col-md-12">
+      @Html.LabelFor(m => m.LocationId)
+      @Html.EditorFor(m => m.LocationId)
+    </div>
+  </div>
+}
+
+@helper RenderShowLocationSection()
+{
+  TransitLocationResource loc = this.ViewBag.Location;
+  @Html.HiddenFor(m => m.LocationId)
+  <div class="row">
+    <div class="col-md-2">
+      <img class="text-center img-lg" src="@loc.Avatar.Medium" alt="@loc.Name"/>
+    </div>
+    <div class="col-md-10">
+      <h3>@loc.Name</h3>
+      <p class="text-muted">
+        @loc.Description
+      </p>
+    </div>
+  </div>
+}
+
+@helper RenderCerraRelationshipCss(string value)
+{
+  @Html.Raw(Model.CerraRelationship == value ? "active" : "");
+}
+
+<div class="row">
+  <div class="col-md-12">
+    @using (Html.BeginForm("EditOrganizationLocation"))
+    {
+      @Html.AntiForgeryToken()
+
+      @Html.HiddenFor(m => m.OrganizationId)
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="h4 heading-inline-block">
+            @if (Model.IsNew())
+            {
+              @Html.GlyphFa("map-marker") @Html.Raw(" Add Response Location")
+            }
+            else
+            {
+              @Html.GlyphFa("map-marker") @Html.Raw(" Edit Response Location Settings")
+            }
+            <div class="pull-right m-t-n-xs">
+              <a class="btn btn-white" href="@Url.Action("Locations", new {id = Model.OrganizationId})">@Html.GlyphFa("times")</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          @if (Model.IsNew())
+          {
+            @RenderAddLocationSection()
+          }
+          else
+          {
+            @RenderShowLocationSection()
+          }
+
+          <div class="row m-t-md">
+            <div class="col-md-12">
+              <h4>Response Relationship</h4>
+              <p class="text-muted">
+                Choose the option that best describes the relationship between the organization and the jurisdiction.
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="btn-group text-center col-md-12" data-toggle="buttons">
+              <div class="btn btn-default col-md-3 h-200 @RenderCerraRelationshipCss("respond")"
+                   action="set-cerra-relationship" style="vertical-align: middle">
+                <div>
+                @Html.GlyphFa("ambulance", GlyphStyles.X3)
+                <p class="btn-text" style="height: 85px">
+                  Respond to emergency events.
+                </p>
+                <span><strong>RESPOND</strong></span>
+                @Html.RadioButtonFor(m => m.CerraRelationship, "respond")
+                </div>
+              </div>
+              <div class="btn btn-default col-md-3 h-200 @RenderCerraRelationshipCss("resident")"
+                   action="set-cerra-relationship">
+                @Html.GlyphFa("home", GlyphStyles.X3)
+                <p class="btn-text" style="height: 85px">
+                  Reside or have facilities in the jurisdiction, assist in recovery efforts.
+                </p>
+                <span><strong>RESIDENT</strong></span>
+                @Html.RadioButtonFor(m => m.CerraRelationship, "resident")
+              </div>
+              <div class="btn btn-default col-md-3 h-200 @RenderCerraRelationshipCss("assist")"
+                   action="set-cerra-relationship">
+                @Html.GlyphFa("handshake-o", GlyphStyles.X3)
+                <p class="btn-text" style="height: 85px">
+                  Assist with emergency event recovery efforts but reside outside the jurisdiction.
+                </p>
+                <span><strong>ASSIST</strong></span>
+                @Html.RadioButtonFor(m => m.CerraRelationship, "assist")
+              </div>
+              <div class="btn btn-default col-md-3 h-200 @RenderCerraRelationshipCss("follow")"
+                   action="set-cerra-relationship">
+                @Html.GlyphFa("eye", GlyphStyles.X3)
+                <p class="btn-text" style="height: 85px">
+                  Track or interested in monitoring emergency events the jurisdiction.
+                </p>
+                <span><strong>FOLLOW</strong></span>
+                @Html.RadioButtonFor(m => m.CerraRelationship, "follow")
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-t-md">
+            <div class="col-md-12">
+              <h4>Special Access</h4>
+              <p class="text-muted">
+                Choose the special access options that apply to this organization in this location.
+              </p>
+              <div class="row">
+                <div class="form-group col-md-offset-1 col-md-11">
+                  @Html.EditorFor(m => m.EmergencyResponseCredentials)
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-offset-1 col-md-11">
+                  @Html.EditorFor(m => m.AllEventsCredentials)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-t-md">
+            <div class="col-md-12">
+              <h4>Credential Options</h4>
+              <p class="text-muted">
+                Choose the credential options that will be applied when creating credentials for events in this location.
+              </p>
+              <div class="row">
+                <div class="form-group col-md-offset-1 col-md-11">
+                  @Html.EditorFor(m => m.AutoIssueCredentials)
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-offset-1 col-md-11">
+                  @Html.EditorFor(m => m.AutoDistributeCredentials)
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row m-b-lg">
+            <div class="col-md-offset-8 col-md-4">
+              <a class="btn btn-lg btn-default" href="@Url.Action("Locations", new {id = Model.OrganizationId})">Cancel</a>
+              <button class="btn btn-lg btn-primary" type="submit">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.organization.editlocation.js"></script>
+}

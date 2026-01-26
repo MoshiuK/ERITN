@@ -1,0 +1,42 @@
+﻿@using AccessManagement.Definitions.Storefront.LandingPages
+@model QuoteSectionDefinition
+@{
+  Layout = "_LandingPageSectionLayout.cshtml";
+}
+
+@helper RenderQuote(QuoteDefinition quote)
+{
+  <div class="formal-quote">
+    <div class="quote-content">@quote.Quote</div>
+    <div class="quote-citation-avatar">
+      <img class="img-circle pull-left" src="@quote.ImageUrl" alt="@quote.CitationName" />
+    </div>
+    <div class="quote-citation">
+      <h4>@quote.CitationName</h4>
+      <p class="text-muted">@quote.CitationOrganization</p>
+    </div>
+  </div>
+}
+
+<div class="formal-quotes-section">
+  @for (var i = 0; i < Model.Quotes.Length; i += 3)
+  {
+    <div class="row">
+      <div class="col-md-4">
+        @RenderQuote(Model.Quotes[i])
+      </div>
+      <div class="col-md-4">
+        @if (i + 1 < Model.Quotes.Length)
+        {
+          @RenderQuote(Model.Quotes[i+1])
+        }
+      </div>
+      <div class="col-md-4">
+        @if (i + 2 < Model.Quotes.Length)
+        {
+          @RenderQuote(Model.Quotes[i + 2])
+        }
+      </div>
+    </div>
+  }
+</div>

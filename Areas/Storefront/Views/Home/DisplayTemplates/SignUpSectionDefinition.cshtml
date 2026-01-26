@@ -1,0 +1,27 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.SignUpSectionDefinition
+
+@{
+  var backgroundImage = string.IsNullOrEmpty(Model.BackgroundSplash) ? string.Empty :
+    $"background: url('{Model.BackgroundSplash}') 0 0 no-repeat";
+
+  var navId = string.IsNullOrEmpty(Model.NavCaption) ? string.Empty : $"id=page-{Model.NavCaption.ToLowerInvariant()}";
+  var inverse = Model.IsBackgroundInverse ? "brand-inverse" : string.Empty;
+}
+
+<div @navId class="storefront-landing" style="@backgroundImage @inverse">
+  @if (Model.IsSeparatorShown)
+  {
+    <div class="row brand-separator"></div>
+  }
+  <div class="sign-up-section">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>@Html.DisplayFor(m => m.Title)</h2>
+        <p>@Html.Raw(Model.Subtitle)</p>
+      </div>
+      <div class="col-md-6">
+        @Html.DisplayFor(m => m.ViewDefinition)
+      </div>
+    </div>
+  </div>
+</div>

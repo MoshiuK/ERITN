@@ -1,0 +1,231 @@
+﻿
+//
+// Variables for CERRA access levels
+//
+@cerra-access-level-1-bg: #FF2700;
+@cerra-access-level-1-fg: black;
+@cerra-access-level-2-bg: #FFFF00;
+@cerra-access-level-2-fg: black;
+@cerra-access-level-3-bg: #00B050;
+@cerra-access-level-3-fg: black;
+@cerra-access-level-4-bg: #0070C0;
+@cerra-access-level-4-fg: black;
+
+@cerra-custom-access-level-bg: mediumpurple;
+@cerra-custom-access-level-fg: white;
+
+//
+// Variables for ER-ITN access levels
+//
+@eritn-tier-er-bg: darkred;
+@eritn-tier-er-fg: white;
+@eritn-tier-1-bg: darkblue;
+@eritn-tier-1-fg: white;
+@eritn-tier-2-bg: darkgreen;
+@eritn-tier-2-fg: white;
+@eritn-tier-3-bg: dimgray;
+@eritn-tier-3-fg: white;
+
+
+//
+// CERRA Styles
+//
+label, span, .label {
+  &.cerra-access-level-1 {
+    background-color: @cerra-access-level-1-bg;
+    color: @cerra-access-level-1-fg;
+  }
+
+  &.cerra-access-level-2 {
+    background-color: @cerra-access-level-2-bg;
+    color: @cerra-access-level-2-fg;
+  }
+
+  &.cerra-access-level-3 {
+    background-color: @cerra-access-level-3-bg;
+    color: @cerra-access-level-3-fg;
+  }
+
+  &.cerra-access-level-4 {
+    background-color: @cerra-access-level-4-bg;
+    color: @cerra-access-level-4-fg;
+  }
+
+  &.custom-tier {
+    background-color: @cerra-custom-access-level-bg;
+    color: @cerra-custom-access-level-fg;
+  }
+}
+
+//
+// ER-ITN Styles
+//
+label, span, .label {
+  &.eritn-tier-er {
+    background-color: @eritn-tier-er-bg;
+    color: @eritn-tier-er-fg;
+  }
+
+  &.eritn-tier-1 {
+    background-color: @eritn-tier-1-bg;
+    color: @eritn-tier-1-fg;
+  }
+
+  &.eritn-tier-2 {
+    background-color: @eritn-tier-2-bg;
+    color: @eritn-tier-2-fg;
+  }
+
+  &.eritn-tier-3 {
+    background-color: @eritn-tier-3-bg;
+    color: @eritn-tier-3-fg;
+  }
+}
+
+//
+// Access Level Controls
+//
+.access-level-label {
+  padding: 8px 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+
+  &.cerra-access-level-1 {
+    background-color: @cerra-access-level-1-bg;
+    color: @cerra-access-level-1-fg;
+    border-bottom: solid 2px darken(@cerra-access-level-1-bg, 15%);
+    border-right: solid 2px darken(@cerra-access-level-1-bg, 15%);
+  }
+
+  &.cerra-access-level-2 {
+    background-color: @cerra-access-level-2-bg;
+    color: @cerra-access-level-2-fg;
+    border-bottom: solid 2px darken(@cerra-access-level-2-bg, 15%);
+    border-right: solid 2px darken(@cerra-access-level-2-bg, 15%);
+  }
+
+  &.cerra-access-level-3 {
+    background-color: @cerra-access-level-3-bg;
+    color: @cerra-access-level-3-fg;
+    border-bottom: solid 2px darken(@cerra-access-level-3-bg, 15%);
+    border-right: solid 2px darken(@cerra-access-level-3-bg, 15%);
+  }
+
+  &.cerra-access-level-4 {
+    background-color: @cerra-access-level-4-bg;
+    color: @cerra-access-level-4-fg;
+    border-bottom: solid 2px darken(@cerra-access-level-4-bg, 15%);
+    border-right: solid 2px darken(@cerra-access-level-4-bg, 15%);
+  }
+
+  &.custom-tier {
+    background-color: @cerra-custom-access-level-bg;
+    color: @cerra-custom-access-level-fg;
+    border-bottom: solid 2px darken(@cerra-custom-access-level-bg, 15%);
+    border-right: solid 2px darken(@cerra-custom-access-level-bg, 15%);
+  }
+
+  &.eritn-tier-er {
+    background-color: @eritn-tier-er-bg;
+    color: @eritn-tier-er-fg;
+    border-bottom: solid 2px darken(@eritn-tier-er-bg, 15%);
+    border-right: solid 2px darken(@eritn-tier-er-bg, 15%);
+  }
+
+  &.eritn-tier-1 {
+    background-color: @eritn-tier-1-bg;
+    color: @eritn-tier-1-fg;
+    border-bottom: solid 2px darken(@eritn-tier-1-bg, 15%);
+    border-right: solid 2px darken(@eritn-tier-1-bg, 15%);
+  }
+
+  &.eritn-tier-2 {
+    background-color: @eritn-tier-2-bg;
+    color: @eritn-tier-2-fg;
+    border-bottom: solid 2px darken(@eritn-tier-2-bg, 15%);
+    border-right: solid 2px darken(@eritn-tier-2-bg, 15%);
+  }
+
+  &.eritn-tier-3 {
+    background-color: @eritn-tier-3-bg;
+    color: @eritn-tier-3-fg;
+    border-bottom: solid 2px darken(@eritn-tier-3-bg, 15%);
+    border-right: solid 2px darken(@eritn-tier-3-bg, 15%);
+  }
+}
+
+.access-level-border-bottom {
+  &.cerra-access-level-1 {
+    border-bottom: solid 2px darken(@cerra-access-level-1-bg, 15%);
+  }
+
+  &.cerra-access-level-2 {
+    border-bottom: solid 2px darken(@cerra-access-level-2-bg, 15%);
+  }
+
+  &.cerra-access-level-3 {
+    border-bottom: solid 2px darken(@cerra-access-level-3-bg, 15%);
+  }
+
+  &.cerra-access-level-4 {
+    border-bottom: solid 2px darken(@cerra-access-level-4-bg, 15%);
+  }
+
+  &.custom-tier {
+    border-bottom: solid 2px darken(@cerra-custom-access-level-bg, 15%);
+  }
+
+  &.eritn-tier-er {
+    border-bottom: solid 2px darken(@eritn-tier-er-bg, 15%);
+  }
+
+  &.eritn-tier-1 {
+    border-bottom: solid 2px darken(@eritn-tier-1-bg, 15%);
+  }
+
+  &.eritn-tier-2 {
+    border-bottom: solid 2px darken(@eritn-tier-2-bg, 15%);
+  }
+
+  &.eritn-tier-3 {
+    border-bottom: solid 2px darken(@eritn-tier-3-bg, 15%);
+  }
+}
+.access-level-border-left {
+  &.cerra-access-level-1 {
+    border-left: solid 2px darken(@cerra-access-level-1-bg, 15%);
+  }
+
+  &.cerra-access-level-2 {
+    border-left: solid 2px darken(@cerra-access-level-2-bg, 15%);
+  }
+
+  &.cerra-access-level-3 {
+    border-left: solid 2px darken(@cerra-access-level-3-bg, 15%);
+  }
+
+  &.cerra-access-level-4 {
+    border-left: solid 2px darken(@cerra-access-level-4-bg, 15%);
+  }
+
+  &.custom-tier {
+    border-left: solid 2px darken(@cerra-custom-access-level-bg, 15%);
+  }
+
+  &.eritn-tier-er {
+    border-left: solid 2px darken(@eritn-tier-er-bg, 15%);
+  }
+
+  &.eritn-tier-1 {
+    border-left: solid 2px darken(@eritn-tier-1-bg, 15%);
+  }
+
+  &.eritn-tier-2 {
+    border-left: solid 2px darken(@eritn-tier-2-bg, 15%);
+  }
+
+  &.eritn-tier-3 {
+    border-left: solid 2px darken(@eritn-tier-3-bg, 15%);
+  }
+}

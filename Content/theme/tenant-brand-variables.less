@@ -1,0 +1,91 @@
+﻿
+//
+// DEFINE TENANT BRAND DEFAULTS
+//
+// Each tenant should replace some or all of these variables.
+// Include EITHER this file (when tenant branding applied) OR common-variables.less (when no tenant branding applied)
+//
+
+@import "../bootstrap/variables.less";
+@import "common-variables.less";
+
+@brand-primary-inverse: @gray;
+@text-color-inverse: @white;
+@help-text-color: @gray-light;
+
+// brand specific styles
+.brand-default-text {
+    color: @text-color;
+}
+
+.brand-primary-text {
+    color: @brand-primary;
+}
+
+.brand-primary-text.inverse {
+    color: @brand-primary-inverse;
+}
+
+.brand-default-bg {
+    color: @body-bg;
+}
+
+.brand-primary-bg {
+  color: @brand-primary-inverse;
+  background-color: @brand-primary;
+}
+
+.brand-primary-bg.inverse {
+  color: @brand-primary;
+  background-color: @brand-primary-inverse;
+}
+
+.brand-separator {
+    border-bottom: solid 2px @brand-primary;
+}
+
+.brand-inverse {
+    color: @brand-primary;
+    background-color: @brand-primary-inverse;
+}
+
+.brand-border-color {
+    border-color: @brand-primary;
+}
+
+.brand-unstyled-link,
+.brand-unstyled-link:hover,
+.brand-unstyled-link:focus {
+    color: @text-color;
+}
+.brand-unstyled-inverse-link,
+.brand-unstyled-inverse-link:hover,
+.brand-unstyled-inverse-link:focus {
+    color: @text-color-inverse;
+}
+
+// flag border
+.flag-border {
+  &.flag-border-muted {
+    border-left-color: @bg-muted;
+    color: @text-muted;
+  }
+}
+
+// inline form
+form.inline-block {
+  display: inline-block;
+}
+
+// button on a dropdown
+.btn.btn-dropdown {
+  width: 100%;
+  padding: 3px 20px;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    background-color: @dropdown-link-hover-bg;
+  }
+}

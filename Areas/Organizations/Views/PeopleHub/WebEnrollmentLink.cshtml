@@ -1,0 +1,106 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Framework.Enrollment.EnrollmentTicket
+@{
+  var enrollmentLink = ViewBag.EnrollmentLink;
+  var breadcrumbs = (NavBar)ViewBag.Breadcrumbs;
+}
+
+<div class="row m-t-sm">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+      @foreach (var nav in breadcrumbs.Items)
+      {
+        if (nav.Selected)
+        {
+          <li class="active">@nav.Caption</li>
+        }
+        else
+        {
+          <li>@nav.AnchorTag(Url)</li>
+        }
+      }
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-primary">Web Enrollment Link</h2>
+    <p>
+      This is a link to a web enrollment form that allows someone to enroll in your organization.  Copy this link to the clipboard
+      and paste it into an email, chat or your favorite collaboration tool.
+    </p>
+  </div>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-offset-1 col-md-10">
+    <div class="alert alert-info">
+      <div class="row">
+        <div class="col-md-2 text-center">
+          @Html.GlyphFa("clock-o", GlyphStyles.X4FixedWidth)
+        </div>
+        <div class="col-md-10">
+          <h4>
+            This link is valid for @Model.ValidityPeriod.TotalDays.ToString("N0") days.
+          </h4>
+          <p>
+            <strong>
+              Copy the link before leaving this page.<br/>
+            </strong>
+            A new link is generated every time you visit this page.  You can control how long a link remains valid by changing your
+            @Html.ActionLink("organization settings", "Enrollment", "Settings").
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <p>
+      <strong>Anyone with this link can enroll in your organization.  Share it responsibly.</strong>
+    </p>
+  </div>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-offset-1 col-md-10">
+    <div class="form-group form-group-lg">
+      <textarea id="urlTextArea" class="form-control" rows="4" readonly="readonly">
+@enrollmentLink
+</textarea>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-offset-1 col-md-10">
+    <button id="copyToClipboardButton" type="button" class="btn btn-success">@Html.GlyphFa("copy") Copy to Clipboard</button>
+  </div>
+</div>
+
+<div class="row m-t-lg m-b-lg">
+  <div class="col-md-12">
+    <a href="@Url.Action("Index", "Enrollments")">@Html.GlyphFa("arrow-left") Back to Invitations</a>    
+  </div>
+</div>
+
+@section scripts
+{
+  <script type="text/javascript">
+    var textField = $("#urlTextArea")[0];
+    $("#copyToClipboardButton").click(function () {
+      textField.focus();
+      textField.setSelectionRange(0, textField.value.length);
+      try {
+        document.execCommand("copy");
+      } catch (e) {
+        console.log(e);
+      }
+      textField.setSelectionRange(0, 0);
+    });
+  </script>
+}

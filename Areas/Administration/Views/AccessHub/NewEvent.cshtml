@@ -1,0 +1,33 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.NewEvent
+@using Juillet.Web.Mvc
+@{
+  Layout = "../Shared/_AdministrationLayout.cshtml";
+  var menuBar = (NavBar)ViewBag.MenuBar ?? new NavBar();
+  var returnUrl = (string)ViewBag.ReturnUrl ?? this.Url.Action("Events", "AccessHub");
+}
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h1>New Emergency Event</h1>
+  </div>
+</div>
+
+@using (Html.BeginForm("NewEvent", "AccessHub", null, FormMethod.Post, new {@class = "form-horizontal"}))
+{
+  @Html.AntiForgeryToken()
+
+  <div class="row">
+    <div class="col-lg-offset-2 col-md-8">
+      @Html.EditorForModel()
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-offset-2 col-md-8">
+      <div class="m-t-lg pull-right">
+        <button type="submit" class="btn btn-primary btn-lg">Create</button>
+        <a class="btn btn-default m-l-lg" href="@returnUrl">Cancel</a>
+      </div>
+    </div>
+  </div>
+}

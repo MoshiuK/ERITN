@@ -1,0 +1,28 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Person.PersonNotificationSettingsViewModel
+
+@{
+  Layout = "_PersonLayout.cshtml";
+}
+
+@using (Html.BeginForm("UpdateNotificationSettings", "Person"))
+{
+  @Html.AntiForgeryToken()
+
+  @Html.HiddenFor(m => m.Id)
+  <div class="col-md-12">
+    <div class="col-md-12 row">
+      <h2>Email Communications</h2>
+      @Html.CheckBoxFor(m => m.NotifyByEmailAllowed)
+      @Html.LabelFor(m => m.NotifyByEmailAllowed)
+    </div>
+    <div class="col-md-12 row">
+      <h2>Phone Communications</h2>
+      @Html.CheckBoxFor(m => m.NotifyByPhoneAllowed)
+      @Html.LabelFor(m => m.NotifyByPhoneAllowed)
+    </div>
+
+    <div class="row pull-right">
+      <button type="submit" class="btn btn-primary">Update Settings</button>
+    </div>
+  </div>
+}

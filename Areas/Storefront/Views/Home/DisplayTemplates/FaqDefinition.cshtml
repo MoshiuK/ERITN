@@ -1,0 +1,20 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.FaqDefinition
+@{
+  var faqId = Guid.NewGuid().ToString("N");
+}
+<div class="faq-item">
+  <div class="row">
+    <div class="col-md-12">
+      <a class="faq-question brand-unstyled-link" aria-expanded="True" href="#@faqId" data-toggle="collapse">
+        @Html.DisplayFor(m => m.Question)
+      </a>
+    </div>    
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel-collapse collapse" id="@faqId" aria-expanded="true">
+        <div class="faq-answer">@Html.DisplayFor(m => m.Answer)</div>
+      </div>
+    </div>
+  </div>
+</div>

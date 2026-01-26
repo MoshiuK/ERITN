@@ -1,0 +1,47 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationLocationsSettings
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="h4 heading-inline-block">@Html.GlyphFa("map-marker") Respond to Locations
+          <div class="pull-right m-t-n-xs">
+            <a class="btn btn-primary"
+               href="@Url.Action("EditOrganizationLocation", new {id = Model.OrganizationId, locationId = Guid.Empty})">
+              @Html.GlyphFa("plus") Add a Location
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th>LOCATION</th>
+              <th>RESPONSE SETTINGS</th>
+              <th class="fw-100 text-center">ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var item in Model.Locations)
+            {
+              @Html.DisplayFor(_ => item, "OrganizationLocationTableRow")
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+@Html.Dialog("confirmDeleteLocation", Url.Action("ConfirmDialog"))
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.organization.locations.js"></script>
+}

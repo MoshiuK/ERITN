@@ -1,0 +1,29 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.RegisterPageViewModel
+
+<section>
+  <div class="well well-sm description">
+    <h4>@Html.ValueFor(m => m.PageContent.AccessTiersStep.Title)</h4>
+    <p>
+      @Html.ValueFor(m => m.PageContent.AccessTiersStep.Description)
+      @if (!string.IsNullOrWhiteSpace(Model.PageContent.AccessTiersStep.DescriptionHint))
+      {
+        <a href="#" data-toggle="popover" data-placement="left" title="Hints" data-content="@Html.ValueFor(m => m.PageContent.AccessTiersStep.DescriptionHint)">@Html.GlyphFa("info-circle")</a>
+      }
+    </p>
+  </div>
+  <div class="organization-access-levels">
+    @foreach (var accessLevel in Model.AvailableAccessLevels)
+    {
+      @Html.DisplayFor(_ => accessLevel, "AccessLevelResourceRow")
+    }
+    <div class="row m-t-md">
+      <div class="col-md-offset-2 col-md-10">
+        <div class="alert alert-info">
+          <strong>@Html.GlyphFa("question-circle")&nbsp; Not sure what this means.</strong>  No problem, most people need a little
+          <a target="_blank" href="@Model.AccessLevelUrl">more information</a> to understand this.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

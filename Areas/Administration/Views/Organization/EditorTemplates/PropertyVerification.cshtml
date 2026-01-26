@@ -1,0 +1,12 @@
+﻿@model AccessManagement.Models.Core.PropertyVerification
+<div class="hidden">
+  @Html.HiddenFor(m => m.CorrelationId, new { htmlAttributes = new { @class = "form-control" } })
+  @Html.HiddenFor(m => m.ValidFrom, new { htmlAttributes = new { @class = "form-control" } })
+  @Html.HiddenFor(m => m.ValidUntil, new { htmlAttributes = new { @class = "form-control" } })
+  @Html.HiddenFor(m => m.VerifiedByName, new { htmlAttributes = new { @class = "form-control" } })
+  @Html.HiddenFor(m => m.VerifiedByOrganizationId, new { htmlAttributes = new { @class = "form-control" } })
+  @Html.HiddenFor(m => m.VerifiedByOrganizationName, new { htmlAttributes = new { @class = "form-control" } })
+  @Html.HiddenFor(m => m.VerifiedByUserId, new { htmlAttributes = new { @class = "form-control" } })
+  @Html.HiddenFor(m => m.VerifiedOn, new { htmlAttributes = new { @class = "form-control" } })
+  @Html.HiddenFor(m => m.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+</div>

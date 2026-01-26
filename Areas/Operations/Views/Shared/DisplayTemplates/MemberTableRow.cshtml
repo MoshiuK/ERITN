@@ -1,0 +1,63 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.Members.MemberPageSummaryLine
+
+<tr>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.Active)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.Deleted)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.HasAvatar)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.CorrelationId)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.Name)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.OrganizationName)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.AssignedAccessLevelId)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.AssignedTransitLocationId)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.AssignedTransitPurposeId)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.Tenant)
+    </small>
+  </td>
+  <td>
+    <small>
+      @Html.DisplayFor(m => m.CreatedOn)
+    </small>
+  </td>
+  <td>
+    @Html.ActionLink("Details", "Details", "Members", new {id = Model.CorrelationId}, new { @class = "btn btn-default" })
+  </td>
+</tr>
+

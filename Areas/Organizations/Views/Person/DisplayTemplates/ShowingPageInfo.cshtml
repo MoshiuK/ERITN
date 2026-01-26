@@ -1,0 +1,9 @@
+﻿@model Juillet.Web.Api.PagedCollectionMetadata
+@if (Model.TotalPageCount > 1)
+{
+  <small class="text-muted">Showing page @Html.ValueFor(m => m.PageNumber) of @Html.ValueFor(m => m.TotalPageCount) </small>
+}
+else
+{
+  <small class="text-muted">Showing items @Html.ValueFor(m => m.StartPosition) - @Html.ValueFor(m => m.EndPosition) </small>
+}

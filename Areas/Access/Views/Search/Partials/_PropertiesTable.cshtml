@@ -1,0 +1,25 @@
+﻿@using Juillet.Web.Mvc.Html
+@model IDictionary<string, string>
+@if (Model == null || Model.Count == 0)
+{
+  <div class="well">
+    <div class="text-danger text-center">
+      <h4>@Html.GlyphFa("wrench", GlyphStyles.X3)</h4>
+      <span>No properties were associated with this credential.</span>
+    </div>
+  </div>
+}
+else
+{
+  <table class="table table-condensed properties-table">
+    <tbody>
+    @foreach (var pair in Model.OrderBy(p => p.Key))
+    {
+      <tr>
+        <td><strong>@pair.Key</strong></td>
+        <td>@pair.Value</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+}

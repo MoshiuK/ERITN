@@ -1,0 +1,52 @@
+﻿@using AccessManagement.Web.Mvc
+@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.RegisterPageViewModel
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+}
+
+@section styles
+{
+  <style>
+    .layout-root > nav {
+      margin-bottom: 0;
+    }
+    .layout-root.browser .workspace {
+      margin-top: 50px;
+    }
+    .workspace .body-content {
+      padding: 0;
+      width: 100%;
+    }
+  </style>
+}
+
+@section scripts
+{
+  <script src="~/Scripts/pages/storefront.registration.js"></script>
+  @if (Model.PageContent.OrganizationDetailsStep.UseLocationSuggestions)
+  {
+    @Html.ScriptForGooglePlacesAutoComplete()
+  }
+}
+
+<div class="storefront-registration page-header">
+  <h1 class="title">@Html.DisplayFor(m => m.PageContent.Title)</h1>
+</div>
+
+<div class="storefront-registration container container-fluid">
+  <div id="registrationValidationAlert" class="hidden alert alert-danger alert-dismissible m-t-sm m-b-sm"></div>
+  @using (Html.BeginForm("Register", "Registration", null, FormMethod.Post, new {id = "registration-form", @class = "storefront-registration registration-steps hidden", enctype = "multipart/form-data"}))
+  {
+    @Html.AntiForgeryToken()
+    <h3>Organization Details</h3>
+    @Html.Partial("Steps/OrganizationDetailsSection", Model)
+    <h3>Where</h3>
+    @Html.Partial("Steps/WhereSection", Model)
+    <h3>Who</h3>
+    @Html.Partial("Steps/WhoSection", Model)
+    <h3>Why</h3>
+    @Html.Partial("Steps/WhySection", Model)
+    <h3>Preview</h3>
+    @Html.Partial("Steps/PreviewSection", Model)
+  }
+</div>

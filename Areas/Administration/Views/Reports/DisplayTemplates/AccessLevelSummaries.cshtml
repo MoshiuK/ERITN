@@ -1,0 +1,16 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Reports.AccessLevelSummary
+
+<div class="row">
+  <div class="text-center col-md-6">
+    <h5>
+      <strong>
+        @Html.DisplayFor(m => m.TenantAccessLevel.AccessLevel, "AccessLevelMini")
+      </strong>
+    </h5>
+  </div>
+  <div class="text-center col-md-2">
+    <h5>
+    @Html.DisplayFor(m => m.PersonnelCount)
+    </h5>
+  </div>
+</div>

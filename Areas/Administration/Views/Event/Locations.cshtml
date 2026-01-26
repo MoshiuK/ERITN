@@ -1,0 +1,33 @@
+﻿@using Juillet.Web.Mvc
+@model AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.EventLocationsViewModel
+@{
+  Layout = "_EventTabLayout.cshtml";
+}
+
+<div class="row m-b-sm">
+  <div class="col-md-8">
+    <h4 class="text-muted">This event is applicable at the following locations.</h4>
+  </div>
+  <div class="col-md-4">
+    <div class="pull-right">
+      @Html.DialogLink("Add Event Location", "#addLocationDialog", new {@class = "btn btn-primary"})
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        @Html.DisplayFor(m => m.Locations, "EventLocationsTable", new { eventId = Model.CorrelationId })
+      </div>
+    </div>
+  </div>
+</div>
+
+@Html.Dialog("addLocationDialog", Url.Action("AddEventLocationDialog", new { id = Model.CorrelationId }))
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.event.locations.js"></script>
+}

@@ -1,0 +1,81 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Models.Core.Tenant
+<div class="card">
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <img src="@Url.Action("LogoFor", new { id = Model.CorrelationId })" alt="logo" class="img-lg"/>
+        <h3>@Html.DisplayFor(m => m.Slug)</h3>
+      </div>
+      <div class="col-md-9">
+        <h3>@Html.DisplayFor(m => m.Name)</h3>
+        <p>@Html.DisplayFor(m => m.MarketingSiteHomeUrl)</p>
+        <div class="row">
+          <div class="col-md-6">
+            Created: @Html.DisplayFor(m => m.CreatedOn)
+          </div>
+          <div class="col-md-6">
+            <div class="pull-right">
+              @{
+                var caption = Model.Active ? "ACTIVE" : "INACTIVE";
+                var style = Model.Active ? "label-success" : "label-inverse";
+              }
+              <label class="label @style">@caption</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-t-md">
+      <div class="col-md-12">
+        <table class="table">
+          <tbody>
+          <tr>
+            <td>ID</td>
+            <td><code>@Html.DisplayFor(m => m.CorrelationId)</code></td>
+          </tr>
+          <tr>
+            <td>Database Row ID</td>
+            <td><code>@Html.DisplayFor(m => m.Id)</code></td>
+          </tr>
+          <tr>
+            <td>Vanity URLs</td>
+            <td>
+              @{
+                var urls = Model.VanityUrls == null ? Array.Empty<string>() : Model.VanityUrls.Split(',');
+                foreach (var url in urls)
+                {
+                  <span>@url</span><br />
+                }
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>Tenant Administrators Group ID</td>
+            <td><code>@Html.DisplayFor(m => m.TenantAdministrationGroupId)</code></td>
+          </tr>
+          <tr>
+            <td>Organizations Administrators Group ID</td>
+            <td><code>@Html.DisplayFor(m => m.OrganizationAdministratorsGroupId)</code></td>
+          </tr>
+          <tr>
+            <td>Access Point Officials Group ID</td>
+            <td><code>@Html.DisplayFor(m => m.AccessPointOfficialGroupId)</code></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row m-t-md">
+      <div class="col-md-3 text-center">
+        <a href="@Url.Action("Discovery", new {id = Model.CorrelationId})">
+          <div class="btn btn-circle btn-lg btn-primary">
+            @Html.GlyphFa("arrows")
+          </div>
+          <small class="text-primary">Discoverability</small>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+

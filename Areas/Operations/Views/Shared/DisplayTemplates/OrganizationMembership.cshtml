@@ -1,0 +1,76 @@
+﻿@model AccessManagement.Models.Core.OrganizationMembership
+
+<div class="well">
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.Organization.Name)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.Organization.Name)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.OrganizationId)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.OrganizationId)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.MemberId)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.MemberId)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.OrganizationMembershipTypeId)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.OrganizationMembershipTypeId)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.IgnoreCustomCredentialDistributionChannels)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.IgnoreCustomCredentialDistributionChannels)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.AssignedAccessLevel)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.AssignedAccessLevel)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.AssignedTransitLocation)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.AssignedTransitLocation)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.AssignedTransitPurpose)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.AssignedTransitPurpose)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      @Html.LabelFor(m => m.CredentialPickupRequested)
+    </div>
+    <div class="col-md-8">
+      @Html.DisplayFor(m => m.CredentialPickupRequested)
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@using AccessManagement.Web.Areas.Administration
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.RegistrationsPageSummaryLine
+@{
+  var registeredOnDateString = Model.RegisteredOn.HasValue ? " on " + Model.RegisteredOn.Value.ToShortDateString() : string.Empty;
+}
+<tr>
+  <td>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <h3 class="heading-inline-block">
+            <a href="@Url.Action("Index", "Registration", new { area = AdministrationAreaRegistration.Name, id = Model.CorrelationId})">@Html.DisplayFor(m => m.OrganizationName)</a>
+          </h3>
+          <span><small>@Html.DisplayFor(m => m.ContactName)</small></span>
+          <div class="row pull-right">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+            {
+              @Html.AntiForgeryToken()
+            }
+            @if (Model.Document.RegistrationDocumentType.Id == 4)
+            {
+              if (Model.Status == AccessManagement.Models.Registration.RegistrationStatus.Reviewing)
+              {
+                <button type="button" class="btn btn-sm btn-warning registrationbutton" onclick="location.href = '@Url.Action("Edit", "Registration", new {id = Model.CorrelationId})'">
+                  Edit
+                </button>
+                <a action="abandon" class="btn btn-sm btn-danger" data-id="@Model.CorrelationId" href="#">
+                  Abandon
+                </a>
+              }
+              <button type="button" class="btn btn-sm btn-success registrationbutton" onclick="location.href = '@Url.Action("Details", "Registration", new {id = Model.CorrelationId})'">
+                View Details
+              </button>
+            }
+            else
+            {
+              <button type="button" class="btn btn-sm btn-warning registrationbutton" onclick="location.href = '@Url.Action("Upload", "Registration", new {id = Model.CorrelationId})'">
+                Upload
+              </button>
+            }
+            <button type="button" class="btn btn-sm btn-info registrationbutton" onclick="location.href = '@Url.Action("Download", "Registration", new {id = Model.CorrelationId})'">
+              Download
+            </button>
+          </div>
+        </div>
+        <div class="row pull-right">
+          <small class="text-muted">@Html.DisplayFor(m => m.ReferenceId)</small>
+        </div>
+        <div class="row">
+          @Html.DisplayFor(m => m.Status) <small class="text-muted">@Html.DisplayFor(m => registeredOnDateString)</small>
+        </div>
+        <div class="row">
+          <small class="text-muted">@Html.DisplayFor(m => m.ContactEmail)</small>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>

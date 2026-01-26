@@ -1,0 +1,43 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.PeopleHub.PeopleViewModel
+@{
+  Layout = "../Shared/_PeopleHubLayout.cshtml";
+}
+@Html.HiddenFor(m => m.TutorialsUrl)
+<div>
+  @if (Model.AvailableEmergencyPersonnel > 0 && Model.TotalEmergencyPersonnel > Model.AvailableEmergencyPersonnel)
+  {
+    var warningText = $"You have exceeded your limit of enrolled members by {Model.TotalEmergencyPersonnel - Model.AvailableEmergencyPersonnel}. You only have only purchased enough licenses for {Model.AvailableEmergencyPersonnel} enrolled member. ";
+    <div class="alert alert-danger">
+      @warningText @("Please purchase more member spots by clicking this ") @Html.ActionLink("link", "Index", "Payment")
+      @(" and clicking the Add Order button.")
+    </div>
+  }
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-12">
+    <input id="peopleListFilter" class="form-control" placeholder="Filter by name" type="text" />
+  </div>
+</div>
+<div class="row m-t-sm">
+  <div class="col-md-12">
+    @Html.DisplayFor(m => m.Page)
+  </div>
+</div>
+
+<div id="pagingDiv" class="row m-t-md">
+  <div class="col-md-12">
+    @Html.DisplayFor(m => m.Pager)
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.peoplehub.people.js"></script>
+
+  @if (!Model.HasCompletedPeopleTour)
+  {
+    <script type="text/javascript" src="~/Scripts/spstour.js"></script>
+  }
+}

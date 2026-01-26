@@ -1,0 +1,86 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.IndexPageViewModel
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+}
+
+<div class="storefront-registration page-header">
+  <h1 class="title">@Html.DisplayFor(m => m.PageContent.Title)</h1>
+  <h3 class="subtitle">@Html.DisplayFor(m => m.PageContent.Subtitle)</h3>
+</div>
+
+<div class="storefront-registration welcome container container-fluid">
+  <div class="m-b-lg">
+    <p class="introduction">@Html.DisplayFor(m => m.PageContent.Introduction)</p>
+    
+    @if (Model.IsEmailAvailable)
+    {
+      <h3 class="email">@Html.DisplayFor(m => m.Email)</h3>
+    }
+
+    <div class="row">
+      @if (Model.IsEmailAvailable)
+      {
+        <div class="col-md-offset-4 col-md-4">
+          @using (Html.BeginForm("Register", "Registration", FormMethod.Get))
+          {
+            @Html.Hidden("email", Model.Email)
+            <button type="submit" class="btn btn-success btn-lg">@Html.GlyphFa("check") @Html.DisplayFor(m => m.PageContent.ConfirmCaption)</button>
+          }
+        </div>
+      }
+      else
+      {
+        <div class="col-md-offset-3 col-md-5">
+          @using (Html.BeginForm("Register", "Registration", FormMethod.Get))
+          {
+            <div class="input-group m-b-md">
+              <span class="input-group-addon" id="email-label">@Html.GlyphFa("envelope-o", GlyphStyles.X2)</span>
+              <input type="text" class="form-control input-lg" placeholder="Enter work email" aria-describedby="email-label" name="email">
+            </div>
+
+            if (ViewBag.RequiredHint != null)
+             {
+               <p class="text-success"><small>@ViewBag.RequiredHint</small></p>
+             }
+
+            <button type="submit" class="btn btn-success btn-lg">Continue @Html.GlyphFa("arrow-circle-right")</button>
+          }          
+        </div>  
+      }
+      <div class="col-md-4 well">
+        <p class="help-text">@Html.GlyphFa("info-circle") <small>@Html.DisplayFor(m => m.PageContent.HelpText)</small>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  @if (Model.IsEmailAvailable)
+  {
+    <div class="m-t-lg m-b-xl">
+      <p class="introduction text-muted">@Html.DisplayFor(m => m.PageContent.IfNotIntroduction)</p>
+      <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+          <a href="@Url.Action("Index")" class="btn btn-default">@Html.DisplayFor(m => m.PageContent.IfNotCaption)</a>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
+
+@section styles
+{
+  <style>
+    .layout-root > nav {
+      margin-bottom: 0;
+    }
+    .layout-root.browser .workspace {
+      margin-top: 30px;
+    }
+    .workspace .body-content {
+      padding: 0;
+      width: 100%;
+    }
+  </style>
+}

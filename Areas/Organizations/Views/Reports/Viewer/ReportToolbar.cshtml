@@ -1,0 +1,86 @@
+﻿@using AccessManagement.Web.Areas.Organizations.ViewModels.Reports
+@using Juillet.Web.Api
+@using Juillet.Web.Mvc.Html
+@{
+  var pagingMetadata = (PagedCollectionMetadata) Model.Rows.Metadata;
+  var mementos = (IReadOnlyCollection<SavedReportMemento>) Model.SavedReports;
+}
+<div class="report-viewer-toolbar">
+  <div class="row">
+    <div class="col-md-3">
+      <h4>@Model.DisplayName</h4>
+    </div>
+    <div class="col-md-9">
+      <nav class="navbar navbar-right">
+        <div class="navbar-header">
+          <small class="navbar-text">Page @pagingMetadata.PageNumber of @pagingMetadata.TotalPageCount (@pagingMetadata.TotalCount items)</small>
+          <form class="navbar-form navbar-left" role="search">
+            @Html.Partial("Viewer/ReportPager", pagingMetadata)
+          </form>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span id="pageSizeCaption">
+                  @Math.Max(25, pagingMetadata.Limit) per page
+                </span> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="page-size-item" data-page-size="25"><a href="#">25 per page</a></li>
+                <li class="page-size-item" data-page-size="50"><a href="#">50 per page</a></li>
+                <li class="page-size-item" data-page-size="100"><a href="#">100 per page</a></li>
+                <li class="page-size-item" data-page-size="250"><a href="#">250 per page</a></li>
+                <li class="page-size-item" data-page-size="500"><a href="#">500 per page</a></li>
+              </ul>
+            </div>
+          </form>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @Html.GlyphFa("floppy-o") Save Report <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li id="saveAsButton"><a href="#">Save As...</a></li>
+                @{
+                  var userReports = mementos.Where(m => m.MementoType == SavedReportMementoTypes.User)
+                    .OrderByDescending(m => m.SavedOn)
+                    .Take(10).ToArray();
+                }
+                @if (userReports.Length > 0)
+                {
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Previously Saved</li>
+
+                  foreach (var item in userReports)
+                  {
+                    <li><a href="@Url.Action("MemberReportFromMemento", new {mementoId = item.CorrelationId})">@item.DisplayName</a></li>
+                  }
+                }
+                <li class="dropdown-header">Recent Searches</li>
+                @{
+                  var recentReports = mementos.Where(m => m.MementoType == SavedReportMementoTypes.Recent)
+                    .OrderByDescending(m => m.SavedOn)
+                    .Take(10);
+                }
+                @foreach (var item in recentReports)
+                {
+                  <li><a href="@Url.Action("MemberReportFromMemento", new { mementoId = item.CorrelationId })">@item.DisplayName</a></li>
+                }
+              </ul>
+            </div>
+          </form>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @Html.GlyphFa("download") Export Report <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="export-action" data-action-uri="/Organizations/Reports/ExportToCsv"><a href="#">Export to CSV...</a></li>
+              </ul>
+            </div>
+          </form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

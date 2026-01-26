@@ -1,0 +1,79 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.Tenants.AdministratorsCardViewModel
+<div class="card">
+  <div class="card-heading">
+    <div class="card-title">
+      <h3>Administrators</h3>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-3">
+        <label>Group name</label>
+      </div>
+      <div class="col-md-9">
+        <span>@Html.DisplayFor(m => m.GroupInfo.Name)</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-9">
+        <span class="text-muted">@Html.DisplayFor(m => m.GroupInfo.Description)</span>
+      </div>
+    </div>
+    <div class="row m-t-md">
+      <div class="col-md-3">
+        <label>Group ID</label>
+      </div>
+      <div class="col-md-9">
+        <code>@Html.DisplayFor(m => m.GroupInfo.ObjectId)</code>
+      </div>
+    </div>
+    <div class="row m-t-lg">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Found @Model.Administrators.Count.</th>
+            <th></th>
+            <th><i class="fa fa-database"></i></th>
+            <th><i class="fa fa-sitemap"></i></th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var admin in Model.Administrators)
+          {
+            <tr>
+              <td>
+                <img class="img-md img-circle" src="@admin.AvatarUri" alt="no image"/>
+              </td>
+              <td>
+                <span>@Html.ActionLink(admin.Name, "Administrator", new { id = Model.TenantId, adminId = admin.Id })</span><br/>
+                <span>
+                  <i class="fa fa-envelope-o"></i> <a href="mailto:@admin.Email"> @admin.Email</a> <br/>
+                  <i class="fa fa-user"></i> @admin.UserName
+                </span>
+              </td>
+              <td>
+                @{
+                  var iconDb = admin.ExistsInDatabase ? "fa fa-check" : "fa fa-times";
+                  var colorDb = admin.ExistsInDatabase ? "text-success" : "text-danger";
+                }
+                <span class="@colorDb"><i class="@iconDb"></i></span>
+              </td>
+              <td>
+                @{
+                  var iconDir = admin.ExistsInDirectory ? "fa fa-check" : "fa fa-times";
+                  var colorDir = admin.ExistsInDirectory ? "text-success" : "text-danger";
+                }
+                <span class="@colorDir"><i class="@iconDir"></i></span>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,36 @@
+﻿@model Juillet.Web.Api.PagedCollection<AccessManagement.Web.Areas.Organizations.ViewModels.Teams.TeamsTableRow>
+@{
+  Layout = "../Shared/_OrganizationsLayout.cshtml";
+}
+
+<div class="row m-t-sm">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+      <li>@Html.ActionLink("People", "Index", "PeopleHub")</li>
+      <li class="active">@ViewBag.Title</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="pw-50" colspan="2">TEAMS</th>
+          <th>LEVEL</th>
+          <th>LOCATION</th>
+          <th>PURPOSE</th>
+          <th class="fw-50 text-right">#</th>
+        </tr>
+      </thead>
+      <tbody>
+      @foreach (var row in Model.Data)
+      {
+        @Html.DisplayFor(_ => row)
+      }
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -1,0 +1,72 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Teams.SettingsPageViewModel
+@{
+  var returnUrl = ViewBag.ReturnUrl ?? Request.UrlReferrer?.ToString() ?? Url.Action("Index", "PeopleHub");
+}
+<div class="team-page">
+
+  <div class="row m-t-sm">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li>@Html.ActionLink("People", "Index", "PeopleHub")</li>
+        <li>@Html.ActionLink("Teams", "Index", "Teams")</li>
+        <li class="active">@ViewBag.Title</li>
+      </ol>
+    </div>
+  </div>
+
+  @Html.Partial("TeamTitleBar", Model.TitleBar)
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      @using (Html.BeginForm())
+      {
+        @Html.AntiForgeryToken()
+
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            @Html.LabelFor(m => m.Settings.TeamTransitPurpose)
+            @Html.EditorFor(m => m.Settings.Name)
+          </div>
+        </div>
+
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            @Html.LabelFor(m => m.Settings.TeamTransitPurpose)
+            @Html.EditorFor(m => m.Settings.Description)
+          </div>
+        </div>
+
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            @Html.LabelFor(m => m.Settings.TeamAccessLevel)
+            @Html.DropDownListFor(m => m.Settings.TeamAccessLevel, Model.AccessLevels, new { @class = "form-control select2-component" })
+          </div>
+        </div>
+
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            @Html.LabelFor(m => m.Settings.TeamTransitLocation)
+            @Html.DropDownListFor(m => m.Settings.TeamTransitLocation, Model.TransitLocations, new { @class = "form-control select2-component" })
+          </div>
+        </div>
+
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            @Html.LabelFor(m => m.Settings.TeamTransitPurpose)
+            @Html.DropDownListFor(m => m.Settings.TeamTransitPurpose, Model.TransitPurposes, new { @class = "form-control select2-component" })
+          </div>
+        </div>
+
+        <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+        <div class="row m-t-lg m-b-lg">
+          <div class="col-md-offset-6 col-md-6">
+            <a href="@returnUrl" class="btn btn-link btn-lg m-r-md">Cancel</a>
+            <button type="submit" class="btn btn-lg btn-success">Save</button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+</div>

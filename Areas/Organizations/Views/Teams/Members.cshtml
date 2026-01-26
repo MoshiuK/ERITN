@@ -1,0 +1,69 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Teams.MembersPageViewModel
+
+<div class="team-page">
+
+  <div class="row m-t-sm">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li>@Html.ActionLink("People", "Index", "PeopleHub")</li>
+        <li>@Html.ActionLink("Teams", "Index", "Teams")</li>
+        <li class="active">@ViewBag.Title</li>
+      </ol>
+    </div>
+  </div>
+  
+  @Html.Partial("TeamTitleBar", Model.TitleBar)
+
+  <div class="row m-t-lg">
+    <div class="col-md-9">
+      <h4 class="text-success">@ViewBag.Title</h4>
+    </div>
+    <div class="col-md-3">
+      <div class="pull-right">
+        <button class="btn btn-success" type="button" action="add-team-member">
+          @Html.GlyphFa("plus-circle") Add To This Team
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-condensed">
+        <thead>
+        <tr>
+          <th>NAME</th>
+          <th class="fw-100">ACTIONS</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var row in Model.PageOfRows.Data)
+        {
+          <tr>
+            <td>@row.Name</td>
+            <td>
+              <button action="remove-team-member" type="button" class="btn btn-sm btn-link" data-member-id="@row.MemberId.ToString("D")">Remove @Html.GlyphFa("times-circle")</button>
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  @using (Html.BeginForm("RemoveTeamMember", "Teams", new {id = Model.TitleBar.TeamId}, FormMethod.Post, new { id = "removeTeamMember_Form"}))
+  {
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" id="removeTeamMember_Id_Field" name="memberId" value=""/>
+  }
+
+  @Html.Dialog("addMemberDialog", Url.Action("AddTeamMemberDialog", new { id = Model.TitleBar.TeamId }))
+</div>
+
+@section scripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.teams.members.js"></script>
+}

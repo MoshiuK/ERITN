@@ -1,0 +1,21 @@
+﻿@model AccessManagement.Web.ViewModels.Body.FilterForm
+@{
+  var a = Model.ActionPath;
+  var formId = Model.FormId;
+  var queryParam = Model.QueryParamName;
+  var placeholder = Model.FormTextPlaceholder;
+  var val = Model.FormTextValue;
+}
+
+@using (Html.BeginForm(a.Action, a.Controller, a.AreaRouteValue(), FormMethod.Get, new { id = formId, @class = "form-horizontal" }))
+{
+  <div class="input-group">
+    @Html.TextBox(queryParam, val, new { placeholder = placeholder, @class = "form-control" })
+    <span class="input-group-addon" id="filterFormSpinner" style="display: none">
+      <i class="fa fa-spinner fa-lg fa-pulse text-primary"></i>
+    </span>
+    <span class="input-group-btn">
+      <button id="searchButton" type="submit" class="btn btn btn-primary"> <i class="fa fa-search"></i></button>
+    </span>
+  </div>
+}

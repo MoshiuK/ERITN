@@ -1,0 +1,72 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.PersonSideBarViewModel
+
+<div class="row">
+  <div class="m-b-md m-t-lg">
+    @Html.LabelFor(m => m.Active, new { @class = "sidebar-caption" })
+    @if (Model.Active)
+    {
+      <div class="label label-sidebar-status active">ACTIVE</div>
+      using (Html.BeginForm("ToggleActivation", "Person", new { id = Model.CorrelationId, isActivating = false }, FormMethod.Post))
+      {
+        @Html.AntiForgeryToken()
+        <div class="m-t-sm">
+          <button class="btn btn-warning btn-block m-t-sm">@Html.GlyphFa("pause") Deactivate</button>
+        </div>
+      }
+    }
+    else
+    {
+      <div class="label label-sidebar-status inactive">INACTIVE</div>
+      using (Html.BeginForm("ToggleActivation", "Person", new { id = Model.CorrelationId, isActivating = true }, FormMethod.Post))
+      {
+        @Html.AntiForgeryToken()
+        <div class="m-t-sm">
+          <button class="btn btn-success btn-block m-t-sm">@Html.GlyphFa("play") Activate</button>   
+        </div>
+      }
+    }
+  </div>
+</div>
+
+@if (Model.IsManaged)
+{
+  <div class="row">
+    <div class="col-sm-12">
+      @Html.LabelFor(m => m.ManagingOrganizationName, new { @class = "sidebar-caption" })
+      <span class="sidebar-value">@Html.DisplayFor(m => m.ManagingOrganizationName)</span>
+      @Html.DisplayFor(m => m.ManagingOrganizationAvatar)
+    </div>
+  </div>
+}
+else
+{
+  <div class="row">
+    <div class="col-sm-12">
+      @Html.LabelFor(m => m.UserName, new {@class = "sidebar-caption"})
+      <span class="sidebar-value">@Html.DisplayFor(m => m.UserName)</span>
+    </div>
+  </div>
+}
+<div class="row">
+  <div class="col-sm-12">
+    @Html.LabelFor(m => m.ReferenceId, new { @class = "sidebar-caption"})
+    <span class="sidebar-value">@Html.DisplayFor(m => m.ReferenceId)</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    @Html.LabelFor(m => m.CreatedOn, new { @class = "sidebar-caption" })
+    <span class="sidebar-value">@Html.DisplayFor(m => m.CreatedOn)</span>
+    <span class="sidebar-value">@Html.DisplayFor(m => m.CreatedBy)</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    @Html.LabelFor(m => m.UpdatedOn, new { @class = "sidebar-caption" })
+    <span class="sidebar-value">@Html.DisplayFor(m => m.UpdatedOn)</span>
+    <span class="sidebar-value">@Html.DisplayFor(m => m.UpdatedBy)</span>
+  </div>
+</div>

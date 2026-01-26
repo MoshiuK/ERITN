@@ -1,0 +1,283 @@
+﻿@import "variables.less";
+
+.layout-root {
+  &.browser {
+    .workspace {
+    }
+  }
+  &.portal {
+    height: calc(~"100% - 50px - 38px");
+    display: flex;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    top: 50px;
+    overflow: hidden;
+    .navmenu-container nav {
+      display: flex;
+      height: 100%;
+      .navmenu-nav {
+        width: 100%;
+      }
+    }
+    .body-content {
+      overflow-y: scroll;
+    }
+  }
+  .workspace {
+    display: flex;
+  }
+}
+
+body.body-nav-overlay-padding {
+    padding-top: 50px;
+}
+
+.navmenu {
+  border-radius: 0;
+  background-color: @navmenu-default-bg;
+  border-color: @navmenu-default-border;
+  width: @navmenu-width;
+  font-size: @navmenu-font-size;
+
+  @media (max-width: @grid-float-breakpoint) {
+    width: @navmenu-mini-width;
+  }
+
+  &.navmenu-inverse{
+    background-color: @navmenu-inverse-bg;
+    border-color: @navmenu-inverse-border;
+  }
+  &.navmenu-mini {
+    width: @navmenu-mini-width;
+    .navmenu-link .nav-item-caption {
+      display: none;
+    }
+  }
+  .navmenu-link .nav-item-caption {
+    display: inline;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 6px;
+    @media (max-width: @grid-float-breakpoint) {
+      display: none;
+    }
+  }
+  #miniNavbarToggleButton {
+    @media (max-width: @grid-float-breakpoint) {
+      display: none;
+    }
+  }
+}
+
+.navmenu-default {
+  .navmenu-nav > .active > a,
+  .navmenu-nav > .active > a:hover,
+  .navmenu-nav > .active > a:focus {
+    color: @navmenu-default-item-active-hover-color;
+    background-color: @navmenu-default-item-active-hover-bg;
+    padding-left: 10px;
+    border-left-color: @navmenu-default-item-active-flag-color;
+    border-left-style: solid;
+    border-left-width: 5px;
+  }
+  .navmenu-nav > li > a {
+    color: @navmenu-default-item-color;
+    height: 40px;
+  }
+  .navmenu-nav > li > a:focus {
+    color: @navmenu-default-item-focus-color;
+  }
+  .navmenu-nav > li > a:hover {
+    color: @navmenu-default-item-color;
+    background-color: @navmenu-default-item-hover-bg;
+  }
+  .navmenu-nav > .divider {
+    border-top: 1px solid @navmenu-default-divider-color;
+  }
+}
+
+.navmenu-inverse {
+  .navmenu-nav > .active > a,
+  .navmenu-nav > .active > a:hover,
+  .navmenu-nav > .active > a:focus {
+    color: @navmenu-inverse-item-active-hover-color;
+    background-color: @navmenu-inverse-item-active-hover-bg;
+    padding-left: 10px;
+    border-left-color: @navmenu-inverse-item-active-flag-color;
+    border-left-style: solid;
+    border-left-width: 5px;
+  }
+  .navmenu-nav > li > a {
+    color: @navmenu-inverse-item-color;
+    height: 40px;
+  }
+  .navmenu-nav > li > a:focus {
+    color: @navmenu-inverse-item-focus-color;
+  }
+  .navmenu-nav > li > a:hover {
+    color: @navmenu-inverse-item-color;
+    background-color: @navmenu-inverse-item-hover-bg;
+  }
+  .navmenu-nav > .divider {
+    border-top: 1px solid @navmenu-inverse-divider-color;
+  }
+}
+
+.toolbar-search-form {
+  input {
+    @media all and (min-width: @screen-md-min) {
+      width: 250px !important;
+    }
+    @media all and (min-width: @screen-lg-min) {
+      width: 350px !important;
+    }
+  }
+  .input-group-addon {
+    padding: 0 10px 0 10px;
+  }
+}
+
+.toolbar-profile-dropdown {
+  a.dropdown-toggle {
+    padding: 0 !important;
+  }
+  ul.dropdown-menu {
+    margin-right: 20px;
+  }
+  .toolbar-profile-dropdown-item {
+    color: @navmenu-default-item-active-hover-color;
+    background-color: @navmenu-default-item-active-hover-bg;
+    padding: 8px 20px;
+    width: 350px;
+   .profile-avatar {
+      width: 64px;
+      height: 64px;
+    }
+    .profile-summary-container {
+      display: inline-block;
+      span {
+        display: block;
+        padding: 0 8px;
+      }
+      .profile-title {
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+    }
+  }
+}
+.navbar.navbar-inverse .toolbar-profile-dropdown .toolbar-profile-dropdown-item {
+  color: @navmenu-default-item-active-hover-color;
+  background-color: @navmenu-default-item-active-hover-bg;
+}
+
+.toolbar-notifications-dropdown {
+  ul a {
+    padding: 1px 0;
+  }
+  .notifications-count-label {
+    font-size: 0.9em;
+    position: absolute;
+    right: 6px;
+    top: 12px;
+    padding: 2px 5px;
+  }
+  .notifications-link {
+    padding: 5px 10px;
+    margin: 0 10px;
+    color: @link-color;
+    display: inline-block;
+    clear: none;
+    text-decoration: underline;
+    &.pull-left {
+      float: left;
+    }
+    &.pull-right {
+      float: right;
+    }
+  }
+  .toolbar-notifications-entry {
+    margin: 4px;
+    padding: 0 3px;
+    height: 50px;
+    width: 350px;
+    overflow: hidden;
+    h4 {
+      font-size: 1.0em;
+      font-weight: bold;
+      display: block;
+      margin: 0;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      width: 70%;
+    }
+    p {
+      font-size: 0.8em;
+      display: block;
+      margin: 0;
+      padding: 0;
+      white-space: normal;
+    }
+    span {
+      color: GrayText;
+      font-size: 0.8em;
+      float: right;
+    }
+  }
+}
+
+.toolbar-profile {
+  padding-left: 8px;
+  margin-right: 20px;
+  .profile-title-container{
+    margin-top: 5px;
+    display: inline-block;
+    text-align: right;
+    span{
+      display: block;
+    }
+  }
+  .profile-title {
+    font-size: 12px;
+    font-weight: normal;
+  }
+  .profile-subtitle {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .profile-avatar {
+    vertical-align: top;
+    height: 50px;
+  }
+}
+
+.footer {
+  background: none repeat scroll 0 0 @footer-default-bg;
+  color: @footer-default-color;
+  padding: 4px;
+  &.footer-inverse {
+    background: none repeat scroll 0 0 @footer-inverse-bg;
+    color: @footer-inverse-color;
+  }
+  &.footer-default{
+    width: 100%;
+    display: inline-block;
+  }
+  &.footer-fixed{
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+  }
+  .social-buttons-container {
+    margin-right: 8px;
+    display:inline;
+  }
+}
+
+.deferred-notification-container,
+.deferred-notification-item {
+  display: none;
+}

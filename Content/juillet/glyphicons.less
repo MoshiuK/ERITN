@@ -1,0 +1,117 @@
+﻿
+.glyphicon.glyphicon-lg {
+    font-size: 1.33333333em;
+    line-height: 0.75em;
+    vertical-align: -15%;
+  }
+
+.glyphicon.glyphicon-2x {
+    font-size: 2em;
+  }
+
+.glyphicon.glyphicon-3x {
+    font-size: 3em;
+  }
+
+.glyphicon.glyphicon-4x {
+    font-size: 4em;
+  }
+
+.glyphicon.glyphicon-5x {
+    font-size: 5em;
+  }
+
+.glyphicon.glyphicon-fw {
+    width: 1.28571429em;
+    text-align: center;
+  }
+.glyphicon.glyphicon-500px:before {
+    content: "\f26e";
+  }
+
+.glyphicon.glyphicon-pull-left {
+    float: left;
+    margin-right: .3em;
+  }
+
+.glyphicon.glyphicon-pull-right {
+    float: right;
+    margin-left: .3em;
+  }
+
+.glyphicon.glyphicon-spin {
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+  }
+
+.glyphicon.glyphicon-pulse {
+    -webkit-animation: fa-spin 1s infinite steps(8);
+    animation: fa-spin 1s infinite steps(8);
+  }
+
+  @-webkit-keyframes fa-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+
+  @keyframes fa-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+
+.glyphicon.glyphicon-rotate-90 {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+
+.glyphicon.glyphicon-rotate-180 {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+.glyphicon.glyphicon-rotate-270 {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+    -webkit-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+
+.glyphicon.glyphicon-flip-horizontal {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+    -webkit-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+  }
+
+.glyphicon.glyphicon-flip-vertical {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+    -webkit-transform: scale(1, -1);
+    -ms-transform: scale(1, -1);
+    transform: scale(1, -1);
+  }
+
+:root .glyphicon-rotate-90,
+:root .glyphicon-rotate-180,
+:root .glyphicon-rotate-270,
+:root .glyphicon-flip-horizontal,
+:root .glyphicon-flip-vertical {
+  filter: none;
+}

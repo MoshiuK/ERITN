@@ -1,0 +1,11 @@
+﻿@using Juillet.Web.Mvc.Html
+@model Guid?
+@using (Html.BeginForm("Delete", "PeopleHub",
+  new
+  {
+    id = Model
+  }, FormMethod.Post))
+{
+  @Html.AntiForgeryToken()
+  <button type="submit" class="btn btn-danger m-t-sm">@Html.GlyphFa("trash-o") Delete Account</button>
+}

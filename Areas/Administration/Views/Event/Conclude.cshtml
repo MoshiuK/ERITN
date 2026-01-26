@@ -1,0 +1,59 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.EventActivationViewModel
+@{
+  Layout = "_EventTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h3 class="text-danger">Confirm you want to conclude this event.</h3>
+  </div>
+</div>
+
+<div class="row m-t-lg">
+  <div class="col-md-12">
+    <div class="panel panel-danger">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-2">
+              @Html.GlyphFa("stop-circle", GlyphStyles.X4, cssClasses: "text-danger")
+          </div>
+          <div class="col-md-10">
+            <p class="text-danger">
+              Conclude an event to revoke all access credentials.
+            </p>
+            <p class="text-danger">
+              <strong>The following steps will be performed for <em>all organizations</em> and <em>all personnel</em>.</strong>
+            </p>
+            <ul class="text-danger m-l-md">
+              <li>No additional credentials can be issued for this event.</li>
+              <li>Existing credentials can no longer be used for access to this event.</li>
+              <li>Credentials for this event will no longer be available to personnel.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-body">
+          @using (Html.BeginForm("Conclude", "Event", null, FormMethod.Post, new { id = "conclusionForm" }))
+          {
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.CorrelationId)
+
+          <div class="m-t-md text-center">
+            <div class="alert alert-danger m-b-lg"><strong>CONCLUDING AN EVENT CANNOT BE REVERSED</strong></div>
+            <a href="@Url.Action("Index", new {id = Model.CorrelationId})" class="btn btn-default">Do Not Conclude</a>
+            <button type="submit" class="btn btn-danger btn-lg">Conclude Event Now</button>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>

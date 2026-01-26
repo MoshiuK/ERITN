@@ -1,0 +1,20 @@
+﻿@using AccessManagement.Framework.Objects
+@model AccessManagement.Framework.Cerra.CerraJurisdictionInfo
+
+@helper RenderAccessLevel(GuidWithAnnotation info, string caption)
+{
+  if (info != null)
+  {
+    <label class="label label-default">@caption</label>
+  }
+}
+
+<span>
+  @Html.DisplayFor(m => m.Name)
+</span>
+<div class="pull-right">
+  @RenderAccessLevel(Model.CerraAccessPrivileges.AccessLevel1, "AL-1")
+  @RenderAccessLevel(Model.CerraAccessPrivileges.AccessLevel2, "AL-2")
+  @RenderAccessLevel(Model.CerraAccessPrivileges.AccessLevel3, "AL-3")
+  @RenderAccessLevel(Model.CerraAccessPrivileges.AccessLevel4, "AL-4")
+</div>

@@ -1,0 +1,38 @@
+﻿@using AccessManagement.Framework.Tenants
+@{
+  var theme = (TenantTheme)ViewBag.Theme;
+  if (theme == null)
+  {
+    Layout = "_NoBrandLayout.cshtml";
+  }
+  else
+  {
+    Layout = "_MinimalBrandLayout.cshtml";
+  }
+
+  var errorMessage = ViewBag.Message == null ? "No information available." : (string)ViewBag.Message;
+}
+<hgroup>
+  <h1>:^(</h1>
+  <h2>We're Sorry!</h2>
+  <h3>An unexpected error occurred on our end.</h3>
+</hgroup>
+<p>
+  You can go back and try the same action again or go to the home page to start over.  If this problem occurs again you may need to contact our support team.
+  <strong>We apologize for the inconvenience.</strong>
+</p>
+@if (theme != null)
+{
+  <p>
+    <small class="text-muted">
+      You can help us by <a href="mailto:@theme.LinksSupportEmail?subject=Unexpected%20Error%20Occurred&body=@Server.UrlEncode(errorMessage)">sending an email to our support team</a> with information about what you were doing in the application when the error occured.
+    </small>
+  </p>
+}
+<div>
+    <pre>@errorMessage</pre>
+</div>
+
+<div>
+  @Html.ActionLink("Force Sign Out", "NoBrandSignOut", "Authentication", new { force = true, area="" }, new { @class = "pull-right" })
+</div>

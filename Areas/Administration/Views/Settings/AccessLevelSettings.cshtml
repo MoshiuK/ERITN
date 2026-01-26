@@ -1,0 +1,29 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Settings.AccessLevelSettingsViewModel
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "_SettingsTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Access Levels</div>
+      </div>
+      <div class="panel-body">
+        <p>
+          The access levels listed below will be available for organizations to request during the registration process.  If
+          an access level is not available or is marked inactive, it will not be available during registration.
+        </p>
+        @Html.DisplayFor(m => m.AccessLevels)
+        @if (Model.IsMoreAccessLevelsShown)
+        {
+          <div class="pull-right">
+            <button data-toggle="modal" data-target="#addAccessLevelDialog" class="btn btn-primary">@Html.GlyphFa("plus") Additional Access Levels</button>
+            @Html.Action("AddAccessLevelDialog", new { id = "addAccessLevelDialog" })
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

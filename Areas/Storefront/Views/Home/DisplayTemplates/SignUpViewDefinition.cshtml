@@ -1,0 +1,25 @@
+﻿@using AccessManagement.Web.Areas.Storefront
+@model AccessManagement.Definitions.Storefront.LandingPages.SignUpViewDefinition
+<div class="sign-up-pane">
+  <div class="row m-b-sm">
+    <div class="col-md-12 m-l-lg">
+      <span>@Html.DisplayFor(m => m.IntroductionText)</span>
+    </div>
+  </div>
+  @using (Html.BeginForm("Index", "Registration", StorefrontAreaRegistration.AreaRouteValues, FormMethod.Get, new {@class = "form-inline m-l-lg" }))
+  {
+    <div class="form-group">
+      <input type="text" name="email" value="" class="form-control input-lg" placeholder="@Model.EmailPlaceholder"/>
+      <button type="submit" class="btn btn-primary btn-lg">@Html.DisplayFor(m => m.SignUpActionCaption)</button>
+    </div>
+  }
+  <div class="row">
+    <div class="col-md-12  m-l-lg">
+      <div class="sign-in-line">
+        <span>@Html.DisplayFor(m => m.ExistingAccountCaption)
+          @Html.ActionLink(Model.SignInCaption, "SignIn", "Home", StorefrontAreaRegistration.AreaRouteValues, null)
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

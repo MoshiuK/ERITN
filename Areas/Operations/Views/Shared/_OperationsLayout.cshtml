@@ -1,0 +1,53 @@
+﻿@using Juillet.Web.Mvc
+@{
+  IPageLayout pageLayout = ViewBag.PageLayout;
+  var layoutMode = pageLayout.NavBar.IsAvailable ? "portal" : "browser";
+  ViewBag.Container = pageLayout.Body.Container();
+}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TruEntry DevOps Management Portal" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>@ViewBag.Title - TruEntry Operations</title>
+  <link rel="icon" href="~/favicon.ico?v=1"/>
+  @Styles.Render("~/Content/css/operations")
+  @RenderSection("styles", required: false)
+  @Scripts.Render("~/Scripts/modernizr")
+  @Html.Partial("_AiScriptPartial")
+</head>
+<body>
+  <div class="layout-root @layoutMode">
+    @if (pageLayout.Toolbar.IsAvailable)
+    {
+      @Html.Partial("Juillet/Chrome/Toolbar", pageLayout.Toolbar)
+    }
+
+    <div class="workspace">
+      @if (pageLayout.NavBar.IsAvailable)
+      {
+        @Html.Partial("Juillet/Chrome/NavBar", pageLayout.NavBar)
+      }
+
+      <div class="@ViewBag.Container body-content @pageLayout.Body.ContentWidth()">
+        @RenderBody()
+      </div>
+    </div>
+
+    @RenderSection("SideBar", required: false)
+    @if (pageLayout.Footer.IsAvailable)
+    {
+      @Html.Partial("Juillet/Chrome/Footer", pageLayout.Footer)
+    }
+    @Html.DeferredNotifications(pageLayout.DeferredToasts)
+    @Html.Partial("Dialogs/SignOutAfterIdleDialog")
+  </div>
+
+@Scripts.Render("~/Scripts/jquery")
+@Scripts.Render("~/Scripts/portal")
+@RenderSection("scripts", required: false)
+</body>
+</html>

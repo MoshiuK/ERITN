@@ -1,0 +1,18 @@
+﻿@model AccessManagement.Framework.Tenants.TransitPurposeResource
+@if (Model == null)
+{
+  <tr class="active">
+    <td colspan="@((int)ViewBag.ColumnCount)">
+      <h4 class="heading-inline-block">Not Specified</h4>
+    </td>
+  </tr>
+}
+else
+{
+  <tr class="active">
+    <td colspan="@((int) ViewBag.ColumnCount)">
+      <h4 class="heading-inline-block">@Html.DisplayFor(m => m.Name) <strong>(ESF @Model.Esf.ToString("D"))</strong></h4>
+      <small class="m-l-md text-muted">@Html.DisplayFor(m => m.Description)</small>
+    </td>
+  </tr>
+}

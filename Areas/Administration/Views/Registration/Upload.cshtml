@@ -1,0 +1,22 @@
+﻿@model Guid
+@using Juillet.Web.Mvc.Html
+<div class="row m-b-md">
+  <div class="col-md-12 text-center">
+    <div class="pull-left">
+      <div class="m-t-sm">
+        <a class="m-t-sm" href="@Url.Action("Registrations", "OrganizationsHub")">@Html.GlyphFa("arrow-circle-left") Back to Registrations</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+@using (Html.BeginForm("UploadFile", "Registration", null, FormMethod.Post, new { id = "registration-form", enctype = "multipart/form-data" }))
+{
+  @Html.AntiForgeryToken()
+  @Html.Hidden("id", Model);
+  <div class="col-md-12">
+    <h3 for="file">Upload New Registration Document:</h3>
+    <input class="btn btn-lg btn-default" type="file" name="file" id="file" /><br><br>
+    <input class="btn btn-lg btn-primary" type="submit" value="Upload Document" />
+  </div>
+}

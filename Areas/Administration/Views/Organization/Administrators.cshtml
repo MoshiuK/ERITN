@@ -1,0 +1,18 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationAdministratorsSettings
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading">
+        <h4 class="heading-inline-block">@Html.GlyphFa("user-circle") Administrators (@Html.ValueFor(m => m.Users.Count))</h4>
+      </div>
+      <div class="panel-body">
+        @Html.DisplayFor(m => m.Users)
+      </div>
+    </div>
+  </div>
+</div>

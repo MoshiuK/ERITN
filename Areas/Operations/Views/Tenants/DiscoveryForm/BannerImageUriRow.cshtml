@@ -1,0 +1,31 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.Tenants.TenantDiscoveryEditableData
+<div class="row">
+  <div class="col-md-12">
+    <h3>Banner Image</h3>
+
+    <p class="help-text">
+      The banner image is displayed on tenant selection pages.  Recommended dimensions: 800 x 100 pixels.  This must be a publicly addressable
+      resource.
+    </p>
+
+    @if (string.IsNullOrEmpty(Model.BannerImageUri))
+    {
+      <div class="well">
+        <p class="text-center text-danger">
+          <small>No banner image is set.</small>
+        </p>
+      </div>
+    }
+    else
+    {
+      <div class="text-center">
+        <img class="m-sm" alt="Banner Image URI" src="@Html.ValueFor(m => m.BannerImageUri)" />
+      </div>
+    }
+      
+    @Html.LabelFor(m => m.BannerImageUri)
+    @Html.EditorFor(m => m.BannerImageUri)
+
+  </div>
+</div>
+

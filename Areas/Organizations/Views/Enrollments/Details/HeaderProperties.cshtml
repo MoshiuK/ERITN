@@ -1,0 +1,64 @@
+﻿@using AccessManagement.Models.Enrollment
+@model AccessManagement.Framework.Enrollment.IEnrollmentProcess
+<div class="row m-t-md">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="control-label">@Html.DisplayNameFor(m => m.EnrollmentStatus)</label>
+      <div class="form-control-static">@Html.DisplayFor(m => m.EnrollmentStatus)</div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      @if (Model.EnrollmentStatus == EnrollmentStatus.Abandoned)
+      {
+        <label class="control-label">Abandoned</label>
+        <p class="form-control-static">@Html.DisplayFor(m => m.TimeOutOn)</p>
+      }
+      @if (Model.EnrollmentStatus == EnrollmentStatus.Failed)
+      {
+        <label class="control-label">@Html.DisplayNameFor(m => m.ErrorOn)</label>
+        <p class="form-control-static">@Html.DisplayFor(m => m.ErrorOn)</p>
+      }
+      @if (Model.EnrollmentStatus == EnrollmentStatus.TimedOut)
+      {
+        <label class="control-label">@Html.DisplayNameFor(m => m.TimeOutOn)</label>
+        <p class="form-control-static">@Html.DisplayFor(m => m.TimeOutOn)</p>
+      }
+      @if (Model.EnrollmentStatus == EnrollmentStatus.Enrolled)
+      {
+        <label class="control-label">@Html.DisplayNameFor(m => m.EnrolledOn)</label>
+        <p class="form-control-static">@Html.DisplayFor(m => m.EnrolledOn)</p>
+      }
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="control-label">@Html.DisplayNameFor(m => m.ReferenceId)</label>
+      <p class="form-control-static">@Html.DisplayFor(m => m.ReferenceId)</p>
+    </div>
+    <div class="form-group">
+      <label class="control-label">@Html.DisplayNameFor(m => m.DisplayEmail)</label>
+      <p class="form-control-static">@Html.DisplayFor(m => m.DisplayEmail)</p>
+    </div>
+    <div class="form-group">
+      <label class="control-label">@Html.DisplayNameFor(m => m.DisplayPhone)</label>
+      <p class="form-control-static">@Html.DisplayFor(m => m.DisplayPhone)</p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="control-label">@Html.DisplayNameFor(m => m.Origin.CreatedBy)</label>
+      <p class="form-control-static">@Html.DisplayFor(m => m.Origin.CreatedBy)</p>
+    </div>
+    <div class="form-group">
+      <label class="control-label">@Html.DisplayNameFor(m => m.StartedOn)</label>
+      <p class="form-control-static">@Html.DisplayFor(m => m.StartedOn)</p>
+    </div>
+    <div class="form-group">
+      <label class="control-label">@Html.DisplayNameFor(m => m.LastModifiedOn)</label>
+      <p class="form-control-static">@Html.DisplayFor(m => m.LastModifiedOn)</p>
+    </div>
+  </div>
+</div>

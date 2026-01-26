@@ -1,0 +1,68 @@
+﻿@using AccessManagement.Models.Core
+@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.AttributesPageViewModel
+@{
+  Layout = "_PersonTabLayout.cshtml";
+}
+
+<div class="row m-b-sm">
+  <div class="col-md-12">
+    <h5 class="heading-inline-block">Found @Html.ValueFor(m => m.PageOfContent.Metadata.TotalCount) attributes.</h5>
+    <div class="pull-right">
+      @Html.DisplayFor(m => m.PageOfContent.Metadata, "ShowingPageInfo")
+      @Html.Partial("Attributes/NewAttributeMenu")
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-12">
+        @if (Model.PageOfContent.Metadata.TotalCount == 0)
+        {
+          var nothingToSee = new NotFoundPane("No properties available.", new FaGlyph("list-ul", GlyphStyles.X5, cssClasses: "text-info"), "There were no properties recorded for this person.");
+          @Html.DisplayFor(_ => nothingToSee)
+        }
+        else
+        {
+          <table class="table">
+            <thead>
+            <tr>
+              <th>@Html.GlyphFa("hashtag")</th>
+              <th>ATTRIBUTE</th>
+              <th>VERIFIED</th>
+              <th>ACTIONS</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var entry in Model.PageOfContent.Data)
+            {
+              @Html.DisplayFor(_ => entry, "PropertyEntryTableRow")
+            }
+            </tbody>
+          </table>
+        }
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        @Html.DisplayFor(m => m.Pager)
+      </div>
+    </div>
+  </div>
+</div>
+
+@Html.Dialog("newInfoDialog", Url.Action("EditAttributeDialog", new { id = Model.CorrelationId, category = PropertyCategories.General }))
+@Html.Dialog("newDocumentDialog", Url.Action("EditAttributeDialog", new { id = Model.CorrelationId, category = PropertyCategories.Document }))
+@Html.Dialog("newAffiliationDialog", Url.Action("EditAttributeDialog", new { id = Model.CorrelationId, category = PropertyCategories.Affiliation }))
+@Html.Dialog("newCertificationDialog", Url.Action("EditAttributeDialog", new { id = Model.CorrelationId, category = PropertyCategories.Certification }))
+@Html.Dialog("verifyAttributeDialog", Url.Action("VerifyAttributeDialog", new { id = Model.CorrelationId }))
+<div id="edit-attribute-dialog" class="modal" role="dialog"></div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.person.attributes.js"></script>
+}

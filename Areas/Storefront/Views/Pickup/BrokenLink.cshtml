@@ -1,0 +1,21 @@
+﻿@model Juillet.Web.Mvc.NotFoundPane
+
+<div class="row storefront-pickup broken-link">
+  <div class="col-md-offset-2 col-md-8 text-center">
+    <h1>We're sorry.</h1>
+    <h3>The credentials you are trying to collect cannot be found.</h3>
+    @Html.DisplayFor(m => m)
+
+    <div class="alert alert-warning m-t-xl text-left">
+      <p><strong>What can you do from here?</strong>
+      </p>
+      <ul class="m-t-sm">
+        <li>You can hit the back button in your browser and try the last step again.</li>
+        <li>You can check that the link was pasted into your browser correctly.  The entire link, including all the digits at the end are required.</li>
+        <li>You can check if the link has expired, links are typically valid for 3-5 days; if the email or text message containing your link is older 
+          than that you may need your organization coordinator to send it again.</li>
+      </ul>
+      <p class="m-t-md">We apologize for the inconvenience.</p>
+    </div>
+  </div>
+</div>

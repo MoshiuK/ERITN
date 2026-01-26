@@ -1,0 +1,64 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.ArchivedVerificationsPageViewModel
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+}
+
+@{
+  var startPosition = (Model.PageOfContent.Metadata.TotalCount == 0) ? 0 : Model.PageOfContent.Metadata.StartPosition;
+  var endPosition = Model.PageOfContent.Metadata.EndPosition;
+  var total = Model.PageOfContent.Metadata.TotalCount;
+}
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h4>@Html.ActionLink("Pending", "Verify", new { }) | @Html.ActionLink("Archived", "Verify", new { })</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <span class="text-muted small pull-right">Last refreshed <i class="fa fa-clock-o"></i> <time data-juillet-currenttime></time></span>
+        <h2>Find Archived Verifications</h2>
+        @Html.Partial("Forms/FilterForm", Model.Filter)
+        <div>
+          <span class="pull-right small text-muted">Showing @startPosition - @endPosition of @total personnel.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="resultsPane">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th class="pw-30"><small>NAME</small></th>
+              <th class="fw-80 text-center"><small>@Html.GlyphFa("hashtag")</small></th>
+              <th class="pw-40"><small>ATTRIBUTE</small></th>
+              <th class="pw-30"><small>VERIFICATIONS</small></th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+              foreach (var item in Model.PageOfContent.Data)
+              {
+                @Html.Partial("ArchivedVerificationLine", item)
+              }
+            }
+            </tbody>
+
+          </table>
+        </div>
+        @Html.DisplayFor(m => m.Pager)
+      </div>
+    </div>
+  </div>
+</div>
+

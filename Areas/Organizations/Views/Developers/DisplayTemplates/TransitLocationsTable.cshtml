@@ -1,0 +1,35 @@
+﻿@using Juillet.Web.Mvc.Html
+@model IReadOnlyCollection<AccessManagement.Framework.Tenants.TransitLocationResource>
+<table class="table">
+  <thead>
+  <tr>
+    <th class="fw-180">ID</th>
+    <th class="pw-50">NAME</th>
+    <th class="fw-80 text-center">LOGO</th>
+  </tr>
+  </thead>
+  <tbody>
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        <div class="input-group">
+          <input id="@item.Id" class="form-control" readonly="readonly" type="text" value="@item.Id">
+          <span class="input-group-btn">
+            <button class="btn btn-primary clipboard-button" type="button" for="@item.Id">@Html.GlyphFa("clipboard")</button>
+          </span>
+        </div>
+      </td>
+      <td>
+        <strong>@item.Name</strong> <br/>
+        <small class="text-muted">@item.Description</small>
+      </td>
+      <td>
+        <div class="text-center">
+          @Html.DisplayFor(_ => item.Avatar)
+        </div>
+      </td>
+    </tr>
+  }
+  </tbody>
+</table>

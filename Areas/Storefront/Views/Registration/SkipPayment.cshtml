@@ -1,0 +1,53 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.UpdatePaymentViewModel
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+}
+
+@section styles
+{
+  <style>
+    .layout-root > nav {
+      margin-bottom: 0;
+    }
+
+    .layout-root.browser .workspace {
+      margin-top: 50px;
+    }
+
+    .workspace .body-content {
+      padding: 0;
+      width: 100%;
+    }
+  </style>
+}
+
+@Html.HiddenFor(m => m.ReferenceId)
+
+<div class="storefront-registration container container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-jumbotitle">Finalizing Registration</h1>
+      <h3 class="m-t-xl m-b-xl">Just a moment, we are finalizing your registration...</h3>
+    </div>
+  </div>
+</div>
+
+@section scripts
+{
+  <script>
+      $(document).ready(function () {
+        const form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "payment");
+
+        const hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "ReferenceId");
+        hiddenField.setAttribute("value", '@Model.ReferenceId');
+        form.appendChild(hiddenField);
+
+        document.body.appendChild(form);
+        form.submit();
+      });
+    </script>
+}

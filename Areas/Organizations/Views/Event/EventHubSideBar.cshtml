@@ -1,0 +1,38 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.EventHub.EventHubSideBar
+
+@{
+  var rosterCss = Model.RosterActive ? "active" : string.Empty;
+  var mapCss = Model.MapActive ? "active" : string.Empty;
+  var activityCss = Model.ActivityActive ? "active" : string.Empty;
+  var pickupsCss = Model.PickupsActive ? "active" : string.Empty;
+}
+
+<div class="events-hub sidebar">
+  <ul class="nav nav-pills nav-stacked">
+    <li id="rosterTab" role="presentation" class="@rosterCss">
+      <a href="@Url.Action("Roster", new { id = Model.EmergencyEventId })">
+        @Html.GlyphFa("users", GlyphStyles.X3FixedWidth)
+        ROSTER
+      </a>
+    </li>
+    <li id="mapTab" role="presentation" class="@mapCss">
+      <a href="@Url.Action("Map", new { id = Model.EmergencyEventId })">
+        @Html.GlyphFa("map", GlyphStyles.X3FixedWidth)
+        USAGE MAP
+      </a>
+    </li>
+    <li id="activityTab" role="presentation" class="@activityCss">
+      <a href="@Url.Action("Activity", new { id = Model.EmergencyEventId })">
+        @Html.GlyphFa("list-ul", GlyphStyles.X3FixedWidth)
+        ACTIVITY
+      </a>
+    </li>
+    <li id="credentialTab" role="presentation" class="@pickupsCss">
+      <a href="@Url.Action("Pickups", new { id = Model.EmergencyEventId })">
+        @Html.GlyphFa("folder-open", GlyphStyles.X3FixedWidth)
+        CREDENTIAL PICKUP
+      </a>
+    </li>
+  </ul>
+</div>

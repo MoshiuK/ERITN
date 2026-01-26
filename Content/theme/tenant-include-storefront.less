@@ -1,0 +1,1054 @@
+﻿//
+// AGGREGATE ALL STYLES, LAYOUTS, CONTROLS FOR THE STOREFRONT AREA
+//
+// NOTE: This file should be imported by a less file in the tenant project,
+//       customized and compiled to tenant specific CSS.  This file should 
+//       not be compiled to CSS directly.
+//
+
+@fa-var-check: "\f00c";
+
+// import bootstrap
+@import "../bootstrap/bootstrap.less";
+@import "../awesome-bootstrap-checkbox.less";
+
+// import juillet
+@import "../juillet/juillet-web-mvc.less";
+
+// import all storefront customizations
+@import "tenant-brand-variables.less";
+@import "../layouts/storefront.less";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  font-family: Roboto, "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+// This file is intended for styles that are specific to controls in the storefront area.
+// In general do not override brand colors here; brand colors are overridden in the tenant specific content.
+
+.page-jumbotitle {
+  margin: -20px -20px 0;
+  background-color: @navbar-default-bg;
+  color: @navbar-default-link-color;
+  padding: 40px;
+  text-align: center;
+  .page-jumbotitle-info {
+    font-size: 1.3em;
+  }
+}
+
+//
+// storefront landing page specific styles.
+//
+
+.storefront-landing {
+  margin-top: 55px;
+  margin-bottom: 30px;
+
+  .default-section-header {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .jumbotron-section {
+    height: 300px;
+    padding: 10px;
+    color: white;
+
+    h1 {
+      margin-top: 50px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 1.8em;
+      font-variant: small-caps;
+      display: inline;
+    }
+
+    .sign-up-pane {
+      float: right;
+      min-width: 600px;
+      margin-right: 30px;
+      background-color: rgba(64, 64, 64, 0.7);
+      -moz-border-radius: 8px;
+      -webkit-border-radius: 8px;
+      border-radius: 8px;
+
+      a, a:hover, a:focus {
+        color: white;
+      }
+    }
+  }
+
+  .banner-section {
+    img {
+      width: 100%;
+    }
+  }
+
+  .sign-up-section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    h2 {
+      margin-bottom: 2px;
+      font-weight: bold;
+    }
+
+    .sign-up-pane {
+      float: right;
+
+      .sign-in-line {
+        display: block;
+      }
+    }
+  }
+
+  .jumbotron-section .sign-up-pane,
+  .sign-up-section .sign-up-pane {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    input {
+      width: 400px;
+      display: inline;
+      color: black;
+    }
+
+    a, a:hover, a:focus {
+      color: inherit;
+    }
+  }
+
+  .features-section {
+    .feature-item {
+      margin-bottom: 40px;
+
+      h2 {
+        font-weight: bold;
+      }
+
+      p, div.p {
+        font-size: 1.2em;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .formal-quotes-section {
+    background-color: #f4f4f4;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .formal-quote {
+      .quote-content {
+        position: relative;
+        height: 150px;
+        padding: 20px;
+        background: #FFFFFF;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        font-style: italic;
+        font-size: 14px;
+      }
+
+      .quote-content:after {
+        content: '';
+        position: absolute;
+        border-style: solid;
+        border-width: 15px 14px 0;
+        border-color: #FFFFFF transparent;
+        display: block;
+        width: 0;
+        z-index: 1;
+        bottom: -15px;
+        left: 30px;
+      }
+
+      .quote-citation-avatar {
+        margin-left: 15px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+
+        img {
+          width: 64px;
+          height: 64px;
+        }
+      }
+
+      .quote-citation {
+        margin-left: 90px;
+        padding-top: 10px;
+
+        h4 {
+          font-size: 1.1em;
+          font-weight: bold;
+          margin-bottom: 4px;
+        }
+
+        p {
+          font-size: 0.9em;
+        }
+      }
+    }
+  }
+
+  .informal-quotes-section {
+    background-color: gray;
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+    font-weight: 100;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    .quote-content {
+      font-style: italic;
+      font-size: 1.1em;
+    }
+
+    .quote-citation {
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+  }
+
+  .simple-pricing-section {
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-bottom: 20px;
+
+    .price-left, .price-right {
+      margin-top: 40px;
+    }
+
+    .price-center {
+      background-color: #f4f4f4;
+    }
+
+    li.price-title {
+      -moz-border-radius: 3px 3px 0 0;
+      -webkit-border-radius: 3px 3px 0 0;
+      border-radius: 3px 3px 0 0;
+      font-size: 1.8em;
+      padding: 15px;
+    }
+
+    li.price-description {
+      padding: 15px;
+    }
+
+    li.price-amount {
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-bottom: 2px;
+
+      span:first-child {
+        font-size: 2.5em;
+        font-weight: bold;
+      }
+    }
+
+    li.price-amountperiod {
+      padding: 0 15px 15px 15px;
+    }
+
+    li.price-benefit {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .faq-item {
+      text-align: left;
+      margin-left: 20%;
+      margin-right: 20%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-bottom: 1px solid lightgray;
+
+      .faq-question {
+        font-weight: bold;
+        font-size: 1.3em;
+      }
+
+      .faq-answer {
+        padding: 10px;
+        background-color: #f3f3f4;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        border: 1px solid #e7eaec;
+      }
+    }
+
+    .feature-item {
+      margin-bottom: 40px;
+
+      h2 {
+        font-weight: bold;
+      }
+
+      p, div.p {
+        font-size: 1.2em;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .contact-section {
+    margin-bottom: 80px;
+  }
+
+  .links-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    .links-logo {
+      height: 64px;
+      margin: 20px;
+    }
+
+    .links-title {
+      font-weight: bold;
+    }
+
+    .links-item a, .links-item a:hover, .links-item a:focus {
+      padding: 2px 0 0 2px;
+    }
+  }
+
+  .divider {
+    border: 1px solid @brand-primary;
+    width: 80%;
+    margin: 32px auto;
+
+    &.m-v-xxl {
+      margin: 80px auto;
+    }
+  }
+}
+
+.storefront-landing:last-of-type {
+  margin-bottom: 0;
+}
+
+
+.storefront-registration {
+  text-align: center;
+
+  &.page-header {
+    margin: 0;
+    padding-top: 18px;
+    padding-bottom: 16px;
+    background-color: @brand-primary;
+    color: @text-color-inverse;
+
+    .title, h1 {
+      margin-top: 0;
+      font-size: @font-size-h1;
+    }
+
+    .subtitle, h3 {
+      margin-top: 0;
+      font-size: @font-size-h3;
+    }
+  }
+
+  &.welcome {
+    margin-bottom: 250px;
+
+    .introduction {
+      margin: 20px 10%;
+    }
+
+    .email {
+      font-weight: bold;
+      margin: 20px auto;
+    }
+
+    .help-text {
+      text-align: left;
+      color: @help-text-color;
+      line-height: 1.1;
+    }
+  }
+
+  &.registration-steps {
+    margin-top: 8px;
+    margin-bottom: 100px;
+
+    &.wizard > .steps > ul > li {
+      width: auto;
+      margin: 0 20px;
+    }
+
+    &.wizard > .steps {
+      width: 50%;
+      margin: auto;
+    }
+
+    &.wizard > .steps a,
+    &.wizard > .steps a:hover,
+    &.wizard > .steps a:active {
+      display: block;
+      height: 40px;
+      width: 40px;
+      margin: 0 0.5em 0.5em;
+      padding: 0.5em;
+      text-decoration: none;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+    }
+
+    &.wizard > .content {
+      min-height: 600px;
+
+      .body {
+        padding: 0;
+      }
+    }
+
+    &.wizard > .actions a {
+      width: 120px;
+    }
+
+    .well.description {
+      margin: 8px 10%;
+    }
+  }
+
+  .organization-details {
+    text-align: left;
+  }
+
+  .organization-where {
+    .transit-checkbox-list {
+      text-align: left;
+    }
+
+    .select2.select2-container {
+      width: 100% !important;
+    }
+
+    .select2-search input {
+      border: none;
+      width: 0;
+    }
+  }
+
+  .organization-access-levels {
+
+    .alert a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    .access-level {
+      padding: 8px 4px;
+      margin-bottom: 12px;
+
+      .access-level-select {
+        text-align: left;
+        margin-top: 0;
+        margin-bottom: 0;
+
+        label {
+          width: 100%;
+        }
+      }
+
+      .access-level-label.moniker {
+        height: 80px;
+        padding: 4px;
+
+        .h2 {
+          margin: 2px;
+          font-weight: bold;
+          font-size: 2em;
+          display: block;
+        }
+
+        .h3 {
+          font-size: 1.1em;
+        }
+      }
+
+      .access-level-label.description {
+        height: 80px;
+        font-weight: normal;
+        text-align: left;
+        width: 100%;
+        font-size: 1.1em;
+      }
+    }
+  }
+
+  .organization-tiers {
+    .alert a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    .tier-container {
+      padding: 15px;
+      margin: 15px;
+      cursor: pointer;
+      min-height: 180px;
+
+      .h2, .h4 {
+        text-align: center;
+        display: block;
+      }
+
+      .p {
+        text-align: left;
+        font-weight: normal;
+      }
+
+      &.tier-er {
+        background-color: darkred;
+        color: @white;
+      }
+
+      &.tier-1 {
+        background-color: darkblue;
+        color: @white;
+      }
+
+      &.tier-2 {
+        background-color: darkgreen;
+        color: @white;
+      }
+
+      &.tier-3 {
+        background-color: dimgray;
+        color: @white;
+      }
+    }
+  }
+
+  .organization-purposes {
+    .transit-purposes-list {
+      text-align: left;
+
+      .checkbox {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      ul {
+        list-style: none !important;
+
+        li {
+          float: left;
+          width: 25%;
+
+          .checkbox label {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .help-text {
+      text-align: left;
+    }
+  }
+
+  .accessdocuments-preview {
+    .preview-container {
+      background-color: rgba(255, 253, 245, 1);
+      padding: 20px;
+      float: left;
+      border: outset 2px white;
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+    }
+  }
+}
+
+.storefront-registration-success {
+  h1 {
+    text-align: center;
+  }
+  .additional-content {
+    color: @gray;
+  }
+}
+
+// Fix for toolbar item not using alignment value.
+.storefront-pickup-body .navbar .navbar-brand:last-child,
+.storefront-pickup-body .navbar .navbar-brand:nth-last-child(2) {
+  float: right;
+}
+
+.storefront-pickup {
+  background-color: @white;
+  text-align: center;
+
+  .big-icon {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    border: 2px solid @black;
+    width: 100px;
+    height: 100px;
+    padding-top: 10px;
+    margin-bottom: 8px;
+  }
+
+  &.broken-link {
+    margin-top: 60px;
+  }
+
+  &.page-header {
+    margin-top: 60px;
+    padding-bottom: 30px;
+
+    .title, h3 {
+      font-size: @font-size-h3;
+      color: #2C3E50;
+      border-bottom: 3px solid #2C3E50;
+      padding-left: 0;
+      padding-right: 0;
+      text-align: left;
+    }
+  }
+
+  &.credential-number-section {
+    text-align: left;
+
+    .title, h3 {
+      font-size: @font-size-h3;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .subtitle, h4 {
+      font-size: @font-size-h4;
+      text-transform: uppercase;
+    }
+  }
+
+  &.get-credentials-section {
+    text-align: left;
+    margin-top: 30px;
+
+    .title, h4 {
+      font-size: @font-size-h4;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .get-credentials-item {
+      text-align: center;
+      width: 80%;
+
+      a {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.credential-details-section {
+    text-align: left;
+    margin-top: 30px;
+
+    .title, h4 {
+      font-size: @font-size-h4;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .event-name {
+      background-color: lightgray;
+      text-align: center;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      margin-top: 0;
+    }
+
+    h3 {
+      margin-top: 8px;
+    }
+
+    .access-level-label {
+      width: 90%;
+      height: 175px;
+
+      h1 {
+        text-align: center;
+        font-size: 4.2em;
+        font-weight: bold;
+        padding-bottom: 18px;
+      }
+
+      h4 {
+        text-align: center;
+        font-size: 2.0em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.credential-contact-section {
+    text-align: left;
+    margin-top: 30px;
+  }
+
+  &.credential-collect-section,
+  &.credential-download-section {
+    text-align: left;
+    margin-top: 60px;
+
+    .title, h4 {
+      font-size: @font-size-h4;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    ol > li {
+      margin-bottom: 12px;
+      a{
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.print-digitalpass-section {
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 60px;
+
+    .title, h4 {
+      font-size: @font-size-h4;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+}
+
+.storefront-enroll {
+
+  .title, h3 {
+    font-size: @font-size-h3;
+    color: #2C3E50;
+    border-bottom: 3px solid #2C3E50;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .subtitle, h4 {
+    font-size: @font-size-h4;
+    text-transform: uppercase;
+  }
+
+  &.page-header {
+    margin-top: 60px;
+    padding-bottom: 30px;
+  }
+
+  &.general-section,
+  &.contact-details-section,
+  &.photo-id-section,
+  &.photograph-section,
+  &.access-specifics-section,
+  &.terms-conditions-section {
+    background-color: @white;
+    text-align: left;
+    margin-top: 20px;
+  }
+}
+
+.cerra-placard {
+  border: solid 1px black;
+  background-color: white;
+  width: 615px;
+  margin: auto;
+
+  .placard-image-row {
+    display: block;
+    height: 200px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+
+    div, img {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+
+    .jurisdiction-logo-element,
+    .organization-logo-element {
+      margin: 2px;
+      border: solid 1px gray;
+      display: inline-block;
+
+      img {
+        width: 180px;
+        height: 180px;
+      }
+    }
+
+    .proprietary-barcode-element,
+    .interop-barcode-element {
+      img {
+        width: 100px;
+        height: 200px;
+      }
+    }
+  }
+
+  .placard-banner-row {
+    display: block;
+    height: 100px;
+    overflow: hidden;
+    padding: 15px 5px;
+
+    &.cerra-access-level-1 {
+      background-color: @cerra-access-level-1-bg;
+      color: @cerra-access-level-1-fg;
+    }
+
+    &.cerra-access-level-2 {
+      background-color: @cerra-access-level-2-bg;
+      color: @cerra-access-level-2-fg;
+    }
+
+    &.cerra-access-level-3 {
+      background-color: @cerra-access-level-3-bg;
+      color: @cerra-access-level-3-fg;
+    }
+
+    &.cerra-access-level-4 {
+      background-color: @cerra-access-level-4-bg;
+      color: @cerra-access-level-4-fg;
+    }
+
+    &.custom-tier {
+      background-color: @cerra-custom-access-level-bg;
+      color: @cerra-custom-access-level-fg;
+    }
+
+    &.eritn-tier-er {
+      background-color: @eritn-tier-er-bg;
+      color: @eritn-tier-er-fg;
+    }
+
+    &.eritn-tier-1 {
+      background-color: @eritn-tier-1-bg;
+      color: @eritn-tier-1-fg;
+    }
+
+    &.eritn-tier-2 {
+      background-color: @eritn-tier-2-bg;
+      color: @eritn-tier-2-fg;
+    }
+
+    &.eritn-tier-3 {
+      background-color: @eritn-tier-3-bg;
+      color: @eritn-tier-3-fg;
+    }
+
+    h1 {
+      font-size: 42px;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+      display: inline;
+    }
+
+    .validity-period-element {
+      float: left;
+      padding: 10px;
+      background-color: inherit;
+      color: inherit;
+    }
+
+    .placard-access-element {
+      float: left;
+      text-align: center;
+      background-color: inherit;
+      color: inherit;
+      width: 425px;
+    }
+
+    .level-element {
+      float: left;
+      display: inline;
+      background-color: inherit;
+      color: inherit;
+      text-align: center;
+
+      h1 {
+        display: block;
+      }
+    }
+  }
+
+  .placard-organization-row {
+    display: block;
+    height: 100px;
+    overflow: hidden;
+    padding: 15px 5px;
+
+    .org-detail {
+      float: left;
+      width: 535px;
+      text-align: center;
+
+      h2 {
+        font-size: 25px;
+        margin-top: 4px;
+        margin-bottom: 8px;
+      }
+    }
+
+    .org-esf {
+      float: left;
+      text-align: center;
+
+      h1, h3 {
+        margin-top: 4px;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+@transit-location-sz: 125px;
+.transit-location-checkbox {
+  width: @transit-location-sz;
+  height: @transit-location-sz;
+  float: left;
+  margin-right: 4px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border: solid 1px @gray-lighter;
+  overflow: hidden;
+
+  input[type='checkbox'] {
+    float: right;
+  }
+
+  label {
+    padding-top: 2px;
+    width: 100%;
+    height: 100%;
+    margin-left: 2px;
+  }
+
+  .transit-location-checkbox-caption {
+    position: relative;
+    left: -20px;
+    bottom: @transit-location-sz * 0.4;
+    width: @transit-location-sz - 2;
+    color: @white;
+    background-color: rgba(0,0,0,0.6);
+    font-size: 12px;
+    padding: 2px;
+  }
+
+  &.checkbox + .checkbox {
+    margin-top: 0;
+  }
+}
+
+.user-profile {
+  &.summary-pane {
+    .avatar-container {
+      text-align: center;
+      position: relative;
+    }
+
+    .profile-info {
+      background-color: whitesmoke;
+      width: 100%;
+      margin-top: -75px;
+      padding-top: 75px;
+
+      h1 {
+        font-weight: 100;
+        font-size: 2.0em;
+        text-align: center;
+      }
+
+      h2 {
+        margin-top: 10px;
+        font-weight: 100;
+        font-size: 1.3em;
+        text-align: center;
+      }
+
+      h3 {
+        margin-top: 8px;
+        font-weight: 400;
+        font-size: 1.0em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .profile-item {
+        display: block;
+        margin-top: 12px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 10px;
+
+        .bullet {
+          padding: 8px;
+          background-color: @btn-primary-bg;
+          color: @btn-primary-color;
+          border-radius: 50%;
+          border-style: solid;
+          border-width: 1px;
+          border-color: @btn-primary-border;
+          vertical-align: middle;
+          text-align: center;
+          font-size: 12px;
+        }
+
+        .item {
+          margin-left: 12px;
+        }
+      }
+    }
+
+    .secondary-info {
+      display: block;
+      margin-bottom: 8px;
+
+      small {
+        display: block;
+      }
+    }
+  }
+
+  &.detail-pane {
+  }
+}

@@ -1,0 +1,142 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Pickup.DigitalPassPrintModel
+@using AccessManagement.Framework.Tenants
+@using Juillet.Web.Mvc
+@{
+  Layout = null;
+  var theme = (TenantTheme) ViewBag.Theme;
+}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="shortcut icon" href="@theme.ImageUrlFavicon" />
+  <title>@ViewBag.Title - @theme.PageTitleSuffix</title>
+  <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+  @Styles.Render(theme.StorefrontStyleBundle)
+  <style>
+    .body-print {
+      width: 800px;
+      padding: 20px;
+    }
+
+    .program-logo {
+      background-color: black;
+      margin: 10px;
+    }
+    .org-logo, .jurisdiction-logo {
+      width: 64px;
+      height: 64px;
+    }
+    .barcode {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="body-print" onload="window.print();">
+<div class="row">
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-sm-12">
+        <img class="program-logo" src="@theme.ImageUrlLogo100X100" alt="@theme.BrandCaption" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="text-center text-uppercase">@theme.DigitalPassTitleLine1<br />@theme.DigitalPassTitleLine2</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        @Html.DisplayFor(m => m.AccessLevel)
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <img class="barcode" src="@Html.ValueFor(m => m.BarcodeUrl)" alt="Digital Pass Barcode" />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="row">
+      <div class="col-sm-12 m-b-lg">
+        <h2 class="text-uppercase"><strong>@theme.BrandCaption</strong></h2>
+        <p>
+          For convenience only.  Digital pass can only be used for expedited access when law enforcement and environment
+          conditionsl allow.  Digital pass is not a replacement for your access documents.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="well well-large">
+          <h3 class="text-center"><strong>@Html.DisplayFor(m => m.EventName)</strong></h3>
+        </div>
+      </div>
+    </div>
+    <div class="row m-t-sm">
+      <div class="col-sm-2">
+        <img class="org-logo" src="@Html.ValueFor(m => m.OrganizationAvatar.Small)" alt="@Html.ValueFor(m => m.Organization.Name)" />
+      </div>
+      <div class="col-sm-10">
+        <h4>
+          @Html.DisplayFor(m => m.Organization.Name)
+        </h4>
+      </div>
+    </div>
+    <div class="row m-t-sm">
+      <div class="col-sm-2">
+        <img class="jurisdiction-logo" src="@Html.ValueFor(m => m.Jurisdiction.ImageUri)" alt="@Html.ValueFor(m => m.Jurisdiction.Name)" />
+      </div>
+      <div class="col-sm-10">
+        <h4>
+          @Html.DisplayFor(m => m.Jurisdiction.Name)
+        </h4>
+      </div>
+    </div>
+    <div class="row m-t-lg">
+      <div class="col-sm-12">
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th>DETAILS</th>
+            <th>VALUE</th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var row in Model.Properties.OrderBy(p => p.Key))
+          {
+            <tr>
+              <td>@row.Key</td>
+              <td>@row.Value</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<div class="row border-top p-md">
+  <div class="col-md-12">
+    <ol>
+      <li>Print this document on white, letter sized (8.5" x 11") paper.</li>
+      <li>Present this barcode for inspection when transiting to or thru restricted zones or checkpoints.</li>
+      <li>Always travel with <strong>2 photo IDs</strong> and your access documents.</li>
+    </ol>
+  </div>
+</div>
+  
+<div class="row p-md">
+  <div class="col-md-12">
+    <h4><strong>Please note</strong></h4>
+    <p>
+      Your access documents do not guarantee entry into or thru restricted zones.  Law enforcement always have the final
+      decision on authorizing access.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>

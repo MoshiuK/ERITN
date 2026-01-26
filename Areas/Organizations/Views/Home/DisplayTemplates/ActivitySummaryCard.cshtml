@@ -1,0 +1,36 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Dashboard.ActivitySummaryCard
+@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+<div class="card events-card">
+  <div class="card-heading">
+    <div class="card-title">
+      <h3 class="heading-inline-block">Activity for the last @Html.ValueFor(m => m.LookbackDays) days</h3>
+    </div>
+    @*<div class="pull-right"> TODO Organization Activity
+      <small><a href="@Url.Action("Index", "Activity")">All Activities @Html.GlyphFa("arrow-circle-right")</a></small>
+    </div>*@
+  </div>
+  <div class="card-content">
+    @if (Model.LookbackDays > 0)
+    {
+      <div id="organizationChartData"
+           data-calendar="@string.Join(",", Model.CalendarLabels)"
+           data-count-personnel="@string.Join(",", Model.Statistics.Select(s => s.PersonnelCount))"
+           data-count-credentials="@string.Join(",", Model.Statistics.Select(s => s.CredentialIssueCount))"
+           data-count-access-success="@string.Join(",", Model.Statistics.Select(s => s.AccessSuccessCount))"
+           data-count-access-failure="@string.Join(",", Model.Statistics.Select(s => s.AccessFailureCount))"
+           style="display: none">
+      </div>
+      <canvas id="organizationChart"></canvas>
+    }
+    else
+    {
+      var notFound = new NotFoundPane(
+        "No Activity",
+        new FaGlyph("th-list", GlyphStyles.X5, cssClasses: "text-info"),
+        $"There was no activity in the system for the last {Model.LookbackDays:N0} days."
+        );
+      @Html.DisplayFor(_ => notFound)
+    }
+  </div>
+</div>

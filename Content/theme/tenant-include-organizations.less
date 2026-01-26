@@ -1,0 +1,684 @@
+﻿//
+// AGGREGATE ALL STYLES, LAYOUTS, CONTROLS FOR THE ADMINISTRATION AREA
+//
+// NOTE: This file should be imported by a less file in the tenant project,
+//       customized and compiled to tenant specific CSS.  This file should
+//       not be compiled to CSS directly.
+//
+
+@fa-var-check: "\f00c";
+
+// import bootstrap
+@import "../bootstrap/bootstrap.less";
+@import "../awesome-bootstrap-checkbox.less";
+
+// import juillet
+@import "../juillet/juillet-web-mvc.less";
+
+// import all organization customizations
+@import "tenant-brand-variables.less";
+@import "../layouts/organizations.less";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+// This file is intended for styles that are specific to controls in the organization area.
+// In general do not override brand colors here; brand colors are overridden in the tenant specific content.
+.admin-list-container {
+    border: 1px solid;
+    padding: 1%;
+    display: flex;
+    align-items: center;
+}
+
+.people-hub {
+  &.people-hub-body {
+    background-color: white;
+  }
+
+  &.sidebar {
+    border-right: 1px solid @btn-primary-border;
+    margin-top: 8px;
+    text-align: center;
+
+    li > a {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .teams-bar {
+    padding: 4px;
+    float: left;
+    width: 100%;
+
+    a.teams-link {
+      text-transform: capitalize;
+      font-weight: bold;
+      line-height: 30px;
+      float: left;
+    }
+
+    .teams-list {
+      display: inline-block;
+      float: left;
+      width: 80%;
+
+      ul {
+        list-style: none;
+
+        li {
+          float: left;
+
+          &.active a {
+            background-color: @btn-info-bg;
+            border-color: @btn-info-border;
+            color: @btn-info-color;
+          }
+
+          a {
+            font-size: ceil((@font-size-base * 0.75));
+            padding: 4px 6px;
+            background-color: @white;
+            border: 1px solid @input-border;
+            color: inherit;
+            border-radius: 2px;
+            margin-right: 5px;
+            margin-top: 5px;
+            display: block;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  .teams-tools {
+    float: right;
+
+    .btn.btn-sm {
+      float: right;
+      color: @text-color;
+
+      &:hover {
+        background-color: @dropdown-link-hover-bg;
+      }
+    }
+  }
+
+  tr {
+    .row-job-title {
+      float: right;
+      line-height: 1.2;
+      color: #888888;
+      text-align: right;
+    }
+
+    img.tiny-profile-image {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .dropdown .btn-sm {
+      &:hover {
+        background-color: @dropdown-link-hover-bg;
+      }
+    }
+
+    .dropdown .dropdown-menu {
+      left: -125px;
+    }
+  }
+}
+
+.team-page {
+  .team-title-bar {
+    .team-title-dropdown {
+      padding: 5px 8px;
+
+      h2 {
+        margin: 2px;
+      }
+    }
+
+    ul.team-title-dropdown-menu {
+      min-width: 375px;
+
+      .avatar-container {
+        padding: 8px;
+        border: 1px solid @hr-border;
+        display: inline-block;
+      }
+
+      .dropdown .btn-sm {
+        &:hover {
+          background-color: @dropdown-link-hover-bg;
+        }
+      }
+
+      .dropdown .dropdown-menu {
+        left: -125px;
+      }
+    }
+  }
+}
+
+.person-page {
+  .person-title-bar {
+    .person-title-dropdown {
+      padding: 5px 8px;
+
+      h2 {
+        margin: 2px;
+        max-width: 400px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    ul.person-title-dropdown-menu {
+      min-width: 375px;
+
+      .avatar-container {
+        padding: 8px;
+        border: 1px solid @hr-border;
+        display: inline-block;
+      }
+
+      .dropdown .btn-sm {
+        &:hover {
+          background-color: @dropdown-link-hover-bg;
+        }
+      }
+
+      .dropdown .dropdown-menu {
+        left: -125px;
+      }
+    }
+  }
+}
+
+.events-hub {
+  &.events-hub-page {
+    background-color: @white;
+  }
+
+  &.sidebar {
+    border-right: 1px solid @btn-primary-border;
+    margin-top: 8px;
+    text-align: center;
+
+    li > a {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+
+  &.event-title-bar {
+    .banner-operational,
+    .banner-concluded,
+    .banner-pending {
+      margin: 2px;
+
+      h5 {
+        margin: 0;
+        padding: 4px;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+
+    .banner-operational {
+      background-color: red;
+      color: white;
+    }
+
+    .banner-concluded {
+      background-color: darkgray;
+      color: white;
+    }
+
+    .banner-pending {
+      background-color: whitesmoke;
+      color: @default-text-color;
+    }
+
+    h2 {
+      margin: 0;
+      height: 32px;
+      overflow: hidden;
+    }
+
+    h6 {
+      margin: 0 0 0 2px;
+    }
+
+    button {
+      float: right;
+      padding: 1px 8px;
+    }
+
+    .dropdown-menu.dropdown-menu-right {
+      right: 12px;
+    }
+
+    ul.event-locations {
+      width: 300px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 8px;
+      margin: 0;
+    }
+
+    li.event-location-item {
+      float: left;
+      margin: 1px 1px 0 0;
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+
+      span {
+        font-size: 1.2em;
+      }
+    }
+  }
+
+  .event-location-caption {
+    text-transform: uppercase;
+    color: @text-muted;
+    display: block;
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .event-location-count {
+    font-size: 28px;
+    line-height: 28px;
+    margin: 0;
+    display: block;
+  }
+
+  .event-metric {
+    min-width: 20%;
+    float: right;
+    display: inline-block;
+    margin-right: 6px;
+
+    .event-location-caption,
+    .event-location-count {
+      padding-left: 2px;
+    }
+  }
+
+  .events-page {
+    padding: 10px;
+    background-color: @white;
+
+    .card.event-card {
+      ul.event-locations {
+        height: 50px;
+        overflow: hidden;
+      }
+
+      li.event-location-item {
+        float: left;
+        margin: 1px 1px 0 0;
+
+        img {
+          width: 48px;
+          height: 48px;
+        }
+      }
+
+      .event-type {
+        display: block;
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
+
+        span {
+          font-size: 14px;
+        }
+      }
+
+      .event-metrics {
+        width: 100%;
+      }
+
+      .event-calendar {
+        width: 100px;
+        height: 80px;
+        float: right;
+        border: 1px solid black;
+        text-align: center;
+
+        .event-calendar-caption {
+          margin-top: 4px;
+          font-size: 12px;
+          font-weight: normal;
+          display: block;
+        }
+
+        .event-calendar-count {
+          line-height: 30px;
+          font-size: 28px;
+          font-weight: bold;
+          display: block;
+        }
+      }
+
+      a.btn-event {
+        position: absolute;
+        top: 30px;
+        left: -20px;
+        height: 75px;
+        width: 75px;
+        padding: 20px 12px;
+        border-radius: 50%;
+        border-bottom-width: 3px;
+
+        &.btn-event-pending {
+          background-color: whitesmoke;
+          color: @default-text-color;
+          border-color: darken(whitesmoke, 15%);
+
+          &:hover {
+            background-color: darken(whitesmoke, 15%);
+          }
+        }
+
+        &.btn-event-operational {
+          background-color: red;
+          color: white;
+          border-color: darken(red, 15%);
+
+          &:hover {
+            background-color: darken(red, 15%);
+          }
+        }
+
+        &.btn-event-concluded {
+          background-color: darkgray;
+          color: white;
+          border-color: darken(darkgray, 15%);
+
+          &:hover {
+            background-color: darken(darkgray, 15%);
+          }
+        }
+      }
+
+      .card-footer {
+        margin: 1px;
+
+        h3 {
+          padding: 0;
+          margin: 4px 0;
+          height: 55px;
+          overflow-y: hidden;
+        }
+
+        h6 {
+          padding: 0;
+          margin: 40px 0 4px 0;
+          text-align: center;
+        }
+
+        &.card-footer-pending {
+          background-color: whitesmoke;
+          color: @default-text-color;
+        }
+
+        &.card-footer-operational {
+          background-color: red;
+          color: white;
+        }
+
+        &.card-footer-concluded {
+          background-color: darkgray;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .roster-page {
+  }
+
+  .credential-page {
+    .organization-logo,
+    .jurisdiction-logo {
+      width: 75px;
+      height: 75px;
+    }
+
+    .photograph {
+      width: 100%;
+    }
+
+    .credential-notify {
+      font-size: small;
+      text-align: right;
+      float: right;
+    }
+
+    .credential-caption {
+      font-size: small;
+      color: @text-muted;
+    }
+
+    .form-factor-download {
+      overflow: hidden;
+      background-color: @white;
+      padding: 10px;
+
+      &:hover {
+        background-color: whitesmoke;
+      }
+
+      .form-factor-icon {
+        display: inline;
+        width: 50px;
+      }
+
+      .form-factor-name {
+        display: inline-block;
+        overflow: hidden;
+      }
+
+      .form-factor-description {
+        display: block;
+        padding: 4px;
+        line-height: 1.0em;
+        color: @text-muted;
+      }
+    }
+
+    .btn.btn-send-credential {
+      .btn-icon,
+      .btn-caption {
+        display: inline;
+      }
+    }
+  }
+
+  .download-progress-page {
+    .archive-entry-table {
+      max-height: 250px;
+      overflow-y: auto;
+      table tr td a {
+        color: @text-color;
+      }
+    }
+  }
+}
+
+.report-viewer {
+  > .report-specification {
+    margin: 0 -20px;
+    padding: 8px 0 4px 20px;
+    background-color: rgb(225,225,225);
+    border-bottom: solid 1px darkgray;
+  }
+
+  > .report-viewer-viewport {
+    width: 100%;
+    margin: 0 -20px;
+    display: flex;
+
+    > .report-viewer-sidebar {
+      width: 225px;
+      margin: 0;
+      padding-bottom: 100px;
+      overflow-x: hidden;
+
+      > .sidebar-button-visible {
+        z-index: 1000;
+      }
+
+      > .sidebar-button-hidden {
+        position: absolute;
+        top: 122px;
+        left: 0;
+        z-index: 1000;
+        background-color: rgba(120,120,120,0.2);
+      }
+    }
+  
+    > .report-viewer-content {
+      padding: 4px;
+      width: 100%;
+
+      > .report-viewer-toolbar {
+        border-bottom: solid 1px darkgray;
+
+        h4 {
+          margin-top: 15px;
+        }
+
+        nav {
+          margin-bottom: 0;
+        }
+      
+        .pagination {
+          display: inline-block;
+          margin: 0;
+      
+          li a {
+            color: black;
+          }
+
+          li.active a {
+            color: white;
+          }
+        }
+      }
+
+      > .report-viewer-table-container {
+        background-color: white;
+        overflow-x: auto;
+        margin-bottom: 50px;
+        font-size: small;
+      }
+    }
+  }
+}
+
+.enrollment-page {
+  .header {
+    display: table;
+    clear: both;
+    width: 100%;
+
+    & > div.avatar-view,
+    & > div.title {
+      float: left;
+    }
+
+    & > div.avatar-view {
+      width: auto;
+    }
+
+    & > div.title {
+      width: auto;
+      margin: 8px;
+
+      h2 {
+        margin: 0;
+      }
+    }
+
+    & > div.actions {
+      float: right;
+    }
+  }
+
+  div.form-control-static,
+  p.form-control-static {
+    padding-top: 0;
+  }
+
+  .file-box {
+    float: left;
+    width: 100%;
+
+    > .file {
+      border: 1px solid @card-border-color;
+      padding: 0;
+      background-color: @panel-bg;
+      position: relative;
+      margin-bottom: 20px;
+      margin-right: 20px;
+      > a {
+        &:hover {
+          text-decoration:none;
+          color: @link-hover-color
+        }
+
+        > .icon {
+          padding: 15px 10px;
+          text-align: center;
+          height: 100px;
+          overflow: hidden;
+
+          > i {
+            font-size: 70px;
+            color: #dadada;
+          }
+        }
+
+        > .file-name {
+          padding: 10px;
+          background-color: #f8f8f8;
+          border-top: 1px solid @card-border-color;
+
+          small {
+            color: @text-color;
+          }
+        }
+
+        > .corner {
+          position: absolute;
+          display: inline-block;
+          width: 0;
+          height: 0;
+          line-height: 0;
+          border: 0.6em solid transparent;
+          border-right: 0.6em solid #f1f1f1;
+          border-bottom: 0.6em solid #f1f1f1;
+          right: 0em;
+          bottom: 0em
+        }
+      }
+    }
+  }
+}

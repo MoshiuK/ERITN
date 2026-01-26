@@ -1,0 +1,84 @@
+﻿@using AccessManagement.Web.Areas.Organizations
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.EventHub.DownloadQueued
+@{
+  Layout = "_EventHubLayout.cshtml";
+
+  var showWarning = ViewBag.RetryCount > 6 && ViewBag.RetryCount < 36;
+  var showError = ViewBag.RetryCount >= 36;
+}
+<div class="download-progress-page">
+  <div class="row m-t-sm m-b-sm">
+    <div class="col-md-12">
+      <a href="@Url.Action("Roster", "Event", new { id = Model.EmergencyEventId, area = OrganizationsAreaRegistration.Name })">
+        @Html.GlyphFa("arrow-circle-left") Back to Full Roster
+      </a>
+    </div>
+  </div>
+
+  <div class="row m-t-lg">
+    <div class="col-md-12 text-center">
+      <h1 class="text-primary">@Html.GlyphFa("download", GlyphStyles.X3FixedWidth)</h1>
+      <h3 class="text-primary">Your request has been queued...</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+          <span class="sr-only">Queued for processing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (showWarning)
+  {
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-warning">
+          <p>
+            <strong>@Html.GlyphFa("clock-o") We're sorry.</strong>
+          </p>
+          <p>
+            It looks like your download is taking longer than expected. This can happen during busy periods. We appreciate your patience.
+          </p>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (showError)
+  {
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-danger">
+          <p>
+            <strong>@Html.GlyphFa("exclamation-circle") We're sorry, something has gone wrong while preparing your download.</strong>
+          </p>
+          <p>
+            It looks like something has gone wrong on our side, your download is taking a lot longer than expected to prepare.
+            Our support team have been notified of the problem. We appreciate your patience and apologize for the inconvenience.
+          </p>
+          <p>
+            If you prefer not to continue waiting, you may still be able to download credentials individually.
+          </p>
+        </div>
+      </div>
+    </div>
+  }
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 class="text-primary">...please wait.</h3>
+      <em><span id="retryTimerCaption" data-retry-count="@ViewBag.RetryCount" class="text-muted">Checking again in 10 seconds.</span></em>
+    </div>
+  </div>
+
+</div>
+
+@section pagescripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.event.downloadqueued.js"></script>
+}

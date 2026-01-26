@@ -1,0 +1,84 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.TenantSummary
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><small></small></th>
+      <th><small>Total</small></th>
+      <th><small>Active</small></th>
+      <th><small>Inactive</small></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <h3><small># Tenants</small></h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.TotalTenants)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.ActiveTenants)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.InactiveTenants)</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3><small># Organizations</small></h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.TotalOrganizations)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.ActiveOrganizations)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.InactiveOrganizations)</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3><small># Members</small></h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.TotalMembers)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.ActiveMembers)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.InactiveMembers)</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3><small># Events</small></h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.TotalEvents)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.ActiveEvents)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.InactiveEvents)</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h3><small># Credentials</small></h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.TotalCredentials)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.ActiveCredentials)</h3>
+      </td>
+      <td>
+        <h3>@Html.DisplayFor(m => m.InactiveCredentials)</h3>
+      </td>
+    </tr>
+  </tbody>
+</table>

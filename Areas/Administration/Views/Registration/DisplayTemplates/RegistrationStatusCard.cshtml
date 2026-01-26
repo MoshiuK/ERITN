@@ -1,0 +1,12 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.RegistrationStatusCard
+
+<div class="card">
+  <div class="card-title"><h4>@Html.DisplayNameForModel()</h4>
+  </div>
+  <div class="card-content">
+    @Html.DisplayFor(m => m.Status)
+  </div>
+  <div class="card-footer card-footer-nav-r">
+    @Html.DisplayFor(m => m.Actions, "CardFooterNavBar")
+  </div>
+</div>  

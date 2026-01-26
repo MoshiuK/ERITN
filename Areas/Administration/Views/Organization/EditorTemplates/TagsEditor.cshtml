@@ -1,0 +1,9 @@
+﻿@model MultiSelectList
+
+<ul class="tag-list">
+  @foreach (var tag in Model)
+  {
+    var css = tag.Selected ? "active" : "";
+    <li class="@css" data-sps-action="toggle-tag" data-tag-value="@tag.Text">@tag.Text</li>
+  }
+</ul>

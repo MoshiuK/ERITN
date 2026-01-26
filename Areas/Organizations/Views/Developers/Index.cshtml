@@ -1,0 +1,25 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+
+@{
+  Layout = "~/Views/Shared/_MinimalBrandLayout.cshtml";
+}
+
+<div class="page-jumbotitle">
+  <h1>DEVELOPERS</h1>
+  <h4 class="page-jumbotitle-info">
+    Start building or integrating emergency access into your applications.
+  </h4>
+</div>
+
+<div class="row">
+  <div class="col-md-12 m-t-lg m-b-lg">
+    @{
+      var underConstruction = new NotFoundPane(
+        "Under Construction", 
+        new FaGlyph("wrench", GlyphStyles.X5, cssClasses: "text-primary"), 
+        "Our developer site is under construction, check back again soon.");
+    }
+    @Html.DisplayFor(_ => underConstruction)
+  </div>
+</div>

@@ -1,0 +1,71 @@
+﻿@using AccessManagement.Framework.Events
+@model OrganizationEmergencyEvent
+
+<div class="events-hub event-title-bar">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="text-primary heading-inline-block">
+        @Html.DisplayFor(m => m.Record.Name)
+      </h2>
+      <h6 class="text-primary heading-inline-block">
+        <span class="m-r-md">@Html.DisplayFor(m => m.Record.EmergencyEventType.Name)</span>
+        <span>@Html.DisplayFor(m => m.AvailableFrom) - @Html.DisplayFor(m => m.AvailableUntil)</span>
+      </h6>
+    </div>
+    <div class="col-md-4">
+      <ul class="list-unstyled event-metrics">
+        @foreach (var accessLevel in Model.CredentialByAccessLevelCounts.Take(4).Reverse())
+        {
+          <li class="event-metric">
+            <div class="access-level-border-left @accessLevel.AccessLevel.CssStyle" style="border-width: 6px">
+              <span class="event-location-caption">@accessLevel.AccessLevel.LevelMoniker</span>
+              <span class="event-location-count">@accessLevel.Count</span>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-default dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+        <span class="event-location-caption">@Html.DisplayNameFor(m => m.Locations)</span>
+        <span class="event-location-count">@Html.DisplayFor(m => m.Locations.Count)</span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <ul class="list-unstyled event-locations">
+          @foreach (var location in Model.Locations)
+          {
+            <li class="event-location-item">
+              <img alt="@location.Name" title="@(location.Name)" src="@(location.Avatar.Thumbnail)" />
+              <span>@location.Name</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+  @{
+    var days = Model.StatusDays > 0 ? $"({Model.StatusDays.ToString("N0")} days)" : string.Empty;
+  }
+  @if (Model.Status == OrganizationEmergencyEventStatus.Operational)
+  {
+    <div class="banner-operational">
+      <h5>@Html.DisplayFor(m => m.Record.Name) is operational (@Html.DisplayFor(m => m.StatusDays) days)</h5>
+    </div>
+  }
+  else if (Model.Status == OrganizationEmergencyEventStatus.Concluded)
+  {
+    <div class="banner-concluded">
+      <h5>@Html.DisplayFor(m => m.Record.Name) has concluded (@Html.DisplayFor(m => m.StatusDays) days ago)</h5>
+    </div>
+  }
+  else
+  {
+    <div class="banner-pending">
+      <h5>@Html.DisplayFor(m => m.Record.Name) is pending (@Html.DisplayFor(m => m.StatusDays) days)</h5>
+    </div>
+  }
+</div>

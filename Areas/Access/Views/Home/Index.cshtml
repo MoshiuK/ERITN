@@ -1,0 +1,26 @@
+﻿@using AccessManagement.Framework.Tenants
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "~/Areas/Access/Views/Shared/_AccessLayout.cshtml";
+  var theme = (TenantTheme)ViewBag.Theme;
+}
+<div class="access-landing-logo">
+  <img src="@theme.ImageUrlLogo100X100" alt="@theme.BrandCaption" />
+</div>
+
+<div class="access-signin-banner">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="text-danger">Authorized Personnel Only</h2>
+      <p class="text-danger">
+        Access to this website is restricted to law enforcement and authorized access point officials.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <a href="@Url.Action("SignInAccessPointOfficial", "Authentication", new { area = ""})" class="btn btn-primary btn-lg">
+        @Html.GlyphFa("lock") SIGN IN
+      </a>
+    </div>
+  </div>
+</div>
+

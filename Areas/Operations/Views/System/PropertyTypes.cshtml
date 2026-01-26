@@ -1,0 +1,33 @@
+﻿@model IReadOnlyCollection<AccessManagement.Models.Core.PropertyType>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Property Types</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Value Type</th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var row in Model.OrderBy(p => p.Category).ThenBy(p => p.Name))
+          {
+            <tr>
+              <td>@row.Category</td>
+              <td>@row.Name</td>
+              <td>@row.Description</td>
+              <td>@row.ValueType</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

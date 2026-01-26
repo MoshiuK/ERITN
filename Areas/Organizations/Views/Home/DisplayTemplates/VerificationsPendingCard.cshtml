@@ -1,0 +1,29 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Dashboard.VerificationsPendingCard
+<div id="verificationsPendingCard" class="card">
+  <div class="card-content">
+    <div class="metric">
+      <div class="metric-glyph">@Html.GlyphFa("calendar-check-o", GlyphStyles.X5)</div>
+      <div class="metric-text">
+        <span>Members with Pending Verfications</span>
+        <h2>@Html.DisplayFor(m => m.PendingVerificationCount)</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h5 class="text-muted">Waiting for verification</h5>
+        <ul class="list-unstyled organizations-mru-list">
+          @foreach (var m in Model.PendingVerificationMembers)
+          {
+            <li class="brand-unstyled-link">
+              <a href="@Url.Action("Index","Person", new { id =  m.Id })">@Html.DisplayFor(_ => m.Annotation)</a>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer card-footer-separator">
+    <small><a href="@Url.Action("Verifications", "PeopleHub")">View Page @Html.GlyphFa("arrow-circle-right")</a></small>
+  </div>
+</div>

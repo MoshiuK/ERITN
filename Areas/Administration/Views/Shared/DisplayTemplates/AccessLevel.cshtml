@@ -1,0 +1,8 @@
+﻿@using AccessManagement.Web.ViewModels.Framework
+@model AccessManagement.Models.Core.AccessLevel
+@{
+  if (Model != null)
+  {
+    @AccessLevelViewSupport.RenderAccessLevelLabel(Model)
+  }
+}

@@ -1,0 +1,19 @@
+﻿@model IReadOnlyCollection<AccessManagement.Models.Core.Tenant>
+@{
+  var selectedId = this.ViewBag.SelectedTenantId ?? Guid.Empty;
+}
+<div class="border-right p-w-sm">
+  <div class="row m-t-md">
+    <div class="col-sm-12">
+      <ul class="nav nav-pills nav-stacked">        
+        @foreach (var item in Model)
+        {
+          var active = item.CorrelationId == selectedId ? "active" : "";
+          <li role="presentation" class="@active">
+            @Html.ActionLink(item.Slug.ToUpperInvariant(), "Summary", new {id = item.CorrelationId})
+          </li>
+        }
+      </ul>      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+﻿@using AccessManagement.Web.Areas.Operations.ViewModels.Clearinghouse
+@model AccessManagement.Web.Areas.Operations.ViewModels.Clearinghouse.TopNavBarActivePages?
+@{
+  var refDataActive = Model == TopNavBarActivePages.ReferenceData ? "active" : "";
+  var locationsActive = Model == TopNavBarActivePages.CorrelationLocations ? "active" : "";
+  var purposesActive = Model == TopNavBarActivePages.CorrelationPurposes ? "active" : "";
+}
+<div class="row m-b-sm">
+  <div class="col-md-12">
+    <ul class="nav nav-pills">
+      <li role="presentation" class="@refDataActive">@Html.ActionLink("Reference Data", "ReferenceData")</li>
+      <li role="presentation" class="@locationsActive">@Html.ActionLink("Location Correlation", "CorrelationLocations")</li>
+      <li role="presentation" class="@purposesActive">@Html.ActionLink("Purpose Correlation", "CorrelationPurposes")</li>
+    </ul>
+  </div>
+</div>

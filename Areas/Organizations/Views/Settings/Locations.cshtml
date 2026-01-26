@@ -1,0 +1,43 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Settings.LocationsPageViewModel
+@{
+  Layout = "_SettingsLayout.cshtml";
+}
+
+<div class="row m-b-lg">
+  <div class="col-md-12">
+    <h2>Manage where your personnel need to travel to or thru.</h2>
+    <h4>
+      Select the places that emergency personnel in your organization need to travel, including places
+      they have to travel thru in order to get to their final destination.
+    </h4>
+    <p class="text-muted">
+      Access documents will be made available to your personnel when an emergency event occurs in these
+      locations.
+    </p>
+  </div>
+</div>
+
+@using (Html.BeginForm("Locations", "Settings"))
+{
+  @Html.AntiForgeryToken()
+
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="list-unstyled">
+        @foreach (var row in Model.Locations)
+        {
+          <li>
+            @Html.EditorFor(_ => row)
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="row m-t-lg m-b-lg">
+    <div class="col-md-offset-6 col-md-6">
+      <button type="submit" class="btn btn-lg btn-primary">Save Changes</button>
+    </div>
+  </div>
+}
+

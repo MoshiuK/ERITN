@@ -1,0 +1,40 @@
+﻿@using AccessManagement.Framework.Tenants
+@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+  var menuBar = (NavBar)ViewBag.MenuBar ?? new NavBar();
+  var theme = (TenantTheme) ViewBag.Theme;
+}
+
+<div class="row m-t-md">
+  <div class="col-md-offset-1 col-md-11">
+    <div class="alert alert-danger">
+      <div class="row">
+        <div class="col-md-1">
+          @Html.GlyphFa("exclamation-triangle", GlyphStyles.X3)
+        </div>
+        <div class="col-md-11">
+          <p>
+            <strong>WARNING:</strong> These settings are an essential part of controlling the behavior of various facets of the @theme.BrandCaption.
+            Change these settings with care as incorrect settings can render the system unusable.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row m-sm">
+  <div class="col-md-3">
+    @Html.Partial("StackedNavBar", menuBar)
+  </div>
+  <div class="col-md-9">
+    @RenderBody()
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.settings.common.js"></script>
+}

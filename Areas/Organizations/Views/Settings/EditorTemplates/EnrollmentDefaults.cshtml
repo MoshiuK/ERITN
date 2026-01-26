@@ -1,0 +1,52 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Settings.EnrollmentDefaults
+
+<div class="row m-b-lg">
+  <div class="col-md-12">
+    <h2>Enrollment Preferences</h2>
+    <h4>
+      These settings will be used for personnel that are not part of a team and do not have specific access information.
+    </h4>
+  </div>
+</div>
+
+@using (Html.BeginForm("EnrollmentDefaults", "Settings"))
+{
+  var optionLabelTransitLocation = Model.DefaultLocation == Guid.Empty ? "(No Default Set)" : null;
+  @Html.AntiForgeryToken()
+
+  <div id="defaultLocation" class="row m-b-lg">
+    <div class="col-md-offset-2 col-md-6">
+      @Html.LabelFor(m => m.DefaultLocation)
+      @Html.DropDownListFor(m => m.DefaultLocation, Model.Locations, optionLabelTransitLocation, new { @class = "form-control select2-component" })
+    </div>
+  </div>
+  <div id="defaultAccessLevel" class="row m-b-lg">
+    <div class="col-md-offset-2 col-md-6"
+         data-toggle="popover"
+         data-placement="left"
+         data-content="@Model.EmergencyAccessMessage">
+      @Html.LabelFor(m => m.DefaultAccessLevel)
+      @Html.DropDownListFor(m => m.DefaultAccessLevel, Model.AccessLevels, new { @class = "form-control select2-component" })
+    </div>
+  </div>
+  <div id="defaultPurpose" class="row m-b-lg">
+    <div class="col-md-offset-2 col-md-6">
+      @Html.LabelFor(m => m.DefaultPurpose)
+      @Html.DropDownListFor(m => m.DefaultPurpose, Model.TransitPurposes, new { @class = "form-control select2-component" })
+    </div>
+  </div>
+  <div class="row m-b-lg">
+    <div class="col-md-12 text-center">
+      <button type="submit" class="btn btn-lg btn-primary">Save Changes</button>
+    </div>
+  </div>
+}
+
+@if(!Model.HasEmergencyAccess)
+{
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="popover"]').popover({ html: true });
+    });
+  </script>
+}

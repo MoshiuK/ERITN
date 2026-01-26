@@ -1,0 +1,48 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.PlacardPreview
+<div class="cerra-placard">
+  <div class="placard-image-row">
+    <div class="organization-logo-element">
+      <img id="placardOrgLogo" src="@Html.ValueFor(m => m.OrganizationLogoUri)" alt="Organization Logo" />
+    </div>
+    <div class="proprietary-barcode-element">
+      <img src="@Html.ValueFor(m => m.ProprietaryBarcodeUri)" alt="Proprietary Barcode" />
+    </div>
+    <div class="interop-barcode-element">
+      <img src="@Html.ValueFor(m => m.InteroperableBarcodeUri)" alt="Interoperable Barcode" />
+    </div>
+    <div class="jurisdiction-logo-element">
+      <img src="@Html.ValueFor(m => m.JurisdictionLogoUri)" alt="Jurisdiction Logo" />
+    </div>
+  </div>
+  <div class="placard-banner-row @Html.ValueFor(m => m.TierCssStyle)">
+    <div class="validity-period-element">
+      <h1>@Html.ValueFor(m => m.ValidityPeriodMoniker)</h1>
+    </div>
+    <div class="placard-access-element">
+      <div class="event-name">
+        <h2>@Html.DisplayFor(m => m.EventName)</h2>
+      </div>
+      <div class="person-name">
+        <h2>@Html.DisplayFor(m => m.PersonName)</h2>        
+      </div>
+    </div>
+    <div class="level-element">
+      <h1>@Html.DisplayFor(m => m.TierMoniker)</h1>
+      <h3>@Html.DisplayFor(m => m.TierColorName)</h3>
+    </div>
+  </div>
+  <div class="placard-organization-row">
+    <div class="org-detail">
+      <div class="org-name">
+        <h2>@Html.DisplayFor(m => m.OrganizationName)</h2>
+      </div>
+      <div class="org-purpose">
+        <h2>@Html.DisplayFor(m => m.Purpose)</h2>
+      </div>
+    </div>
+    <div class="org-esf">
+      <h3>ESF</h3>
+      <h1>@Html.ValueFor(m => m.SupportFunctionMoniker)</h1>      
+    </div>
+  </div>
+</div>

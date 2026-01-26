@@ -1,0 +1,54 @@
+﻿@using AccessManagement.Framework.Credentials
+@using Juillet.Web.Mvc.Html
+@model IReadOnlyCollection<CredentialAttributeInfo>
+  
+@functions
+{
+
+  string GetFlagBorderCss(CredentialValidationStatus outcome)
+  {
+    switch (outcome)
+    {
+      case CredentialValidationStatus.InvalidForAccess:
+      case CredentialValidationStatus.Unknown:
+      case CredentialValidationStatus.IndeterminateForAccess:
+        return "flag-border flag-border-danger";
+      case CredentialValidationStatus.ValidWithWarningsForAccess:
+        return "flag-border flag-border-warning";
+      default:
+        return "flag-border flag-border-success";
+    }
+  }
+
+}
+@if (Model== null || Model.Count == 0)
+{
+  <div class="well">
+    <div class="text-danger text-center">
+      <h4>@Html.GlyphFa("wrench", GlyphStyles.X3)</h4>
+      <span>No attributes were verified.</span>
+    </div>
+  </div>
+}
+else
+{
+  <table class="table table-condensed attributes-table">
+    <tbody>
+    @foreach (var attr in Model)
+    {
+      <tr>
+        <td>
+          <div class="@GetFlagBorderCss(attr.Valid) pull-left">
+            <small class="text-muted">@attr.AttributeType.Name</small><br/>
+            @attr.ValueForDisplay
+          </div>
+          <div class="pull-right">
+            <small class="text-muted">Valid until</small><br/>
+            @Html.DisplayFor(_ => attr.ValidUntil)
+          </div>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+}

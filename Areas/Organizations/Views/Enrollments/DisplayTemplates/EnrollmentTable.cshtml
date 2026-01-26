@@ -1,0 +1,27 @@
+﻿@using Juillet.Web.Mvc.Html
+@model Juillet.Web.Api.PagedCollection<AccessManagement.Web.Areas.Organizations.ViewModels.Enrollments.EnrollmentTableRow>
+<table id="enrollmentList" class="table table-condensed">
+  <thead>
+    <tr>
+      <th class="fw-24">@Html.GlyphFa("edit")</th>
+      <th>ENROLLMENTS</th>
+      <th>LAST UPDATE</th>
+      <th class="fw-24"></th>
+    </tr>
+  </thead>
+  <tbody>
+  @if (Model.Metadata.TotalCount == 0)
+  {
+    <tr>
+      <td colspan="4"><span class="text-muted"><em>No enrollments found.</em></span></td>
+    </tr>
+  }
+  else
+  {
+    foreach (var row in Model.Data)
+    {
+      @Html.DisplayFor(_ => row)
+    }    
+  }
+  </tbody>
+</table>

@@ -1,0 +1,110 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationPaymentsRow
+@{
+  var billPending = Model.BilledDate == null;
+  ViewBag.Style = billPending ? "newInvoice" : "billedInvoice";
+  ViewBag.Style = Model.Age > 30 ? "overDueInvoice" : ViewBag.Style;
+  ViewBag.Style = Model.PaidDate.HasValue ? "paidInvoice" : ViewBag.Style;
+  if (ViewBag.Style == "paidInvoice")
+  {
+    ViewBag.TopText = "Paid";
+    if (Model.PaidDate != null)
+    {
+      ViewBag.MiddleText = DateTime.Today.Subtract(Model.PaidDate.Value.DateTime).Days;
+    }
+    ViewBag.BottomText = ViewBag.MiddleText == 1 ? "Day Ago" : "Days Ago";
+  }
+  else
+  {
+    ViewBag.TopText = billPending ? "" : "Billed";
+    ViewBag.MiddleText = billPending ? "New" : Model.Age.ToString();
+    ViewBag.BottomText = billPending ? "" : Model.AgeNoun + " Ago";
+  }
+}
+<div class="card-title">
+  <div class="row">
+    <div class="col-md-10">
+      @using (Html.BeginForm("UpdateInvoiceOrder", "Organization", FormMethod.Post))
+      {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.OrganizationId)
+        @Html.HiddenFor(m => m.InvoiceId)
+        <div class="row form-group">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.CreatedOnDateFormatted)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.CreatedOnDateFormatted)
+          </div>
+          <div class="col-md-4">
+            @Html.LabelFor(m => m.InvoiceTotal)
+          </div>
+          <div class="col-md-2">
+            @String.Format("{0:c}", Model.InvoiceTotal * .01)
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.ProductName)
+          </div>
+          <div class="col-md-4">
+            @Html.DisplayFor(m => m.ProductName)
+          </div>
+          <div class="col-md-4">
+            @Html.LabelFor(m => m.EmergencyPersonnel)
+          </div>
+          <div class="col-md-2">
+            @Html.TextBoxFor(m => m.EmergencyPersonnel, new { @class = "form-control" })
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.ReferenceNumber)
+          </div>
+          <div class="col-md-10">
+            @Html.EditorFor(m => m.ReferenceNumber, new { @class = "form-control" })
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.BilledDate)
+          </div>
+          <div class="col-md-4">
+            @Html.EditorFor(model => model.BilledDate, new { @class = "form-control" })
+          </div>
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.PaidDate)
+          </div>
+          <div class="col-md-4">
+            @Html.EditorFor(model => model.PaidDate, new { @class = "form-control" })
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-2">
+            @Html.LabelFor(m => m.ExpirationDate)
+          </div>
+          <div class="col-md-4">
+            @Html.EditorFor(m => m.ExpirationDate, new { @class = "form-control" })
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary pull-right">Save</button>
+          </div>
+        </div>
+      }
+      @using (Html.BeginForm("DeleteInvoice", "Organization", new { organizationId = Model.OrganizationId, invoiceId = Model.InvoiceId }, FormMethod.Post, null))
+      {
+        @Html.AntiForgeryToken()
+        <div class="row form-group">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-danger pull-right">Delete</button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="col-md-2 paymentStatus @(ViewBag.Style)">
+      <h6 class="text-center">@(ViewBag.TopText)</h6>
+      <h4 class="text-center">@(ViewBag.MiddleText)</h4>
+      <h6 class="text-center">@(ViewBag.BottomText)</h6>
+    </div>
+  </div>
+</div>

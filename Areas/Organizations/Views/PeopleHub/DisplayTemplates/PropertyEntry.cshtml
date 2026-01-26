@@ -1,0 +1,20 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.PeopleHub.PropertyEntry
+
+<div class="row">
+  <div class="col-md-8">
+    <label for="@Html.NameFor(m => m.PropertyValueLine)">
+      @Html.DisplayFor(m => m.PropertyName)
+    </label>
+  </div>
+  <div class="col-md-4">
+    @Html.LabelFor(m => m.PendingVerificationSince)
+  </div>
+</div>
+<div class="row m-b-md">
+  <div class="col-md-8">
+    @Html.DisplayFor(m => m.PropertyValueLine)
+  </div>
+  <div class="col-md-4">
+    @Html.DisplayFor(m => m.PendingVerificationSince)
+  </div>
+</div>

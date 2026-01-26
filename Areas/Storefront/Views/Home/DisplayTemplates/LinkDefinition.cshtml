@@ -1,0 +1,13 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.LinkDefinition
+@{
+  bool? inverse = ViewBag.Inverse ?? false;
+  var style = (inverse.HasValue && inverse.Value) ? "brand-unstyled-inverse-link" : "brand-unstyled-link";
+}
+@if (string.IsNullOrEmpty(Model.Target))
+{
+  <a href="@Model.Href" class="@style btn btn-link" role="button">@Model.Content</a>
+}
+else
+{
+  <a href="@Model.Href" target="@Model.Target" class="@style btn btn-link" role="button">@Model.Content</a>
+}

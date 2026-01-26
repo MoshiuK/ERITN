@@ -1,0 +1,45 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationAdministrator
+
+<div class="admin-list-container">
+    <div class="col-md-2">
+        @Html.DisplayFor(m => m.Avatar)
+    </div>
+    <div class="col-md-7">
+        <h2 class="heading-inline-block">@Html.DisplayFor(m => m.DisplayName)</h2>
+        <div>@Html.GlyphFa("lock") @Html.DisplayFor(m => m.UserName)</div>
+        <div>@Html.GlyphFa("envelope-o") @Html.DisplayFor(m => m.Email)</div>
+        <div>@Html.GlyphFa("phone") @Html.DisplayFor(m => m.Phone)</div>
+        <div>
+            @if (Model.Enabled)
+            {
+                <a class="btn btn-warning" href="@Url.Action("Enable", "Settings", new { id = Model.DirectoryObjectId, enablingAccount = false })">Deactivate</a>
+            }
+            else
+            {
+                <a class="btn btn-success" href="@Url.Action("Enable", "Settings", new { id = Model.DirectoryObjectId, enablingAccount = true })">Activate</a>
+            }
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div>
+            @Html.LabelFor(m => m.CreatedOn)
+        </div>
+        <div>
+            @Html.DisplayFor(m => m.CreatedOn)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.MostRecentSuccessfulSignIn)
+        </div>
+        <div>
+            @Html.DisplayFor(m => m.MostRecentSuccessfulSignIn)
+        </div>
+    </div>
+    <div class="pull-right">
+        <div>
+            <a class="btn btn-danger" href="@Url.Action("Delete", "Settings", new { id = Model.DirectoryObjectId })">@Html.GlyphFa("trash") Delete</a>
+        </div>
+    </div>
+</div>
+
+<br />

@@ -1,0 +1,39 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.SuccessPageViewModel
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+}
+
+@section styles
+{
+  <style>
+    .layout-root > nav {
+      margin-bottom: 0;
+    }
+
+    .layout-root.browser .workspace {
+      margin-top: 50px;
+    }
+
+    .workspace .body-content {
+      padding: 50px;
+    }
+  </style>
+}
+
+<div class="storefront-registration-success">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="page-jumbotitle">@Html.ValueFor(m => m.PageContent.ConfirmationCaption) @Html.ValueFor(m => m.PageContent.Title)</h1>
+      <h1 class="m-t-xl m-b-xl">@Html.ValueFor(m => m.PageContent.RegistrationNumberCaption) <span class="alert alert-success"><strong>@Html.ValueFor(m => m.ReferenceId)</strong></span></h1>
+    </div>
+  </div>
+
+  <div class="row m-t-xl">
+    <div class="col-md-9 additional-content">
+      @Html.Raw(Model.PageContent.AdditionalContent)
+    </div>
+    <div class="col-md-3 m-b-xl">
+      <a href="@Html.ValueFor(m => m.SignUpUrl)" class="btn btn-lg btn-success">@Html.DisplayFor(m => m.PageContent.GoToSignUpCaption)</a>
+    </div>
+  </div>
+</div>

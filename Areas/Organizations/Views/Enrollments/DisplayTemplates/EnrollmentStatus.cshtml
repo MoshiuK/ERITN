@@ -1,0 +1,19 @@
+﻿@using AccessManagement.Models.Enrollment
+@model AccessManagement.Models.Enrollment.EnrollmentStatus?
+@{
+  var cssSuffix = "label-danger";
+  switch (Model)
+  {
+    case EnrollmentStatus.Pending:
+      cssSuffix = "label-warning";
+      break;
+    case EnrollmentStatus.Started:
+      cssSuffix = "label-success";
+      break;
+    case EnrollmentStatus.Enrolled:
+      cssSuffix = "label-white";
+      break;
+  }
+  <div class="label @cssSuffix">@Model.ToString().ToUpperInvariant()</div>
+}
+

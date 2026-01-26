@@ -1,0 +1,120 @@
+﻿//
+// AGGREGATE ALL STYLES, LAYOUTS, CONTROLS FOR THE STOREFRONT AREA
+//
+// NOTE: This file should be imported by a less file in the tenant project,
+//       customized and compiled to tenant specific CSS.  This file should 
+//       not be compiled to CSS directly.
+//
+
+@fa-var-check: "\f00c";
+
+// import bootstrap
+@import "../bootstrap/bootstrap.less";
+@import "../awesome-bootstrap-checkbox.less";
+
+// import juillet
+@import "../juillet/juillet-web-mvc.less";
+
+// import all storefront customizations
+@import "tenant-brand-variables.less";
+@import "../layouts/access.less";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+// This file is intended for styles that are specific to controls in the access area.
+// In general do not override brand colors here; brand colors are overridden in the tenant specific content.
+
+.access-landing-body {
+  .body-content {
+    min-height: 1000px;
+    background-image: url(https://spsonldvue.blob.core.windows.net/theme/eritn/access-banner-00.jpeg);
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size: contain;
+  }
+
+  .access-landing-logo {
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    height: 125px;
+    width: 150px;
+    border-radius: 0 0 8px 8px;
+    background-color: black;
+
+    img {
+      margin-left: 25px;
+      margin-top: 10px;
+    }
+  }
+
+  .access-signin-banner {
+    position: absolute;
+    top: 450px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    .btn {
+      margin-top: 20px;
+      padding: 8px 28px;
+    }
+    h2 {
+      font-weight: bold;
+    }
+  }
+
+  .footer {
+    background-color: inherit;
+    color: @gray;
+  }
+}
+
+.access-credential-card-container {
+  margin-bottom: 20px;
+
+  h3 {
+    margin-top: 5px;
+    display: inline-block;
+  }
+
+  .card-heading.card-danger {
+    background-color: @brand-danger;
+    color: @text-white;
+    font-weight: bold;
+  }
+
+  .member-photo {
+    width: 100%;
+  }
+
+  .member-name {
+    color: @brand-info;
+    vertical-align: top;
+  }
+
+  .reference-id {
+    font-weight: bold;
+    margin: 2px 0;
+  }
+
+  .event-name {
+    color: @text-muted;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 0;
+  }
+
+  .attributes-table {
+    font-size: small;
+  }
+
+  .properties-table {
+    font-size: small;
+
+    .td-bold {
+      font-weight: bold;
+    }
+  }
+}

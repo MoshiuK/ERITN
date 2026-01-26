@@ -1,0 +1,58 @@
+﻿@using Juillet.Web.Mvc.Html
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+}
+
+<h2>Reports</h2>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-heading">
+        <div class="card-title">
+          <h3 class="heading-inline-block">Credential Reports</h3>
+        </div>
+      </div>
+      <div class="card-content text-info">
+        <ul class="list-unstyled">
+          <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Access Request Report", "CredentialAccessReport", "Reports", null, new { @class = "btn btn-link" })</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-heading">
+        <div class="card-title">
+          <h3 class="heading-inline-block">Jurisdiction Reports</h3>
+        </div>
+      </div>
+      <div class="card-content text-info">
+        <ul class="list-unstyled">
+          <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Jurisdiction Reports", "JurisdictionReports", "Reports", null, new { @class = "btn btn-link" })</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-heading">
+        <div class="card-title">
+          <h3 class="heading-inline-block">Organization Reports</h3>
+        </div>
+      </div>
+      <div class="card-content text-info">
+        <ul class="list-unstyled">
+          <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Organizations by Jurisdiction Report", "OrganizationsByJurisdictionReport", "Reports", null, new { @class = "btn btn-link" })</li>
+          <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Organizations by Purpose Report", "OrganizationsByPurposeReport", "Reports", null, new { @class = "btn btn-link" })</li>
+          <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Organizations Registered this Week", "OrganizationsRegisteredWeeklyReport", "Reports", null, new { @class = "btn btn-link" })</li>
+          <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Organizations Enrollments and Orders this Week", "OrganizationEnrollmentWeeklyReport", "Reports", null, new { @class = "btn btn-link" })</li>
+          <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Registrations Abandoned this Week", "AbandonedRegistrationsWeeklyReport", "Reports", null, new { @class = "btn btn-link" })</li>
+          <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Organizations Over Enrollment Allotment", "OrganizationPaymentsReport", "Reports", null, new { @class = "btn btn-link" })</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

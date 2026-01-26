@@ -1,0 +1,38 @@
+﻿@model AccessManagement.Models.Emergency.EmergencyEvent
+@functions
+{
+
+  string GetBorderStyle()
+  {
+    if (Model.ConcludedOn.HasValue)
+    {
+      return "flag-border-danger";
+    }
+    if (Model.OperationalOn.HasValue)
+    {
+      return "flag-border-success";
+    }
+    return "flag-border-info";
+  }
+}
+
+<div class="flag-border @GetBorderStyle()">
+  <a href="@Url.Action("Index", "Event", new { id = Model.CorrelationId })"><h4 class="m-b-xxs">@Html.DisplayFor(m => m.Name)</h4></a>
+  <small class="text-muted">@Model.NotBefore.ToString("M") - @Model.NotAfter.ToString("M")</small>
+  <small class="text-muted pull-right">
+    @{
+      if (Model.ConcludedOn.HasValue)
+      {
+        <strong>Concluded: @Model.ConcludedOn.Value.ToString("M")</strong>
+      }
+      else if (Model.OperationalOn.HasValue)
+      {
+        <strong>Operational: @Model.OperationalOn.Value.ToString("M")</strong>
+      }
+      else
+      {
+        <strong>Not Activated</strong>
+      }
+    }
+  </small>
+</div>

@@ -1,0 +1,9 @@
+﻿@using Juillet.Web.Mvc
+@model NavBar
+<ul class="nav nav-pills">
+  @foreach (var action in Model.Items)
+  {
+    <li role="presentation">@action.AnchorTag(Url)</li>
+  }
+</ul>
+

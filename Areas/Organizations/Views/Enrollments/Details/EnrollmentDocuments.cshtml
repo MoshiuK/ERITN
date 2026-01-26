@@ -1,0 +1,6 @@
+﻿@model AccessManagement.Framework.Enrollment.IEnrollmentProcess
+<label class="control-label">@Html.DisplayNameFor(m => m.Documents)</label>
+@foreach (var doc in Model.Documents)
+{
+  @Html.DisplayFor(_ => doc)
+}

@@ -1,0 +1,21 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Home.PeopleSummaryCardViewModel
+@using Juillet.Web.Mvc.Html
+<div class="card">
+  <div class="card-heading">
+    <div class="card-title">
+      <h3 class="heading-inline-block">People</h3>
+      <div class="pull-right">
+        <small><a href="@Url.Action("Index", "PeopleHub")">All People @Html.GlyphFa("arrow-circle-right")</a></small>
+      </div>
+    </div>
+  </div>
+  <div class="card-content text-info">
+    @Html.DisplayFor(m => m.ActiveMembersCount)
+    <div>
+      <ul class="list-unstyled">
+        <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Find someone", "Index", "PeopleHub", null, new { @class = "btn btn-link" })</li>
+        <li>@Html.GlyphFa("arrow-right") @Html.ActionLink("Create a new member", "NewPerson", "PeopleHub", null, new { @class = "btn btn-link" })</li>
+      </ul>
+    </div>
+  </div>
+</div>

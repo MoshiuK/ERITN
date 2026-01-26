@@ -1,0 +1,299 @@
+﻿@using AccessManagement.Web.Areas.Operations.ViewModels.Clearinghouse
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Framework.Cerra.ICerraReferenceData
+
+<div id="top"></div>
+
+@Html.Partial("TopNavBar", TopNavBarActivePages.ReferenceData)
+
+<div class="bg-info m-b-sm">
+  <ul class="nav nav-pills">
+    <li>
+      <a href="#relationships">
+        @Html.GlyphFa("link") Relationship Types
+      </a>
+    </li>
+    <li>
+      <a href="#tags">
+        @Html.GlyphFa("link") Tags
+      </a>
+    </li>
+    <li>
+      <a href="#transitPurposes">
+        @Html.GlyphFa("link") Purposes
+      </a>
+    </li>
+    <li>
+      <a href="#capabilities">
+        @Html.GlyphFa("link") Capabilities
+      </a>
+    </li>
+    <li>
+      <a href="#traits">
+        @Html.GlyphFa("link") Traits
+      </a>
+    </li>
+    <li>
+      <a href="#jurisdictions">
+        @Html.GlyphFa("link") Jurisdictions
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="card" id="relationships">
+  <div class="card-title">
+    <h4>
+      CERRA Organization Relationships
+    </h4>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>NAME</th>
+              <th>DESCRIPTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            @{
+              var special = new[] { "respond", "assist", "resident", "follow" };
+            }
+            <tr>
+              @{
+                var respond = Model.JurisdictionRelationshipTypes.First(r => r.Name.ToLowerInvariant() == "respond");
+              }
+              <td>@Html.GlyphFa("ambulance")</td>
+              <td>@respond.Name</td>
+              <td>@respond.Description</td>
+            </tr>
+            <tr>
+              @{
+                var assist = Model.JurisdictionRelationshipTypes.First(r => r.Name.ToLowerInvariant() == "assist");
+              }
+              <td>@Html.GlyphFa("handshake-o")</td>
+              <td>@assist.Name</td>
+              <td>@assist.Description</td>
+            </tr>
+            <tr>
+              @{
+                var resident = Model.JurisdictionRelationshipTypes.First(r => r.Name.ToLowerInvariant() == "resident");
+              }
+              <td>@Html.GlyphFa("home")</td>
+              <td>@resident.Name</td>
+              <td>@resident.Description</td>
+            </tr>
+            <tr>
+              @{
+                var follow = Model.JurisdictionRelationshipTypes.First(r => r.Name.ToLowerInvariant() == "follow");
+              }
+              <td>@Html.GlyphFa("eye")</td>
+              <td>@follow.Name</td>
+              <td>@follow.Description</td>
+            </tr>
+            <tr><td colspan="3" style="background-color: whitesmoke;"></td></tr>
+            @foreach (var rt in Model.JurisdictionRelationshipTypes.Where(jr => !special.Contains(jr.Name.ToLowerInvariant())))
+            {
+              <tr>
+                <td>@Html.GlyphFa("heart-o")</td>
+                <td>@rt.Name</td>
+                <td>@rt.Description</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-right"><a href="#top">@Html.GlyphFa("level-up") Top of page</a></div>
+
+<div class="card" id="tags">
+  <div class="card-title">
+    <h4>
+      CERRA Organization Tags
+    </h4>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="tag-list">
+          @foreach (var tag in Model.Tags)
+          {
+            <li data-toggle="popover" data-placement="bottom" data-content="@tag.Description">@Html.GlyphFa("tag") @tag.Name</li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-right"><a href="#top">@Html.GlyphFa("level-up") Top of page</a></div>
+
+<div class="card" id="transitPurposes">
+  <div class="card-title">
+    <h4>
+      CERRA Organization Transit Purposes
+    </h4>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>ESF</th>
+              <th>NAME</th>
+              <th>DESCRIPTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var cap in Model.TransitPurposes.OrderBy(o => o.Esf))
+            {
+              <tr>
+                <td><strong>@cap.Esf.ToString("D")</strong></td>
+                <td>@cap.Name</td>
+                <td>@cap.Description</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-right"><a href="#top">@Html.GlyphFa("level-up") Top of page</a></div>
+
+<div class="card" id="capabilities">
+  <div class="card-title">
+    <h4>
+      CERRA Organization Capabilities
+    </h4>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>CODE</th>
+              <th class="fw-250">NAME</th>
+              <th>DESCRIPTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var cap in Model.CapabilityTypes)
+            {
+              <tr>
+                <td><strong>@cap.Code</strong></td>
+                <td>@cap.Name</td>
+                <td>@cap.Description</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-right"><a href="#top">@Html.GlyphFa("level-up") Top of page</a></div>
+
+<div class="card" id="traits">
+  <div class="card-title">
+    <h4>
+      CERRA Organization Relationship Traits
+    </h4>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>TYPE</th>
+              <th class="fw-250">VALUE</th>
+              <th>DESCRIPTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var cap in Model.OrganizationRelationshipTraitTypes)
+            {
+              <tr>
+                <td><strong>@cap.ToString("G")</strong></td>
+                <td>@cap.ToString("D")</td>
+                <td>@cap.ToString("G")</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-right"><a href="#top">@Html.GlyphFa("level-up") Top of page</a></div>
+
+<div class="card" id="jurisdictions">
+  <div class="card-title">
+    <h4>
+      CERRA Jurisdictions
+    </h4>
+  </div>
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th class="pw-60">NAME</th>
+              <th class="pw-40">AUTHORITY</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var jur in Model.Jurisdictions)
+            {
+              <tr>
+                <td>
+                  @Html.DisplayFor(_ => jur)
+                </td>
+                <td>
+                  @if (string.IsNullOrEmpty(jur.Authority.Website))
+                  {
+                    <span>@jur.Authority.Name</span>
+                  }
+                  else
+                  {
+                    var href = jur.Authority.Website.StartsWith("http") ? jur.Authority.Website : $"https://{jur.Authority.Website}";
+                    <a href="@href" target="_blank">
+                      @jur.Authority.Name
+                    </a>
+                  }
+                  <br />
+                  <span class="text-muted">
+                    <small>
+                      @if (!string.IsNullOrEmpty(jur.Authority.ContactEmail))
+                      {
+                        @jur.Authority.ContactEmail<br />
+                      }
+                      @jur.Authority.ContactPhone
+                    </small>
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-right"><a href="#top">@Html.GlyphFa("level-up") Top of page</a></div>
+
+<div class="m-b-lg"></div>

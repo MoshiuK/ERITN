@@ -1,0 +1,74 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Pickup.MobileUpdate
+@using AccessManagement.Framework.Tenants
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+  var theme = (TenantTheme) ViewBag.Theme;
+}
+
+<div class="row storefront-pickup credential-collect-section border-bottom m-b-lg">
+  <div class="col-md-12">
+    <div class="m-t-sm m-b-sm">
+      @Html.GlyphFa("chevron-circle-left") @Html.ActionLink("Back to credential options", "Index", new { id = Model.TicketId, n = Model.Nonce })
+    </div>
+    <div class="row m-b-lg">
+      <div class="col-md-2">
+        <div class="big-icon">
+          @Html.GlyphFa("mobile", GlyphStyles.X5)
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row m-b-md">
+          <div class="col-md-12">
+            <h4 class="title">MOBILE CREDENTIALS</h4>
+            <p>
+              Enter your US mobile phone number and we will send your transit credentials to your phone.
+            </p>
+            <p>
+              <strong>Important:</strong> Standard message rates apply to the messages you receive.
+            </p>
+            <p>
+              The message includes a link where you can <strong>download your digital pass</strong> to your phone and a <strong>barcode image</strong> that 
+              can be scanned by law enforcement as you enter restricted areas or encounter checkpoints.
+            </p>
+            <p>
+              <strong>Note:</strong> You need internet access on your phone to download your digital pass.
+            </p>
+          </div>
+        </div>
+        <div class="row m-b-lg">
+          <div class="col-md-12">
+            @using(Html.BeginForm("MobileUpdate", "Pickup"))
+            {
+              @Html.AntiForgeryToken()
+              @Html.HiddenFor(m => m.TicketId)
+              @Html.HiddenFor(m => m.Nonce)
+
+              <div class="form-group">
+                @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+                @Html.EditorFor(m => m.PhoneNumber, new { @class = "control-label" })
+              </div>
+
+              <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPhoneNumber, new { @class = "control-label" })
+                @Html.EditorFor(m => m.ConfirmPhoneNumber, new { @class = "control-label" })
+              </div>
+
+              <div class="m-t-md m-b-md">
+                <small class="text-muted">
+                  By entering your mobile phone number and clicking "Send Mobile Credentials", you consent to our 
+                  <a href="@theme.LinksTerms">Terms &amp; Conditions</a> and <a href="@theme.LinksPrivacy"> Privacy Policy</a>
+                  and authorize @theme.BrandCaption and its service providers to deliver your mobile credentials.
+                </small>
+              </div>
+
+              <button class="btn btn-primary btn-lg" type="submit" role="button">
+                @Html.GlyphFa("mobile", GlyphStyles.Large) &nbsp;Send to my phone
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

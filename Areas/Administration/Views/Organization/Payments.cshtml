@@ -1,0 +1,37 @@
+﻿@using Juillet.Web.Mvc.Html
+@model  AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationPaymentsViewModel
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+  var verb = Model.TotalLicenses != 1 ? "are" : "is";
+  var license = Model.TotalLicenses != 1 ? "licenses" : "license";
+}
+
+<div class="pull-right m-b-sm">
+  @Html.ActionLink("+ Add Order", "AddOrder", new { organizationId = Model.OrganizationId })
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading">
+        <h4 class="heading-inline-block">
+          @Html.GlyphFa("dollar") Payments
+          <br />
+          <small>There @verb <b>@Html.DisplayFor(m => m.TotalLicenses)</b> @license in total with <b>@Html.DisplayFor(m => m.PersonnelCount)</b> in use and <b>@Html.DisplayFor(m => m.RemainingLicenses)</b> available.</small>
+        </h4>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          @foreach (var item in Model.Payments)
+          {
+            <div class="col-md-12">
+              <div class="card">
+                @Html.Partial("OrganizationPayment", item)
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

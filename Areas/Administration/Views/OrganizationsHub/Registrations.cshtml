@@ -1,0 +1,74 @@
+﻿@using AccessManagement.Web.Areas.Storefront
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.RegistrationsPageViewModel
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+}
+
+@{
+  var startPosition = (Model.PageOfContent.Metadata.TotalCount == 0) ? 0 : Model.PageOfContent.Metadata.StartPosition;
+  var endPosition = Model.PageOfContent.Metadata.EndPosition;
+  var total = Model.PageOfContent.Metadata.TotalCount;
+  var toggle = !ViewBag.HideComplete;
+  var check = ViewBag.HideComplete ? "checked" : "";
+}
+
+<div class="row">
+  <div class="col-md-10">
+    <div class="panel">
+      <div class="panel-body">
+        <span class="text-muted small pull-right">Last refreshed <i class="fa fa-clock-o"></i> <time data-juillet-currenttime></time></span>
+        <h2>Find Registrations</h2>
+        @Html.Partial("Forms/FilterForm", Model.Filter)
+        <div>
+          <span class="pull-right small text-muted">Showing @startPosition - @endPosition of @total items.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="m-t-md">
+      <a class="btn btn-primary btn-lg m-t-md"
+         href="@Url.Action("Index", "Registration", new {area = StorefrontAreaRegistration.Name})"
+         target="_blank">
+        @Html.GlyphFa("plus")<br />
+        New Registration
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="registrationhub row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="resultsPane">
+          <div>
+            <input type="checkbox" @(check) onclick="location.href='@Url.Action("Registrations", "OrganizationsHub", new { hideComplete = @toggle })'" />
+            <label for="checkbox">Show only not registered</label>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th><small>REGISTRATIONS</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              @{
+                foreach (var item in Model.PageOfContent.Data)
+                {
+                  @Html.Partial("RegistrationSummaryLine", item)
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+        @Html.DisplayFor(m => m.Pager)
+      </div>
+    </div>
+  </div>
+</div>
+@section pagescripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/administration.registration.summaryline.js"></script>
+}

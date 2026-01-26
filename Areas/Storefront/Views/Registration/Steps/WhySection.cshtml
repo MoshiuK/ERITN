@@ -1,0 +1,56 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.RegisterPageViewModel
+
+<section>
+  <div class="well well-sm description">
+    <h4>@Html.ValueFor(m => m.PageContent.TransitPurposesStep.Title)</h4>
+    <p>
+      @Html.ValueFor(m => m.PageContent.TransitPurposesStep.Description)
+    </p>
+  </div>
+  <div class="organization-purposes m-t-lg">
+    <div class="transit-purposes-list row">
+      <div class="col-md-12">
+        <ul>
+          @foreach (var purpose in Model.AvailableTransitPurposes)
+          {
+            <li>
+              <div class="checkbox checkbox-success">
+                <input id="chbx-@purpose.Id" type="checkbox" name="@Html.NameFor(m => m.TransitPurposes)" value="@purpose.Id" data-caption="@purpose.Name" data-esf="@purpose.Esf.ToString("D")" />
+                <label for="chbx-@purpose.Id">@purpose.Name</label>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <hr />
+    <div class="row m-t-lg">
+      <div class="col-md-3 text-right">
+        @Html.LabelFor(m => m.PersonnelCount)
+      </div>
+      <div class="col-md-5">
+        @Html.EditorFor(m => m.PersonnelCount, new { htmlAttributes = new { min = 1, max = 9999 } })
+      </div>
+      <div class="col-md-3 well">
+        <p class="help-text small">
+          @Html.GlyphFa("info-circle") Approximate the number of personnel that need passes, including any temporary staff or contractors that enter restricted areas for your organization.
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div class="row m-t-lg">
+      <div class="col-md-3 text-right">
+        @Html.LabelFor(m => m.AdditionalTransitPurpose)
+      </div>
+      <div class="col-md-5">
+        @Html.EditorFor(m => m.AdditionalTransitPurpose)
+      </div>
+      <div class="col-md-3 well">
+        <p class="help-text">
+          @Html.GlyphFa("info-circle") <small>@Html.DisplayFor(m => m.PageContent.TransitPurposesStep.OtherHelpText)</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

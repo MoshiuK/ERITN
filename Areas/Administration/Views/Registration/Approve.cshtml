@@ -1,0 +1,86 @@
+﻿@using AccessManagement.Web.Areas.Administration
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.RegistrationApprovalPageViewModel
+@{
+  Layout = "../Shared/_AdministrationLayout.cshtml";
+}
+
+<div class="row m-b-md">
+  <div class="col-md-12 text-center">
+    <div class="pull-left">
+      <div class="m-t-sm">
+        <a class="m-t-sm" href="@Url.Action("Index", "Registration", new { area = AdministrationAreaRegistration.Name, id = Model.Id})">@Html.GlyphFa("arrow-circle-left") Back to registration for <strong>@Html.DisplayFor(m => m.OrganizationName)</strong></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3>Approve registration for <strong>@Html.DisplayFor(m => m.OrganizationName)</strong></h3>
+    <p>
+      Review the registration details for <strong>@Html.DisplayFor(m => m.OrganizationName)</strong> below, then approve the registration
+      if you are satisfied this organization should be added to @Html.DisplayFor(m => m.ProgramName).
+    </p>
+    <p>
+      Click <strong>Approve Registration</strong> to perform the following steps:
+      <ul>
+        <li>Activate a new organization for this registration.</li>
+        <li>Send a welcome email to <strong>@Html.DisplayFor(m => m.RegistrantEmail)</strong> (the registrant) with details of 
+          how to sign in as an administrator.</li>
+        <li>Archive the registration details for audit purposes. <em>The registration will no longer be in the registrations list.</em></li>
+      </ul>
+    </p>
+  </div>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-12 border">
+    <h5>@Html.DisplayFor(m => m.DocumentType)</h5>
+    <span class="pull-right text-muted"><small>@Html.DisplayFor(m => m.DocumentMediaType)</small></span>
+    <table class="table table-condensed">
+      <thead>
+      <tr>
+        <th>FIELD</th>
+        <th>VALUE</th>
+      </tr>
+      </thead>
+      <tbody>
+      @foreach (var field in Model.FormItems)
+      {
+        <tr>
+          <td>@field.Key</td>
+          <td>@field.Value</td>
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row m-t-lg">
+  <div class="col-md-12">
+    <div class="alert alert-warning text-center">
+      <p>
+        <strong>@Html.GlyphFa("info-circle") Note: </strong> This step will send an email to the organization administrator 
+        that provides access to the system.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row m-t-lg m-b-lg">
+  <div class="col-md-12 text-center">
+    @using (Html.BeginForm("Approve", "Registration", FormMethod.Post))
+    {
+      @Html.AntiForgeryToken()
+
+      @Html.HiddenFor(m => m.Id)
+
+      @Html.ActionLink("Cancel", "Index", "Registration", new {area = AdministrationAreaRegistration.Name, id = Model.Id}, new {@class = "btn btn-default"})
+      <button type="submit" class="btn btn-lg btn-success m-l-lg">
+        Approve Registration @Html.GlyphFa("check-square-o")
+      </button>
+    }
+  </div>
+</div>

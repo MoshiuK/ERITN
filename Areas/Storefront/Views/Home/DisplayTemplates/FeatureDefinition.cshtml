@@ -1,0 +1,47 @@
+﻿@using AccessManagement.Definitions.Storefront.LandingPages
+@model FeatureDefinition
+
+@helper RenderCopy(bool centered)
+{
+  var w = centered ? "col-md-12" : "col-md-6";
+  <div class="@w">
+    <h2>@Html.DisplayFor(m => m.Title)</h2>
+    <div class="p">@Html.Raw(Model.Copy)</div>
+    @if (Model.MoreInformation != null)
+    {
+      @Html.DisplayFor(m => m.MoreInformation, "LinkDefinitionButton")
+    }
+  </div>
+}
+
+@helper RenderImage(bool centered)
+{
+var w = centered ? "col-md-12" : "col-md-6";
+
+  <div class="@w">
+    <img class="center-block" src="@Model.ImageUrl" alt="@Model.Title"/>
+  </div>
+}
+
+
+<div class="feature-item">
+  <div class="row">
+    @switch (Model.Orientation)
+    {
+      case FeatureCopyImageOrientation.ImageLeftCopyRight:
+        @RenderImage(false)
+        @RenderCopy(false)
+        break;
+      case FeatureCopyImageOrientation.ImageRightCopyLeft:
+        @RenderCopy(false)
+        @RenderImage(false)
+        break;
+      case FeatureCopyImageOrientation.CopyCenteredNoImage:
+        @RenderCopy(true)
+        break;
+      case FeatureCopyImageOrientation.ImageCenteredNoCopy:
+        @RenderImage(true)
+        break;
+    }
+  </div>
+</div>

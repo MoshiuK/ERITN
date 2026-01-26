@@ -1,0 +1,8 @@
+﻿@model AccessManagement.Framework.Credentials.CredentialSummary
+<div class="card">
+  <img style="width: 100%" src="@Model.MemberAvatar.Medium" alt="@Html.ValueFor(m => m.Member.Name)"/>
+  <div class="card-footer">
+    <h2 class="text-center">@Html.DisplayFor(m => m.Member.Name)</h2>
+  </div>
+</div>
+

@@ -1,0 +1,40 @@
+﻿@using AccessManagement.Web.ViewModels.Framework
+@using Juillet.Web.Mvc.Html
+@model IReadOnlyCollection<AccessManagement.Models.Core.OrganizationActionItem>
+@if (Model.Count > 0)
+{
+  <ul class="action-list">
+    @foreach (var item in Model)
+    {
+      <li class="action-list-item">
+        <div class="pull-right">
+          @if (item.IsAssignedTo(this.User.Identity))
+          {
+            <a data-action-btn="rescind" data-action-id="@item.CorrelationId" class="action-button" href="#" title="Rescind">@Html.GlyphFa("undo", GlyphStyles.FixedWidth)</a>
+          }
+          else
+          {
+            <a data-action-btn="take" data-action-id="@item.CorrelationId" class="action-button" href="#" title="Take">@Html.GlyphFa("play-circle", GlyphStyles.FixedWidth)</a>
+          }
+          <a data-action-btn="complete" data-action-id="@item.CorrelationId" class="action-button" href="#" title="Mark Complete">@Html.GlyphFa("check-square-o", GlyphStyles.FixedWidth)</a>
+        </div>
+        @if (item.HasResourceLink())
+        {
+          <a class="undecorated-link" href="@item.BuildResourceLink()">
+            @item.ActionMessage
+          </a>
+        }
+        else
+        {
+          <span>@item.ActionMessage</span>
+        }
+      </li>
+    }
+
+  </ul>
+}
+else
+{
+  <em class="text-muted">No actions found.</em>
+}
+

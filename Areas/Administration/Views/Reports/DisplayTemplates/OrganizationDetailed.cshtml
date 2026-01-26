@@ -1,0 +1,15 @@
+﻿@model AccessManagement.Models.Core.Organization
+<tr>
+  <td>@Html.DisplayFor(m => m.Name)</td>
+  <td>@Model.Memberships.Count</td>
+  <td>@Html.DisplayFor(m => m.Profile.StreetAddress)</td>
+  <td>@Html.DisplayFor(m => m.Profile.Website)</td>
+  <td>@Html.DisplayFor(m => m.Profile.CreatedOn)</td>
+  <td>@Html.DisplayFor(m => m.Profile.BusinessContactName)</td>
+  <td>@Html.DisplayFor(m => m.Profile.BusinessContactEmail)</td>
+  <td>@Html.DisplayFor(m => m.Profile.BusinessContactPhone)</td>
+  <td>@Html.DisplayFor(m => m.Profile.EmergencyContactName)</td>
+  <td>@Html.DisplayFor(m => m.Profile.EmergencyContactEmail)</td>
+  <td>@Html.DisplayFor(m => m.Profile.EmergencyContactPhone)</td>
+</tr>
+

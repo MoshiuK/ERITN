@@ -1,0 +1,34 @@
+﻿@model System.Collections.Generic.List<AccessManagement.Web.Areas.Storefront.ViewModels.Home.CredentialDownloadViewModel>
+
+@{
+  Layout = "~/Views/Shared/_MinimalBrandLayout.cshtml";
+  ViewBag.Title = "Credential Download Links";
+}
+
+<div class="page-jumbotitle">
+  <h1>@ViewBag.Title</h1>
+</div>
+
+<div class="col-md-12">
+  <table>
+    <thead>
+    <tr>
+      <th>Form Factor Description</th>
+      <th>Link</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var formFactorDownload in Model)
+    {
+      <tr>
+        <td>
+          @(formFactorDownload.Description)
+        </td>
+        <td>
+          <a href="@(formFactorDownload.Uri)">@(formFactorDownload.ShortName)</a>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>

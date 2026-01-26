@@ -1,0 +1,85 @@
+﻿@using Juillet.Web.Mvc.Html
+@using AccessManagement.Web.Mvc
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.DirectoryDetailEntry
+
+@Html.HiddenFor(m => m.Latitude, new { id = "latField" })
+@Html.HiddenFor(m => m.Longitude, new { id = "longField" })
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="@Url.Action("Index", "Organization", new { id = Model.Organization.CorrelationId })">
+                    <h4 class="heading-inline-block"><strong>@Html.DisplayFor(m => m.Organization.Name)</strong></h4>
+                </a>
+                <div class="pull-right">
+                    @if (Model.Organization.Active)
+                    {
+                        <div class="label label-success">ACTIVE</div>
+                    }
+                    else
+                    {
+                        <div class="label label-default">INACTIVE</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row m-t-sm">
+            <div class="col-md-4">
+                <img class="img-lg" src="@Model.AvatarInfo.Small" alt="Logo for @Html.ValueFor(m => m.Organization.Name)" />
+            </div>
+            <div class="col-md-8">
+                <strong>@Html.DisplayFor(m => m.Organization.Profile.BusinessContactName)</strong> <br />
+                <a href="@Html.ValueFor(m => m.Organization.Profile.BusinessContactEmail)">@Html.DisplayFor(m => m.Organization.Profile.BusinessContactEmail)</a> <br />
+                @Html.DisplayFor(m => m.Organization.Profile.BusinessContactPhone) <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="text-muted">@Html.GlyphFa("map-marker") @Html.DisplayFor(m => m.Organization.Profile.StreetAddress)</h5>
+                <div id="mapDiv"></div>
+            </div>
+        </div>
+
+        <div class="row m-t-sm">
+            <div class="col-sm-12">
+                <h4 class="border-bottom">@Html.GlyphFa("users") Personnel (@Model.Memberships.Count)</h4>
+            </div>
+        </div>
+        <div class="card-content card-200px-scrollable">
+            @foreach (var item in Model.Memberships)
+            {
+                <div class="row">
+                    <div class="col-md-11">
+                        <p>
+                            <strong>• @Html.DisplayFor(_ => item.Member.Name)</strong>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+        @{
+            var moreUsersVisible = Model.HasMoreMemberships ? "visible" : "hidden";
+            <small style="visibility:@(moreUsersVisible)">Currently displaying the 100 most recently created personnel.</small>
+        }
+
+        <div class="row m-t-sm">
+            <div class="col-sm-12">
+                <h4 class="border-bottom">@Html.GlyphFa("th-list") Activity</h4>
+            </div>
+        </div>
+        <div class="card-content card-200px-scrollable">
+            <div class="text-muted"><small>Found @Html.DisplayFor(m => m.SystemActivities.Metadata.TotalCount) items.</small></div>
+            @foreach (var item in Model.SystemActivities.Data)
+            {
+                <div class="row">
+                    <div class="col-md-11">
+                        <p>
+                            <small>• @Html.DisplayFor(_ => item.ActivityOccurredAt) </small>
+                            <small> - @Html.DisplayFor(_ => item.Remarks)</small>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

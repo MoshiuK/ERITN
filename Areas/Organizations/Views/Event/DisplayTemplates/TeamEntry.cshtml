@@ -1,0 +1,20 @@
+﻿@model AccessManagement.Framework.Events.TeamEntry
+<tr>
+  <td class="text-center" style="vertical-align: middle">
+    <input type="checkbox"
+           data-roster-entry-type="team"
+           data-team-id="@Model.CorrelationId" />
+  </td>
+  <td colspan="3">
+    @Html.DisplayFor(m => m.Avatar, "TeamAvatar")
+    <a class="undecorated-link" href="@Url.Action("Members", "Teams", new {id = Model.CorrelationId})">
+      <strong>
+        @Html.DisplayFor(m => m.Name)
+      </strong>
+    </a>
+  </td>
+</tr>
+@foreach (var next in Model.CredentialsForMembers)
+{
+  @Html.DisplayFor(_ => next, new { indent = true })
+}

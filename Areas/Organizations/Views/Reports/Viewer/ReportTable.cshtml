@@ -1,0 +1,24 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Reports.ReportViewer
+@using Juillet.SystemExtensions
+<div class="report-viewer-content">
+  @Html.Partial("Viewer/ReportToolbar", Model)
+  <div class="report-viewer-table-container">
+    <table class="table table-condensed table-bordered">
+      <thead>
+        <tr>
+          @foreach (var col in Model.Columns)
+          {
+            var colAttr = $"visibility-{col.Key.ToSearchable()}";
+            <th @colAttr class="text-uppercase">@col.DisplayName</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var row in Model.Rows.Data)
+        {
+          @Html.DisplayFor(_ => row)
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

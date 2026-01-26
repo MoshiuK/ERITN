@@ -1,0 +1,531 @@
+﻿@model AccessManagement.Web.ViewModels.Home.UnifiedViewModel
+@{
+  Layout = null;
+  <style>
+    .divider {
+      display: none;
+      margin: 30px 30px 0;
+      padding: 0;
+      border-top: 1px solid @(Model.ButtonBorderColorHover);
+      text-align: center;
+    }
+
+    #createAccount:hover {
+      background-color: @(Model.ButtonBgHover);
+      border: 1px solid @(Model.ButtonBorderColorHover);
+      border-radius: 4px;
+      -moz-box-shadow: 0 0 0;
+      -webkit-box-shadow: 0 0 0;
+      box-shadow: 0 0 0;
+    }
+
+    .buttons button:hover {
+      background: @(Model.ButtonBg);
+      border: 1px solid @(Model.ButtonBorderColorHover);
+      -moz-box-shadow: 0 0 0;
+      -webkit-box-shadow: 0 0 0;
+      box-shadow: 0 0 0;
+    }
+
+    .main {
+      height: 100%;
+      margin: 0;
+      padding: 8% 0 0;
+      background-image: @(Model.SplashImage);
+      background-repeat: no-repeat;
+      background-size: cover;
+      -webkit-animation: fadeIn 1s;
+      animation: fadeIn 1s;
+      text-align: left;
+    }
+
+    .brand-separator {
+      margin: 10px 0;
+      height: 25px;
+      background-color: @(Model.SeparatorColor);
+    }
+
+    .divider h2 {
+      display: none;
+      margin: 0;
+      padding: 0 20px;
+      position: relative;
+      top: -20px;
+      background-color: #FFF;
+      width: auto;
+      color: @(Model.ButtonBorderColorHover);
+      font-weight: bold;
+    }
+
+    .buttons button {
+      width: auto;
+      height: auto;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      border-radius: 4px;
+      margin: 0;
+      font-size: 1em;
+      padding: 12px;
+      min-width: 50px;
+      background: @(Model.ButtonBg);
+      border: 1px solid @(Model.ButtonBorderColorHover);
+      color: white;
+    }
+
+    #createAccount {
+      border: 1px solid @(Model.ButtonBorderColorHover);
+      color: #FFF;
+      margin-left: 20px;
+      margin-right: 10px;
+      padding: 12px;
+      transition: background-color 1s ease 0s;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 0.9em;
+      word-wrap: break-word;
+      height: 34px;
+      width: 158px;
+      background-color: @(Model.ButtonBg);
+      cursor: pointer;
+    }
+  </style>
+}
+<html lang="en-US">
+<head>
+
+  <title>User Details</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="locale" content="en-US">
+  <meta name="ROBOTS" content="NONE, NOARCHIVE">
+  <meta name="GOOGLEBOT" content="NOARCHIVE">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+  <style id="common">
+    @@charset "utf-8";
+
+    html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: 'Segoe UI', Segoe, Tahoma, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      background-color: transparent;
+      color: #000;
+      text-decoration: none;
+    }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+    h1,
+    h2 {
+      font-weight: 400;
+    }
+
+    img {
+      border: 0;
+    }
+
+    form {
+      height: auto;
+      width: auto;
+    }
+
+    .panel {
+      display: block;
+      border: 1px groove lightgray;
+      background: #FFF;
+      min-height: 550px;
+      width: 500px;
+      min-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .page-copy {
+      margin-bottom: 40px;
+    }
+
+    .normaltext,
+    .smalltext,
+    .tinytext {
+      font-family: 'Segoe UI', Segoe, Tahoma, Helvetica, Arial, sans-serif;
+    }
+
+    #brand {
+      padding: 30px 30px 0;
+    }
+
+    .banner {
+      height: 50px;
+    }
+
+    .intro {
+      text-align: center;
+      padding: 0 30px 0;
+    }
+
+      .intro h2 {
+        font-size: 1.5em;
+      }
+
+      .intro p {
+        font-size: 1.1em;
+      }
+
+    label {
+      max-width: 100%;
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    .entry,
+    .attr {
+      padding: 0 30px 0;
+      margin: 0;
+    }
+
+      .entry ul,
+      .attr ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+    .entry-item .error.itemLevel,
+    .attrEntry .error.itemLevel {
+      display: none;
+      color: #a61e0c;
+      font-size: 0.9em;
+    }
+
+    .entry-item input:focus,
+    .attrEntry input:focus,
+    .entry-item select:focus,
+    .attrEntry select:focus,
+    .entry-item textarea:focus,
+    .attrEntry textarea:focus {
+      outline: 0;
+      border-color: #66afe9;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+      box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.075), 0px 0px 8px rgba(102, 175, 233, 0.6);
+    }
+
+    .entry-item select,
+    .attrEntry select {
+      height: 28px;
+    }
+
+    .entry-item option[disabled=disabled],
+    .attrEntry option[disabled=disabled] {
+      display: inline;
+    }
+
+    .entry-item input[type=radio],
+    .attrEntry input[type=radio],
+    .entry-item select,
+    .attrEntry select,
+    .entry-item .textInput,
+    .attrEntry .textInput {
+      margin-top: 4px;
+    }
+
+      .entry-item input[type=radio] + label,
+      .attrEntry input[type=radio] + label {
+        display: inline;
+      }
+
+    .entry-item input[type=email],
+    .attrEntry input[type=email],
+    .entry-item input[type=number],
+    .attrEntry input[type=number],
+    .entry-item input[type=password],
+    .attrEntry input[type=password],
+    .entry-item input[type=text],
+    .attrEntry input[type=text] {
+      display: block;
+      border-radius: 4px;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+      height: 28px;
+      width: 94%;
+      padding: 6px 12px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      color: #555;
+      -moz-box-shadow: 0 0 0;
+      -webkit-box-shadow: 0 0 0;
+      box-shadow: 0 0 0;
+    }
+
+      .entry-item input[type=email]:focus,
+      .attrEntry input[type=email]:focus,
+      .entry-item input[type=number]:focus,
+      .attrEntry input[type=number]:focus,
+      .entry-item input[type=password]:focus,
+      .attrEntry input[type=password]:focus,
+      .entry-item input[type=text]:focus,
+      .attrEntry input[type=text]:focus {
+        border: 1px solid #4d90fe;
+      }
+
+    .entry-item input:invalid,
+    .attrEntry input:invalid {
+      outline: 0;
+      border: 2px solid #a61e0c;
+      background-color: #fce8e8;
+      border-radius: 4px;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+    }
+
+    ul li:nth-child(4) div.attrEntry {
+      margin-top: 20px;
+    }
+
+    .entry {
+      padding: 0 30px 0;
+      margin: 0;
+    }
+
+    .entry-item {
+      padding-top: 8px;
+    }
+
+    ::-webkit-input-placeholder {
+      color: #6d6d6d;
+    }
+
+    :-moz-placeholder {
+      color: #6d6d6d;
+    }
+
+    ::-moz-placeholder {
+      color: #6d6d6d;
+    }
+
+    :-ms-input-placeholder {
+      color: #6d6d6d !important;
+    }
+
+    .buttons {
+      padding: 0;
+      margin: 30px 0;
+    }
+
+      .buttons.verify {
+        padding: 0;
+        margin-top: 10px;
+      }
+
+      .buttons button:disabled,
+      .buttons button[disabled] {
+        background-color: #696969;
+      }
+
+    .create {
+      display: none;
+    }
+
+    #createAccount:focus {
+      outline: gold solid 1px;
+    }
+
+    #continue {
+      margin-left: 30px;
+    }
+
+    .errorText,
+    .error {
+      color: #a61e0c;
+      padding: 20px;
+    }
+
+    .highlightError {
+      border: 1px solid #a61e0c !important;
+      background-color: #fce8e8 !important;
+    }
+
+    .error-page-content {
+      padding: 0 30px 0;
+    }
+
+      .error-page-content .error-page-help {
+        margin-top: 10px;
+        margin-bottom: 30px;
+      }
+
+      .error-page-content .error-page-messagedetails {
+        color: darkgray;
+        font-size: small;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+        .error-page-content .error-page-messagedetails div {
+          margin-bottom: 4px;
+        }
+
+        .error-page-content .error-page-messagedetails .error-page-detail {
+          color: #a61e0c;
+        }
+
+    .working {
+      display: none;
+      background: url(data:image/gif;base64,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) no-repeat;
+      height: 10px;
+      width: auto;
+    }
+
+    .tiny {
+      font-size: 0.8em;
+      float: right;
+      display: none;
+    }
+
+    .helpText {
+      color: darkgray;
+      font-size: small;
+      margin-top: 10px;
+      display: none;
+    }
+
+    #reenterPassword {
+      margin-top: 4px;
+    }
+
+    #email_intro {
+      color: black;
+    }
+
+    #email_ver_input_label::after {
+      content: " is needed to confirm your email";
+    }
+
+    label[for='email'] {
+      margin-top: 8px;
+    }
+
+    label[for='signInName'] {
+      font-size: 0;
+    }
+
+    label[for='signInName']:before {
+      content: "Username"; 
+      font-size: 16px;
+    }
+
+    label[for='signInName']:after {
+      content: "\A(Only letters and numbers are allowed. e.g. jsmith99)"; 
+      font-size: 12px;
+      font-weight: lighter;
+      white-space: pre-wrap;
+    }
+
+    label[for='newPassword']:after { 
+      content: "\A(Minimum length of 8 with at least one uppercase, lowercase, and number.)"; 
+      font-size: 12px;
+      font-weight: lighter;
+      white-space: pre-wrap;
+    }
+
+    .verificationSuccessText {
+      color: green;
+    }
+
+    .verificationErrorText {
+      color: #a61e0c;
+    }
+
+    .verificationInfoText {
+      color: gray;
+      font-weight: normal;
+    }
+
+    .password-label label {
+      display: inline-block;
+    }
+
+    #forgotPassword {
+      font-size: 0.75em;
+      padding-left: 5px;
+      float: right;
+    }
+
+    @@-webkit-keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @@media only screen and (min-height: 250px) and (max-width: 600px), (min-device-height: 250px) and (max-device-width: 600px) {
+      html {
+        overflow: hidden;
+      }
+
+      .main {
+        padding: 0;
+      }
+
+      .panel {
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  <div class="main">
+    <div class="panel">
+      <div id="brand">
+        <a href="@(ViewBag.HomeLink)" target="_blank">
+          <img class="banner" alt="@(ViewBag.BrandCaption)" src="@(Model.Banner)">
+        </a>
+        <div>
+          @if (!string.IsNullOrWhiteSpace(ViewBag.HomeLink))
+          {
+            <a href="@(ViewBag.HomeLink)" target="_blank">@(ViewBag.HomeLink)</a> @Html.Raw(@"-")
+          }
+          @if (!string.IsNullOrWhiteSpace(ViewBag.SupportEmail))
+          {
+            <a href="mailto:@ViewBag.SupportEmail">@ViewBag.SupportEmail</a>
+          }
+        </div>
+      </div>
+      <div class="brand-separator">
+      </div>
+      <div id="api">
+      </div>
+    </div>
+  </div>
+  <script>"use strict"; $(document).ready(function () { if (navigator.userAgent.match(/IEMobile\/10\.0/)) { var t = document.createElement("style"); t.appendChild(document.createTextNode("@@-ms-viewport{width:auto!important}")), t.appendChild(document.createTextNode("@@-ms-viewport{height:auto!important}")), document.getElementsByTagName("head")[0].appendChild(t) } if (navigator.userAgent.match(/MSIE 10/i)) { var e = $("#footer_links_container"); $(e).css("padding-top", "100px") } var o, i = $("#background_background_image"), n = function () { document.body.style.overflow = "hidden", ($(window).width() - 500) / $(window).height() < o ? (i.height($(window).height()), i.width("auto")) : (i.width($(window).width() - 500), i.height("auto")), document.body.style.overflow = "" }; $("<img>").attr("src", i.attr("src")).load(function () { o = this.width / this.height, n() }), $(window).resize(function () { n() }), "undefined" != typeof $("#MicrosoftAccountExchange") && $("#MicrosoftAccountExchange").text("Microsoft"), $("*").removeAttr("placeholder") });</script>
+
+</body>
+</html>

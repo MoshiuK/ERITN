@@ -1,0 +1,37 @@
+﻿@using AccessManagement.Framework.Tenants
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Access.ViewModels.DetailsPageViewModel
+@{
+  Layout = "~/Areas/Access/Views/Shared/_AccessLayout.cshtml";
+  var theme = (TenantTheme)ViewBag.Theme;
+}
+
+<div class="row m-b-sm bg-primary">
+  <div class="col-md-12">
+    <img src="@theme.BrandLogo" alt="@theme.BrandCaption" />
+  </div>
+</div>
+
+<div class="row m-b-sm">
+  <div class="col-md-12">
+    <a href="@Url.Action("Query")">@Html.GlyphFa("arrow-circle-left") Back to Search</a>
+  </div>
+</div>
+
+<div class="row m-b-md">
+  <div class="col-md-6">
+    @Html.Partial("Details/OutcomeCard", Model.Credential)
+    @Html.Partial("Details/IssuanceCard", Model.Credential)
+    @Html.Partial("Details/OrganizationCard", Model)
+  </div>
+  <div class="col-md-6">
+    @Html.Partial("Details/MemberCard", Model.Credential)
+    @Html.Partial("Details/PropertyVerificationCard", Model.Credential)
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    @Html.Partial("Details/CredentialActivityCard", Model.Activities)
+  </div>
+</div>

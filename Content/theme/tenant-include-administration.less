@@ -1,0 +1,256 @@
+﻿//
+// AGGREGATE ALL STYLES, LAYOUTS, CONTROLS FOR THE ADMINISTRATION AREA
+//
+// NOTE: This file should be imported by a less file in the tenant project,
+//       customized and compiled to tenant specific CSS.  This file should
+//       not be compiled to CSS directly.
+//
+
+@fa-var-check: "\f00c";
+
+// import bootstrap
+@import "../bootstrap/bootstrap.less";
+@import "../awesome-bootstrap-checkbox.less";
+
+// import juillet
+@import "../juillet/juillet-web-mvc.less";
+
+// import all storefront customizations
+@import "tenant-brand-variables.less";
+@import "../layouts/administration.less";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+// This file is intended for styles that are specific to controls in the administration area.
+// In general do not override brand colors here; brand colors are overridden in the tenant specific content.
+
+.navbar-brand {
+  padding-top: 0;
+}
+
+#mapDiv {
+    height: 350px;
+    overflow: visible;
+}
+
+.sidebar {
+  margin-top: 15px;
+  padding: 0;
+  min-height: 500px;
+
+  .row {
+    margin: 0;
+    padding: 0;
+  }
+
+  label,
+  .sidebar-caption,
+  .sidebar-value {
+    display: block;
+    font-size: x-small;
+    color: @text-muted;
+    word-wrap: break-word;
+  }
+
+  label {
+    margin: 12px 0 2px 0;
+  }
+
+  .label {
+    &.label-sidebar-status {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+
+      &.active {
+        background-color: @label-success-bg;
+        color: @label-color;
+      }
+
+      &.inactive {
+        background-color: @label-warning-bg;
+        color: @label-color;
+      }
+    }
+  }
+}
+
+#generalSettingsForm > div.form-group > label {
+  font-size: large;
+  font-weight: normal;
+  margin-top: 12px;
+}
+
+.people-directory {
+  &.summary-row {
+    .summary-row-name {
+      & > span {
+        display: block;
+      }
+    }
+  }
+  &.affiliation {
+    .affiliation-info {
+      display: inline-block;
+      & > span {
+        display: block;
+      }
+    }
+    .affiliation-avatar {
+      float: right;
+    }
+  }
+}
+
+th.pw-60 {
+  width: 60%;
+}
+th.pw-40 {
+  width: 40%;
+}
+
+.table-action-cell {
+  button, input, form, div {
+    display: inline-block;
+  }
+
+  button {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.card-content.card-200px-scrollable {
+  height: 200px;
+  overflow-y: auto;
+}
+.card-content.card-250px-scrollable {
+  height: 250px;
+  overflow-y: auto;
+}
+.card-content.card-300px-scrollable {
+  height: 300px;
+  overflow-y: auto;
+}
+
+.credentials-table {
+  .credentials-table-item {
+    h4 {
+      font-weight: bold;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .credential {
+      width: 100%;
+      height: 52px;
+      margin-left: 20px;
+      margin-bottom: 8px;
+
+      .credential-access-level {
+        width: 120px;
+        display: inline;
+        vertical-align: top;
+
+        .tier-label {
+          display: inline-block;
+        }
+      }
+
+      .credential-info-line {
+        display: inline-block;
+
+        .avatar-view {
+          display: inline;
+        }
+      }
+    }
+  }
+}
+
+img.eventtype-icon {
+  background-color: slateGray;
+  border-radius: 50%;
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+}
+
+td.eventlocation-item .avatar-item,
+li.eventlocation-item .avatar-item {
+  display: inline;
+}
+
+img.jurisdiction-icon {
+  background-color: slateGray;
+  padding: -4px;
+  width: 32px;
+  height: 32px;
+}
+
+.captioned-avatar {
+  .avatar-view {
+    display: inline;
+    img {
+      background-color: slateGray;
+      padding: -4px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+tr.organization-location-row {
+  td {
+    padding: 4px !important;
+
+    &.name-cell {
+      img {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    .trait-section {
+      float: left;
+      min-width: 100%;
+      padding: 4px 0;
+    }
+  }
+}
+
+.toolbar-inline-form {
+  display: inline;
+}
+
+.registrationhub {
+  button.registrationbutton{
+    width: 89px;
+    margin-right: 1px;
+  }
+}
+
+.paymentStatus {
+  border-left: thick solid;
+}
+
+.newInvoice {
+  border-color: #5cb85c;
+}
+
+.billedInvoice {
+  border-color: #5bc0de;
+}
+
+.paidInvoice {
+  border-color: #428bca
+}
+
+.overDueInvoice {
+  border-color: #d9534f;
+}
+
+.leadButton {
+  width: 100px;
+  font-size: small;
+}

@@ -1,0 +1,105 @@
+﻿@using Juillet.Web.Mvc.Html
+@{
+  bool isWebVerboseEnabled = Convert.ToBoolean(this.ViewBag.IsWebVerboseEnabled);
+}
+
+<div class="alert alert-warning text-center">
+  <p>
+    <strong>
+      @Html.GlyphFa("exclamation-triangle") WARNING:
+      Changing system settings can break the application and impact service level agreements. Change with care!
+    </strong>
+  </p>
+</div>
+<div class="row">
+  <div class="col-md-4 text-center">
+    <a href="@Url.Action("AccessLevels")" class="btn btn-lg btn-default btn-block">
+      <h1>@Html.GlyphFa("list-ol")</h1>
+      <p>Manage access levels</p>
+    </a>
+  </div>
+  <div class="col-md-4 text-center">
+    <a href="@Url.Action("TransitPurposes")" class="btn btn-lg btn-default btn-block">
+      <h1>@Html.GlyphFa("truck")</h1>
+      <p>Manage support functions</p>
+    </a>
+  </div>
+  <div class="col-md-4 text-center">
+    <a href="@Url.Action("TransitLocations")" class="btn btn-lg btn-default btn-block">
+      <h1>@Html.GlyphFa("map-marker")</h1>
+      <p>Manage transit locations</p>
+    </a>
+  </div>
+</div>
+<div class="row m-t-lg">
+  <div class="col-md-4 text-center">
+    <a href="@Url.Action("Configuration")" class="btn btn-lg btn-default btn-block">
+      <h1>@Html.GlyphFa("sliders")</h1>
+      <p>Configuration settings</p>
+    </a>
+  </div>
+  <div class="col-md-4 text-center">
+    <a href="@Url.Action("PropertyTypes")" class="btn btn-lg btn-default btn-block">
+      <h1>@Html.GlyphFa("th-list")</h1>
+      <p>Property Types</p>
+    </a>
+  </div>
+  <div class="col-md-4 text-center">
+    <a href="@Url.Action("PropertyTypes")" class="btn btn-lg btn-default btn-block">
+      <h1>@Html.GlyphFa("th-list")</h1>
+      <p>Property Types</p>
+    </a>
+  </div>
+  <div class="col-md-4 text-center m-t-md">
+    @if (isWebVerboseEnabled)
+    {
+      using (Html.BeginForm("ToggleVerboseTracingWebApp", "System", new { isEnablingVerbose = false }, FormMethod.Post))
+      {
+        @Html.AntiForgeryToken()
+        <button class="btn btn-lg btn-default btn-block">
+          <h1>
+            @Html.GlyphFa("globe")
+          </h1>
+          <p><b>Disable</b><br />verbose tracing on the web app.</p>
+        </button>
+      }
+    }
+    else
+    {
+      using (Html.BeginForm("ToggleVerboseTracingWebApp", "System", new { isEnablingVerbose = true }, FormMethod.Post))
+      {
+        @Html.AntiForgeryToken()
+        <button class="btn btn-lg btn-default btn-block">
+          <h1>
+            @Html.GlyphFa("globe")
+          </h1>
+          <p><b>Enable</b><br />verbose tracing on the web app.</p>
+        </button>
+      }
+    }
+  </div>
+  <div class="col-md-4 text-center m-t-md">
+    @using (Html.BeginForm("ToggleVerboseTracingWebJob", "System", new { isEnablingVerbose = true }, FormMethod.Post))
+    {
+      @Html.AntiForgeryToken()
+      <button class="btn btn-lg btn-default btn-block">
+        <h1>
+          @Html.GlyphFa("pencil")
+        </h1>
+        <p>Request to <b>enable</b><br />verbose tracing on the web job.</p>
+      </button>
+    }
+  </div>
+  <div class="col-md-4 text-center m-t-md">
+    @using (Html.BeginForm("ToggleVerboseTracingWebJob", "System", new { isEnablingVerbose = false }, FormMethod.Post))
+    {
+      @Html.AntiForgeryToken()
+      <button class="btn btn-lg btn-default btn-block">
+        <h1>
+          @Html.GlyphFa("pencil")
+        </h1>
+        <p>Request to <b>disable</b><br />verbose tracing on the web job.</p>
+      </button>
+    }
+  </div>
+</div>

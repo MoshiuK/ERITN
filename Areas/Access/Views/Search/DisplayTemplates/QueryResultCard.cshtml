@@ -1,0 +1,7 @@
+﻿@model AccessManagement.Web.Areas.Access.ViewModels.QueryResultCard
+
+<div class="access-credential-card-container">
+  <a class="undecorated-link" href="@Url.Action("Details", new {id = Model.Credential.CredentialId})">
+    @Html.DisplayFor(m => m.Credential)
+  </a>
+</div>

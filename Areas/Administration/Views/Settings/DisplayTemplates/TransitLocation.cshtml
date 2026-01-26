@@ -1,0 +1,31 @@
+﻿@using AccessManagement.Web.Areas.Administration.ViewModels
+@using AccessManagement.Models.Core
+@using AccessManagement.Web.Mvc
+@model AvailabilityOf<TransitLocation>
+ 
+@{
+  var activeCaption = Model.IsAvailable ? "ACTIVE" : "INACTIVE";
+  var activeLabelStyle = Model.IsAvailable ? "label-success" : "label-default";
+  var activeButtonStyle = Model.IsAvailable ? "btn-warning" : "btn-success";
+  var activeButtonCaption = Model.IsAvailable ? "Deactivate" : "Activate";
+}
+<div class="row m-b-lg">
+  <div class="col-md-2 text-center">
+    @Html.ThumbnailFor(Model.Resource)
+  </div>
+  <div class="col-md-8">
+    <h3 class="heading-inline-block">@Html.DisplayFor(m => m.Resource.Name)</h3>
+    <span id="status-@Model.Resource.CorrelationId" class="pull-right label @activeLabelStyle">@activeCaption</span>
+    <p class="text-muted">
+      @Html.DisplayFor(m => m.Resource.Description)
+    </p>
+  </div>
+  <div class="col-md-2 text-center">
+    <button class="btn btn-sm @activeButtonStyle"
+            data-sps-action="toggle-transitlocation"
+            data-sps-resource-id="@Model.Resource.CorrelationId"
+            data-sps-resource-name="@Model.Resource.Name"><span>@activeButtonCaption</span>
+      @Html.BusyIndicator()
+    </button>
+  </div>
+</div>

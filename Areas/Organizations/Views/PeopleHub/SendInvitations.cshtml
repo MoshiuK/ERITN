@@ -1,0 +1,244 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.PeopleHub.SendInvitationsViewModel
+@Html.HiddenFor(m => m.TutorialsUrl)
+@Html.Partial("Breadcrumbs", (NavBar)ViewBag.Breadcrumbs)
+
+<div>
+  @if (Model.AvailableEmergencyPersonnel > 0 && Model.TotalEmergencyPersonnel >= Model.AvailableEmergencyPersonnel)
+  {
+    var warningText = $"You have exceeded your limit of enrolled members by {Model.TotalEmergencyPersonnel - Model.AvailableEmergencyPersonnel}. You only have only purchased enough licenses for {Model.AvailableEmergencyPersonnel} enrolled member. ";
+    if (Model.TotalEmergencyPersonnel == Model.AvailableEmergencyPersonnel)
+    {
+      warningText = $"You are at your limit of {Model.AvailableEmergencyPersonnel} members. ";
+    }
+    <div class="alert alert-danger">
+      @warningText @("Please purchase more member spots by clicking this ") @Html.ActionLink("link", "Index", "Payment")
+      @(" and clicking the Add Order button.")
+    </div>
+  }
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-primary">Invite someone to enroll</h2>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10">
+        <h3>
+          Use a Web Enrollment Form
+        </h3>
+        <p>
+          Provide a link to a web enrollment form on our website that allows anyone with the link to enroll in your organization.
+          You can paste the link into an email, instant messaging or your favorite collaborate tool to share it with your emergency personnel.
+        </p>
+        <p>
+          <strong>NOTE: anyone who has this link can enroll in your organization, so share it responsibly.</strong>
+        </p>
+      </div>
+    </div>
+
+    <div id="webLinkOptionsContainer" class="row m-b-lg">
+      <div class="col-md-offset-1 col-md-10 full-width">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseWebLink" aria-expanded="false" aria-controls="collapseExample">
+          @Html.GlyphFa("cog") Web Enrollment Form Options &amp; Restrictions
+        </button>
+        @using (Html.BeginForm("InviteToWebLink", "PeopleHub", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+          @Html.AntiForgeryToken()
+
+          <div class="collapse m-t-md" id="collapseWebLink">
+            <div class="well">
+              <div class="form-group">
+                @Html.LabelFor(m => m.WebLinkForm.Settings.MembershipType, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-8">
+                  @Html.EditorFor(m => m.WebLinkForm.Settings.MembershipType)
+                  <div class="help-block">
+                    <small>
+                      Restrict this link to only allow the the specified affiliation.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(m => m.WebLinkForm.Settings.DesignatedAccessLevel, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-8">
+                  @Html.DropDownListFor(m => m.WebLinkForm.Settings.DesignatedAccessLevel, Model.AvailableAccessLevels, new { @class = "form-control select2-component" })
+                  <div class="help-block">
+                    <small>
+                      Restrict this link to only allow the specified access level.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(m => m.WebLinkForm.Settings.DesignatedTransitLocation, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-8">
+                  @Html.DropDownListFor(m => m.WebLinkForm.Settings.DesignatedTransitLocation, Model.AvailableLocations, new { @class = "form-control select2-component" })
+                  <div class="help-block">
+                    <small>
+                      Restrict this link to only allow the specified location.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(m => m.WebLinkForm.Settings.DesignatedTransitPurpose, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-8">
+                  @Html.DropDownListFor(m => m.WebLinkForm.Settings.DesignatedTransitPurpose, Model.AvailablePurposes, new { @class = "form-control select2-component" })
+                  <div class="help-block">
+                    <small>
+                      Restrict this link to only allow the specified purpose.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button id="generateLinkButton" class="btn btn-success m-t-sm" type="submit">
+            @Html.GlyphFa("link") Generate Enrollment Link
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-primary"><em>or</em></h2>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10">
+        <h3>
+          Invite Individuals by Email or Phone
+        </h3>
+        <p>
+          Send and enrollment invitations email or text message to individuals you want to invite.
+        </p>
+      </div>
+    </div>
+
+    <div id="individualInviteOptionsContainer" class="row m-b-lg">
+      <div class="col-md-offset-1 col-md-10">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseInvitePerEntry" aria-expanded="false" aria-controls="collapseExample">
+          @Html.GlyphFa("cog") Invitation Options &amp; Restrictions
+        </button>
+        @using (Html.BeginForm("InvitePerEntry", "PeopleHub", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+          @Html.AntiForgeryToken()
+
+          <div class="collapse m-t-md" id="collapseInvitePerEntry">
+            <div class="well">
+              <div class="form-group">
+                @Html.LabelFor(m => m.RecipientsForm.Settings.MembershipType, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-8">
+                  @Html.EditorFor(m => m.RecipientsForm.Settings.MembershipType)
+                  <div class="help-block">
+                    <small>
+                      Restrict this invitation to only allow the the specified affiliation.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(m => m.RecipientsForm.Settings.DesignatedAccessLevel, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-8">
+                  @Html.DropDownListFor(m => m.RecipientsForm.Settings.DesignatedAccessLevel, Model.AvailableAccessLevels, new { @class = "form-control select2-component" })
+                  <div class="help-block">
+                    <small>
+                      Restrict this invitation to only allow the the specified access level.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(m => m.RecipientsForm.Settings.DesignatedTransitLocation, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-8">
+                  @Html.DropDownListFor(m => m.RecipientsForm.Settings.DesignatedTransitLocation, Model.AvailableLocations, new { @class = "form-control select2-component" })
+                  <div class="help-block">
+                    <small>
+                      Restrict this invitation to only allow the the specified location.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                @Html.LabelFor(m => m.RecipientsForm.Settings.DesignatedTransitPurpose, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-8">
+                  @Html.DropDownListFor(m => m.RecipientsForm.Settings.DesignatedTransitPurpose, Model.AvailablePurposes, new { @class = "form-control select2-component" })
+                  <div class="help-block">
+                    <small>
+                      Restrict this invitation to only allow the the specified purpose.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-t-md">
+            <div class="col-md-12">
+              @Html.LabelFor(m => m.RecipientsForm.Recipients, new { @class = "control-label" })
+              <div class="help-block">
+                <small>
+                  Provide one email address or phone number per line.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row m-t-sm">
+            <div class="col-sm-6">
+              @Html.EditorFor(m => m.RecipientsForm.Recipients)
+              @Html.ValidationMessageFor(m => m.RecipientsForm.Recipients)
+              @{
+                var errors = (IEnumerable<string>)ViewBag.RecipientValidationErrors;
+                if (errors != null)
+                {
+                  <ul class="list-unstyled">
+                    @foreach (var err in errors)
+                    {
+                      <li class="field-validation-error">@err</li>
+                    }
+                  </ul>
+                }
+              }
+            </div>
+            <div class="col-sm-6">
+              <div class="help-block">
+                Examples:
+              </div>
+              <pre>
+someone@@mail.com
+555-123-1234
+</pre>
+            </div>
+          </div>
+
+          <button id="sendInvitationsButton" class="btn btn-success m-t-sm" type="submit">
+            @Html.GlyphFa("paper-plane") Send Invites
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.peoplehub.sendinvites.js"></script>
+
+  @if (!Model.HasCompletedInvitationsTour)
+  {
+    <script type="text/javascript" src="~/Scripts/spstour.js"></script>
+  }
+}

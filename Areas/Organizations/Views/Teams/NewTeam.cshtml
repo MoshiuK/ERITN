@@ -1,0 +1,33 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Teams.NewTeam
+@{
+  var returnUrl = ViewBag.ReturnUrl ?? Request.UrlReferrer?.ToString() ?? Url.Action("Index", "PeopleHub");
+}
+<div class="row m-t-sm">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+      <li>@Html.ActionLink("People", "Index", "PeopleHub")</li>
+      <li class="active">@ViewBag.Title</li>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <h2 class="text-primary">New Team</h2>
+    @using (Html.BeginForm())
+    {
+      @Html.AntiForgeryToken()
+
+      @Html.EditorForModel()
+
+      <input type="hidden" name="returnUrl" value="@returnUrl"/>
+
+      <div class="row m-t-lg m-b-lg">
+        <div class="col-md-offset-6 col-md-6">
+          <a href="@returnUrl" class="btn btn-link btn-lg m-r-md">Cancel</a>
+          <button type="submit" class="btn btn-lg btn-success">Create Team</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

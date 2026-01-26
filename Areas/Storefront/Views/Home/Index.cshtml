@@ -1,0 +1,18 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Home.IndexPageViewModel
+
+@foreach (var section in Model.Sections)
+{
+  @Html.DisplayFor(_ => section)
+}
+
+@section styles
+{
+<style>
+  .layout-root.browser .workspace {
+    margin-top: 0;
+  }
+  .workspace .container {
+    padding-bottom: 0;
+  }
+</style>
+}

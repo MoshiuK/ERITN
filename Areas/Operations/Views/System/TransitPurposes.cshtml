@@ -1,0 +1,55 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.System.TransitPurposesPageViewModel
+<div class="row m-b-md">
+  <div class="col-md-12">
+    @Html.ActionLink("Add New Support Function", "NewTransitPurpose", null, new { @class = "btn btn-primary" })
+  </div>
+</div>
+
+@foreach (var esfGroup in Model.TransitPurposes)
+{
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>
+            @Html.DisplayFor(_ => esfGroup.Key)
+          </h3>
+        </div>
+        <div class="panel-body">
+          @foreach (var item in esfGroup)
+          {
+            <p>
+              @Html.DisplayFor(_ => item.Description)
+              The ID for this transit purpose is <code> @Html.DisplayFor(_ => item.CorrelationId)</code>
+            </p>
+
+            foreach (var tenant in item.Tenants)
+            {
+              <div class="row m-t-sm">
+                <div class="col-md-4">
+                  <strong>@Html.DisplayFor(_ => tenant.Annotation)</strong>
+                </div>
+                <div class="col-md-1">
+                  @{
+                    var caption = tenant.Selected ? "Disable" : "Enable";
+                    var style = tenant.Selected ? "red" : "green";
+                  }
+                  <button sps-action="toggle-selection" class="ladda-button"
+                          data-tenant="@tenant.Id" data-transitpurpose="@item.CorrelationId" data-selected="@tenant.Selected"
+                          data-style="expand-right" data-size="xs" data-color="@style">
+                    @caption <span class="ladda-label"></span>
+                  </button>
+                </div>
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/operations.system.transitpurposes.js"></script>
+}

@@ -1,0 +1,28 @@
+﻿@using AccessManagement.Models.Enrollment
+@using Juillet.Profile
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Framework.Enrollment.IEnrollmentProcess
+@{
+  var avatar = ViewBag.Avatar as AvatarInfo;
+}
+<div class="header">
+    @if (avatar != null)
+    {
+      @Html.DisplayFor(_ => avatar)
+    }
+  <div class="title">
+    <h2 class="text-primary">
+      @Html.DisplayFor(m => m.DisplayName)
+    </h2>
+  </div>
+  <div class="actions">
+    @if (Model.EnrollmentStatus == EnrollmentStatus.Pending || Model.EnrollmentStatus == EnrollmentStatus.Started)
+    {
+      <a class="btn btn-primary">Edit Enrollment</a>
+    }
+    else
+    {
+      <span title="This enrollment cannot be changed or edited." class="text-danger">@Html.GlyphFa("lock", GlyphStyles.X2)</span>
+    }
+  </div>
+</div>

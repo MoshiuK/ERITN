@@ -1,0 +1,30 @@
+﻿@using AccessManagement.Models.Core
+@model OrganizationMembershipTypes
+@{
+  var result = string.Empty;
+  switch (Model)
+  {
+    case OrganizationMembershipTypes.FullTimeEmployee:
+      result = "Full time employee";
+      break;
+    case OrganizationMembershipTypes.PartTimeEmployee:
+      result = "Part time employee";
+      break;
+    case OrganizationMembershipTypes.Contractor:
+      result = "Contractor";
+      break;
+    case OrganizationMembershipTypes.Subcontractor:
+      result = "Sub-contractor";
+      break;
+    case OrganizationMembershipTypes.Intern:
+      result = "Intern";
+      break;
+    case OrganizationMembershipTypes.Volunteer:
+      result = "Volunteer";
+      break;
+    case OrganizationMembershipTypes.Other:
+      result = "Other";
+      break;
+  }
+}
+@Html.Raw(result)

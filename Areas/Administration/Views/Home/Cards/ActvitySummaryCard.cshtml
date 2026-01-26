@@ -1,0 +1,36 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Home.ActivitySummaryCardViewModel
+@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+<div class="card events-card">
+  <div class="card-heading">
+    <div class="card-title">
+      <h3 class="heading-inline-block">Activities for last @Html.ValueFor(m => m.LookbackDays) days</h3>
+      <div class="pull-right">
+        <small><a href="@Url.Action("Index", "Activity")">All Activities @Html.GlyphFa("arrow-circle-right")</a></small>
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    @if (Model.TotalActivityCount > 0)
+    {
+      <div id="activityChartData"
+           data-calendar="@string.Join(",", Model.CalendarLabels)"
+           data-count-errors="@string.Join(",", Model.ErrorCounts)"
+           data-count-warnings="@string.Join(",", Model.WarningCounts)"
+           data-count-information="@string.Join(",", Model.InfomationCounts)"
+           data-count-other="@string.Join(",", Model.OtherCounts)"
+           style="display: none">        
+      </div>
+      <canvas id="activityChart"></canvas>        
+    }
+    else
+    {
+      var notFound = new NotFoundPane(
+        "No Activity",
+        new FaGlyph("th-list", GlyphStyles.X5, cssClasses: "text-info"),
+        $"There was no activity in the system for the last {Model.LookbackDays:N0} days."
+        );
+      @Html.DisplayFor(_ => notFound)
+    }
+  </div>
+</div>

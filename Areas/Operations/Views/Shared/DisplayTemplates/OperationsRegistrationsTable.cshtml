@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AccessManagement.Web.Areas.Operations.ViewModels.OperationsRegistrationTableRow>
+@{
+  var rowCount = 0;
+}
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="registrationsResultsPane">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><small></small></th>
+                <th class="text-right"><small>Total Registrations</small></th>
+                <th class="text-right"><small>Total Enrollment</small></th>
+                <th class="text-right"><small>Abandoned Registrations</small></th>
+                <th class="text-right"><small>Attributes Not Verified</small></th>
+                <th class="text-right"><small>Imported Members</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var row in Model)
+              {
+                <tr>
+                  <td id="TenantName_@rowCount">
+                    @Html.DisplayFor(_ => row.TenantName)
+                  </td>
+                  <td id="Registrations_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.Registrations)
+                  </td>
+                  <td id="Enrollments_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.Enrollments)
+                  </td>
+                  <td id="AbandonedRegistrations_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.AbandonedRegistrations)
+                  </td>
+                  <td id="AttributesNotVerified_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.AttributesNotVerified)
+                  </td>
+                  <td id="ImportedMembers_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.ImportedMembers)
+                  </td>
+                </tr>
+
+                rowCount++;
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

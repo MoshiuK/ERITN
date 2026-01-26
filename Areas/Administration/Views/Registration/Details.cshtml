@@ -1,0 +1,152 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.RegistrationSummaryViewModel
+@using Juillet.Web.Mvc.Html
+<div class="row m-b-md">
+  <div class="col-md-12 text-center">
+    <div class="pull-left">
+      <div class="m-t-sm">
+        <a class="m-t-sm" href="@Url.Action("Registrations", "OrganizationsHub")">@Html.GlyphFa("arrow-circle-left") Back to Registrations</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <table class="table">
+    <tbody>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.StartedOn)
+      </td>
+      <td>
+        @Model.StartedOn
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.LastModifiedOn)
+      </td>
+      <td>
+        @Model.LastModifiedOn
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.RegisteredOn)
+      </td>
+      <td>
+        @Model.RegisteredOn
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.OrganizationName)
+      </td>
+      <td>
+        @Model.OrganizationName
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.RegistrantEmail)
+      </td>
+      <td>
+        @Model.RegistrantEmail
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.OrganizationAddress)
+      </td>
+      <td>
+        @Model.OrganizationAddress
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.PrimaryContactName)
+      </td>
+      <td>
+        @Model.PrimaryContactName
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.PrimaryContactEmail)
+      </td>
+      <td>
+        @Model.PrimaryContactEmail
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.PrimaryContactPhone)
+      </td>
+      <td>
+        @Model.PrimaryContactPhone
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.BillingAddress)
+      </td>
+      <td>
+        @Model.BillingAddress
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.BillingContactName)
+      </td>
+      <td>
+        @Model.BillingContactName
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.BillingContactEmail)
+      </td>
+      <td>
+        @Model.BillingContactEmail
+      </td>
+    </tr>
+    <tr>
+      <td>
+        @Html.LabelFor(m => m.BillingContactPhone)
+      </td>
+      <td>
+        @Model.BillingContactPhone
+      </td>
+    </tr>
+
+    @foreach (var a in Model.AccessLevels)
+    {
+      <tr>
+        <td>
+          <label>Access Level</label>
+        </td>
+        <td>@a.Annotation</td>
+      </tr>
+    }
+
+    @foreach (var a in Model.TransitLocations)
+    {
+      <tr>
+        <td>
+          <label>Transit Location</label>
+        </td>
+        <td>@a.Annotation</td>
+      </tr>
+    }
+
+    @foreach (var a in Model.TransitPurposes)
+    {
+      <tr>
+        <td>
+          <label>Transit Purpose</label>
+        </td>
+        <td>@a.Annotation</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>

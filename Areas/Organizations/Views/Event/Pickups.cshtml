@@ -1,0 +1,29 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.EventHub.Pickups
+@{
+  Layout = "_EventHubLayout.cshtml";
+}
+
+<div class="pickups-page">
+  <div class="row m-t-md m-b-sm">
+    <div class="col-md-12">
+      <input id="pickupsListFilter" class="form-control" placeholder="Filter by name" type="text" data-event-id="@Model.EmergencyEventId" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      @Html.Partial("PickupsTable", Model)
+    </div>
+  </div>
+
+  <div class="row m-t-md">
+    <div class="col-md-12">
+      @Html.DisplayFor(m => m.Pager)
+    </div>
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/organizations.event.pickups.js"></script>
+}

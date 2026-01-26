@@ -1,0 +1,198 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.Members.MemberDetailsViewModel
+
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.Id)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.Id)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.CorrelationId)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.CorrelationId)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.Active)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.Active)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.Deleted)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.Deleted)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.HasAvatar)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.HasAvatar)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.NotifyByEmailAllowed)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.NotifyByEmailAllowed)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.NotifyByPhoneAllowed)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.NotifyByPhoneAllowed)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.CreatedOn)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.CreatedOn)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.CreatedBy)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.CreatedBy)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.UpdatedOn)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.UpdatedOn)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.UpdatedBy)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.UpdatedBy)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.Name)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.Name)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.SearchableName)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.SearchableName)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.ReferenceId)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.ReferenceId)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.PrimaryEmail)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.PrimaryEmail)
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      @Html.LabelFor(m => m.PrimaryPhone)
+    </div>
+    <div class="col-md-9">
+      @Html.DisplayFor(m => m.PrimaryPhone)
+    </div>
+  </div>
+  @if (Model.OrganizationMemberships.Count > 0)
+  {
+    <div class="row">
+      <div class="col-md-3">
+        @Html.LabelFor(m => m.OrganizationMemberships)
+      </div>
+      <div class="col-md-9">
+        @foreach (var o in Model.OrganizationMemberships)
+        {
+          {
+            @Html.Partial("DisplayTemplates/OrganizationMembership", o);
+          }
+        }
+      </div>
+    </div>
+  }
+  @if (Model.Properties.Count > 0)
+  {
+    <div class="row">
+      <div class="col-md-3">
+        @Html.LabelFor(m => m.Properties)
+      </div>
+      <div class="col-md-9">
+        @foreach (var p in Model.Properties)
+        {
+          {
+            @Html.Partial("DisplayTemplates/MemberProperties", p)
+            ;
+          }
+        }
+      </div>
+    </div>
+  }
+  @if (Model.Credentials.Count > 0)
+  {
+    <div class="row">
+      <div class="col-md-3">
+        @Html.LabelFor(m => m.Credentials)
+      </div>
+      <div class="col-md-9">
+        @foreach (var c in Model.Credentials)
+        {
+          {
+            @Html.Partial("DisplayTemplates/MemberCredentials", c)
+            ;
+          }
+        }
+      </div>
+    </div>
+  }
+  @if (Model.Users.Count > 0)
+  {
+    <div class="row">
+      <div class="col-md-3">
+        @Html.LabelFor(m => m.Users)
+      </div>
+      <div class="col-md-9">
+        @foreach (var m in Model.Users)
+        {
+          {
+            @Html.Partial("DisplayTemplates/MemberUser", m);
+          }
+        }
+      </div>
+    </div>
+  }
+</div>

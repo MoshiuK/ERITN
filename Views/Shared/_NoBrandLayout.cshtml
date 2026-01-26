@@ -1,0 +1,52 @@
+﻿@using Juillet.Web.Mvc
+@{
+  IPageLayout pageLayout = this.ViewBag.PageLayout ?? new PageLayout("NoBrand");
+  var layoutMode = pageLayout.NavBar.IsAvailable ? "portal" : "browser";
+  ViewBag.Container = pageLayout.Body.Container();
+  var showToolBar = pageLayout.Toolbar.IsAvailable && pageLayout.Toolbar.Items != null && pageLayout.Toolbar.Items.Any();
+  var showNavBar = pageLayout.NavBar.IsAvailable && pageLayout.NavBar.Items != null && pageLayout.NavBar.Items.Any();
+}
+<!DOCTYPE html>
+<html>
+<head>
+  @{
+    var favicon = ViewBag.Favicon ?? "/Content/images/favicon.ico";
+  }
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link rel="shortcut icon" href="@favicon"/>
+  <title>@ViewBag.Title</title>
+  @Styles.Render("~/Content/css/landing")
+  @Scripts.Render("~/Scripts/modernizr")
+  @Html.Partial("_AiScriptPartial")
+</head>
+<body>
+  <div class="layout-root @layoutMode">
+    @if (showToolBar)
+    {
+      @Html.Partial("Juillet/Chrome/Toolbar", pageLayout.Toolbar)
+    }
+
+    <div class="workspace">
+      @if (showNavBar)
+      {
+        @Html.Partial("Juillet/Chrome/NavBar", pageLayout.NavBar)
+      }
+
+      <div class="@ViewBag.Container body-content @pageLayout.Body.ContentWidth()">
+        @RenderBody()
+      </div>
+    </div>
+
+    @RenderSection("SideBar", required: false)
+    @if (pageLayout.Footer.IsAvailable)
+    {
+      @Html.Partial("Juillet/Chrome/Footer", pageLayout.Footer)
+    }
+  </div>
+
+  @Scripts.Render("~/Scripts/jquery")
+  @*@Scripts.Render("~/Scripts/portal")*@
+  @RenderSection("scripts", required: false)
+</body>
+</html>

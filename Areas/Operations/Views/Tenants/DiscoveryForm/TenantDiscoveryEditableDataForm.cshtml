@@ -1,0 +1,47 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.Tenants.TenantDiscoveryEditableData
+@{
+  Guid tenantId = ViewBag.TenantId;
+}
+@using (Html.BeginForm("Discovery", "Tenants", new { id = tenantId }, FormMethod.Post, null))
+{
+  @Html.AntiForgeryToken()
+
+  @Html.Partial("DiscoveryForm/BannerImageUriRow")
+  @Html.Partial("DiscoveryForm/TileImageUriRow")
+
+  <div class="row m-t-md">
+    <div class="col-md-12">
+      <h3>Marketing Links &amp; Copy</h3>
+
+      <p class="help-text">
+        The copy provided here will be displayed when a description of the tenant is required.  When interactive, the links will be used
+        to navigate to the <em>home page</em> or <em>sign up page</em>.
+      </p>
+    </div>
+  </div>
+
+  <div class="row m-t-md">
+    <div class="col-md-12">
+      @Html.LabelFor(m => m.MarketingHome)
+      @Html.EditorFor(m => m.MarketingHome)
+    </div>
+  </div>
+  <div class="row m-t-md">
+    <div class="col-md-12">
+      @Html.LabelFor(m => m.StorefrontHome)
+      @Html.EditorFor(m => m.StorefrontHome)
+    </div>
+  </div>
+  <div class="row m-t-md">
+    <div class="col-md-12">
+      @Html.LabelFor(m => m.Brief)
+      @Html.EditorFor(m => m.Brief)
+    </div>
+  </div>
+
+  <div class="row m-t-lg">
+    <div class="col-md-offset-5 col-md-1">
+      <button class="btn btn-success btn-lg" type="submit">Publish</button>
+    </div>
+  </div>
+}

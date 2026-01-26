@@ -1,0 +1,46 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationSideBarViewModel
+<div class="row">
+  @Html.LabelFor(m => m.Active, new { @class = "sidebar-caption" })
+  @if (Model.Active)
+  {
+    <div class="label label-sidebar-status active">ACTIVE</div>
+    using (Html.BeginForm("ToggleActivation", "Organization", new { id = Model.CorrelationId, isActivating = false }, FormMethod.Post, new { @class = "inline-block" }))
+    {
+      @Html.AntiForgeryToken()
+      <div class="m-t-sm">
+        <button class="btn btn-warning btn-circle">@Html.GlyphFa("pause")</button>
+        <small class="text-muted">DEACTIVATE</small>
+      </div>
+    }
+  }
+  else
+  {
+    <div class="label label-sidebar-status inactive">INACTIVE</div>
+    using (Html.BeginForm("ToggleActivation", "Organization", new { id = Model.CorrelationId, isActivating = true }, FormMethod.Post, new { @class = "inline-block" }))
+    {
+      @Html.AntiForgeryToken()
+      <div class="m-t-sm">
+        <button class="btn btn-success btn-circle">@Html.GlyphFa("play")</button>
+        <small class="text-muted">ACTIVATE</small>
+      </div>
+    }
+  }
+</div>
+
+<div class="row">
+  @Html.LabelFor(m => m.ReferenceId, new { @class = "sidebar-caption" })
+  <span class="sidebar-value">@Html.DisplayFor(m => m.ReferenceId)</span>
+</div>
+
+<div class="row">
+  @Html.LabelFor(m => m.CreatedOn, new { @class = "sidebar-caption" })
+  <span class="sidebar-value">@Html.DisplayFor(m => m.CreatedOn)</span>
+  <span class="sidebar-value">@Html.DisplayFor(m => m.CreatedBy)</span>
+</div>
+
+<div class="row">
+  @Html.LabelFor(m => m.UpdatedOn, new { @class = "sidebar-caption" })
+  <span class="sidebar-value">@Html.DisplayFor(m => m.UpdatedOn)</span>
+  <span class="sidebar-value">@Html.DisplayFor(m => m.UpdatedBy)</span>
+</div>

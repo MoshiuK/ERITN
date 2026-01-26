@@ -1,0 +1,71 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.UpdatePaymentViewModel
+<div class="well well-sm description">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-2 small">
+        Monthly Cost
+      </div>
+      <div class="col-md-1 small">
+
+      </div>
+      <div class="col-md-2 small">
+        Subscription Term
+      </div>
+      <div class="col-md-1 small">
+
+      </div>
+      <div class="col-md-3 small">
+        # of Emergency Personnel
+        <a href="#" data-toggle="popover" data-placement="bottom" title="Personnel Count" data-content="Please put in the number of your personnel that will need authorization passes in the event of a storm or disaster.">@Html.GlyphFa("info-circle")</a>
+      </div>
+      <div class="col-md-1 small">
+
+      </div>
+      <div class="col-md-2 small">
+        Annual Cost
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-2">
+        <h4>
+          @String.Format("{0:c}", Model.UnitPrice * .01)
+        </h4>
+        @Html.HiddenFor(_ => Model.UnitPrice)
+      </div>
+      <div class="col-md-1 small">
+        <h4>
+          X
+        </h4>
+      </div>
+      <div class="col-md-2">
+        <h4>
+          @Html.DisplayFor(_ => Model.SubscriptionTermMonths) Months
+          @Html.HiddenFor(_ => Model.SubscriptionTermMonths)
+        </h4>
+      </div>
+      <div class="col-md-1 small">
+        <h4>
+          X
+        </h4>
+      </div>
+      <div class="col-md-3">
+        <h5>
+          @Html.EditorFor(m => m.Quantity, new { htmlAttributes = new { @class = "form-control input-w-sm", min = 1, max = 9999 } })
+        </h5>
+      </div>
+      <div class="col-md-1 small">
+        <h4>
+          =
+        </h4>
+      </div>
+      <div class="col-md-2">
+        <h4>
+          <span id="totalPrice"></span>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>

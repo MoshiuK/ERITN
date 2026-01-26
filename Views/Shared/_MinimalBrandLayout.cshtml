@@ -1,0 +1,89 @@
+﻿@using System.Security.Claims
+@using AccessManagement.Framework.Tenants
+@using AccessManagement.Web.Mvc
+@using Juillet.SystemExtensions
+<!DOCTYPE html>
+<html>
+@{
+    var theme = (TenantTheme)ViewBag.Theme;
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="@theme.ImageUrlFavicon" />
+    <title>@ViewBag.Title - @theme.PageTitleSuffix</title>
+    @Styles.Render("~/Content/css/tenant-base")
+    @Styles.Render(theme.StorefrontStyleBundle)
+
+    @Scripts.Render("~/Scripts/modernizr")
+    @Html.Partial("_AiScriptPartial")
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-static-top" role="toolbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="@Url.GetBrandUrlFor(User)"><img class="navbar-brand" src="@theme.SquareLogoInverse" alt="Logo for @theme.BrandCaption" /></a>
+                    <a href="@Url.GetBrandUrlFor(User)" class="navbar-brand">@theme.BrandCaption</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown toolbar-profile-dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <div class="toolbar-profile">
+                                        <img class="profile-avatar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAMAAADypuvZAAABxVBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AbUpCAAAAlnRSTlMAAQIDBAUGBwgJCgsNDg8QERIUFRcYGRocHR4fICEiIyQlJicoKSorLC0wMTM0Njc4OT0+P0BBQkNFRkdJSk1PUFFSVVdZW1xdXl9hY2RmZ2xvcHR1d3x+f4CChoiJi4yOj5GSlJWXmpueo6WmqKqrra+wsrS1t7m6vL7AwcPFx8jO1dfZ2t7g4uTm6evt7/Hz9ff5+/3CTITwAAACoUlEQVQYGcXB92MTZQDH4e97uUBCShEbVlEiBQMqDRRpKWWo1AEqKsvFRikyShWr1soou8XmmjI+fy/N3XsZdxn9jefR62ZSHSs7UkaLlt5x+gGBB6f7lqk9Uxin3njBqCUzOE3c9KBRc933KCue3bk27Tpueu3Ocx5l99apCfMtZb/mVMPkRig7ooYSf7Dg0nJFrRhhwZijuORdYDqnRjbOALddRTn/AdeSaiw5Ckw4irgCnDGynPzJq7eunsw7ssx54DfV+wi4qNCQR8Dba2SNAAdUa/lL+McokBilasxVwPwLLztU4wbMpRVw7lBrylFgWQlGVZUD+mWNUO+yrEFggyr+gjuy3iGqR9YUjCvUBeRlTRJ1W9Z7wJuyjsJ9WSniUrIewXeyPPhYVp64rbKGoajASiAjq5+43bI6gDfkG4BphfYTd0ChpzAg3wk4pVAvcQWFzsBx+W7CQYWyxK1SaBh+l+8hbFPFHFElo1Av3JfPg82q+IqoI6p4F2blew4bVZEoUs9zVdEDz+SbgV5VdVPvLVUV4Il8UzCkGtuoVVCNfXBXvl/ga4XcrpRWPyT0aI1SXUmFvoEL8n0BfyuQvQFzOZn+CcomBoze9mAsq8AEfC7fJsBR2R58x5dIbueqTldKHsO3R2UO0CNfEujWgi1Yz3/emnbkpPI/PsPaogXrAVeBcTgrKVGkuVlH0nm4KasPWCIN08qwtBTYLisxD4ekJ7TyWDoMJUehL+FFJktr2cwLOKSKZAmuH6S1T0ahlFTVXmCe1uaBIdWaZDEmVSczT3uljOrlaW+zogZo50PF7aK1PjXS49Hc7AY1lvqTZsaWqqkd/9PI01614uybIerxbqN2cqc8qoo/rdfirPjgsx8uXrnw/afvd+r1egVOrJoDtw2nugAAAABJRU5ErkJggg==" alt="@User.Identity.Name" />
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="toolbar-profile-dropdown-item">
+                                            <span class="profile-title">@User.Identity.Name</span>
+                                            <span class="profile-subtitle">@User.Identity.FindClaimValue(ClaimTypes.Upn)</span>
+                                        </div>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Profile", "Index", "Profile", new { area = "" }, null)</li>
+                                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Profile", new { area = "" }, null)</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Sign Out", "SigningOut", "Authentication", new { area = "" }, null)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid body-content">
+            @RenderBody()
+        </div>
+
+        <div id="footer" class="footer footer-default">
+            <div class="pull-right">
+                <span>
+                    <small>@theme.BrandCaption</small>
+                </span>
+                <span class="m-r-sm m-l-sm">
+                    |
+                </span>
+                <span class="m-r-md">
+                    <small>Copyright &copy; 2018 - TruEntry LLC.</small>
+                </span>
+                <div class="social-buttons-container">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/Scripts/portal")
+    @Scripts.Render(theme.ScriptBundle)
+    @RenderSection("scripts", required: false)
+</body>
+</html>

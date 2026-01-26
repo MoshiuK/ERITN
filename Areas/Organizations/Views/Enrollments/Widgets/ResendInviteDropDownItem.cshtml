@@ -1,0 +1,7 @@
+﻿@model Guid?
+@using (Html.BeginForm("ResendInvitation", "Enrollments", new { id = Model }, FormMethod.Post))
+{
+  @Html.AntiForgeryToken()
+  <button type="submit" class="btn btn-link btn-dropdown">Resend Invite</button>
+}
+

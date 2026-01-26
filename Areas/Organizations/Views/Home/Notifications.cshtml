@@ -1,0 +1,97 @@
+﻿@using AccessManagement.Web.Areas.Organizations
+@using Juillet.Notifications
+@using Juillet.SystemExtensions
+@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.NotificationsPageViewModel
+
+<div class="row m-t-md m-b-sm">
+  <div class="col-md-12">
+    <h2 class="text-primary heading-inline-block">Messages</h2>
+    @if (Model.PageOfNotifications.Metadata.TotalCount > 0)
+    {
+      <span class="text-muted m-t-sm m-l-lg">
+        <small>Showing page @Model.PageOfNotifications.Metadata.PageNumber of @Model.PageOfNotifications.Metadata.TotalPageCount. Total @Model.PageOfNotifications.Metadata.TotalCount items.</small>
+      </span>
+
+      <div class="pull-right">
+        @using (Html.BeginForm("ClearNotifications", "Home", new {returnUrl = Url.Action()}, FormMethod.Post, new {@class = "form-inline"}))
+        {
+          @Html.AntiForgeryToken()
+
+          <a href="@Url.Action("NotificationsDownload")" title="Download All Messages" class="m-r-sm btn btn-circle btn-primary" download>@Html.GlyphFa("download")</a>
+
+          <button id="dismissAllButton"
+                  type="submit"
+                  class="btn btn-default btn-sm">
+            @Html.GlyphFa("times", GlyphStyles.FixedWidth) Dismiss All Messages
+          </button>
+        }
+      </div>
+    }
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-condensed table-hover">
+      <tbody>
+      @if (Model.PageOfNotifications.Metadata.TotalCount == 0)
+      {
+        <tr>
+          <td colspan="3">
+            <span class="text-muted"><em>No recent messages found.</em></span>
+          </td>
+        </tr>
+      }
+      else
+      {
+        foreach (var row in Model.PageOfNotifications.Data)
+        {
+          <tr>
+            <td>
+              <div class="@Html.FlagBorderCss(row.NotificationType, FlagBorderStyles.Thick)">
+                <h5 class="m-n text-primary">
+                  @if (row.State == MessageNotificationStates.Unread)
+                  {
+                    <strong>@Html.DisplayFor(_ => row.DisplayTitle)</strong>
+                  }
+                  else
+                  {
+                    @Html.DisplayFor(_ => row.DisplayTitle)
+                  }
+                </h5>
+                <small>@Html.DisplayFor(_ => row.DisplayDescription)</small>
+              </div>
+            </td>
+            <td>
+              <span>@row.OccurredAtUtc.DateTime.TimeAgo()<br />
+                <small class="text-muted"><time data-juillet-utctolocal="@row.OccurredAtUtc.ToString("O")"></time></small>
+              </span>
+            </td>
+            <td>
+              <button type="button" 
+                      class="btn btn-circle btn-white pull-right"
+                      data-message-id="@row.MessageId">@Html.GlyphFa("times", GlyphStyles.FixedWidth)</button>
+            </td>
+          </tr>
+        }
+      }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    @{
+      var pager = new Pager(new ActionPath("Notifications", "Home", OrganizationsAreaRegistration.Name), Model.PageOfNotifications.Metadata, 4);
+    }
+    @Html.DisplayFor(_ => pager)
+  </div>
+</div>
+
+@section scripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/organizations.home.messages.js"></script>
+}

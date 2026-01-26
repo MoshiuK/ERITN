@@ -1,0 +1,28 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.OrganizationAdministrators
+@using Juillet.Web.Mvc.Html
+@{
+    Layout = "_SettingsLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h4 class="heading-inline-block">@Html.GlyphFa("user-circle") Coordinators (@Html.ValueFor(m => m.Users.Count))</h4>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-sm btn-primary" onclick="location.href='@Url.Action("AddAdministrator", "Settings")'">
+                        <span class="glyphicon glyphicon-plus"></span> Add Coordinator
+                    </button>
+                </div>
+            </div>
+            <div class="panel-body">
+                @Html.DisplayFor(m => m.Users)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section pagescripts
+{
+    <script src="~/Scripts/pages/organizations.settings.administrators.js"></script>
+}

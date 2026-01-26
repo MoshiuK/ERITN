@@ -1,0 +1,52 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.System.ConfigurationPageViewModel
+@using Juillet.Azure
+@using Juillet.SystemExtensions
+@using Juillet.Web.Mvc.Html
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">Settings for <strong>@AzureRuntimeEnvironment.WebSiteName</strong></div>
+      <div class="panel-body">
+      </div>
+      @foreach (var item in Model.All)
+      {
+        var readonlyAttr = item.IsReadOnly ? "readonly='readonly'" : string.Empty;
+        var isTextArea = item.Value?.Length > 80;
+        var htmlId = item.Key.Slugify().Replace('.','-');
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="m-md">
+              <label>@Html.DisplayFor(_ => item.Key)</label>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="m-sm">
+              @if (isTextArea)
+              {
+                <textarea id="@htmlId" @readonlyAttr class="form-control" rows="6">@item.Value</textarea>
+              }
+              else
+              {
+                <input id="@htmlId" type="text" @readonlyAttr value="@item.Value" class="form-control"/>
+              }
+            </div>
+          </div>
+          <div class="col-md-1">
+            @if (!item.IsReadOnly)
+            {
+              <div class="m-sm">
+                <button sps-action="update-config" class="ladda-button btn btn-primary btn-sm" data-key="@item.Key" data-field-id="@htmlId" data-style="expand-right" data-size="xs" data-color="blue">@Html.GlyphFa("upload")<span class="ladda-label"></span></button>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/operations.system.configuration.js"></script>
+}

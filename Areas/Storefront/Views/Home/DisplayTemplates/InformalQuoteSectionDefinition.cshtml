@@ -1,0 +1,40 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.QuoteSectionDefinition
+
+@{
+  var background = string.IsNullOrEmpty(Model.BackgroundSplash) ? string.Empty :
+    $"background: url('{Model.BackgroundSplash}') 0 0 no-repeat";
+
+  var quoteIndex = new Random().Next(Model.Quotes.Length);
+  var quote = Model.Quotes[quoteIndex];
+
+  var navId = string.IsNullOrEmpty(Model.NavCaption) ? string.Empty : $"id=page-{Model.NavCaption.ToLowerInvariant()}";
+  var inverse = Model.IsBackgroundInverse ? "brand-inverse" : string.Empty;
+}
+
+<div @navId class="storefront-landing" style="@background @inverse">
+  <div class="informal-quotes-section">
+    <div class="row">
+      <div class="col-md-12">
+        <i class="fa fa-comment fa-4x"></i>
+      </div>
+    </div>
+    @if (Model.HasTitle)
+    {
+      <div class="row">
+        <div class="col-md-12">
+          <h2>@Html.DisplayFor(m => m.Title)</h2>
+        </div>
+      </div>
+    }
+    <div class="row">
+      <div class="col-md-12">
+        <span class="quote-content">"@quote.Quote"</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">        
+        <span class="quote-citation">@quote.CitationName</span>
+      </div>
+    </div>
+  </div>
+</div>

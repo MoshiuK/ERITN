@@ -1,0 +1,33 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.LinksSectionDefinition
+@{
+  var navId = string.IsNullOrEmpty(Model.NavCaption) ? string.Empty : $"id=page-{Model.NavCaption.ToLowerInvariant()}";
+  var inverse = Model.IsBackgroundInverse ? "brand-primary-bg" : string.Empty;
+}
+<div @navId class="storefront-landing @inverse">
+  <div class="links-section">
+    <div class="row">
+      <div class="col-md-2">
+        <img class="links-logo" alt="@Model.Title" src="@Model.BackgroundSplash"/>
+      </div>
+
+      @{
+        var whitespace = $"col-md-{10 - Model.Groups.Length * 2}";
+      }
+
+      <div class="@whitespace"></div>
+      @foreach (var grp in Model.Groups)
+      {
+        <div class="col-md-2">
+          <ul class="list-unstyled">
+            <li class="links-title">@grp.Title</li>
+
+            @foreach (var link in grp.Links)
+            {
+              <li class="links-item">@Html.DisplayFor(_ => link, new { Inverse = Model.IsBackgroundInverse })</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</div>

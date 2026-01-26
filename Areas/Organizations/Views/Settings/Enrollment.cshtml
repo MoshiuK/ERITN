@@ -1,0 +1,19 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Settings.EnrollmentPageViewModel
+@{
+  Layout = "_SettingsLayout.cshtml";
+}
+
+@Html.EditorFor(m => m.EnrollmentDefaults)
+@Html.EditorFor(m => m.InvitationDefaults)
+@Html.EditorFor(m => m.CommunicationDefaults)
+@Html.EditorFor(m => m.DeliveryDefaults)
+
+
+@section pagescripts
+{
+  @if (!Model.HasCompletedEnrollmentTour)
+  {
+    @Html.HiddenFor(m => m.TutorialsUrl)
+    <script type="text/javascript" src="~/Scripts/spstour.js"></script>
+  }
+}

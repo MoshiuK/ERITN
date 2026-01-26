@@ -1,0 +1,39 @@
+﻿@using AccessManagement.Definitions.Storefront.LandingPages
+@model LandingPageSectionDefinition
+
+@{
+  var bannerImage = Model.SectionType == LandingPageSectionTypes.Banner;
+  var backgroundImage = bannerImage || string.IsNullOrEmpty(Model.BackgroundSplash) ? string.Empty :
+    $"background: url('{Model.BackgroundSplash}') 0 0 no-repeat";
+  var navId = string.IsNullOrEmpty(Model.NavCaption) ? string.Empty : $"id=page-{Model.NavCaption}";
+  var inverse = Model.IsBackgroundInverse ? "brand-inverse" : string.Empty;
+}
+
+<div @navId class="storefront-landing" style="@backgroundImage @inverse">
+  @if (Model.HasDefaultHeader)
+  {
+    <div class="default-section-header">
+      @if (Model.IsSeparatorShown)
+      {
+        <div class="row brand-separator"></div>
+      }
+      @if (Model.HasTitle)
+      {
+        <div class="row">
+          <div class="col-md-12">
+            <h1>@Html.DisplayFor(m => m.Title)</h1>
+          </div>
+        </div>
+      }
+      @if (Model.HasSubtitle)
+      {
+        <div class="row">
+          <div class="col-md-12">
+            <p>@Html.DisplayFor(m => m.Subtitle, new { @class="text-muted" })</p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+  @RenderBody()
+</div>

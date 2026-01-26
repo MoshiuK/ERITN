@@ -1,0 +1,249 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.UpdatePaymentViewModel
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+  Model.Quantity = 10;
+}
+<script src="https://js.stripe.com/v3/"></script>
+@section styles
+{
+  <style>
+    .layout-root > nav {
+      margin-bottom: 0;
+    }
+
+    .layout-root.browser .workspace {
+      margin-top: 50px;
+    }
+
+    .workspace .body-content {
+      padding: 0;
+      width: 100%;
+    }
+  </style>
+}
+
+<div class="storefront-registration page-header">
+  <h1 class="title">Payment Options</h1>
+</div>
+
+<div class="col-md-offset-2 col-md-8">
+  <form action="Payment" method="POST" id="payment-form">
+    @Html.Hidden("referenceId", Model.ReferenceId)
+    @Html.Hidden("productId", Model.TenantProductId)
+    @Html.Hidden("isOnlinePayment", Model.IsOnlinePayment)
+
+    <div>
+      @Html.Partial("_PaymentOptionsHeader", Model)
+    </div>
+
+    @if (Model.UnitPrice > 0)
+    {
+      <div>
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li id="payNowButton" class="active" role="presentation"><a href="#onlinePayment" aria-controls="onlinePayment" role="tab" data-toggle="tab">Complete Registration and <b>Pay Now</b> with Credit Card</a></li>
+          <li id="payLaterButton" role="presentation"><a href="#invoicePayment" aria-controls="invoicePayment" role="tab" data-toggle="tab">Complete Registration and <b>Pay Later</b> Via Invoice</a></li>
+        </ul>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel-body">
+            <div class="tab-content">
+              <div class="row">
+                <div class="form-group col-md-offset-2 col-md-8">
+                  @Html.LabelFor(m => m.EmailAddress)
+                  @Html.EditorFor(m => m.EmailAddress)
+                  @Html.ValidationMessageFor(m => m.EmailAddress)
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane active" id="onlinePayment">
+                <div class="row">
+                  @Html.Partial("_OnlinePayment", Model)
+                </div>
+                <div id="card-errors" role="alert">@Html.DisplayFor(m => m.AdditionalInformation)</div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="invoicePayment">
+                <div class="row">
+                  @Html.Partial("_InvoicePayment", Model)
+                </div>
+              </div>
+              <br />
+              <button id="submitPaymentButton" class="btn btn-lg btn-primary pull-right">Process Payment Now and Complete Registration</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    else
+    {
+      <div class="col-md-12">
+        <div class="panel-body">
+          <div class="tab-content">
+            <div class="well">
+              @Model.AdditionalInformation
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="submitPaymentButton" class="btn btn-lg btn-primary pull-right m-b-lg">Complete Registration</button>
+    }
+  </form>
+</div>
+
+@section scripts
+{
+  <script>
+    $(document).ready(function () {
+      $('[data-toggle="popover"]').popover();
+
+      $("#payLaterButton").click(function () {
+        $("#submitPaymentButton").text('Receive Invoice and Complete Registration');
+      });
+
+      $("#payNowButton").click(function () {
+        $("#submitPaymentButton").text('Process Payment Now and Complete Registration');
+      });
+
+      var unitPrice = document.getElementById("UnitPrice");
+      const quantityVal = document.getElementById("Quantity");
+      var termLength = document.getElementById("SubscriptionTermMonths").value;
+      const total = document.getElementById("Quantity").value * unitPrice.value * .01 * termLength;
+
+      document.getElementById("totalPrice").innerHTML = total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      quantityVal.addEventListener('change', function () {
+        const newTotal = document.getElementById("Quantity").value * unitPrice.value * .01 * termLength;
+        document.getElementById("totalPrice").innerHTML = newTotal.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      });
+
+      // Bug 2488: Production - IntegrationError: The selector you specified (#cardNumber) applies to no DOM elements that are currently on the page.
+      // If the price is 0 at this point we can return.
+      // No need to continue setting up listeners.
+      if (unitPrice.value === "0") {
+        return;
+      }
+
+      // Create a Stripe client.
+      const publicKey = '@ViewBag.PublicKey';
+      var stripe = window.Stripe(publicKey);
+
+      // Create an instance of Elements.
+      const elements = stripe.elements();
+
+      // Custom styling can be passed to options when creating an Element.
+      // (Note that this demo uses a wider set of styles than the guide below.)
+      const style = {
+        base: {
+          color: '#000000',
+          lineHeight: '18px',
+          fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+          fontSmoothing: 'antialiased',
+          fontSize: '16px',
+          '::placeholder': {
+            color: '#aab7c4'
+          }
+        },
+        invalid: {
+          color: '#fa755a',
+          iconColor: '#fa755a'
+        }
+      };
+
+      // Create an instance of the card Element.
+      var cardNumber = elements.create('cardNumber', { style: style });
+      const cardExpiry = elements.create('cardExpiry', { style: style });
+      const cardCvc = elements.create('cardCvc', { style: style });
+      // Add an instance of the card Element into the `card-element` <div>.
+      cardNumber.mount('#cardNumber');
+      cardExpiry.mount('#cardExpiry');
+      cardCvc.mount('#cardCvc');
+
+      // Handle real-time validation errors from the card Element.
+      cardNumber.addEventListener('change', function (event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+
+      cardExpiry.addEventListener('change', function (event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+
+      cardCvc.addEventListener('change', function (event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+
+      // Handle form submission.
+      const form = document.getElementById('payment-form');
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if ($("#onlinePayment").attr('class') === "tab-pane active") {
+          document.getElementById("isOnlinePayment").value = true;
+        }
+        else {
+          document.getElementById("isOnlinePayment").value = false;
+          stripeTokenHandler(null);
+          return;
+        }
+
+        const name = document.querySelector('input[name="name"]').value;
+        const addressZip = document.querySelector('input[name="address_zip"]').value;
+        stripe.createToken(cardNumber, { name: name, address_zip: addressZip }).then(function (result) {
+          if (result.error) {
+            // Inform the user if there was an error.
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+          } else {
+            // Send the token to your server.
+            stripeTokenHandler(result.token.id);
+          }
+        });
+      });
+
+      function stripeTokenHandler(tokenId) {
+        // Insert the token ID into the form so it gets submitted to the server
+        const paymentForm = document.getElementById('payment-form');
+        if (tokenId != null) {
+          const hiddenInput = document.createElement('input');
+          hiddenInput.setAttribute('type', 'hidden');
+          hiddenInput.setAttribute('name', 'stripeToken');
+          hiddenInput.setAttribute('value', tokenId);
+          paymentForm.appendChild(hiddenInput);
+        }
+        if ($("#invoicePayment").attr('class') === "tab-pane active") {
+          if (isInvoiceValid()) {
+            paymentForm.submit();
+          }
+        }
+        else {
+          // Online payment - validation already completed.
+          paymentForm.submit();
+        }
+      }
+    });
+
+    function isInvoiceValid() {
+      var isValid = ($('#payment-form').validate().element($('#Phone')));
+      isValid = ($('#payment-form').validate().element($('#InvoiceName'))) ? isValid : false;
+      isValid = ($('#payment-form').validate().element($('#InvoiceStreetAddress1'))) ? isValid : false;
+      isValid = ($('#payment-form').validate().element($('#InvoiceCity'))) ? isValid : false;
+      isValid = ($('#payment-form').validate().element($('#InvoiceState'))) ? isValid : false;
+      isValid = ($('#payment-form').validate().element($('#ZipCode'))) ? isValid : false;
+
+      return isValid;
+    }
+  </script>
+}

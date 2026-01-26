@@ -1,0 +1,46 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.EnrollmentSummary
+
+<div class="row">
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.Enrollments)
+      </small> <br />
+      <span id="Enrollments">
+        @Html.DisplayFor(m => m.Enrollments)
+      </span>
+    </h3>
+  </div>
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.PendingEnrollments)
+      </small> <br />
+      <span id="PendingEnrollments">
+        @Html.DisplayFor(m => m.PendingEnrollments)
+      </span>
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.AttributesVerified)
+      </small> <br />
+      <span id="AttributesVerified">
+        @Html.DisplayFor(m => m.AttributesVerified)
+      </span>
+    </h3>
+  </div>
+  <div class="col-md-6 text-center">
+    <h3>
+      <small>
+        @Html.LabelFor(m => m.MembersImported)
+      </small> <br />
+      <span id="MembersImported">
+        @Html.DisplayFor(m => m.MembersImported)
+      </span>
+    </h3>
+  </div>
+</div>

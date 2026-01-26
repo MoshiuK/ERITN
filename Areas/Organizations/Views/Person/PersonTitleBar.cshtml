@@ -1,0 +1,57 @@
+﻿@using AccessManagement.Framework.Objects
+@using Juillet.Web.Mvc
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Person.PersonTitleBar
+<div class="row person-title-bar">
+  <div class="col-md-5">
+    <div class="dropdown">
+      <div class="btn-group">
+        <div class="btn btn-lg btn-link person-title-dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          @{
+            var flagBorderCss = Model.Active ? "flag-border-success" : "flag-border-muted";
+          }
+          <div class="flag-border @flagBorderCss">
+            <h2 class="text-primary">@Html.DisplayFor(m => m.Name) <span class="caret"></span></h2>
+          </div>
+        </div>
+        <ul class="dropdown-menu person-title-dropdown-menu">
+          <li class="m-md">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="avatar-container">
+                  <a href="@Url.Action("Index", new {id = Model.MemberId})">
+                    @Html.DisplayFor(m => m.Avatar)
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-6">
+                @Html.Partial("Widgets/ChangeActivationLink", new GuidWith<bool>(Model.MemberId, Model.Active))
+                @Html.Partial("Widgets/DeleteLink", Model.MemberId)
+              </div>
+            </div>
+          </li>
+          @if (!Model.Active)
+          {
+            <li class="m-l-md">
+              <span class="label label-default label-sm">ACCOUNT IS DISABLED</span>
+            </li>
+          }
+          <li class="m-l-md">
+            @Html.DisplayFor(m => m.Email)
+          </li>
+          <li class="m-l-md m-b-md">
+            @Html.DisplayFor(m => m.Phone)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <ul class="nav nav-pills pull-right">
+      @foreach (var row in Model.TabBar.Items)
+      {
+        var active = row.Selected ? "active" : "";
+        <li role="presentation" class="@active">@row.AnchorTag(Url)</li>
+      }
+    </ul>
+  </div>
+</div>

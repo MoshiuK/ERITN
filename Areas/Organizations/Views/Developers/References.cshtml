@@ -1,0 +1,77 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Developers.DeveloperReferencesViewModel
+@using Juillet.Web.Mvc.Html
+
+@{
+  Layout = "~/Views/Shared/_MinimalBrandLayout.cshtml";
+}
+
+<div class="page-jumbotitle">
+  <h1>@ViewBag.Title</h1>
+  <h4 class="page-jumbotitle-info">
+    Developers can use the codes and references on this page with our APIs.
+  </h4>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-title">
+        <h4>Access Levels</h4>
+      </div>
+      <div class="card-content">
+        @Html.DisplayFor(m => m.AccessLevels, "AccessLevelsTable")
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-title">
+        <h4>Transit Locations</h4>
+      </div>
+      <div class="card-content">
+        @Html.DisplayFor(m => m.TransitLocations, "TransitLocationsTable")
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row m-t-md">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-title">
+        <h4>Transit Purposes</h4>
+      </div>
+      <div class="card-content">
+        @Html.DisplayFor(m => m.TransitPurposes, "TransitPurposesTable")
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="row m-t-md">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-title">
+        <h4>Member Attribute Types</h4>
+      </div>
+      <div class="card-content">
+        @Html.DisplayFor(m => m.PropertyTypes, "PropertyTypesTable")
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    <small class="text-muted">
+      Showing details for @Html.DisplayFor(m => m.OrganizationName) (ID @Html.DisplayFor(m => m.OrganizationId))
+      at @Html.GlyphFa("clock-o") <time data-juillet-currentdatetime></time>
+    </small>
+  </div>
+</div>

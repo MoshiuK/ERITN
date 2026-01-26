@@ -1,0 +1,13 @@
+﻿@using AccessManagement.Web.Areas.Organizations.ViewModels.Enrollments
+@model AccessManagement.Framework.Enrollment.IEnrollmentProcess
+<div class="form-group">
+  <label class="control-label">@Html.DisplayNameFor(m => m.EnrollmentType)</label>
+  <p class="form-control-static">
+    @Html.Partial("DisplayTemplates/EnrollmentTypeGlyphInfo", new EnrollmentTypeGlyphInfo(Model.EnrollmentStatus, Model.EnrollmentType))
+    <small>@Html.DisplayFor(m => m.EnrollmentType.Name)</small>
+  </p>
+  <p class="text-muted">
+    <small>@Html.DisplayFor(m => m.EnrollmentType.Description)</small>
+  </p>
+</div>
+

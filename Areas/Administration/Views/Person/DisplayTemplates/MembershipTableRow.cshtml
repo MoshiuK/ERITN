@@ -1,0 +1,27 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.OrganizationMembershipInfo
+<tr>
+  <td>
+    <div class="captioned-avatar">
+      @Html.DisplayFor(m => m.OrganizationAvatar)
+      @Html.DisplayFor(m => m.OrganizationName)
+      <small class="text-muted">@Html.DisplayFor(m => m.OrganizationRelationship)</small>
+    </div>
+  </td>
+  <td>
+    @Html.DisplayFor(m => m.AccessLevel)
+  </td>
+  <td>
+    @Html.DisplayFor(m => m.Purpose.Name)
+    <strong>@Html.DisplayFor(m => m.Purpose.Esf)</strong>
+  </td>
+  <td>
+    @Html.DisplayFor(m => m.Location)
+  </td>
+  <td>
+    <button class="btn btn-sm btn-default"
+            action="edit-transit-details"
+            data-editor-uri="@Url.Action("EditTransitDetailsDialog", new {id = Model.MemberId, organizationId = Model.OrganizationId})">
+      Edit
+    </button>
+  </td>
+</tr>

@@ -1,0 +1,87 @@
+﻿@using AccessManagement.Models.Emergency
+@using AccessManagement.Web.Services
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.CredentialActivityStream
+
+@functions
+{
+  string GlyphForActivityType(int type)
+  {
+    var uiSupport = (ICredentialActivityViewSupport)ViewBag.UiSupport;
+    return uiSupport.GetGlyphFor(type);
+  }
+
+  string CssClassForActivityType(int type)
+  {
+    var uiSupport = (ICredentialActivityViewSupport)ViewBag.UiSupport;
+    var brand = uiSupport.GetBootstrapBrandFor(type);
+    var css = string.Empty;
+    switch (brand)
+    {
+      case BootstrapBrands.Success:
+        css = "bg-success";
+        break;
+      case BootstrapBrands.Info:
+        css = "bg-info";
+        break;
+      case BootstrapBrands.Warning:
+        css = "bg-warning";
+        break;
+      case BootstrapBrands.Danger:
+        css = "bg-danger";
+        break;
+    }
+    return css;
+  }
+
+  string ActionStatementForActivity(CredentialActivity activity)
+  {
+    var uiSupport = (ICredentialActivityViewSupport)ViewBag.UiSupport;
+    return uiSupport.GetActivitySummaryFromActivity(activity);
+  }
+
+}
+
+@if (!Model.PageOfContent.Data.Any())
+{
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h4 class="text-muted">No activity found.</h4>
+    </div>
+  </div>
+}
+else
+{
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div id="resultsPane">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th><small>Name</small></th>
+                  <th><small>Checkpoint Official</small></th>
+                  <th><small>Activity</small></th>
+                  <th><small>Occurred</small></th>
+                  <th><small>Location</small></th>
+                  <th><small>Remarks</small></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @{
+                  foreach (var item in Model.PageOfContent.Data)
+                  {
+                    @Html.Partial("DisplayTemplates/CredentialActivityTableRow", item);
+                  }
+                }
+              </tbody>
+            </table>
+          </div>
+          @Html.DisplayFor(m => m.Pager)
+        </div>
+      </div>
+    </div>
+  </div>
+}

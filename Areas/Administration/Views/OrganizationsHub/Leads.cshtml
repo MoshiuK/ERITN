@@ -1,0 +1,54 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Leads.BrowseLeadsPageViewModel
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-11">
+    <h2>Leads</h2>
+  </div>
+  <div class="col-md-1">
+    <div class="pull-right">
+      @Html.ActionLink("Download Leads", "DownloadLeads", null, new {@class = "btn btn-default m-t-md"})
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th>ORGANIZATION NAME</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      @foreach (var row in Model.PageOfContacts.Data)
+      {
+        <tr>
+          <td>@Html.DisplayFor(_ => row.Name)</td>
+          <td>@Html.DisplayFor(_ => row.Email)</td>
+          <td>@Html.DisplayFor(_ => row.OrganizationName)</td>
+          <td>
+            @using (Html.BeginForm("DeleteLead", "OrganizationsHub", new { id = Html.ValueFor(_ => row.Id) }, FormMethod.Post, null))
+            {
+              <button type="submit" class="leadButton pull-right btn btn-danger">@Html.GlyphFa("trash-o") Delete</button>
+            }
+            @Html.ActionLink(" Edit Lead", "EditLead", new { id = row.Id }, new { @class = "leadButton pull-right fa fa-pencil-square-o btn btn-info" })
+          </td>
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 text-center">
+  @Html.DisplayFor(m => m.Pager)
+  </div>
+</div>

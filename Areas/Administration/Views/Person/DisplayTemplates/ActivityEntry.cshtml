@@ -1,0 +1,33 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.ActivityEntry
+@{
+  var pinCssClass = "timeline-pin-default";
+  switch (Model.Pin.Brand)
+  {
+    case BootstrapBrands.Success:
+      pinCssClass = "timeline-pin-success";
+      break;
+    case BootstrapBrands.Info:
+      pinCssClass = "timeline-pin-info";
+      break;
+    case BootstrapBrands.Warning:
+      pinCssClass = "timeline-pin-warning";
+      break;
+    case BootstrapBrands.Danger:
+      pinCssClass = "timeline-pin-danger";
+      break;
+  }
+}
+<div class="timeline-block">
+  <div class="timeline-pin @pinCssClass">
+    @Html.DisplayFor(m => m.Pin)
+  </div>
+  <div class="timeline-content">
+    <h4>@Html.DisplayFor(m => m.Headline)</h4>
+    <p>@Html.Raw(Model.RemarksHtml)</p>
+    <div class="timeline-occurred">
+      <span>@Html.DisplayFor(m => m.OccurredDateUtc)</span>
+      <span>@Html.DisplayFor(m => m.OccurredTimeUtc)</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@using AccessManagement.Web.Areas.Organizations
+@using Juillet.Web.Mvc.Html
+@model IReadOnlyCollection<AccessManagement.Data.Blobs.DownloadCredentialArchiveEntryResult>
+<div class="archive-entry-table">
+  <table class="table table-condensed">
+    <tbody>
+    @foreach (var row in Model)
+    {
+      <tr>
+        <td>
+          <a href="@Url.Action("Index", "Person", new { id = row.MemberId, area = OrganizationsAreaRegistration.Name })">
+            @row.MemberName
+          </a>
+        </td>
+        <td>
+          <span>@row.FormFactorName</span>
+        </td>
+        <td>
+          @if (row.CompletedAt.HasValue)
+          {
+            if (row.Succeeded)
+            {
+              <span class="text-success">COMPLETED @Html.GlyphFa("check")</span>
+            }
+            else
+            {
+              <span class="text-danger">ERROR @Html.GlyphFa("exclamation-circle")</span>
+            }
+          }
+          else
+          {
+            if (row.StartedAt.HasValue)
+            {
+              <span class="text-primary">STARTED</span>
+            }
+            else
+            {
+              <span class="text-muted">PENDING</span>
+            }
+          }
+        </td>
+      </tr>
+      if (!string.IsNullOrEmpty(row.ErrorMessage))
+      {
+        <tr>
+          <td colspan="3">
+            <small class="text-danger pull-right">@row.ErrorMessage</small>
+          </td>
+        </tr>
+      }
+    }
+    </tbody>
+  </table>
+</div>

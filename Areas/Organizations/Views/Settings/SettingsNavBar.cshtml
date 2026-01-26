@@ -1,0 +1,12 @@
+﻿@using AccessManagement.Web.Mvc
+@using Juillet.Web.Mvc
+@model NavBar
+<h2 class="text-primary">Settings for @User.Identity.ExtractOrganizationName()</h2>
+<ul class="nav nav-pills">
+  @foreach (var action in Model.Items)
+  {
+    var style = action.Selected ? "active" : string.Empty;
+    <li id=@action.Caption.Split(' ')[0].ToLower() role="presentation" class="@style">@action.AnchorTag(Url)</li>
+  }
+</ul>
+

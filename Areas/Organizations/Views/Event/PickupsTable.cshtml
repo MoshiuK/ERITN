@@ -1,0 +1,21 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.EventHub.Pickups
+@{
+  ViewBag.EventId = Model.EmergencyEventId;
+}
+<table id="pickupsList" class="table table-condensed">
+  <thead>
+    <tr>
+      <th class="pw-60">NAME</th>
+      <th class="fw-50 text-center">LEVEL</th>
+      <th class="text-center">REQUESTED</th>
+      <th class="text-center">ACTIONS</th>
+    </tr>
+  </thead>
+  <tbody>
+  @foreach (var row in Model.Entries)
+  {
+    @Html.DisplayFor(_ => row)
+  }
+  </tbody>
+</table>
+

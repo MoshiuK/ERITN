@@ -1,0 +1,212 @@
+﻿@import "variables.less";
+
+.avatar-action span {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  color: #FFFFFF;
+  background: rgba(64, 64, 64, 0.8);
+  text-align: center;
+  padding: 5px 0;
+}
+.avatar-action .avatar-view {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+a.avatar-action:hover span {
+  display: block;
+}
+
+.avatar-view {
+  width: 100%;
+  &.avatar-item {
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  &.avatar-profile {
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  &.avatar-links {
+    img {
+      width: 100%;
+    }
+  }
+  &.avatar-card {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  .avatar-editor-img {
+    max-width: 100%;
+  }
+  .square-preview {
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.avatar-upload {
+  .avatar-upload-cropper-container {
+    width: 100%;
+    height: auto;
+    background-color: whitesmoke;
+    border: dotted 1px;
+    &.cropper-sm {
+      width: 250px;
+      height: 250px;
+    }
+    &.cropper-md {
+      width: 350px;
+      height: 350px;
+    }
+    &.cropper-lg {
+      width: 500px;
+      height: 500px;
+    }
+  }
+  .avatar-upload-file {
+    margin-top: 8px;
+  }
+}
+
+.avatar-image-preview {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+.avatar-editor {
+  width: 100%;
+  .avatar-editor-img {
+    max-width: 100%;
+  }
+  .square-preview {
+    padding: 4px;
+    background-color: lightgray;
+    border-radius: 4px;
+    img {
+      width: 100%;
+    }
+  }
+  .avatar-tile-editor {
+    min-height: 300px;
+  }
+  .alert {
+    margin-top: 45%;
+  }
+}
+
+.avatar-tile-editor .avatar-tile-preview {
+  display: inline-block;
+  color: whitesmoke;
+  border: 1px solid #e7eaec;
+  font-size: 4.3em;
+  font-weight: bold;
+  width: 125px;
+  height: 125px;
+  vertical-align: top;
+  text-align: center;
+  margin: 10px;
+  padding-top: 20px;
+  &.avatar-tile-preview.preview-tm {
+    padding-top: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.6em;
+  }
+  &.avatar-tile-preview.preview-sm {
+    padding-top: 20px;
+    width: 125px;
+    height: 125px;
+    font-size: 4.3em;
+  }
+  &.avatar-tile-preview.preview-md {
+    padding-top: 35px;
+    width: 250px;
+    height: 250px;
+    font-size: 9em;
+  }
+}
+
+.fileinput {
+  margin-bottom: 0; 
+  width: 100%;
+  .thumbnail {
+    width: 200px;
+    height: 200px;
+    max-height: 200px;
+    max-width: 200px;
+    & > img {
+      width: 100%;
+    }
+  }
+}
+
+.metric {
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  height: 100px;
+  display: block;
+  border-radius: 5px;
+  border: solid 1px transparent;
+  &.metric-default {
+    background-color: @btn-default-bg;
+    color: @btn-default-color;
+    border-color: @btn-default-border;
+  }
+  &.metric-info {
+    background-color: @btn-info-bg;
+    color: @btn-info-color;
+    border-color: @btn-info-border;
+  }
+  &.metric-danger {
+    background-color: @btn-danger-bg;
+    color: @btn-danger-color;
+    border-color: @btn-danger-border;
+  }
+  &.metric-warning {
+    background-color: @btn-warning-bg;
+    color: @btn-warning-color;
+    border-color: @btn-warning-border;
+  }
+  &.metric-success {
+    background-color: @btn-success-bg;
+    color: @btn-success-color;
+    border-color: @btn-success-border;
+  }
+  > .metric-glyph {
+    text-align: center;
+    width: 20%;
+    float: left;
+  }
+  > .metric-text {
+    text-align: right;
+    width: 80%;
+    float: left;
+    span {
+    }
+    h2 {
+      margin-top: 5px;
+      margin-bottom: 0;
+      font-size: 3.5em;
+      font-weight: bold;
+    }
+  }
+  &.metric-small {
+    height: auto;
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+}

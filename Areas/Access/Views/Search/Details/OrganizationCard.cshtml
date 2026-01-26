@@ -1,0 +1,32 @@
+﻿@model AccessManagement.Web.Areas.Access.ViewModels.DetailsPageViewModel
+<div class="card">
+  <div class="card-heading">
+    <div class="card-title"><h4>Issuing Organization</h4></div>
+  </div>
+  <div class="card-content">
+    <div class="row m-t-md m-b-md">
+      <div class="col-sm-3 text-center">
+        <img src="@Html.ValueFor(m => m.Credential.OrganizationAvatar.Thumbnail)" alt="@Html.ValueFor(m => m.Credential.Organization.Name)" />
+      </div>
+      <div class="col-sm-9">
+        <h4 class="m-t-md">@Html.DisplayFor(m => m.Credential.Organization.Name)</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-condensed">
+          <tbody>
+            <tr><td><strong>Contact</strong></td><td>@Html.DisplayFor(m => m.Credential.Organization.Profile.EmergencyContactName)</td></tr>
+            <tr><td><strong>Title</strong></td><td>@Html.DisplayFor(m => m.Credential.Organization.Profile.EmergencyContactTitle)</td></tr>
+            <tr><td><strong>Email</strong></td><td>@Html.DisplayFor(m => m.Credential.Organization.Profile.EmergencyContactEmail)</td></tr>
+            <tr><td><strong>Phone</strong></td><td>@Html.DisplayFor(m => m.Credential.Organization.Profile.EmergencyContactPhone)</td></tr>
+            <tr><td><strong>Phone 2</strong></td><td>@Html.DisplayFor(m => m.Credential.Organization.Profile.EmergencyContactPhone2)</td></tr>
+            <tr><td><strong>Address</strong></td><td>@Html.DisplayFor(m => m.Credential.Organization.Profile.StreetAddress)</td></tr>
+            <tr><td><strong>Website</strong></td><td>@Html.DisplayFor(m => m.Credential.Organization.Profile.Website)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

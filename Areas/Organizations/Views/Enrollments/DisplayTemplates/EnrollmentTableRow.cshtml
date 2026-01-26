@@ -1,0 +1,44 @@
+﻿@using AccessManagement.Models.Enrollment
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Enrollments.EnrollmentTableRow
+
+<tr data-enrollment-id="@Html.ValueFor(m => m.Id)" data-searchable-name="@Html.ValueFor(m => m.SearchableName)">
+  <td>@Html.DisplayFor(m => m.GlyphInfo)</td>
+  <td>
+    @{
+      var borderStyle = "flag-border-muted";
+      switch (Model.Status)
+      {
+        case EnrollmentStatus.Pending:
+          borderStyle = "flag-border-warning";
+          break;
+        case EnrollmentStatus.Started:
+          borderStyle = "flag-border-success";
+          break;
+      }
+    }
+    <div class="flag-border flag-border-wide @borderStyle">
+      <a class="undecorated-link" href="@Url.Action("Details", new { id = Model.Id})">
+        @Html.DisplayFor(m => m.Name)
+      </a>
+      <div class="pull-right">
+        @Html.DisplayFor(m => m.Status)
+      </div>
+      <br />
+      <small>
+        @Html.DisplayTextFor(m => m.Email)
+        @if (!string.IsNullOrEmpty(Model.PrimaryPhone))
+        {
+          <span class="m-l-xs">@Html.GlyphFa("phone")</span>
+          @Html.DisplayFor(m => m.PrimaryPhone)
+        }
+      </small>
+    </div>
+  </td>
+  <td>
+    <span title="@Html.DisplayFor(m => m.LastModifiedOn)">@Html.DisplayFor(m => m.LastModifiedOnFormatted)</span>
+  </td>
+  <td>
+    @Html.Partial("Widgets/ActionsDropDown", Model)
+  </td>
+</tr>

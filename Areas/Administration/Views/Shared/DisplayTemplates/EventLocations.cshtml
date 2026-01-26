@@ -1,0 +1,8 @@
+﻿@model IReadOnlyCollection<AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.EventLocationViewModel>
+<span class="text-muted"><small>@Model.Count locations</small></span>
+<ul class="list-unstyled">
+  @foreach (var item in Model.OrderBy(m => m.EventLocationInfo.LocationName))
+  {
+    @Html.DisplayFor(_ => item)
+  }
+</ul>

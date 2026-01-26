@@ -1,0 +1,5 @@
+﻿@model AccessManagement.Models.Core.EsfCodes?
+@if (Model != null)
+{
+  @Html.Raw(Model.Value.ToString("D"))
+}

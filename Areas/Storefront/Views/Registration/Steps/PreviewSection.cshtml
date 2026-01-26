@@ -1,0 +1,18 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.RegisterPageViewModel
+
+<section>
+  <div class="well well-sm description">
+    <h4>@Html.ValueFor(m => m.PageContent.PreviewStep.Title)</h4>
+    <p>
+      @Html.ValueFor(m => m.PageContent.PreviewStep.Description)
+    </p>
+  </div>
+  <div class="accessdocuments-preview m-t-lg">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="preview-container" data-preview-uri="@Html.ValueFor(m => m.PreviewUriStem)">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

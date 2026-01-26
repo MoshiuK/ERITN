@@ -1,0 +1,10 @@
+﻿@model Juillet.Web.Mvc.Navigation.NavigationItem
+<li>
+  <a href="@Html.ValueFor(m => m.Href)" target="_blank">
+    @if (Model.Glyph != null)
+    {
+      @Model.Glyph.Render()
+    }
+    @Html.DisplayFor(m => m.Caption)
+  </a>
+</li>

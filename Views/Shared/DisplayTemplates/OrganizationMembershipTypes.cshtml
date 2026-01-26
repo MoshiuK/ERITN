@@ -1,0 +1,30 @@
+﻿@using AccessManagement.Models.Core
+@model OrganizationMembershipTypes
+@{
+  var relationshipType = "(other relationship)";
+  switch (Model)
+  {
+    case OrganizationMembershipTypes.Undefined:
+      relationshipType = "(undefined / no relationship)";
+      break;
+    case OrganizationMembershipTypes.FullTimeEmployee:
+      relationshipType = "Full Time Employee";
+      break;
+    case OrganizationMembershipTypes.PartTimeEmployee:
+      relationshipType = "Part Time Employee";
+      break;
+    case OrganizationMembershipTypes.Contractor:
+      relationshipType = "Contractor";
+      break;
+    case OrganizationMembershipTypes.Subcontractor:
+      relationshipType = "Sub-contractor";
+      break;
+    case OrganizationMembershipTypes.Intern:
+      relationshipType = "Intern";
+      break;
+    case OrganizationMembershipTypes.Volunteer:
+      relationshipType = "Volunteer";
+      break;
+  }
+}
+@Html.Raw(relationshipType)

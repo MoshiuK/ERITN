@@ -1,0 +1,33 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.PeopleHub.PeopleHubSideBar
+
+@{
+  var peopleCss = Model.PeopleActive ? "active" : string.Empty;
+  var enrollmentsCss = Model.EnrollmentsActive ? "active" : string.Empty;
+  var verificationsCss = Model.VerificationsActive ? "active" : string.Empty;
+  var peopleAlertCount = Model.Statistics.PeopleAlertCount > 0 ? "(" + Model.Statistics.PeopleAlertCount.ToString("N0") + ")" : string.Empty;
+  var enrollmentsAlertCount = Model.Statistics.EnrollmentsAlertCount > 0 ? "(" + Model.Statistics.EnrollmentsAlertCount.ToString("N0") + ")" : string.Empty;
+  var verificationsAlertCount = Model.Statistics.VerificationsAlertCount > 0 ? "(" + Model.Statistics.VerificationsAlertCount.ToString("N0") + ")" : string.Empty;
+}
+<div class="people-hub sidebar">
+  <ul class="nav nav-pills nav-stacked">
+    <li id="peopleTab" role="presentation" class="@peopleCss">
+      <a href="@Url.Action("Index", "PeopleHub")">
+        @Html.GlyphFa("user", GlyphStyles.X3FixedWidth)
+        EVERYONE <strong>@peopleAlertCount</strong>
+      </a>
+    </li>
+    <li id="enrollmentsTab" role="presentation" class="@enrollmentsCss">
+      <a href="@Url.Action("Index", "Enrollments")">
+        @Html.GlyphFa("edit", GlyphStyles.X3FixedWidth)
+        ENROLLMENTS <strong>@enrollmentsAlertCount</strong>
+      </a>
+    </li>
+    <li id="verificationsTab" role="presentation" class="@verificationsCss">
+      <a href="@Url.Action("Verifications", "PeopleHub")">
+        @Html.GlyphFa("calendar-check-o", GlyphStyles.X3FixedWidth)
+        VERIFICATIONS PENDING <strong>@verificationsAlertCount</strong>
+      </a>
+    </li>
+  </ul>
+</div>

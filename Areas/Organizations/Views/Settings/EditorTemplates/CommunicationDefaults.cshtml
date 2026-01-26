@@ -1,0 +1,52 @@
+﻿@using AccessManagement.Framework.Tenants
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Settings.CommunicationDefaults
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Personnel Communications</h2>
+    <h4>
+      We will send email and SMS messages to your personnel with details of how to download their access
+      passes for emergency events.
+    </h4>
+    <p>
+      These settings are applied with a person is <strong>first enrolled</strong>.  You can change communiciation
+      preferences for specific individuals at any time by making changes directly to their membership.
+    </p>
+  </div>
+</div>
+
+@using (Html.BeginForm("CommunicationDefaults", "Settings"))
+{
+  @Html.AntiForgeryToken()
+
+  <div class="row m-b-sm">
+    <div class="col-md-offset-2 col-md-8">
+      @Html.EditorFor(m => m.AllowEmailCommunication)
+      <small class="text-muted m-l-lg">
+        This is your organization's consent for personnel to receive email from us after they enroll.
+      </small>
+    </div>
+  </div>
+
+  <div class="row m-b-sm">
+    <div class="col-md-offset-2 col-md-8">
+      @Html.EditorFor(m => m.AllowPhoneCommunication)
+      <small class="text-muted m-l-lg">
+        This is your organization's consent for personnel to receive phone messages from us after they enroll.
+      </small>
+    </div>
+  </div>
+
+  <div class="row m-b-sm">
+    <div class="col-md-offset-2 col-md-8">
+      @Html.EditorFor(m => m.SendWelcomeEmailOnEnrollComplete)
+    </div>
+  </div>
+
+  <div class="row m-b-lg">
+    <div class="col-md-12 text-center">
+      <button type="submit" class="btn btn-lg btn-primary">Save Changes</button>
+    </div>
+  </div>
+
+}

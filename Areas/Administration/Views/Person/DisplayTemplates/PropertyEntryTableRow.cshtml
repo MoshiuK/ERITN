@@ -1,0 +1,84 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.PropertyEntry
+<tr>
+  <td>
+    @Html.DisplayFor(m => m.Glyph)
+  </td>
+  <td>
+    <p>
+      @if (Model.IsVerified)
+      {
+        <strong>@Html.DisplayFor(m => m.PropertyName)</strong>
+      }
+      else
+      {
+        <em>@Html.DisplayFor(m => m.PropertyName)</em>
+      }
+      <br />
+      @Html.DisplayFor(m => m.PropertyValueLine)
+    </p>
+  </td>
+  <td>
+    @if (Model.IsVerified)
+    {
+      var content = "<small class=text-muted>" +
+                    Html.DisplayFor(m => m.VerficationInfo.VerifiedOn) +
+                    "</small><br/>Verified by <strong>" +
+                    Html.DisplayFor(m => m.VerficationInfo.VerifiedByUserName) +
+                    "</strong> of organization <strong>" +
+                    Html.DisplayFor(m => m.VerficationInfo.VerifiedByOrganizationName) +
+                    "</strong>. <br/><br/>Valid from <strong>" +
+                    Html.DisplayFor(m => m.VerficationInfo.ValidFrom) +
+                    "</strong> until <strong>" +
+                    Html.DisplayFor(m => m.VerficationInfo.ValidUntil) +
+                    "</strong>.";
+      if (!string.IsNullOrEmpty(Model.VerficationInfo.Remarks))
+      {
+        content += "<br/><br/>Remarks: <em>" +
+                   Html.DisplayFor(m => m.VerficationInfo.Remarks) +
+                   ".</em>";
+      }
+
+      <div title="Verification Details"
+           data-toggle="popover" 
+           data-trigger="hover"
+           data-html="true"
+           data-placement="left"            
+           data-content="@content">
+        @Html.GlyphFa("info", cssClasses: "text-info")
+        <small>
+          @Html.DisplayFor(m => m.VerficationInfo.VerifiedOn)<br />
+          by @Html.DisplayFor(m => m.VerficationInfo.VerifiedByUserName)
+        </small>
+      </div>
+    }
+    else
+    {
+      <button type="button" 
+              class="btn btn-sm btn-default verify-attribute"
+              title="Pending since @Html.DisplayFor(m => m.PendingVerificationSince)"
+              data-property-id="@Model.PropertyDbId">@Html.GlyphFa("check") Verify Now</button>
+    }
+  </td>
+  <td>
+    <div class="table-action-cell">
+      <button class="btn btn-sm btn-info m-r-sm edit-attribute" 
+              type="button"
+              title="Edit"
+              data-toggle="modal"
+              data-target="#edit-attribute-dialog"
+              data-editor-uri="@Url.Action("EditAttributeDialog", new { id = Model.MemberId, category = Model.Category, propertyId = Model.PropertyDbId })"
+              data-property-id="@Model.PropertyDbId"
+              data-property-type-name="@Model.PropertyName"
+              data-property-type-id="@Model.PropertyTypeId">@Html.GlyphFa("pencil-square-o")</button>
+
+      @using (Html.BeginForm("DeleteAttribute", "Person", new {id = Model.MemberId, propertyId = Model.PropertyDbId}, FormMethod.Post))
+      {
+        @Html.AntiForgeryToken()
+
+        <button type="submit" class="btn btn-sm btn-danger form-control" title="Delete">@Html.GlyphFa("trash-o")</button>
+      }
+    </div>
+  </td>
+</tr>
+

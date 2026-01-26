@@ -1,0 +1,103 @@
+﻿@using AccessManagement.Framework
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.ViewModels.Profile.ProfilePageViewModel
+@{
+  Layout = "~/Views/Shared/_MinimalBrandLayout.cshtml";
+}
+<div class="page-jumbotitle">
+  <h1>@ViewBag.Title</h1>
+  <h4 class="page-jumbotitle-info">
+    Control your profile settings and decide how to make our services work better for you.
+  </h4>
+</div>
+
+<div class="row m-t-lg">
+  <div class="col-md-4">
+    <div class="user-profile summary-pane">
+      <div class="avatar-container">
+        @Html.DisplayFor(m => m.Avatar)
+      </div>
+      <div class="profile-info">
+        <h1>@Html.DisplayFor(m => m.UserDirectoryEntry.DisplayName)</h1>
+        <h2>@Html.DisplayFor(m => m.UserDirectoryEntry.JobTitle)</h2>
+        <h3>@Html.DisplayFor(m => m.UserDirectoryEntry.OrganizationName)</h3>
+        <div class="profile-item">
+          <span class="bullet">@Html.GlyphFa("envelope", GlyphStyles.FixedWidth)</span>
+          <span class="item">@Html.DisplayFor(m => m.UserDirectoryEntry.Email)</span>
+        </div>
+        <div class="profile-item">
+          <span class="bullet">@Html.GlyphFa("phone", GlyphStyles.FixedWidth)</span>
+          <span class="item">
+            <a href="tel:@Html.ValueFor(m => m.UserDirectoryEntry.MobilePhone)">@Html.DisplayFor(m => m.UserDirectoryEntry.MobilePhone)</a>
+          </span>
+        </div>
+        <div class="profile-item">
+          <span class="bullet" title="@Html.DisplayNameFor(m => m.UserDirectoryEntry.UserName)">@Html.GlyphFa("user-o", GlyphStyles.FixedWidth)</span>
+          <span class="item" title="@Html.DisplayTextFor(m => m.UserDirectoryEntry.UserName)">@Html.DisplayFor(m => m.UserDirectoryEntry.SignInName)</span>
+        </div>
+        <div class="row">
+          <div class="col-sm-offset-2 col-sm-8 text-center m-t">
+            <a class="btn btn-primary full-width" href="@Url.Action("Edit")">@Html.GlyphFa("pencil") Update Profile</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-offset-2 col-sm-8 text-center m-t">
+            <a class="btn btn-primary full-width" href="@Url.Action("ChangePassword")">@Html.GlyphFa("key") Change Password</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-offset-2 col-sm-8 text-center m-t">
+            <a class="btn btn-primary full-width" href="@Url.Action("ResetTour")">@Html.GlyphFa("info") Reset Tour</a>
+          </div>
+        </div>
+        @if (Model.TutorialsUrl != null)
+        {
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-8 text-center m-t">
+              <a class="btn btn-link" href=@Model.TutorialsUrl  target="_blank">@Html.GlyphFa("external-link") View Tutorials</a>
+            </div>
+          </div>
+        }
+        <div class="row p-lg">
+          <div class="col-sm-12">
+            @{
+              var since = Model.UserRecord.FirstSuccessfulSignIn?.Date.ToString("d") ?? "";
+              if (!string.IsNullOrEmpty(since))
+              {
+                <span>User since:</span>
+                <span>@since</span>
+              }
+            }
+            <div class="secondary-info">
+              <small class="text-muted">Most recent sign in:</small>
+              <span>@Html.DisplayFor(m => m.UserRecord.MostRecentSuccessfulSignIn)</span>
+            </div>
+            <div class="secondary-info">
+              <small class="text-muted">Created on:</small>
+              <span>@Model.UserRecord.CreatedOn.ToString("d")</span>
+            </div>
+            <div class="secondary-info">
+              <small class="text-muted">Created by:</small>
+              <span>@Html.DisplayFor(m => m.UserRecord.CreatedBy)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="user-profile detail-pane">
+      @if (User.IsInRole(FrameworkConstants.Roles.OrganizationAdministrator))
+      {
+        @Html.Partial("Cards/ActionsCard", Model.Actions)
+      }
+      @Html.Partial("Cards/MessagesCard", Model.Messages)
+      @Html.Partial("Cards/ActivitiesCard", Model.Activities)
+    </div>
+  </div>
+</div>
+
+@section scripts
+{
+  <script type="text/javascript" src="~/Scripts/pages/common.profile.js"></script>
+}

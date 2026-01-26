@@ -1,0 +1,62 @@
+﻿@using AccessManagement.Models.Registration
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Operations.ViewModels.Organizations.RegistrationsIndexPageViewModel
+
+<div class="row m-b-sm">
+  <div class="col-md-12">
+    <ul class="nav nav-pills">
+      <li role="presentation" class="">@Html.ActionLink("Organizations", "OrganizationsIndex")</li>
+      <li role="presentation" class="active">@Html.ActionLink("Registrations", "RegistrationsIndex")</li>
+    </ul>    
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body"></div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>@Html.GlyphFa("circle-o")</th>
+          <th>Status</th>
+          <th>Name</th>
+          <th>Reference ID</th>
+          <th>Started</th>
+          <th>Registrant</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var reg in Model.PageOfRegistrations.Data)
+        {
+          <tr>
+            <td>
+              @{
+                var style = reg.Status == RegistrationStatus.Registered ? "text-success" : "text-muted";
+                var glyph = reg.Status == RegistrationStatus.Registered ? "circle" : "circle-o";
+              }
+              <span class="@style">@Html.GlyphFa(glyph)</span>
+            </td>
+            <td>
+              @Html.DisplayFor(_ => reg.Status)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => reg.OrganizationName)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => reg.ReferenceId)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => reg.StartedOn)
+            </td>
+            <td>
+              @Html.DisplayFor(_ => reg.ContactName) (@Html.DisplayFor(_ => reg.ContactEmail))
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

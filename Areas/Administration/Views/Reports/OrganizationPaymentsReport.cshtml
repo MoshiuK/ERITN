@@ -1,0 +1,28 @@
+﻿@model IReadOnlyCollection<AccessManagement.Web.ViewModels.Framework.Reports.ReportDataRow>
+
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+
+  ViewBag.ColumnCount = 3;
+}
+
+<h2>@ViewBag.Title</h2>
+<small>Found @Model.Count report rows.</small>
+
+<div class="table-scroll-container">
+  <table class="table table-condensed table-bordered">
+    <thead>
+    <tr>
+      <th class="md-l">Organization Name</th>
+      <th class="md-l">Total Currently Enrolled</th>
+      <th class="md-l">Total Available Enrollment Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var row in Model)
+    {
+      @Html.DisplayFor(_ => row.Data, row.DataTemplate);
+    }
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,141 @@
+﻿@model AccessManagement.Web.Areas.Storefront.ViewModels.Registration.InvoiceQuotationViewModel
+
+<script src="~/Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+
+@section styles
+{
+  <style>
+    .layout-root > nav {
+      margin-bottom: 0;
+    }
+
+    .layout-root.browser .workspace {
+      margin-top: 50px;
+    }
+
+    .workspace .body-content {
+      padding: 50px;
+    }
+  </style>
+}
+
+<div id="contentDiv">
+  <div>
+    <h1>
+      @(Model.OrganizationName)
+      <small class="pull-right">Quotation</small>
+    </h1>
+    <h4>
+      <small>@(DateTime.Today.ToShortDateString())</small>
+    </h4>
+
+    <hr />
+
+    <h3>Bill To</h3>
+    <div class="row">
+      <div class="col-md-8">
+        <strong>@Html.DisplayFor(model => model.OrganizationName)</strong>
+      </div>
+      <div class=" col-md-4">
+      </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        @Html.DisplayFor(model => model.Name)
+      </div>
+      <div class=" col-md-4">
+        Quotation Valid Until: @(DateTime.Today.AddDays(30).ToShortDateString())
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        @Html.DisplayFor(model => model.Address1)
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        @Html.DisplayFor(model => model.Address2)
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        @Html.DisplayFor(model => model.City) @Html.DisplayFor(model => model.State), @Html.DisplayFor(model => model.ZipCode)
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        @Html.DisplayFor(model => model.Phone)
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+  </div>
+
+  <h3>
+    Order Information
+  </h3>
+  <h5>
+    <i>Product Pricing Subject to Change</i>
+  </h5>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Price Per Person Per Term</th>
+        <th scope="col"># Emergency Personnel</th>
+        <th scope="col">Subscription Term (months)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="col-md-2">
+          @Html.DisplayFor(model => model.ProductName)
+        </td>
+        <td class="col-md-3">
+          @Html.DisplayFor(model => model.PriceInDollars)
+        </td>
+        <td class="col-md-3">
+          @Html.DisplayFor(model => model.Quantity)
+        </td>
+        <td class="col-md-3">
+          @Html.DisplayFor(model => model.SubscriptionTermMonths)
+        </td>
+        <td class="col-md-1"></td>
+      </tr>
+      <tr>
+        <td class="col-md-2"></td>
+        <td class="col-md-3"></td>
+        <td class="col-md-2"></td>
+        <td class="col-md-3"><strong>TOTAL:</strong></td>
+        <td class="col-md-1">
+          @Html.DisplayFor(model => model.Total)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br />
+
+  <p>
+    @Html.ActionLink("Back to Registration Completion", "Payment", "Registration", new { referenceId = Model.ReferenceId, subscriptionTermMonths = Model.SubscriptionTermMonths, tenantProductId = Model.ProductId, unitPrice = Model.PriceInCents }, new { @class = "pull-right btn btn-lg btn-primary" })
+  </p>
+</div>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AccessManagement.Web.Areas.Operations.ViewModels.OperationsActivityTableRow>
+@{
+  var rowCount = 0;
+}
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="activityResultsPane">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><small></small></th>
+                <th class="text-right"><small>Credentials Issued</small></th>
+                <th class="text-right"><small>Access Succeeded</small></th>
+                <th class="text-right"><small>Access Failed</small></th>
+                <th class="text-right"><small>Access Denied</small></th>
+                <th class="text-right"><small>Other Activity</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var row in Model)
+              {
+                <tr>
+                  <td id="TenantName_@rowCount">
+                    @Html.DisplayFor(_ => row.TenantName)
+                  </td>
+                  <td id="CredentialsIssued_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.CredentialsIssued)
+                  </td>
+                  <td id="SuccessCount_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.SuccessCount)
+                  </td>
+                  <td id="FailedCount_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.FailedCount)
+                  </td>
+                  <td id="DeniedCount_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.DeniedCount)
+                  </td>
+                  <td id="OtherActivityCount_@rowCount" class="text-right">
+                    @Html.DisplayFor(_ => row.OtherActivityCount)
+                  </td>
+                </tr>
+
+                rowCount++;
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

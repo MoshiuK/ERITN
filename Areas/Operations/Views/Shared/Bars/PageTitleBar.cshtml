@@ -1,0 +1,30 @@
+﻿@using AccessManagement.Web.ViewModels.Body
+@{
+  var header = (PageHeaderViewModel)ViewBag.Header ?? PageHeaderViewModel.Untitled;
+}
+<div class="row border-top-bottom page-heading">
+  <div class="col-lg-10">
+    <h2>@header.Title</h2>
+    <ol class="breadcrumb">
+      @foreach (var breadcrumb in @header.Breadcrumbs)
+      {
+        if (breadcrumb.Active)
+        {
+          <li class="active">
+            <strong>@breadcrumb.Caption</strong>
+          </li>
+        }
+        else
+        {
+          var routeValuesToUse = breadcrumb.RouteValues ?? breadcrumb.Action.AreaRouteValue();
+          <li>
+            @Html.ActionLink(breadcrumb.Caption, breadcrumb.Action.Action, breadcrumb.Action.Controller, routeValuesToUse, null)
+          </li>
+        }
+      }
+    </ol>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+

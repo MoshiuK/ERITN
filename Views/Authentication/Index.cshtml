@@ -1,0 +1,37 @@
+﻿@using AccessManagement.Framework.Tenants
+@{
+  Layout = "~/Views/Shared/_MinimalBrandLayout.cshtml";
+  var theme = (TenantTheme)ViewBag.Theme;
+  var themeCaption = theme == null ? "(unknown)" : theme.BrandCaption;
+}
+<div class="page-jumbotitle">
+  <h1>@ViewBag.Title</h1>
+  <h4 class="page-jumbotitle-info">
+    Sign in to your @themeCaption
+  </h4>
+</div>
+
+<div class="row m-t-lg">
+  <div class="col-md-12 text-center">
+    <h2>Coordinator</h2>
+    <p>
+      Manage emergency access for the people in your organization.
+    </p>
+    @Html.ActionLink("COORDINATOR SIGN IN", "SignInOrganizationAdmin", null, new { @class = "btn btn-lg btn-primary" })
+  </div>
+</div>
+
+<div class="divider m-v-xxl"><hr /></div>
+
+@if (HttpContext.Current.IsDebuggingEnabled)
+{
+  <div class="row m-t-lg">
+    <div class="col-md-12 text-center">
+      <ul class="list-unstyled">
+        <li>@Html.ActionLink("TruEntry Tenant Administrator Sign In", "SignInTenantAdmin", null, new { @class = "btn btn-link" })</li>
+        <li>@Html.ActionLink("TruEntry Staff Sign In", "SignInOperations", null, new { @class = "btn btn-link" })</li>
+        <li>@Html.ActionLink("Access Point Offical Sign In", "SignInAccessPointOfficial", "Authentication", null, new { @class = "btn btn-link" })</li>
+      </ul>
+    </div>
+  </div>
+}

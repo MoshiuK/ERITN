@@ -1,0 +1,33 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.AccessHub.EventGeneralSettings
+@{
+  Layout = "_EventTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        @using (Html.BeginForm("General", "Event", null, FormMethod.Post, new { id = "generalSettingsForm" }))
+        {
+          @Html.AntiForgeryToken()
+
+          @Html.HiddenFor(m => m.CorrelationId)
+          @Html.EditorForModel()
+
+          <div id="initialselection-@Html.IdFor(m => m.EmergencyEventTypeId)" 
+               data-event-type-id="@Html.ValueFor(m => m.EmergencyEventTypeId)" 
+               data-event-type-name="@Html.ValueFor(m => m.EmergencyEventTypeName)"></div>
+
+          <div class="pull-right m-t-md">
+            <button type="submit" class="btn btn-primary btn-lg">Update</button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.event.general.js"></script>
+}

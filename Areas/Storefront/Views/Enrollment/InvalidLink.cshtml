@@ -1,0 +1,26 @@
+﻿@using AccessManagement.Framework.Tenants
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+  var theme = (TenantTheme)ViewBag.Theme;
+}
+
+<div class="row storefront-enroll page-header">
+  <div class="col-md-12">
+    <h3 class="title">Link is no longer usable</h3>
+  </div>
+</div>
+
+<div class="row storefront-enroll general-section border-bottom m-b-lg text-center">
+  <div class="col-md-offset-2 col-md-8">
+    <p class="h4">
+      The invitation or link that you clicked on is no longer usable.
+    </p>
+    <p>
+      We recommend you contact the @theme.BrandCaption coordinator in your organization and request another invitation from them.
+    </p>
+    <div class="alert alert-info">
+      We apologize for the inconvenience.
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,49 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Home.DashboardPageViewModel
+@using AccessManagement.Framework.Tenants
+@using AccessManagement.Web.Mvc
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+  var theme = (TenantTheme)ViewBag.Theme;
+}
+<h2>@theme.BrandCaption</h2>
+
+<div class="row">
+  <div class="col-md-7">
+    @Html.Partial("Cards/TopOrganizationsCard", Model.TopOrganizationsCard)
+    @Html.Partial("Cards/ActvitySummaryCard", Model.ActivitySummaryCard)
+  </div>
+  <div class="col-md-5">
+    @Html.Partial("Cards/EventsSummaryCard", Model.EventsSummaryCard)
+    @Html.Partial("Cards/OrganizationsSummaryCard", Model.OrganizationsSummaryCard)
+    @Html.Partial("Cards/PeopleSummaryCard", Model.PeopleSummaryCard)
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card"></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card"></div>
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/Chart.bundle.min.js"></script>
+  <script src="~/Scripts/pages/administration.home.index.js"></script>
+  @Html.ScriptForGooglePlacesAutoComplete()
+}
+
+@section pagestyles {
+  <style type="text/css">
+    #topOrgsMap {
+      height: 350px;
+    }
+
+    .events-card .card-content {
+      height: 350px;
+      overflow-y: auto;
+    }
+  </style>
+}

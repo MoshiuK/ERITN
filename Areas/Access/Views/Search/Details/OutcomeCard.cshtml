@@ -1,0 +1,74 @@
+﻿@using AccessManagement.Framework.Credentials
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Framework.Credentials.CredentialSummary
+
+@functions
+{
+
+  string GetStyleCss(CredentialValidationStatus outcome)
+  {
+    switch (outcome)
+    {
+      case CredentialValidationStatus.InvalidForAccess:
+      case CredentialValidationStatus.Unknown:
+      case CredentialValidationStatus.IndeterminateForAccess:
+        return "card-danger";
+      case CredentialValidationStatus.ValidWithWarningsForAccess:
+        return "card-warning";
+      default:
+        return "card-success";
+    }
+  }
+
+  string GetTitle(CredentialValidationStatus outcome)
+  {
+    switch (outcome)
+    {
+      case CredentialValidationStatus.InvalidForAccess:
+        return "Not Valid for Transit";
+      case CredentialValidationStatus.Unknown:
+      case CredentialValidationStatus.IndeterminateForAccess:
+        return "More Information Required";
+      case CredentialValidationStatus.ValidWithWarningsForAccess:
+        return "Inspection Required";
+      default:
+        return "Valid for Transit";
+    }
+  }
+
+  string GetGlyph(CredentialValidationStatus outcome)
+  {
+    switch (outcome)
+    {
+      case CredentialValidationStatus.InvalidForAccess:
+      case CredentialValidationStatus.Unknown:
+      case CredentialValidationStatus.IndeterminateForAccess:
+        return "ban";
+      case CredentialValidationStatus.ValidWithWarningsForAccess:
+        return "minus-square-o";
+      default:
+        return "check-square-o";
+    }
+  }
+}
+
+<div class="card @GetStyleCss(Model.Outcome)">
+  <div class="card-content">
+    <div class="row">
+      <div class="col-md-2">
+        @Html.GlyphFa(GetGlyph(Model.Outcome), GlyphStyles.X5, cssClasses: "text-white")
+      </div>
+      <div class="col-md-10">
+        <h2 class="text-white">@GetTitle(Model.Outcome)</h2>
+        <ul class="list-unstyled">
+          @foreach (var err in Model.ValidationItems)
+          {
+            <li>
+              <div class="text-white">@err.DisplayName - @err.Message</div>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

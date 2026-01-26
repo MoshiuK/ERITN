@@ -1,0 +1,81 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Person.PersonAccessLevelsViewModel
+
+@{
+  Layout = "_PersonLayout.cshtml";
+  string returnUrl = ViewBag.ReturnUrl ?? Request.UrlReferrer?.ToString();
+  var peopleHubUrl = Url.Action("People", "PeopleHub");
+
+  //Only show 'Return to List' link when coming from the people hub.
+  if (!string.IsNullOrWhiteSpace(peopleHubUrl) && returnUrl.EndsWith(peopleHubUrl))
+  {
+    ViewBag.ReturnUrl = returnUrl;
+    <a class="btn btn-link m-t-md" href="@returnUrl">@Html.GlyphFa("arrow-circle-left") Back to List of People</a>
+  }
+}
+
+<div class="row m-t-lg">
+  <div class="col-md-offset-1 col-md-10">
+    @using (Html.BeginForm("UpdateOrgMembershipAccess", "Person", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+    {
+      @Html.AntiForgeryToken()
+      @Html.HiddenFor(m => m.Id)
+      <div class="row">
+        <div class="form-group col-md-12">
+          <h3>Assigned Access Level</h3>
+          <p>
+            <strong>Determines the access level that is used for reentry documents.</strong> You can choose a specific level of access for this person. When a specific level of access is not set (<em>unassigned</em>) the person
+            will use the default access level from your @(Html.ActionLink("organization enrollment settings", "Enrollment", "Settings")).
+          </p>
+        </div>
+        <div class="form-group col-md-6">
+          @Html.DropDownListFor(m => m.AccessLevelId, (SelectList)ViewBag.AvailableAccessLevels, "Unassigned", new { @class = "select2-component form-control" })
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <h3>Assigned Location</h3>
+          <p>
+            <strong>Determines the transit location that is used for reentry documents.</strong> You can choose a specific transit location for this person. When a specific transit location is not set (<em>unassigned</em>) the person
+            will use the default transit location from your @(Html.ActionLink("organization enrollment settings", "Enrollment", "Settings")).
+          </p>
+        </div>
+        <div class="form-group col-md-6">
+          @Html.DropDownListFor(m => m.TransitLocationId, (SelectList)ViewBag.AvailableTransitLocations, "Unassigned", new { @class = "select2-component form-control" })
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <h3>Assigned Purpose or Support Function</h3>
+          <p>
+            <strong>Determines the purpose / support function that is used for reentry documents.</strong> You can choose a specific purpose for this person. When a specific purpose is not set (<em>unassigned</em>) the person
+            will use the default purpose from your @(Html.ActionLink("organization enrollment settings", "Enrollment", "Settings")).
+          </p>
+        </div>
+        <div class="form-group col-md-6">
+          @Html.DropDownListFor(m => m.TransitPurposeId, (SelectList)ViewBag.AvailableTransitPurposes, "Unassigned", new { @class = "select2-component form-control" })
+        </div>
+      </div>
+      if (ViewBag.ShowDeliveryOptions)
+      {
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h3>Delivery of Access Documents</h3>
+            <p>
+              Your organization has a specific policy for delivering access documents to personnel. Some personnel may be allowed
+              to choose their own method of delivery instead (e.g. email, phone, download to their device etc.).
+            </p>
+          </div>
+          <div class="form-group col-md-12">
+            @Html.EditorFor(m => m.IgnoreCustomDeliveryChannels)
+          </div>
+        </div>
+      }
+      <div class="row m-t-lg">
+        <div class="col-md-offset-6 col-md-6">
+          <button type="submit" class="btn btn-success btn-lg">Update</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

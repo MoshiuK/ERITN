@@ -1,0 +1,26 @@
+﻿@model AccessManagement.Web.ViewModels.Home.PartnerAdCard
+
+<a href="@Model.HomeUri" class="undecorated-link">
+  <div class="card">
+    <div class="card-content card-hsplit">
+      <div class="card-hsplit-imagepane fh-300">
+        <img src="@Model.ImageUri" alt="@Model.Name" />
+      </div>
+      <div class="card-hsplit-infopane fh-300">
+        <span><i class="fa fa-globe"></i>&nbsp; @Model.HomeUri</span>
+        <span class="infopane-name">@Model.Name</span>
+        <div class="m-t-xs">
+          @Html.DisplayFor(model => model.About)
+        </div>
+        <div class="m-t-xs">
+          <ul class="list-inline">
+            @foreach (var locationName in @Model.LocationNames)
+            {
+              <li><span class="small"><i class="fa fa-map-marker"></i> @locationName &nbsp;&nbsp;</span></li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>

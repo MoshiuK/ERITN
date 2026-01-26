@@ -1,0 +1,33 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.DistributionChannelsSettings
+@{
+  var organizationId = ViewData["OrganizationId"];
+}
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>Credential Distribution Channels</h4>
+        <p>Configure custom distribution channels to control how credentials are delivered to personnel from 
+          this organization.  A custom distribution channel supersedes the default credential pickup channel.</p>
+      </div>
+      <div class="panel-body">
+        @using (Html.BeginForm("UpdateCredentialDistributionChannel", "Organization", 
+          new { id = organizationId }, FormMethod.Post, 
+          new { id = "generalSettingsForm" }))
+        {
+          @Html.AntiForgeryToken()
+
+          <div id="EmailAttachmentsFormFactorsInitialSelections" 
+               data-initial-selections="@string.Join(",", Model.EmailAttachmentsFormFactors)" 
+               class="hidden" ></div>
+
+          @Html.EditorForModel()
+
+          <div class="pull-right m-t-md">
+            <button type="submit" class="btn btn-success">Save Changes</button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

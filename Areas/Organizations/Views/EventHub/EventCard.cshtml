@@ -1,0 +1,120 @@
+﻿@using AccessManagement.Framework.Events
+@using AccessManagement.Web.Areas.Organizations
+@using Juillet.Web.Mvc.Html
+@model OrganizationEmergencyEvent
+
+@functions
+{
+  string StatusCaption()
+  {
+    var status = "PENDING";
+    switch (Model.Status)
+    {
+      case OrganizationEmergencyEventStatus.Operational:
+        status = "OPERATIONAL";
+        break;
+      case OrganizationEmergencyEventStatus.Concluded:
+        status = "CONCLUDED";
+        break;
+    }
+    return status;
+  }
+
+  string DaysCaption()
+  {
+    var days = "DAYS";
+    switch (Model.Status)
+    {
+      case OrganizationEmergencyEventStatus.Concluded:
+        days = "DAYS AGO";
+        break;
+    }
+    return days;
+  }
+
+  string StatusCss(string prefix)
+  {
+    var statusCss = prefix + "-pending";
+    switch (Model.Status)
+    {
+      case OrganizationEmergencyEventStatus.Operational:
+        statusCss = prefix + "-operational";
+        break;
+      case OrganizationEmergencyEventStatus.Concluded:
+        statusCss = prefix + "-concluded";
+        break;
+    }
+    return statusCss;
+  }
+}
+
+<div class="card event-card">
+  <div class="card-content">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="event-type">
+          @Html.DisplayFor(m => m.Record.EmergencyEventType)
+          <span>
+            @Html.DisplayFor(m => m.Record.EmergencyEventType.Name)
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="event-calendar">
+          <span class="event-calendar-caption">@StatusCaption()</span>
+          <span class="event-calendar-count">@Html.DisplayFor(m => m.StatusDays)</span>
+          <span class="event-calendar-caption">@DaysCaption()</span>
+        </div>
+      </div>
+    </div>
+    <div class="row m-t-sm">
+      <div class="col-md-4">
+        <span class="event-location-caption">@Html.DisplayNameFor(m => m.Locations)</span>
+        <span class="event-location-count">@Html.DisplayFor(m => m.Locations.Count)</span>
+      </div>
+      <div class="col-sm-8">
+        <ul class="list-unstyled event-metrics">
+          @foreach (var accessLevel in Model.CredentialByAccessLevelCounts.Take(4).Reverse())
+          {
+            <li class="event-metric">
+              <div class="access-level-border-left @accessLevel.AccessLevel.CssStyle" style="border-width: 6px">
+                <span class="event-location-caption">@accessLevel.AccessLevel.LevelMoniker</span>
+                <span class="event-location-count">@accessLevel.Count</span>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="row m-t-sm">
+      <div class="col-sm-10">
+        <ul class="list-unstyled event-locations">
+          @foreach (var location in Model.Locations)
+          {
+            <li class="event-location-item">
+              <img alt="@location.Name" title="@(location.Name)" src="@(location.Avatar.Thumbnail)" />
+            </li>
+          }
+        </ul>
+      </div>
+      <div class="col-sm-2">
+        <a class="btn btn-event @StatusCss("btn-event")"
+           href="@Url.Action("Roster", "Event", new {id = Model.Record.CorrelationId, area = OrganizationsAreaRegistration.Name})">
+          @Html.GlyphFa("arrow-right", GlyphStyles.X2FixedWidth)
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer @StatusCss("card-footer")">
+    <div class="row">
+      <div class="col-sm-8">
+        <h3>
+          @Html.DisplayFor(m => m.Record.Name)
+        </h3>
+      </div>
+      <div class="col-sm-4 p-w-xxs">
+        <h6>@Html.DisplayFor(m => m.AvailableFrom) - @Html.DisplayFor(m => m.AvailableUntil)</h6>
+      </div>
+    </div>
+  </div>
+</div>

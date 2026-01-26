@@ -1,0 +1,78 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.EventHub.Roster
+@using Juillet.Web.Mvc.Html
+@{
+  Layout = "_EventHubLayout.cshtml";
+
+  ViewBag.EventId = Model.EmergencyEventId;
+}
+@Html.HiddenFor(m => m.TutorialsUrl)
+<div class="roster-page">
+  <div class="row m-t-md m-b-sm">
+    <div class="col-md-9">
+      <input id="rosterListFilter" class="form-control" placeholder="Filter by name" type="text" data-event-id="@Model.EmergencyEventId" value="@Model.Filter" />
+    </div>
+    <div class="col-md-3">
+        @using (Html.BeginForm("DistributeCredentials", "Event", new { id = Model.EmergencyEventId }, FormMethod.Post, new { id = "distributeForm", @class = "form-inline", style = "display: inline-block" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="button" id="sendCredentialButton" class="btn btn-default" title="Send Selected Credentials">@Html.GlyphFa("paper-plane")</button>
+        }
+        @using (Html.BeginForm("DownloadStart", "Event", new { id = Model.EmergencyEventId }, FormMethod.Post, new { id = "downloadForm", @class = "form-inline", style = "display: inline-block" }))
+        {
+            @Html.AntiForgeryToken()
+        }
+
+        @*Create Credentials*@
+        <!--@using (Html.BeginForm("CreateCredentials", "Event", new { id = Model.EmergencyEventId }, FormMethod.Post, new { id = "createForm", @class = "form-inline", style = "display: inline-block" }))
+        {
+            @Html.AntiForgeryToken()
+        }-->
+
+        @if (Model.EventIsOperational)
+        {
+            using (Html.BeginForm("ReissueCredentials", "Event", new { id = Model.EmergencyEventId }, FormMethod.Post, new { id = "reissueForm", @class = "form-inline", style = "display: inline-block" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <button type="button" id="reissueCredentialButton" class="btn btn-default" title="Reissue All Credentials">@Html.GlyphFa("rotate-right")</button>
+            }
+        }
+        <button type="button" id="downloadCredentialsButton"
+                class="btn btn-default dropdown-toggle"
+                title="Download Credentials"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @Html.GlyphFa("download")
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a id="createCredentialButton" href="#" style="display:none">ReCreate Credentials</a></li>
+            <li><a id="downloadCredentialButton" href="#">Download Selections</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a id="downloadAllCredentialsButton" href="#">Download All Credentials</a></li>
+        </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      @Html.Partial("RosterTable", Model)
+    </div>
+  </div>
+
+</div>
+
+@section pagescripts
+{
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="popover"]').popover({ html: true });
+    });
+  </script>
+  <script src="~/Scripts/pages/organizations.event.roster.js"></script>
+  @if (!Model.HasCompletedEventTour)
+  {
+    <script type="text/javascript" src="~/Scripts/spstour.js"></script>
+  }
+}

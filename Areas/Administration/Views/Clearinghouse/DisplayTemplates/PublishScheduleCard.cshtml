@@ -1,0 +1,35 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Clearinghouse.PublishSchedule
+<div class="card">
+  <div class="card-content">
+    <img class="center-block" alt="CERRA Clearinghouse" src="https://clrngonldvue.blob.core.windows.net/public/theme/clearinghouse-banner-200x50.png" />
+  </div>
+  <div class="card-content">
+    <div class="form-group-sm">
+      <label>@Html.DisplayNameFor(m => m.Schedule)</label>
+      <p>@Html.DisplayFor(m => m.Schedule)</p>
+    </div>
+    @using (Html.BeginForm("OrganizationsPublishNow", "Clearinghouse", FormMethod.Post))
+    {
+      @Html.AntiForgeryToken()
+      <button type="submit" class="btn btn-primary">Publish Now</button>
+    }
+  </div>
+  <div class="card-content">
+    <label>@Html.DisplayNameFor(m => m.History)</label>
+    <table class="table table-condensed">
+      <tbody>
+        @foreach (var next in Model.History)
+        {
+        <tr>
+          <td>
+            @Html.DisplayFor(_ => next.Outcome)
+          </td>
+          <td>
+            @Html.DisplayFor(_ => next.Completed)
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

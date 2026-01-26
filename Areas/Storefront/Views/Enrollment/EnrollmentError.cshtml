@@ -1,0 +1,30 @@
+﻿@using AccessManagement.Framework.Tenants
+@model AccessManagement.Framework.Enrollment.EnrollmentFailedException
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+  var theme = (TenantTheme)ViewBag.Theme;
+}
+
+<div class="row storefront-enroll page-header">
+  <div class="col-md-12">
+    <h3 class="title">Something went wrong.</h3>
+  </div>
+</div>
+
+<div class="row storefront-enroll general-section border-bottom m-b-lg">
+  <div class="col-md-12">
+    <p class="h4">
+      We're sorry, there was a problem and we were not able to complete your enrollment.
+    </p>
+    <p>
+      We recommend you contact the @theme.BrandCaption coordinator in your organization and request another invitation from them.
+    </p>
+    <div class="alert alert-info">
+      We apologize for the inconvenience.
+    </div>
+    <div class="well well-sm">
+      <strong>Enrollment reference '@Html.DisplayFor(m => m.ReferenceId)'.  Error details:</strong>
+      @Html.DisplayFor(m => m.Message)
+    </div>
+  </div>
+</div>

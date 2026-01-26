@@ -1,0 +1,58 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.DirectoryPageViewModel
+
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+@{
+  var startPosition = (Model.PageOfContent.Metadata.TotalCount == 0) ? 0 : Model.PageOfContent.Metadata.StartPosition;
+  var endPosition = Model.PageOfContent.Metadata.EndPosition;
+  var total = Model.PageOfContent.Metadata.TotalCount;
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <span class="text-muted small pull-right">Last refreshed <i class="fa fa-clock-o"></i> <time data-juillet-currenttime></time></span>
+        <h2>Find People</h2>
+        @Html.Partial("Forms/FilterForm", Model.Filter)
+        <div>
+          <span class="pull-right small text-muted">Showing @startPosition - @endPosition of @total items.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="resultsPane">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th class="fw-80 text-center"><small>@Html.GlyphFa("user-circle")</small></th>
+                <th class="pw-40"><small>NAME</small></th>
+                <th class="pw-30"><small>MEMBERSHIP TYPE</small></th>
+                <th class="pw-30"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @{
+                foreach (var item in Model.PageOfContent.Data)
+                {
+                  @Html.Partial("DirectorySummaryLine", item);
+                }
+              }
+            </tbody>
+
+          </table>
+        </div>
+        @Html.DisplayFor(m => m.Pager)
+      </div>
+    </div>
+  </div>
+</div>

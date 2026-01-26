@@ -1,0 +1,48 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Organizations.ViewModels.Person.NotesPageViewModel
+@{
+  Layout = "_PersonLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      @Html.DialogLink("Add a note", "#newnote", new { @class = "btn btn-primary" })
+    </div>
+
+    @Html.Dialog("newnote", Url.Action("NewNoteDialog", new { id = Model.Id }))
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    @if (Model.PageOfContent.Metadata.TotalCount == 0)
+    {
+      var nothingToSee = new NotFoundPane("No notes or remarks.", new FaGlyph("sticky-note", GlyphStyles.X5, cssClasses: "text-info"), "There were no notes recorded for this person.");
+      @Html.DisplayFor(_ => nothingToSee)
+    }
+    else
+    {
+      <div class="m-t-md">
+        @foreach (var entry in Model.PageOfContent.Data)
+        {
+          @Html.DisplayFor(_ => entry)
+        }
+      </div>
+    }
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    @Html.DisplayFor(m => m.Pager)
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script type="text/javascript">
+    Juillet.Web.Mvc.onDialogOk("#newnote", function() {});
+  </script>
+}

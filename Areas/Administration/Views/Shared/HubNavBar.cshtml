@@ -1,0 +1,10 @@
+﻿@using Juillet.Web.Mvc
+@model NavBar
+<ul class="nav nav-tabs">
+  @foreach (var action in Model.Items)
+  {
+    var style = action.Selected ? "active" : string.Empty;
+    <li role="presentation" class="@style">@action.AnchorTag(Url)</li>
+  }
+</ul>
+

@@ -1,0 +1,570 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Juillet.Web.Contracts</name>
+    </assembly>
+    <members>
+        <member name="T:Juillet.Web.Api.FromQueryParamAttribute">
+            <summary>
+            Annotate a property with an alias from a query parameter.
+            </summary>
+            <remarks>
+            <para>
+            Use the <see cref="T:Juillet.Web.Api.FromQueryParamAttribute"/> to change the name of a property coming from a query parameters.
+            With the following example, instead of /resource?Criteria.Name=John you can use /resource?n=John.
+            </para>
+            <example>
+            public class Criteria
+            {
+              [Juillet.Web.Api.FromQueryParam("n")]
+              public string Name { get; set; }
+            }
+            </example>
+            </remarks>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="M:Juillet.Web.Api.FromQueryParamAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.FromQueryParamAttribute"/> class.
+            </summary>
+            <param name="alias">The alias.</param>
+        </member>
+        <member name="P:Juillet.Web.Api.FromQueryParamAttribute.Alias">
+            <summary>
+            Gets the alias.
+            </summary>
+            <value>
+            The alias.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.Api.EntityBase">
+            <summary>
+            A base data contract for concrete entity data contract classes to extend.
+            </summary>
+        </member>
+        <member name="P:Juillet.Web.Api.EntityBase.Id">
+            <summary>
+            Gets or sets the entity id.
+            </summary>
+            <value>
+            The entity id.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.EntityBase.Name">
+            <summary>
+            Gets or sets the entity name.
+            </summary>
+            <value>
+            The entity name.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.EntityBase.Active">
+            <summary>
+            Gets or sets a value indicating whether active.
+            </summary>
+            <value>
+              <c>true</c> if active; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.EntityBase.CreatedBy">
+            <summary>
+            Gets or sets the user name that created this entity.
+            </summary>
+            <value>
+            The user name that created this entity.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.EntityBase.CreatedOn">
+            <summary>
+            Gets or sets the date and time this entity was created on.
+            </summary>
+            <value>
+            The date and time this entity was created on.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.EntityBase.ModifiedBy">
+            <summary>
+            Gets or sets the user name that last modified this entity.
+            </summary>
+            <value>
+            The user name that last modified this entity.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.EntityBase.ModifiedOn">
+            <summary>
+            Gets or sets the date and time this entity was last modified on.
+            </summary>
+            <value>
+            The date and time this entity was last modified on.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.Api.Link">
+            <summary>
+            Encapsulates a link for a web resource.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.Link.Self">
+            <summary>
+            Specifies the resource itself, typically in a response to a POST.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.Link.Next">
+            <summary>
+            Specifies the next resource, typically used in coordination with paging.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.Link.Delete">
+            <summary>
+            Specifies the link to delete a resource.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.Link.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.Link"/> class.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.Link.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.Link"/> class.
+            </summary>
+            <param name="rel">The relative.</param>
+            <param name="href">The href.</param>
+        </member>
+        <member name="P:Juillet.Web.Api.Link.Rel">
+            <summary>
+            Gets or sets the relationship.
+            </summary>
+            <value>
+            The relationship.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.Link.Href">
+            <summary>
+            Gets or sets the href.
+            </summary>
+            <value>
+            The href.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.Api.MessageResult">
+            <summary>
+            A simple web API result that contains a message.
+            </summary>
+        </member>
+        <member name="P:Juillet.Web.Api.MessageResult.Message">
+            <summary>
+            Gets or sets the message.
+            </summary>
+            <value>
+            The message.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.Api.NameValuePair">
+            <summary>
+            Represents a name value pair.
+            </summary>
+        </member>
+        <member name="P:Juillet.Web.Api.NameValuePair.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.NameValuePair.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="M:Juillet.Web.Api.NameValuePair.Equals(Juillet.Web.Api.NameValuePair)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.NameValuePair.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.NameValuePair.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.NameValuePair.op_Equality(Juillet.Web.Api.NameValuePair,Juillet.Web.Api.NameValuePair)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.NameValuePair.op_Inequality(Juillet.Web.Api.NameValuePair,Juillet.Web.Api.NameValuePair)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="T:Juillet.Web.Api.PagedCollection`1">
+            <summary>
+            A generic pages collection.
+            </summary>
+            <typeparam name="TResource">The type of the resource.</typeparam>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollection`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.PagedCollection`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollection`1.#ctor(System.Collections.Generic.IReadOnlyCollection{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.PagedCollection`1"/> class.
+            </summary>
+            <param name="collection">The collection.</param>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollection`1.Data">
+            <summary>
+            Gets or sets the data.
+            </summary>
+            <value>
+            The data.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollection`1.Metadata">
+            <summary>
+            Gets or sets the metadata.
+            </summary>
+            <value>
+            The metadata.
+            </value>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollection`1.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:Juillet.Web.Api.PagedCollectionBase">
+            <summary>
+            A base class for paged collections to extend and reuse.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollectionBase.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.PagedCollectionBase"/> class.
+            </summary>
+            <param name="totalCount">The total count.</param>
+            <param name="offset">The offset.</param>
+            <param name="limit">The limit.</param>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollectionBase.#ctor(Juillet.Web.Api.PagedCollectionMetadata)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.PagedCollectionBase"/> class.
+            </summary>
+            <param name="metadata">The metadata.</param>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionBase.Metadata">
+            <summary>
+            Gets or sets the metadata.
+            </summary>
+            <value>
+            The metadata.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.Api.PagedCollectionMetadata">
+            <summary>
+            Encapsulates metadata associated with a paged collection.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollectionMetadata.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.PagedCollectionMetadata"/> class.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollectionMetadata.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.PagedCollectionMetadata"/> class.
+            </summary>
+            <param name="totalCount">The total count.</param>
+            <param name="offset">The offset.</param>
+            <param name="limit">The limit.</param>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionMetadata.TotalCount">
+            <summary>
+            Gets or sets the total count.
+            </summary>
+            <value>
+            The total count.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionMetadata.Limit">
+            <summary>
+            Gets or sets the limit.
+            </summary>
+            <value>
+            The limit.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionMetadata.Offset">
+            <summary>
+            Gets or sets the offset.
+            </summary>
+            <value>
+            The offset.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionMetadata.TotalPageCount">
+            <summary>
+            Gets the total page count.
+            </summary>
+            <value>
+            The total page count.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionMetadata.PageNumber">
+            <summary>
+            Gets the page number.
+            </summary>
+            <value>
+            The page number.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionMetadata.StartPosition">
+            <summary>
+            Gets the start position of this page.
+            </summary>
+            <value>
+            The start position of this page.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionMetadata.EndPosition">
+            <summary>
+            Gets the end position of this page.
+            </summary>
+            <value>
+            The end position of this page.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionMetadata.HasNext">
+            <summary>
+            Gets a value indicating whether there is another page.
+            </summary>
+            <value>
+              <c>true</c> if there is another page; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollectionMetadata.Next">
+            <summary>
+            Gets metadata for the next page.
+            </summary>
+            <returns>Metadata for the next page.</returns>
+        </member>
+        <member name="P:Juillet.Web.Api.PagedCollectionMetadata.HasPrevious">
+            <summary>
+            Gets a value indicating whether there is a previous page.
+            </summary>
+            <value>
+              <c>true</c> if there is a previous page; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollectionMetadata.Previous">
+            <summary>
+            Gets metadata for the previous page.
+            </summary>
+            <returns>Metadata for the previous page.</returns>
+        </member>
+        <member name="M:Juillet.Web.Api.PagedCollectionMetadata.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:Juillet.Web.Api.PagingParameters">
+            <summary>
+            Represents the paging parameters.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.PagingParameters.DefaultSize">
+            <summary>
+            The default size of a page, always 100.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.PagingParameters.MinIndex">
+            <summary>
+            The zero-based minimum index of pages, always 0.
+            </summary>
+        </member>
+        <member name="F:Juillet.Web.Api.PagingParameters.MinSize">
+            <summary>
+            The minimum size of a page, always 1.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.PagingParameters.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.PagingParameters"/> class.
+            </summary>
+        </member>
+        <member name="M:Juillet.Web.Api.PagingParameters.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Juillet.Web.Api.PagingParameters"/> class.
+            </summary>
+            <param name="size">The page size (the number of items per page).</param>
+        </member>
+        <member name="P:Juillet.Web.Api.PagingParameters.Index">
+            <summary>
+            Gets or sets the page index.
+            </summary>
+            <value>
+            The page index.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.PagingParameters.Size">
+            <summary>
+            Gets or sets the page size.
+            </summary>
+            <value>
+            The page size.
+            </value>
+        </member>
+        <member name="M:Juillet.Web.Api.PagingParameters.Equals(Juillet.Web.Api.PagingParameters)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>
+            true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.PagingParameters.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.PagingParameters.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.PagingParameters.op_Equality(Juillet.Web.Api.PagingParameters,Juillet.Web.Api.PagingParameters)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.PagingParameters.op_Inequality(Juillet.Web.Api.PagingParameters,Juillet.Web.Api.PagingParameters)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.PagingParameters.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:Juillet.Web.Api.PagingParameters.ToQueryStringParameters(System.String,System.String,System.String)">
+            <summary>
+            Create the paging query string parameters.
+            </summary>
+            <param name="stem">The stem.</param>
+            <param name="indexParamName">Name of the index parameter.</param>
+            <param name="sizeParamName">Name of the size parameter.</param>
+            <returns>
+            A string of the form "page.index=2&amp;page.size=125".
+            </returns>
+        </member>
+        <member name="T:Juillet.Web.Api.WebErrorResult">
+            <summary>
+            Represents a typical web error response.
+            </summary>
+        </member>
+        <member name="P:Juillet.Web.Api.WebErrorResult.Message">
+            <summary>
+            Gets or sets the message.
+            </summary>
+            <value>
+            The message.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.WebErrorResult.ErrorCode">
+            <summary>
+            Gets or sets the error code.
+            </summary>
+            <value>
+            The error code.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.WebErrorResult.ErrorCorrelationId">
+            <summary>
+            Gets or sets the error correlation identifier.
+            </summary>
+            <value>
+            The error correlation identifier.
+            </value>
+        </member>
+        <member name="P:Juillet.Web.Api.WebErrorResult.MoreInfo">
+            <summary>
+            Gets or sets the more information.
+            </summary>
+            <value>
+            The more information.
+            </value>
+        </member>
+        <member name="T:Juillet.Web.Api.WebResourceBase">
+            <summary>
+            A base class for resources to extend and reuse.
+            </summary>
+        </member>
+        <member name="P:Juillet.Web.Api.WebResourceBase.Links">
+            <summary>
+            Gets or sets the links associated with this web resource.
+            </summary>
+            <value>
+            The links associated with this web resource.
+            </value>
+        </member>
+    </members>
+</doc>

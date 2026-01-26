@@ -1,0 +1,9 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.AffiliationInfo
+<div class="people-directory affiliation">
+  <div class="affiliation-info">
+    <span><a href="@Url.Action("Index", "Organization", new { id = Model.CorrelationId })">@Html.DisplayFor(m => m.Name)</a>
+    </span>
+    <span class="text-muted">@Html.DisplayFor(m => m.MembershipType)</span>
+  </div>
+  <div class="affiliation-avatar">@Html.DisplayFor(m => m.Avatar)</div>
+</div>

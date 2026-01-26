@@ -1,0 +1,11 @@
+﻿@model AccessManagement.Web.Areas.Organizations.ViewModels.Dashboard.ActionsSummaryCard
+<div id="actionsSummaryCard" class="card">
+  <div class="card-title">
+    <a href="@Url.Action("Actions")" class="btn btn-link">
+      <h5>Actions Pending <small>(for @Model.OrganizationName organization)</small></h5>
+    </a>
+  </div>
+  <div class="card-content">
+    @Html.DisplayFor(m => m.Actions, "OrganizationActionItemCollection")
+  </div>
+</div>

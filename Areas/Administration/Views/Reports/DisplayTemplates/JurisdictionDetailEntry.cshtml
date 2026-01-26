@@ -1,0 +1,57 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.Reports.JurisdictionDetailEntry
+
+<div class="panel">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-8">
+        <h4 class="heading-inline-block"><strong>@Html.DisplayFor(m => m.TenantTransitLocation.TransitLocation.Name)</strong></h4>
+      </div>
+    </div>
+    <div class="row m-t-sm">
+      <div class="col-md-3">
+        <img class="img-lg" src="@Model.AvatarInfo.Small" alt="Logo for @Html.ValueFor(m => m.TenantTransitLocation.TransitLocation.Name)" />
+      </div>
+      <div class="col-md-3">
+        <div class="row">
+          @Html.LabelFor(m => m.OrganizationCount)
+          <div class="pull-right">
+            @Html.DisplayFor(m => m.OrganizationCount)
+          </div>
+        </div>
+        <div class="row">
+          @Html.LabelFor(m => m.TotalPersonnelCount)
+          <div class="pull-right">
+            @Html.DisplayFor(m => m.TotalPersonnelCount)
+          </div>
+        </div>
+        <div class="row">
+          @Html.LabelFor(m => m.TotalEvents)
+          <div class="pull-right">
+            @Html.DisplayFor(m => m.TotalEvents)
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        @Html.ActionLink("Download Report", "ExportJurisdictionReport", new { jurisdictionId = Model.TenantTransitLocation.TransitLocation.CorrelationId }, new { @class = "btn btn-link" })
+      </div>
+    </div>
+    <div class="row m-t-sm">
+      <div class="col-sm-10">
+        <h4 class="border-bottom">@Html.GlyphFa("users") Organizations (@Model.OrganizationSummaries.Count())</h4>
+      </div>
+    </div>
+    <div class="card-content">
+      @foreach (var item in Model.OrganizationSummaries)
+      {
+        <div class="row">
+          <div class="col-md-11">
+            <p>
+              @Html.Partial("DisplayTemplates/OrganizationSummary", item)
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

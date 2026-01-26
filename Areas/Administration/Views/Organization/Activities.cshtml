@@ -1,0 +1,19 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.ViewModels.Framework.Activity.ActivityBrowser
+@{
+  Layout = "_OrganizationTabLayout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading">
+        <h4 class="heading-inline-block">@Html.GlyphFa("th") Activity</h4>
+      </div>
+      <div class="panel-body">
+        @Html.Partial("Framework/Activity/ActivityBrowser", Model)
+      </div>
+    </div>
+  </div>
+</div>
+

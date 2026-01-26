@@ -1,0 +1,8 @@
+﻿@using AccessManagement.Web.Areas.Administration.ViewModels
+@using AccessManagement.Models.Core
+@model IReadOnlyCollection<AvailabilityOf<TransitPurpose>>
+  
+@foreach (var entry in Model)
+{
+  @Html.DisplayFor(_ => entry, "TransitPurpose")
+}

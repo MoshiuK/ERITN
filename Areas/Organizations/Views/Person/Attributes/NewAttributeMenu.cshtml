@@ -1,0 +1,21 @@
+﻿@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+<div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    @Html.GlyphFa("plus") New Attribute <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right">
+    <li>@Html.DialogLink("Information Item", "#newInfoDialog")</li>
+    <li>@Html.DialogLink("Identification Document", "#newDocumentDialog")</li>
+    @*
+    An organization admin cannot create affiliations to other organizations. Omit this.
+    <li>@Html.DialogLink("Organization Affiliation", "#newAffiliationDialog")</li>
+    *@
+    <li>@Html.DialogLink("Certification", "#newCertificationDialog")</li>
+    @*
+      An organization admin cannot assign a jurisdictional role for the organization.  Omit this.
+    <li class="divider" role="separator"></li>
+    <li>@Html.DialogLink("Jurisdictional Role", "#newJurisdictionalRoleDialog")</li>
+    *@
+  </ul>
+</div>

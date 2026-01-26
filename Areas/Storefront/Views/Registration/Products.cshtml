@@ -1,0 +1,98 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.SimplePricingSectionDefinition
+@{
+  Layout = "../Shared/_StorefrontLayout.cshtml";
+  var referenceId = ViewBag.ReferenceId;
+  int quantity = (int)ViewBag.Quantity;
+}
+
+<div id="page-Pricing" class="storefront-landing">
+  @if (Model.AdditionalProducts.Length > 0)
+  {
+    foreach (var product in Model.AdditionalProducts)
+    {
+      var paymentLink = Url.Action("Payment", "Registration", new { referenceId, product.SubscriptionTermMonths, quantity, tenantProductId = product.ProductId, additionalInformation = product.Description });
+      <div class="row m-b-lg">
+        <a href="@paymentLink">
+          <img class="center-block border" src="@product.MoreInformationLink.Href" width="1000" alt="@product.Title" />
+        </a>
+      </div>
+    }
+  }
+
+  <div class="simple-pricing-section">
+    <div class="row">
+      <div class="col-md-4">
+        <ul class="price-left list-unstyled">
+          <li class="price-title brand-primary-bg">@Html.DisplayFor(m => m.Left.Title)</li>
+          <li class="price-description">@Html.DisplayFor(m => m.Left.Description)</li>
+          <li class="price-amount"><span>@Html.DisplayFor(m => m.Left.AmountCaption)</span></li>
+          <li class="price-amountperiod">@Html.DisplayFor(m => m.Left.AmountPeriodCaption)</li>
+          @foreach (var benefit in Model.Left.Benefits)
+          {
+            <li class="price-benefit">@Html.Raw(benefit)</li>
+          }
+          @if (Model.Left.MoreInformationLink != null)
+          {
+            <li>@Html.DisplayFor(m => m.Left.MoreInformationLink)</li>
+          }
+        </ul>
+        @if (Model.Left.ProductId != null && Model.Left.ProductId != Guid.Empty.ToString())
+        {
+          @Html.ActionLink("Choose", "Payment", new { referenceId, Model.Left.SubscriptionTermMonths, quantity, tenantProductId = Model.Left.ProductId }, new { @class = "btn btn-lg btn-primary" })
+        }
+        else
+        {
+          <button type="button" class="btn btn-lg" disabled>Unavailable</button>
+        }
+      </div>
+      <div class="col-md-4">
+        <ul class="price-center list-unstyled">
+          <li class="price-title brand-primary-bg">@Html.DisplayFor(m => m.Center.Title)</li>
+          <li class="price-description">@Html.DisplayFor(m => m.Center.Description)</li>
+          <li class="price-amount"><span>@Html.DisplayFor(m => m.Center.AmountCaption)</span></li>
+          <li class="price-amountperiod">@Html.DisplayFor(m => m.Center.AmountPeriodCaption)</li>
+          @foreach (var benefit in Model.Center.Benefits)
+          {
+            <li class="price-benefit">@Html.Raw(benefit)</li>
+          }
+          @if (Model.Center.MoreInformationLink != null)
+          {
+            <li>@Html.DisplayFor(m => m.Center.MoreInformationLink)</li>
+          }
+        </ul>
+        @if (Model.Center.ProductId != null && Model.Center.ProductId != Guid.Empty.ToString())
+        {
+          @Html.ActionLink("Choose", "Payment", new { referenceId, Model.Center.SubscriptionTermMonths, quantity, tenantProductId = Model.Center.ProductId }, new { @class = "btn btn-lg btn-primary" })
+        }
+        else
+        {
+          <button type="button" class="btn btn-lg" disabled>Unavailable</button>
+        }
+      </div>
+      <div class="col-md-4">
+        <ul class="price-right list-unstyled">
+          <li class="price-title brand-primary-bg">@Html.DisplayFor(m => m.Right.Title)</li>
+          <li class="price-description text-muted">@Html.DisplayFor(m => m.Right.Description)</li>
+          <li class="price-amount"><span>@Html.DisplayFor(m => m.Right.AmountCaption)</span></li>
+          <li class="price-amountperiod">@Html.DisplayFor(m => m.Right.AmountPeriodCaption)</li>
+          @foreach (var benefit in Model.Right.Benefits)
+          {
+            <li class="price-benefit">@Html.Raw(benefit)</li>
+          }
+          @if (Model.Right.MoreInformationLink != null)
+          {
+            <li>@Html.DisplayFor(m => m.Right.MoreInformationLink)</li>
+          }
+        </ul>
+        @if (Model.Right.ProductId != null && Model.Right.ProductId != Guid.Empty.ToString())
+        {
+          @Html.ActionLink("Choose", "Payment", new { referenceId, Model.Right.SubscriptionTermMonths, quantity, tenantProductId = Model.Right.ProductId }, new { @class = "btn btn-lg btn-primary" })
+        }
+        else
+        {
+          <button type="button" class="btn btn-lg" disabled>Unavailable</button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

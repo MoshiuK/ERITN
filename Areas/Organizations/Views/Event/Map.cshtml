@@ -1,0 +1,47 @@
+﻿@using AccessManagement.Web.Mvc
+@model List<AccessManagement.Web.Areas.Organizations.ViewModels.EventHub.MapViewModel>
+
+@{
+  Layout = "_EventHubLayout.cshtml";
+}
+
+<div class="border" id="activityMap"></div>
+
+<div>
+  <table id="activityTable" class="table table-condensed table-hover">
+    <tbody>
+      @foreach (var next in Model)
+      {
+        var geoAttrs = $"data-has-marker " +
+                       $"data-marker-activityType={next.CredentialActivityType.ValueType} " +
+                       $"data-marker-lat={next.Latitude} " +
+                       $"data-marker-lng={next.Longitude} " +
+                       $"data-marker-personfirstname={next.FirstName} " +
+                       $"data-marker-personlastname={next.LastName} " +
+                       $"data-marker-personinitials={next.Initials} " +
+                       $"data-marker-time={next.TimeString} " +
+                       $"data-marker-date={next.DateString}";
+
+      <tr @geoAttrs></tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/organizations.event.map.js"></script>
+  @Html.ScriptForGooglePlacesAutoComplete()
+}
+
+@section pagestyles {
+  <style type="text/css">
+    #activityMap {
+      margin-top: 10px;
+      margin-left: 0px;
+      height: 480px;
+      width: 100%;
+    }
+
+  </style>
+}

@@ -1,0 +1,40 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Reports.JurisdictionReportsPageViewModel
+@{
+  Layout = "../Shared/_HubLayout.cshtml";
+}
+
+@{
+  var initialSelectionTag = Model.InitialSelection.HasValue ? string.Format("data-sps-initial-selection={0}", Model.InitialSelection.Value) : string.Empty;
+}
+<div>
+  <div class="col-md-3">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="resultsPane">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th><small>Transit Locations</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              @{
+                foreach (var item in Model.Summaries)
+                {
+                  @Html.Partial("DisplayTemplates/JurisdictionReportSummaryLine", item)
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="detailPane" class="col-md-9" @initialSelectionTag>
+  </div>
+</div>
+
+@section pagescripts
+{
+  <script src="~/Scripts/pages/administration.reports.jurisdictionreport.js"></script>
+}

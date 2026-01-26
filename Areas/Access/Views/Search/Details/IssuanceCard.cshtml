@@ -1,0 +1,23 @@
+﻿@model AccessManagement.Framework.Credentials.CredentialSummary
+<div class="card">
+  <div class="card-content">
+    <h3 class="text-center">@Html.ValueFor(m => m.EmergencyEvent.Name)</h3>
+    <h4 class="text-center">@Html.ValueFor(m => m.CredentialType.Name)</h4>
+    <h4 class="text-center"><strong>@Html.ValueFor(m => m.ReferenceId)</strong></h4>
+    @Html.DisplayFor(m => m.AccessLevel)
+    <div class="row m-t-md m-b-md">
+      <div class="col-sm-3 text-center">
+        <img src="@Html.ValueFor(m => m.Jurisdiction.Avatar.Thumbnail)" alt="@Html.ValueFor(m => m.Jurisdiction.Name)" />
+      </div>
+      <div class="col-sm-9">
+        <h4 class="m-t-lg">@Html.DisplayFor(m => m.Jurisdiction.Name)</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        @Html.Partial("Partials/_PropertiesTable", Model.Properties)
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,82 @@
+﻿@using AccessManagement.Framework.Tenants
+@using AccessManagement.Models.Core
+@using Juillet.Web.Mvc.Html
+@model AccessManagement.Models.Core.OrganizationLocation
+@{
+  var lookup = (ITenantLookupTables)ViewBag.LookupTables;
+}
+
+@helper RenderAccessList()
+{
+  var types = new[]
+  {
+    (int) OrganizationLocationTraitTypes.EmergencyResponderOrganization,
+    (int) OrganizationLocationTraitTypes.RespondsToAllEvents,
+  };
+  var traits = Model.Traits.Where(t => types.Contains(t.OrganizationLocationTraitTypeId)).ToArray();
+  if (traits.Length > 0)
+  {
+    <div class="trait-section">
+      <small class="text-muted">SPECIFIC ACCESS</small>
+      <ul class="trait-list">
+        @Html.DisplayFor(_ => traits)
+      </ul>
+    </div>
+  }
+}
+
+@helper RenderCerraRelationship()
+{
+  var types = new[]
+  {
+    (int) OrganizationLocationTraitTypes.CerraJurisdictionRelationship,
+  };
+  var traits = Model.Traits.Where(t => types.Contains(t.OrganizationLocationTraitTypeId)).ToArray();
+  if (traits.Length > 0)
+  {
+    <div class="trait-section">
+      <small class="text-muted">RESPONSE RELATIONSHIP</small>
+      <ul class="trait-list">
+        @Html.DisplayFor(_ => traits)
+      </ul>
+    </div>
+  }
+}
+
+<tr class="organization-location-row">
+  <td class="name-cell m-b-sm">
+    <img class="m-r-sm" src="@lookup.TransitLocations[Model.TransitLocation.CorrelationId].ImageUri" alt="Logo for @Model.TransitLocation.Name" />
+    <span>
+      <strong>
+        @Html.DisplayFor(m => m.TransitLocation.Name)
+      </strong>
+    </span>
+  </td>
+  <td>
+    @Html.DisplayFor(m => m.AutoIssueCredentials, "AutoIssueCredentials")
+    @Html.DisplayFor(m => m.AutoDistributeCredentials, "AutoDistributeCredentials")
+    @RenderAccessList()
+    @RenderCerraRelationship()
+  </td>
+  <td class="text-center">
+    <a href="@Url.Action("EditOrganizationLocation", new { id = Model.Organization.CorrelationId, locationId = Model.TransitLocation.CorrelationId})"
+            class="btn btn-sm btn-default btn-circle">
+      @Html.GlyphFa("pencil", GlyphStyles.FixedWidth)
+    </a>
+    @using (Html.BeginForm("RemoveOrganizationLocation", "Organization",
+      new {id = Model.Organization.CorrelationId, locationId = Model.TransitLocation.CorrelationId},
+      FormMethod.Post, new {@class = "toolbar-inline-form form-inline", id = "form-" + Model.TransitLocation.CorrelationId}))
+    {
+      @Html.AntiForgeryToken()
+      <button action="delete-organization-location"
+              data-toggle="modal"
+              data-target="#confirmDeleteLocation"
+              data-form-id="#form-@Model.TransitLocation.CorrelationId"
+              class="btn btn-sm btn-danger btn-circle"
+              role="button" type="button">
+        @Html.GlyphFa("times", GlyphStyles.FixedWidth)
+      </button>
+    }
+  </td>
+</tr>
+

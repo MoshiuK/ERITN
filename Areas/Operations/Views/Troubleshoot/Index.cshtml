@@ -1,0 +1,40 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Operations.ViewModels.Troubleshoot.IndexPageViewModel
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-warning"><strong>Glimpse Diagnostics:</strong> Update modules and settings on the <a target="_blank" href="/Glimpse.axd">glimpse settings page @Html.GlyphFa("external-link")</a>.</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-heading">
+        <div class="card-title">
+          <h4>Health of resources</h4>
+        </div>
+      </div>
+      <div class="card-content">
+        @Html.DisplayFor(m => m.HealthProbes)
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-heading">
+        <div class="card-title">
+          <h4>Error probes</h4>
+        </div>
+      </div>
+      <div class="card-content">
+        <ul class="list-unstyled">
+          <li><div class="m-b-sm">@Html.ActionLink("401", "FailCurrentRequest", new { hint = "401" }, new { @class = "btn btn-danger" }) Raise a HTTP 401 error, expect <strong>external 401 page</strong>. </div></li>
+          <li><div class="m-b-sm">@Html.ActionLink("403", "FailCurrentRequest", new { hint = "403" }, new { @class = "btn btn-danger" }) Raise a HTTP 403 error, expect <strong>external 403 page</strong>. </div></li>
+          <li><div class="m-b-sm">@Html.ActionLink("404", "FailCurrentRequest", new { hint = "404" }, new { @class = "btn btn-danger" }) Raise a HTTP 404 error, expect <strong>external 404 page</strong>. </div></li>
+          <li><div class="m-b-sm">@Html.ActionLink("500", "FailCurrentRequest", new { hint = "500" }, new { @class = "btn btn-danger" }) Raise a HTTP 500 error, expect retreat to <strong>this page</strong>. </div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

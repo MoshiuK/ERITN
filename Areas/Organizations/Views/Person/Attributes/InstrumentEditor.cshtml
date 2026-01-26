@@ -1,0 +1,12 @@
+﻿@using AccessManagement.Framework.Instruments
+@model dynamic
+@{
+  var initialSelections = (IEnumerable<InitialSelectionInfo>) ViewBag.InitialSelections;
+}
+<div class="instrument-editor">
+  @Html.EditorForModel()
+  @foreach (var sel in initialSelections)
+  {
+    <div class="initial-selection" data-select-name="@sel.PropertyName" data-selected-id="@sel.Id"></div>
+  }
+</div>

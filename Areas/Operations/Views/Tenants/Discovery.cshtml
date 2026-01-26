@@ -1,0 +1,53 @@
+﻿@model AccessManagement.Web.Areas.Operations.ViewModels.Tenants.TenantDiscoveryPageViewModel
+@{
+  ViewBag.TenantId = Model.Tenant.CorrelationId;
+}
+<div class="row">
+  <div class="col-md-2">
+    @Html.Action("TenantNavigationLinks", new { selection = Model.Tenant.CorrelationId })
+  </div>
+  <div class="col-md-8">
+    @if (ViewBag.ShowMakeDiscoverable)
+    {
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-warning m-b-md">
+            <strong> NOT DISCOVERABLE:</strong> Discoverability metadata for this tenant has not been published (or has been removed).
+            Click Publish below to make this tenant discoverable to external applications.
+          </div>
+        </div>
+      </div>
+    }
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-content">
+            <h1>
+              Metadata for @Html.DisplayFor(m => m.Tenant.Name)
+            </h1>
+            @Html.DisplayFor(m => m.ReferenceData)
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-content">
+            <h1>Publish Tenant Metadata</h1>
+            <p class="text-muted">
+              Make metadata information about this tenant available to other applications, notably <strong>the Verify mobile app</strong>.
+            </p>
+            @Html.Partial("DiscoveryForm/TenantDiscoveryEditableDataForm", Model.EditableData)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @if (!ViewBag.ShowMakeDiscoverable)
+  {
+    <div class="col-md-2">
+      @Html.Partial("DiscoveryForm/UndiscoverForm")
+    </div>
+  }
+</div>

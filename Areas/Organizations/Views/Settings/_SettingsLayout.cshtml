@@ -1,0 +1,20 @@
+﻿@using Juillet.Web.Mvc
+@{
+  Layout = "../Shared/_OrganizationsLayout.cshtml";
+  var menuBar = (NavBar)ViewBag.MenuBar ?? new NavBar();
+}
+
+<div class="row m-b-sm">
+  <div class="col-md-12">
+    @Html.Partial("SettingsNavBar", menuBar)
+  </div>
+</div>
+
+<div class="m-w-25">
+  @RenderBody()
+</div>
+
+@section scripts
+{
+  @RenderSection("pagescripts", false)
+}

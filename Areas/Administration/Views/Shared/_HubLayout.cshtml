@@ -1,0 +1,21 @@
+﻿@using Juillet.Web.Mvc
+@{
+  Layout = "_AdministrationLayout.cshtml";
+  var hubNavBar = (NavBar)ViewBag.HubNavBar ?? new NavBar();
+}
+<div class="row m-sm">
+  <div class="col-md-12">
+    @Html.Partial("HubNavBar", hubNavBar)
+  </div>
+</div>
+
+@RenderBody()
+
+@section styles
+{
+  @RenderSection("pagestyles", false)
+}
+@section scripts
+{
+  @RenderSection("pagescripts", false)
+}

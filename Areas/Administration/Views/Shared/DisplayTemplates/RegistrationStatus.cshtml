@@ -1,0 +1,34 @@
+﻿@using AccessManagement.Models.Registration
+@model RegistrationStatus
+@{
+  string caption;
+  string cssClass;
+  switch (Model)
+  {
+    case RegistrationStatus.Reviewing:
+      caption = "UNDER REVIEW";
+      cssClass = "label label-warning";
+      break;
+    case RegistrationStatus.Registered:
+      caption = "REGISTERED";
+      cssClass = "label label-success";
+      break;
+    case RegistrationStatus.TimedOut:
+      caption = "TIMED OUT";
+      cssClass = "label label-danger";
+      break;
+    case RegistrationStatus.Failed:
+      caption = "FAILED";
+      cssClass = "label label-danger";
+      break;
+    case RegistrationStatus.Abandoned:
+      caption = "ABANDONED";
+      cssClass = "label label-danger";
+      break;
+    default:
+      caption = "UNKNOWN";
+      cssClass = "label label-default";
+      break;
+  }
+}
+<span class="@cssClass">@caption</span>

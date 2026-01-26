@@ -1,0 +1,22 @@
+﻿@using Juillet.Web.Mvc.Html
+@model AccessManagement.Web.Areas.Administration.ViewModels.PeopleHub.NoteEntry
+<div class="row">
+  <div class="col-md-1">
+    @Html.DisplayFor(m => m.AuthorAvatar)
+  </div>
+  <div class="col-md-10">
+    <a href="@Url.Action("Index", "Administrators", new { id = Model.AuthorId } )">@Html.DisplayFor(m => m.AuthorName)</a> writes:
+    <span>@Html.DisplayFor(m => m.Remarks)</span>
+    <p>
+    <small class="text-muted">@Html.DisplayFor(m => m.Date) at @Html.DisplayFor(m => m.Time)</small>
+    </p>
+  </div>
+  <div class="col-md-1">
+    @using (Html.BeginForm("DeleteNote", "Person", new {id = Model.MemberId, noteId = Model.NoteId}, FormMethod.Post))
+    {
+      @Html.AntiForgeryToken()
+
+      <button class="btn btn-sm btn-danger">@Html.GlyphFa("trash-o")</button>
+    }
+  </div>
+</div>

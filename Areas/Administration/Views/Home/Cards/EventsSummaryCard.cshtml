@@ -1,0 +1,27 @@
+﻿@model AccessManagement.Web.Areas.Administration.ViewModels.Home.EventsSummaryCardViewModel
+@using Juillet.Web.Mvc
+@using Juillet.Web.Mvc.Html
+<div class="card events-card">
+  <div class="card-heading">
+    <div class="card-title">
+      <h3 class="heading-inline-block">Emergency Events (@Html.ValueFor(m => m.Events.Count))</h3>
+      <div class="pull-right"><small><a href="@Url.Action("Index", "AccessHub")">All Events @Html.GlyphFa("arrow-circle-right")</a></small>
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    @if (Model.Events.Count > 0)
+    {
+      @Html.DisplayFor(m => m.Events)
+    }
+    else
+    {
+      var notFound = new NotFoundPane(
+        "No Active Events", 
+        new FaGlyph("bolt", GlyphStyles.X5, cssClasses: "text-info"), 
+        "There are no emergency events activated for the program at the moment."
+        );
+      @Html.DisplayFor(_ => notFound)
+    }
+  </div>
+</div>

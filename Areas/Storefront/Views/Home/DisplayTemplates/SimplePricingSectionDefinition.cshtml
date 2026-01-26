@@ -1,0 +1,80 @@
+﻿@model AccessManagement.Definitions.Storefront.LandingPages.SimplePricingSectionDefinition
+@{
+  Layout = "_LandingPageSectionLayout.cshtml";
+}
+<div class="simple-pricing-section">
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="price-left list-unstyled">
+        <li class="price-title brand-primary-bg">@Html.DisplayFor(m => m.Left.Title)</li>
+        <li class="price-description">@Html.DisplayFor(m => m.Left.Description)</li>
+        <li class="price-amount"><span>@Html.DisplayFor(m => m.Left.AmountCaption)</span></li>
+        <li class="price-amountperiod">@Html.DisplayFor(m => m.Left.AmountPeriodCaption)</li>
+        @foreach (var benefit in Model.Left.Benefits)
+        {
+          <li class="price-benefit">@Html.Raw(benefit)</li>
+        }
+        @if (Model.Left.MoreInformationLink != null)
+        {
+          <li>@Html.DisplayFor(m => m.Left.MoreInformationLink)</li>
+        }
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <ul class="price-center list-unstyled">
+        <li class="price-title brand-primary-bg">@Html.DisplayFor(m => m.Center.Title)</li>
+        <li class="price-description">@Html.DisplayFor(m => m.Center.Description)</li>
+        <li class="price-amount"><span>@Html.DisplayFor(m => m.Center.AmountCaption)</span></li>
+        <li class="price-amountperiod">@Html.DisplayFor(m => m.Center.AmountPeriodCaption)</li>
+        @foreach (var benefit in Model.Center.Benefits)
+        {
+          <li class="price-benefit">@Html.Raw(benefit)</li>
+        }
+        @if (Model.Center.MoreInformationLink != null)
+        {
+          <li>@Html.DisplayFor(m => m.Center.MoreInformationLink)</li>
+        }
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <ul class="price-right list-unstyled">
+        <li class="price-title brand-primary-bg">@Html.DisplayFor(m => m.Right.Title)</li>
+        <li class="price-description text-muted">@Html.DisplayFor(m => m.Right.Description)</li>
+        <li class="price-amount"><span>@Html.DisplayFor(m => m.Right.AmountCaption)</span></li>
+        <li class="price-amountperiod">@Html.DisplayFor(m => m.Right.AmountPeriodCaption)</li>
+        @foreach (var benefit in Model.Right.Benefits)
+        {
+          <li class="price-benefit">@Html.Raw(benefit)</li>
+        }
+        @if (Model.Right.MoreInformationLink != null)
+        {
+          <li>@Html.DisplayFor(m => m.Right.MoreInformationLink)</li>
+        }
+      </ul>      
+    </div>
+  </div>
+  <div class="row">
+    @foreach (var feature in Model.PricingFeatures)
+    {
+      @Html.DisplayFor(_ => feature)
+    }
+  </div>
+@if (Model.PricingFaq != null && Model.PricingFaq.Length > 0)
+{
+  <div class="feature-item">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Common questions about pricing</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      @foreach (var faq in Model.PricingFaq)
+      {
+        @Html.DisplayFor(_ => faq)
+      }
+    </div>
+  </div>
+}
+</div>
