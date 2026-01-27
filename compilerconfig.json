@@ -162,94 +162,163 @@
   },
   {
     "outputFile": "Content/theme/virginia/access.css",
-    "inputFile": "Content/theme/virginia/access.less"
+    "inputFile": "Content/theme/virginia/access.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/virginia/administration.css",
-    "inputFile": "Content/theme/virginia/administration.less"
+    "inputFile": "Content/theme/virginia/administration.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/virginia/brand.css",
-    "inputFile": "Content/theme/virginia/brand.less"
+    "inputFile": "Content/theme/virginia/brand.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/virginia/members.css",
-    "inputFile": "Content/theme/virginia/members.less"
+    "inputFile": "Content/theme/virginia/members.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/virginia/organizations.css",
-    "inputFile": "Content/theme/virginia/organizations.less"
+    "inputFile": "Content/theme/virginia/organizations.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/virginia/storefront.css",
-    "inputFile": "Content/theme/virginia/storefront.less"
+    "inputFile": "Content/theme/virginia/storefront.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/washington/access.css",
-    "inputFile": "Content/theme/washington/access.less"
+    "inputFile": "Content/theme/washington/access.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/washington/administration.css",
-    "inputFile": "Content/theme/washington/administration.less"
+    "inputFile": "Content/theme/washington/administration.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/washington/members.css",
-    "inputFile": "Content/theme/washington/members.less"
+    "inputFile": "Content/theme/washington/members.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/washington/organizations.css",
-    "inputFile": "Content/theme/washington/organizations.less"
+    "inputFile": "Content/theme/washington/organizations.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/washington/storefront.css",
-    "inputFile": "Content/theme/washington/storefront.less"
+    "inputFile": "Content/theme/washington/storefront.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/utah/brand.css",
-    "inputFile": "Content/theme/utah/brand.less"
+    "inputFile": "Content/theme/utah/brand.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/utah/administration.css",
-    "inputFile": "Content/theme/utah/administration.less"
+    "inputFile": "Content/theme/utah/administration.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/utah/access.css",
-    "inputFile": "Content/theme/utah/access.less"
+    "inputFile": "Content/theme/utah/access.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/utah/members.css",
-    "inputFile": "Content/theme/utah/members.less"
+    "inputFile": "Content/theme/utah/members.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/utah/organizations.css",
-    "inputFile": "Content/theme/utah/organizations.less"
+    "inputFile": "Content/theme/utah/organizations.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/utah/storefront.css",
-    "inputFile": "Content/theme/utah/storefront.less"
+    "inputFile": "Content/theme/utah/storefront.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/iowa/brand.css",
-    "inputFile": "Content/theme/iowa/brand.less"
+    "inputFile": "Content/theme/iowa/brand.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/iowa/storefront.css",
-    "inputFile": "Content/theme/iowa/storefront.less"
+    "inputFile": "Content/theme/iowa/storefront.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/iowa/organizations.css",
-    "inputFile": "Content/theme/iowa/organizations.less"
+    "inputFile": "Content/theme/iowa/organizations.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/iowa/members.css",
-    "inputFile": "Content/theme/iowa/members.less"
+    "inputFile": "Content/theme/iowa/members.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/iowa/administration.css",
-    "inputFile": "Content/theme/iowa/administration.less"
+    "inputFile": "Content/theme/iowa/administration.less",
+    "minify": {
+      "enabled": true
+    }
   },
   {
     "outputFile": "Content/theme/iowa/access.css",
-    "inputFile": "Content/theme/iowa/access.less"
+    "inputFile": "Content/theme/iowa/access.less",
+    "minify": {
+      "enabled": true
+    }
   }
 ]
