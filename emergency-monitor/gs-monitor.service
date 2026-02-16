@@ -1,0 +1,46 @@
+[Unit]
+Description=EEM Emergency Monitor (gs-monitor) - ERITN Admin Endpoint
+Documentation=file:///opt/emergency-monitor/UPTIME_RUNBOOK.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=exec
+User=root
+Group=root
+WorkingDirectory=/opt/emergency-monitor
+
+# Environment
+Environment=EEM_ADMIN_KEY=KMGI-EEM-ADMIN
+Environment=EEM_APK_URL=https://emergency.eritn.com/static/eem/app-release.apk
+Environment=EEM_INVITE_CODE=ERITN2026
+
+# Exec
+ExecStart=/usr/local/bin/gunicorn wsgi:app --config gunicorn.conf.py
+ExecReload=/bin/kill -s HUP $MAINPID
+
+# Hardened restart policy
+Restart=always
+RestartSec=3
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+# Security hardening
+ProtectSystem=strict
+ReadWritePaths=/opt/emergency-monitor/data /opt/emergency-monitor/logs
+ProtectHome=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+# Resource limits
+LimitNOFILE=65536
+TimeoutStartSec=15
+TimeoutStopSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=gs-monitor
+
+[Install]
+WantedBy=multi-user.target
