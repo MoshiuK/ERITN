@@ -5,7 +5,7 @@
 # Checks the /healthz endpoint. If not HTTP 200, restarts the service
 # and re-checks. Logs all actions to /opt/emergency-monitor/logs/healthcheck.log
 #
-set -euo pipefail
+set -u
 
 APP_DIR="/opt/emergency-monitor"
 LOG_FILE="${APP_DIR}/logs/healthcheck.log"
