@@ -13,8 +13,16 @@ ENDPOINT="https://localhost:5001/healthz"
 ADMIN_ENDPOINT="https://localhost:5001/eem/admin?status=pending&key=KMGI-EEM-ADMIN"
 MAX_RETRIES=2
 CURL_TIMEOUT=10
+NO_ENSURE="${1:-}"
 
 mkdir -p "${APP_DIR}/logs"
+
+# Unless called with --no-ensure (from daemon), ensure monitor daemon is alive.
+# This creates a self-healing loop: any manual healthcheck call will also
+# revive the monitoring daemon if it died.
+if [ "${NO_ENSURE}" != "--no-ensure" ]; then
+    /usr/local/bin/python3 "${APP_DIR}/monitor_daemon.py" ensure 2>/dev/null &
+fi
 
 log() {
     echo "$(date -u '+%Y-%m-%dT%H:%M:%SZ') $*" >> "${LOG_FILE}"
