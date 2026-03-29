@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Trading Advisor - 1.25% Daily Compound</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --green: #3fb950;
+            --red: #f85149;
+            --blue: #58a6ff;
+            --gold: #d29922;
+            --purple: #bc8cff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1e2e 0%, #0d1117 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 20px; }
+        .header h1 span { color: var(--gold); }
+        .header .target-badge {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .disclaimer {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            color: var(--red);
+            padding: 8px 24px;
+            font-size: 12px;
+            text-align: center;
+        }
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            background: var(--card);
+        }
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: var(--muted);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .tab:hover { color: var(--text); }
+        .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px 24px; }
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .card h2 { font-size: 16px; margin-bottom: 12px; color: var(--muted); font-weight: 500; }
+        .card h3 { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+
+        /* Grid */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        @media (max-width: 900px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        /* Stats */
+        .stat { text-align: center; }
+        .stat .value { font-size: 28px; font-weight: 700; }
+        .stat .label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+        .green { color: var(--green); }
+        .red { color: var(--red); }
+        .blue { color: var(--blue); }
+        .gold { color: var(--gold); }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { text-align: left; padding: 10px 12px; color: var(--muted); border-bottom: 1px solid var(--border); font-weight: 500; }
+        td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+        tr:hover { background: rgba(88, 166, 255, 0.04); }
+
+        /* Buttons */
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--card);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .btn:hover { border-color: var(--blue); }
+        .btn-primary { background: #238636; border-color: #238636; }
+        .btn-primary:hover { background: #2ea043; }
+        .btn-danger { background: transparent; border-color: var(--red); color: var(--red); }
+        .btn-sm { padding: 4px 10px; font-size: 12px; }
+
+        /* Forms */
+        input, select {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
+        }
+        input:focus, select:focus { outline: none; border-color: var(--blue); }
+        label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+        .form-group { margin-bottom: 12px; }
+
+        /* Advice Cards */
+        .advice-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .advice-card .coin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .advice-card .coin-name { font-size: 18px; font-weight: 600; text-transform: capitalize; }
+        .signal-badge {
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .signal-BUY { background: rgba(63, 185, 80, 0.15); color: var(--green); }
+        .signal-SELL { background: rgba(248, 81, 73, 0.15); color: var(--red); }
+        .signal-HOLD { background: rgba(139, 148, 158, 0.15); color: var(--muted); }
+        .confidence-high { border-left: 3px solid var(--green); }
+        .confidence-medium { border-left: 3px solid var(--gold); }
+        .confidence-low { border-left: 3px solid var(--muted); }
+        .reasons { list-style: none; margin-top: 8px; }
+        .reasons li { padding: 3px 0; font-size: 13px; color: var(--muted); }
+        .reasons li::before { content: "→ "; color: var(--blue); }
+        .price-levels {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        .price-level { text-align: center; }
+        .price-level .label { font-size: 11px; color: var(--muted); }
+        .price-level .price { font-size: 15px; font-weight: 600; }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+        }
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border);
+            border-top-color: var(--blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Compound chart area */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 12px;
+        }
+        canvas { width: 100% !important; }
+
+        /* Market ticker */
+        .ticker {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding: 12px 0;
+        }
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            font-size: 13px;
+        }
+        .ticker-item img { width: 20px; height: 20px; border-radius: 50%; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Crypto Trading <span>Advisor</span></h1>
+    <div class="target-badge">Target: 1.25% Daily Compound</div>
+</div>
+<div class="disclaimer">
+    ⚠ FOR EDUCATIONAL PURPOSES ONLY — This is not financial advice. Crypto trading carries substantial risk. Always do your own research.
+</div>
+
+<div class="tabs">
+    <div class="tab active" data-page="dashboard">Dashboard</div>
+    <div class="tab" data-page="advice">Trade Advice</div>
+    <div class="tab" data-page="signals">Signal Tracker</div>
+    <div class="tab" data-page="compound">Compound Calculator</div>
+    <div class="tab" data-page="daily">Daily Log</div>
+</div>
+
+<div class="container">
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="page active">
+        <div id="market-ticker" class="ticker" style="margin-bottom: 16px;"></div>
+
+        <div class="grid-4" id="dashboard-stats">
+            <div class="card stat">
+                <div class="value green" id="stat-today-return">—</div>
+                <div class="label">Today's Return</div>
+            </div>
+            <div class="card stat">
+                <div class="value blue" id="stat-signals-open">—</div>
+                <div class="label">Open Signals</div>
+            </div>
+            <div class="card stat">
+                <div class="value gold" id="stat-win-rate">—</div>
+                <div class="label">Win Rate</div>
+            </div>
+            <div class="card stat">
+                <div class="value" id="stat-compound-30d">—</div>
+                <div class="label">30-Day Projected ($1000)</div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h2>Market Overview</h2>
+                <table>
+                    <thead><tr><th>Coin</th><th>Price</th><th>24h</th><th>7d</th></tr></thead>
+                    <tbody id="market-table"></tbody>
+                </table>
+            </div>
+            <div class="card">
+                <h2>Recent Signals</h2>
+                <table>
+                    <thead><tr><th>Coin</th><th>Dir</th><th>Entry</th><th>Status</th><th>P&L</th></tr></thead>
+                    <tbody id="recent-signals-table"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRADE ADVICE -->
+    <div id="advice" class="page">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h2 style="font-size:18px;">AI Trading Advice</h2>
+            <div style="display:flex; gap:8px;">
+                <select id="advice-coin" style="width:200px;">
+                    <option value="bitcoin">Bitcoin (BTC)</option>
+                    <option value="ethereum">Ethereum (ETH)</option>
+                    <option value="solana">Solana (SOL)</option>
+                    <option value="binancecoin">BNB</option>
+                    <option value="cardano">Cardano (ADA)</option>
+                    <option value="ripple">XRP</option>
+                    <option value="polkadot">Polkadot (DOT)</option>
+                    <option value="avalanche-2">Avalanche (AVAX)</option>
+                    <option value="chainlink">Chainlink (LINK)</option>
+                    <option value="polygon">Polygon (MATIC)</option>
+                </select>
+                <button class="btn btn-primary" onclick="getAdvice()">Get Advice</button>
+                <button class="btn" onclick="getAllAdvice()">Scan All Top Coins</button>
+            </div>
+        </div>
+        <div id="advice-results">
+            <div class="loading">Select a coin and click "Get Advice" to analyze</div>
+        </div>
+    </div>
+
+    <!-- SIGNAL TRACKER -->
+    <div id="signals" class="page">
+        <div class="grid-2">
+            <div class="card">
+                <h2>Add New Signal</h2>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Coin</label>
+                        <select id="sig-coin">
+                            <option value="BTC">Bitcoin (BTC)</option>
+                            <option value="ETH">Ethereum (ETH)</option>
+                            <option value="SOL">Solana (SOL)</option>
+                            <option value="BNB">BNB</option>
+                            <option value="ADA">Cardano (ADA)</option>
+                            <option value="XRP">XRP</option>
+                            <option value="DOT">Polkadot (DOT)</option>
+                            <option value="AVAX">Avalanche (AVAX)</option>
+                            <option value="LINK">Chainlink (LINK)</option>
+                            <option value="MATIC">Polygon (MATIC)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Direction</label>
+                        <select id="sig-direction">
+                            <option value="LONG">LONG (Buy)</option>
+                            <option value="SHORT">SHORT (Sell)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label>Entry Price ($)</label>
+                        <input type="number" id="sig-entry" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Price ($)</label>
+                        <input type="number" id="sig-target" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Stop Loss ($)</label>
+                        <input type="number" id="sig-stop" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Notes / Source</label>
+                    <input type="text" id="sig-notes" placeholder="e.g. BG Commonwealth signal, Bunch chat code...">
+                </div>
+                <button class="btn btn-primary" onclick="addSignal()" style="margin-top:8px;">Add Signal</button>
+            </div>
+
+            <div class="card">
+                <h2>Close Signal</h2>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Signal ID</label>
+                        <input type="number" id="close-id" placeholder="Signal #">
+                    </div>
+                    <div class="form-group">
+                        <label>Exit Price ($)</label>
+                        <input type="number" id="close-price" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+                <button class="btn btn-danger" onclick="closeSignal()" style="margin-top:8px;">Close Signal</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>All Signals</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th><th>Coin</th><th>Dir</th><th>Entry</th>
+                        <th>Target</th><th>Stop</th><th>Status</th>
+                        <th>Exit</th><th>P&L %</th><th>Notes</th><th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="signals-table"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- COMPOUND CALCULATOR -->
+    <div id="compound" class="page">
+        <div class="card">
+            <h2>Daily Compound Growth Calculator</h2>
+            <div class="grid-4">
+                <div class="form-group">
+                    <label>Starting Balance ($)</label>
+                    <input type="number" id="calc-balance" value="1000" step="100">
+                </div>
+                <div class="form-group">
+                    <label>Daily Return (%)</label>
+                    <input type="number" id="calc-rate" value="1.25" step="0.05">
+                </div>
+                <div class="form-group">
+                    <label>Number of Days</label>
+                    <input type="number" id="calc-days" value="365" step="1">
+                </div>
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-primary" onclick="calculateCompound()" style="width:100%;">Calculate</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-4" id="compound-stats" style="display:none;">
+            <div class="card stat">
+                <div class="value green" id="comp-30d">—</div>
+                <div class="label">After 30 Days</div>
+            </div>
+            <div class="card stat">
+                <div class="value blue" id="comp-90d">—</div>
+                <div class="label">After 90 Days</div>
+            </div>
+            <div class="card stat">
+                <div class="value gold" id="comp-180d">—</div>
+                <div class="label">After 180 Days</div>
+            </div>
+            <div class="card stat">
+                <div class="value green" id="comp-final">—</div>
+                <div class="label">Final Balance</div>
+            </div>
+        </div>
+
+        <div class="card" id="compound-chart-card" style="display:none;">
+            <h2>Growth Projection</h2>
+            <div class="chart-container">
+                <canvas id="compoundChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card" id="compound-table-card" style="display:none;">
+            <h2>Monthly Milestones</h2>
+            <table>
+                <thead><tr><th>Day</th><th>Balance</th><th>Daily Profit</th><th>Total Profit</th><th>Total Return</th></tr></thead>
+                <tbody id="compound-milestones"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- DAILY LOG -->
+    <div id="daily" class="page">
+        <div class="card">
+            <h2>Log Today's Performance</h2>
+            <div class="grid-4">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="log-date">
+                </div>
+                <div class="form-group">
+                    <label>Starting Balance ($)</label>
+                    <input type="number" id="log-start" step="0.01" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label>Ending Balance ($)</label>
+                    <input type="number" id="log-end" step="0.01" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-primary" onclick="logDaily()" style="width:100%;">Log Day</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Notes</label>
+                <input type="text" id="log-notes" placeholder="What trades did you take today?">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Performance History</h2>
+            <table>
+                <thead>
+                    <tr><th>Date</th><th>Start</th><th>End</th><th>Daily %</th><th>Hit Target?</th><th>Notes</th></tr>
+                </thead>
+                <tbody id="daily-log-table"></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+// ==================== API ====================
+const API = {
+    async get(url) {
+        const res = await fetch(url);
+        return res.json();
+    },
+    async post(url, data) {
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        return res.json();
+    }
+};
+
+// ==================== TABS ====================
+document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.page).classList.add('active');
+    });
+});
+
+// ==================== FORMATTING ====================
+function fmt(n, decimals = 2) {
+    if (n == null) return '—';
+    return Number(n).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+function fmtUsd(n) { return n != null ? '$' + fmt(n) : '—'; }
+function pctClass(n) { return n >= 0 ? 'green' : 'red'; }
+function pctStr(n) { return n != null ? (n >= 0 ? '+' : '') + fmt(n) + '%' : '—'; }
+
+// ==================== DASHBOARD ====================
+async function loadDashboard() {
+    // Market data
+    try {
+        const market = await API.get('/api/market');
+        const ticker = document.getElementById('market-ticker');
+        const table = document.getElementById('market-table');
+
+        if (market.length) {
+            ticker.innerHTML = market.slice(0, 10).map(c => `
+                <div class="ticker-item">
+                    <img src="${c.image}" alt="${c.symbol}">
+                    <strong>${c.symbol.toUpperCase()}</strong>
+                    <span>${fmtUsd(c.current_price)}</span>
+                    <span class="${pctClass(c.price_change_percentage_24h)}">${pctStr(c.price_change_percentage_24h)}</span>
+                </div>
+            `).join('');
+
+            table.innerHTML = market.map(c => `
+                <tr>
+                    <td><strong>${c.symbol.toUpperCase()}</strong></td>
+                    <td>${fmtUsd(c.current_price)}</td>
+                    <td class="${pctClass(c.price_change_percentage_24h)}">${pctStr(c.price_change_percentage_24h)}</td>
+                    <td class="${pctClass(c.price_change_percentage_7d_in_currency)}">${pctStr(c.price_change_percentage_7d_in_currency)}</td>
+                </tr>
+            `).join('');
+        }
+    } catch (e) {
+        document.getElementById('market-table').innerHTML = '<tr><td colspan="4" style="color:var(--muted)">Could not load market data. Server may be starting up.</td></tr>';
+    }
+
+    // Signals
+    try {
+        const signals = await API.get('/api/signals');
+        const open = signals.filter(s => s.status === 'OPEN');
+        const closed = signals.filter(s => s.status === 'CLOSED');
+        const wins = closed.filter(s => s.pnl_percent > 0);
+
+        document.getElementById('stat-signals-open').textContent = open.length;
+        document.getElementById('stat-win-rate').textContent = closed.length ? fmt(wins.length / closed.length * 100, 0) + '%' : '—';
+
+        if (closed.length) {
+            const avgReturn = closed.reduce((a, s) => a + s.pnl_percent, 0) / closed.length;
+            document.getElementById('stat-today-return').textContent = pctStr(avgReturn);
+        }
+
+        document.getElementById('recent-signals-table').innerHTML = signals.slice(0, 8).map(s => `
+            <tr>
+                <td>${s.coin}</td>
+                <td><span class="signal-badge signal-${s.direction === 'LONG' ? 'BUY' : 'SELL'}" style="font-size:11px;padding:2px 8px;">${s.direction}</span></td>
+                <td>${fmtUsd(s.entry_price)}</td>
+                <td>${s.status}</td>
+                <td class="${pctClass(s.pnl_percent)}">${s.pnl_percent != null ? pctStr(s.pnl_percent) : '—'}</td>
+            </tr>
+        `).join('') || '<tr><td colspan="5" style="color:var(--muted)">No signals yet. Add some in Signal Tracker.</td></tr>';
+    } catch (e) { /* ok */ }
+
+    // 30-day compound projection
+    const balance = 1000;
+    const rate = 1.25;
+    const final30 = balance * Math.pow(1 + rate / 100, 30);
+    document.getElementById('stat-compound-30d').textContent = fmtUsd(final30);
+    document.getElementById('stat-compound-30d').className = 'value green';
+}
+
+// ==================== TRADE ADVICE ====================
+async function getAdvice() {
+    const coin = document.getElementById('advice-coin').value;
+    const container = document.getElementById('advice-results');
+    container.innerHTML = '<div class="loading"><div class="spinner"></div><br>Analyzing ' + coin + '...</div>';
+
+    try {
+        const data = await API.get('/api/advice?coin=' + coin);
+        container.innerHTML = renderAdviceCard(data);
+    } catch (e) {
+        container.innerHTML = '<div class="loading">Error fetching advice. Make sure the server is running.</div>';
+    }
+}
+
+async function getAllAdvice() {
+    const container = document.getElementById('advice-results');
+    container.innerHTML = '<div class="loading"><div class="spinner"></div><br>Scanning top coins... This may take a moment.</div>';
+
+    try {
+        const data = await API.get('/api/advice/all');
+        if (data.length) {
+            // Sort: BUY first, then by confidence
+            const order = { BUY: 0, SELL: 1, HOLD: 2 };
+            data.sort((a, b) => order[a.direction] - order[b.direction]);
+            container.innerHTML = data.map(renderAdviceCard).join('');
+        } else {
+            container.innerHTML = '<div class="loading">No results returned.</div>';
+        }
+    } catch (e) {
+        container.innerHTML = '<div class="loading">Error scanning coins.</div>';
+    }
+}
+
+function renderAdviceCard(d) {
+    return `
+        <div class="advice-card confidence-${d.confidence}">
+            <div class="coin-header">
+                <div>
+                    <span class="coin-name">${d.coin}</span>
+                    <span style="color:var(--muted);font-size:14px;margin-left:8px;">${fmtUsd(d.current_price)}</span>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <span style="font-size:12px;color:var(--muted);">Confidence: ${d.confidence}</span>
+                    <span class="signal-badge signal-${d.direction}">${d.direction}</span>
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;font-size:13px;margin-bottom:8px;">
+                <div>RSI: <strong class="${d.rsi < 30 ? 'green' : d.rsi > 70 ? 'red' : ''}">${d.rsi}</strong></div>
+                <div>7d MA: <strong>${fmtUsd(d.sma7)}</strong></div>
+                <div>20d MA: <strong>${fmtUsd(d.sma20)}</strong></div>
+                <div>Weekly: <strong class="${pctClass(d.weekly_change)}">${pctStr(d.weekly_change)}</strong></div>
+            </div>
+            <ul class="reasons">${d.reasons.map(r => '<li>' + r + '</li>').join('')}</ul>
+            <div class="price-levels">
+                <div class="price-level">
+                    <div class="label">Entry</div>
+                    <div class="price blue">${fmtUsd(d.suggested_entry)}</div>
+                </div>
+                <div class="price-level">
+                    <div class="label">Target (1.25%)</div>
+                    <div class="price green">${fmtUsd(d.suggested_target)}</div>
+                </div>
+                <div class="price-level">
+                    <div class="label">Stop Loss</div>
+                    <div class="price red">${fmtUsd(d.suggested_stop)}</div>
+                </div>
+            </div>
+            <div style="margin-top:10px;text-align:right;">
+                <button class="btn btn-sm btn-primary" onclick="quickSignal('${d.coin}','${d.direction === 'SELL' ? 'SHORT' : 'LONG'}',${d.suggested_entry},${d.suggested_target},${d.suggested_stop})">
+                    Track This Signal
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function quickSignal(coin, direction, entry, target, stop) {
+    API.post('/api/signals', {
+        coin: coin.toUpperCase(),
+        direction: direction,
+        entry_price: entry,
+        target_price: target,
+        stop_loss: stop,
+        notes: 'From AI advice scan',
+        source: 'advisor'
+    }).then(() => {
+        alert('Signal added! Check Signal Tracker tab.');
+        loadSignals();
+    });
+}
+
+// ==================== SIGNAL TRACKER ====================
+async function loadSignals() {
+    try {
+        const signals = await API.get('/api/signals');
+        document.getElementById('signals-table').innerHTML = signals.map(s => `
+            <tr>
+                <td>${s.id}</td>
+                <td><strong>${s.coin}</strong></td>
+                <td><span class="signal-badge signal-${s.direction === 'LONG' ? 'BUY' : 'SELL'}" style="font-size:11px;padding:2px 8px;">${s.direction}</span></td>
+                <td>${fmtUsd(s.entry_price)}</td>
+                <td>${fmtUsd(s.target_price)}</td>
+                <td>${fmtUsd(s.stop_loss)}</td>
+                <td>${s.status}</td>
+                <td>${fmtUsd(s.exit_price)}</td>
+                <td class="${pctClass(s.pnl_percent)}">${s.pnl_percent != null ? pctStr(s.pnl_percent) : '—'}</td>
+                <td style="font-size:12px;color:var(--muted);">${s.notes || ''}</td>
+                <td style="font-size:12px;color:var(--muted);">${s.created_at ? s.created_at.split(' ')[0] : ''}</td>
+            </tr>
+        `).join('') || '<tr><td colspan="11" style="color:var(--muted)">No signals yet.</td></tr>';
+    } catch (e) { /* ok */ }
+}
+
+async function addSignal() {
+    const data = {
+        coin: document.getElementById('sig-coin').value,
+        direction: document.getElementById('sig-direction').value,
+        entry_price: parseFloat(document.getElementById('sig-entry').value),
+        target_price: parseFloat(document.getElementById('sig-target').value) || null,
+        stop_loss: parseFloat(document.getElementById('sig-stop').value) || null,
+        notes: document.getElementById('sig-notes').value,
+        source: 'manual'
+    };
+    if (!data.entry_price) { alert('Enter an entry price'); return; }
+    await API.post('/api/signals', data);
+    document.getElementById('sig-entry').value = '';
+    document.getElementById('sig-target').value = '';
+    document.getElementById('sig-stop').value = '';
+    document.getElementById('sig-notes').value = '';
+    loadSignals();
+}
+
+async function closeSignal() {
+    const id = parseInt(document.getElementById('close-id').value);
+    const price = parseFloat(document.getElementById('close-price').value);
+    if (!id || !price) { alert('Enter signal ID and exit price'); return; }
+    const result = await API.post('/api/signals/close', { id, exit_price: price });
+    if (result.pnl_percent != null) {
+        alert(`Signal closed! P&L: ${result.pnl_percent >= 0 ? '+' : ''}${result.pnl_percent}%`);
+    }
+    document.getElementById('close-id').value = '';
+    document.getElementById('close-price').value = '';
+    loadSignals();
+}
+
+// ==================== COMPOUND CALCULATOR ====================
+let compoundChart = null;
+
+async function calculateCompound() {
+    const balance = parseFloat(document.getElementById('calc-balance').value) || 1000;
+    const rate = parseFloat(document.getElementById('calc-rate').value) || 1.25;
+    const days = parseInt(document.getElementById('calc-days').value) || 365;
+
+    const data = await API.get(`/api/compound?balance=${balance}&rate=${rate}&days=${days}`);
+
+    document.getElementById('compound-stats').style.display = 'grid';
+    document.getElementById('compound-chart-card').style.display = 'block';
+    document.getElementById('compound-table-card').style.display = 'block';
+
+    // Stats
+    const d30 = data.projection[Math.min(29, data.projection.length - 1)];
+    const d90 = data.projection[Math.min(89, data.projection.length - 1)];
+    const d180 = data.projection[Math.min(179, data.projection.length - 1)];
+    document.getElementById('comp-30d').textContent = fmtUsd(d30.balance);
+    document.getElementById('comp-90d').textContent = fmtUsd(d90.balance);
+    document.getElementById('comp-180d').textContent = d180 ? fmtUsd(d180.balance) : '—';
+    document.getElementById('comp-final').textContent = fmtUsd(data.final_balance);
+
+    // Chart
+    const labels = data.projection.filter((_, i) => i % Math.max(1, Math.floor(days / 60)) === 0).map(p => 'Day ' + p.day);
+    const values = data.projection.filter((_, i) => i % Math.max(1, Math.floor(days / 60)) === 0).map(p => p.balance);
+
+    if (compoundChart) compoundChart.destroy();
+    const ctx = document.getElementById('compoundChart').getContext('2d');
+    compoundChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Balance ($)',
+                data: values,
+                borderColor: '#3fb950',
+                backgroundColor: 'rgba(63, 185, 80, 0.1)',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { color: '#30363d' }, ticks: { color: '#8b949e', maxTicksLimit: 12 } },
+                y: { grid: { color: '#30363d' }, ticks: { color: '#8b949e', callback: v => '$' + v.toLocaleString() } }
+            }
+        }
+    });
+
+    // Milestones table
+    const milestones = [1, 7, 14, 30, 60, 90, 120, 180, 270, 365].filter(d => d <= days);
+    document.getElementById('compound-milestones').innerHTML = milestones.map(d => {
+        const p = data.projection[d - 1];
+        if (!p) return '';
+        const dailyProfit = d > 1 ? p.balance - data.projection[d - 2].balance : p.balance - balance;
+        return `
+            <tr>
+                <td>Day ${d}</td>
+                <td class="green"><strong>${fmtUsd(p.balance)}</strong></td>
+                <td>${fmtUsd(dailyProfit)}</td>
+                <td class="green">${fmtUsd(p.profit)}</td>
+                <td class="green">+${fmt(p.total_return_pct)}%</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// ==================== DAILY LOG ====================
+async function loadDailyLog() {
+    try {
+        const logs = await API.get('/api/daily-log');
+        document.getElementById('daily-log-table').innerHTML = logs.map(l => {
+            const hitTarget = l.daily_return_pct >= 1.25;
+            return `
+                <tr>
+                    <td>${l.date}</td>
+                    <td>${fmtUsd(l.starting_balance)}</td>
+                    <td>${fmtUsd(l.ending_balance)}</td>
+                    <td class="${pctClass(l.daily_return_pct)}">${pctStr(l.daily_return_pct)}</td>
+                    <td>${hitTarget ? '<span class="green">✓ YES</span>' : '<span class="red">✗ NO</span>'}</td>
+                    <td style="font-size:12px;color:var(--muted);">${l.notes || ''}</td>
+                </tr>
+            `;
+        }).join('') || '<tr><td colspan="6" style="color:var(--muted)">No daily logs yet.</td></tr>';
+    } catch (e) { /* ok */ }
+}
+
+async function logDaily() {
+    const date = document.getElementById('log-date').value;
+    const start = parseFloat(document.getElementById('log-start').value);
+    const end = parseFloat(document.getElementById('log-end').value);
+    const notes = document.getElementById('log-notes').value;
+    if (!date || !start || !end) { alert('Fill in date, starting and ending balance'); return; }
+    const pct = (end - start) / start * 100;
+    await API.post('/api/daily-log', {
+        date, starting_balance: start, ending_balance: end,
+        daily_return_pct: Math.round(pct * 100) / 100, notes
+    });
+    document.getElementById('log-start').value = '';
+    document.getElementById('log-end').value = '';
+    document.getElementById('log-notes').value = '';
+    loadDailyLog();
+}
+
+// ==================== INIT ====================
+document.getElementById('log-date').value = new Date().toISOString().split('T')[0];
+loadDashboard();
+loadSignals();
+loadDailyLog();
+
+// Refresh market data every 60 seconds
+setInterval(loadDashboard, 60000);
+</script>
+</body>
+</html>
