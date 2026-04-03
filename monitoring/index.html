@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Infrastructure Monitoring - TruEntry</title>
+    <link rel="stylesheet" href="../Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="../Content/font-awesome.min.css" />
+    <link rel="stylesheet" href="monitoring.css" />
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fa fa-server"></i> TruEntry Infrastructure
+            </a>
+            <div class="d-flex align-items-center">
+                <span class="badge bg-success me-3" id="system-status-badge">
+                    <i class="fa fa-circle"></i> All Systems Operational
+                </span>
+                <span class="text-light small" id="last-updated"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar + Content -->
+    <div class="dashboard-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-tab="overview">
+                        <i class="fa fa-tachometer"></i> Overview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-tab="services">
+                        <i class="fa fa-cubes"></i> Services
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-tab="websites">
+                        <i class="fa fa-globe"></i> Websites
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-tab="ai-deployments">
+                        <i class="fa fa-magic"></i> AI Deployments
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-tab="audit-log">
+                        <i class="fa fa-list-alt"></i> Audit Log
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-tab="access-control">
+                        <i class="fa fa-shield"></i> Access Control
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <!-- ==================== OVERVIEW TAB ==================== -->
+            <div class="tab-panel active" id="tab-overview">
+                <h4 class="mb-4">System Overview</h4>
+
+                <!-- Resource Gauges -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <div class="card gauge-card">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted">CPU Usage</h6>
+                                <div class="gauge-container">
+                                    <svg class="gauge" viewBox="0 0 120 120">
+                                        <circle class="gauge-bg" cx="60" cy="60" r="50" />
+                                        <circle class="gauge-fill gauge-cpu" cx="60" cy="60" r="50" />
+                                    </svg>
+                                    <div class="gauge-value" id="gauge-cpu-val">0%</div>
+                                </div>
+                                <canvas class="sparkline" id="spark-cpu" height="40"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card gauge-card">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted">Memory</h6>
+                                <div class="gauge-container">
+                                    <svg class="gauge" viewBox="0 0 120 120">
+                                        <circle class="gauge-bg" cx="60" cy="60" r="50" />
+                                        <circle class="gauge-fill gauge-mem" cx="60" cy="60" r="50" />
+                                    </svg>
+                                    <div class="gauge-value" id="gauge-mem-val">0%</div>
+                                </div>
+                                <canvas class="sparkline" id="spark-mem" height="40"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card gauge-card">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted">Disk I/O</h6>
+                                <div class="gauge-container">
+                                    <svg class="gauge" viewBox="0 0 120 120">
+                                        <circle class="gauge-bg" cx="60" cy="60" r="50" />
+                                        <circle class="gauge-fill gauge-disk" cx="60" cy="60" r="50" />
+                                    </svg>
+                                    <div class="gauge-value" id="gauge-disk-val">0%</div>
+                                </div>
+                                <canvas class="sparkline" id="spark-disk" height="40"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card gauge-card">
+                            <div class="card-body text-center">
+                                <h6 class="text-muted">Network</h6>
+                                <div class="gauge-container">
+                                    <svg class="gauge" viewBox="0 0 120 120">
+                                        <circle class="gauge-bg" cx="60" cy="60" r="50" />
+                                        <circle class="gauge-fill gauge-net" cx="60" cy="60" r="50" />
+                                    </svg>
+                                    <div class="gauge-value" id="gauge-net-val">0%</div>
+                                </div>
+                                <canvas class="sparkline" id="spark-net" height="40"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <!-- Top Services -->
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-header"><i class="fa fa-cubes"></i> Top Services</div>
+                            <div class="card-body p-0">
+                                <table class="table table-sm table-hover mb-0">
+                                    <thead><tr><th>Service</th><th>CPU</th><th>Status</th></tr></thead>
+                                    <tbody id="top-services-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pending AI Proposals -->
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-header"><i class="fa fa-magic"></i> Pending AI Proposals</div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush" id="pending-proposals"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Recent Activity Feed -->
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-header"><i class="fa fa-clock-o"></i> Recent Activity</div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush" id="recent-activity"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SERVICES TAB ==================== -->
+            <div class="tab-panel" id="tab-services">
+                <h4 class="mb-4">Services</h4>
+                <div class="row g-3" id="services-grid"></div>
+
+                <!-- Service Detail Modal -->
+                <div class="modal fade" id="serviceModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content bg-dark text-light">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="serviceModalTitle">Service Detail</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-3"><strong>Status:</strong> <span id="modal-status"></span></div>
+                                    <div class="col-md-3"><strong>CPU:</strong> <span id="modal-cpu"></span></div>
+                                    <div class="col-md-3"><strong>RAM:</strong> <span id="modal-ram"></span></div>
+                                    <div class="col-md-3"><strong>Uptime:</strong> <span id="modal-uptime"></span></div>
+                                </div>
+                                <h6>Live Logs</h6>
+                                <div class="log-viewer" id="modal-logs"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== WEBSITES TAB ==================== -->
+            <div class="tab-panel" id="tab-websites">
+                <h4 class="mb-4">Website Monitoring</h4>
+                <div class="row g-3" id="websites-grid"></div>
+            </div>
+
+            <!-- ==================== AI DEPLOYMENTS TAB ==================== -->
+            <div class="tab-panel" id="tab-ai-deployments">
+                <h4 class="mb-4">AI Deployment Proposals</h4>
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle"></i>
+                    <strong>Human-in-the-loop:</strong> AI agents propose changes; a minimum of <strong>2 human approvals</strong> are required before any deployment proceeds.
+                </div>
+                <div id="proposals-list"></div>
+            </div>
+
+            <!-- ==================== AUDIT LOG TAB ==================== -->
+            <div class="tab-panel" id="tab-audit-log">
+                <h4 class="mb-4">Audit Log</h4>
+                <div class="mb-3">
+                    <div class="btn-group btn-group-sm" id="audit-filters">
+                        <button class="btn btn-outline-secondary active" data-filter="all">All</button>
+                        <button class="btn btn-outline-primary" data-filter="human">Human</button>
+                        <button class="btn btn-outline-warning" data-filter="ai">AI Agent</button>
+                        <button class="btn btn-outline-info" data-filter="system">System</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead><tr><th>Timestamp</th><th>Actor</th><th>Action</th><th>Target</th><th>Details</th></tr></thead>
+                        <tbody id="audit-log-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== ACCESS CONTROL TAB ==================== -->
+            <div class="tab-panel" id="tab-access-control">
+                <h4 class="mb-4">Access Control (RBAC)</h4>
+
+                <!-- RBAC Table -->
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fa fa-users"></i> Role Permissions</div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered mb-0">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Permission</th>
+                                        <th class="text-center">Admin</th>
+                                        <th class="text-center">AI Agent</th>
+                                        <th class="text-center">Developer</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rbac-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secrets Vault -->
+                <div class="card">
+                    <div class="card-header"><i class="fa fa-lock"></i> Secrets Vault</div>
+                    <div class="card-body p-0">
+                        <div class="alert alert-warning m-3 mb-0">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            <strong>Key Principle:</strong> AI agents never touch raw secrets. All credentials are scoped and masked.
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover mb-0">
+                                <thead><tr><th>Secret Name</th><th>Scope</th><th>Value</th><th>Last Rotated</th><th>Next Rotation</th></tr></thead>
+                                <tbody id="secrets-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../Scripts/jquery-3.7.1.min.js"></script>
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/Chart.bundle.min.js"></script>
+    <script src="monitoring.js"></script>
+</body>
+</html>
