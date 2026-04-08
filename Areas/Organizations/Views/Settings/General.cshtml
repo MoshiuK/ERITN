@@ -1,4 +1,4 @@
-﻿@using AccessManagement.Web.Mvc
+@using AccessManagement.Web.Mvc
 @model AccessManagement.Web.Areas.Administration.ViewModels.Organizations.OrganizationGeneralSettings
 
 @{
@@ -23,9 +23,6 @@
         </div>
     </div>
     <div class="panel-body">
-
-        <div id="saveAlert" class="alert" style="display:none;" role="alert"></div>
-
         @using (@Html.BeginForm("General", "Settings", null, FormMethod.Post, new { id = "generalSettingsForm" }))
         {
             @Html.AntiForgeryToken()
@@ -34,7 +31,6 @@
             @Html.HiddenFor(model => model.RegistrationData.PlaceId)
 
             <label class="control-label">Organization Information</label>
-
             <div class="form-group">
                 @Html.LabelFor(model => model.RegistrationData.Name)
                 @Html.EditorFor(model => model.RegistrationData.Name, new { htmlAttributes = new { @class = "form-control org-field", @readonly = "readonly" } })
@@ -57,7 +53,6 @@
             </div>
 
             <br />
-
             <label class="control-label">Business Contact</label>
             <div class="form-group">
                 @Html.LabelFor(model => model.BusinessContact.Name)
@@ -112,11 +107,9 @@
     }
 </style>
 
-@section pagescripts
-{
+@section pagescripts {
     <script src="~/Scripts/pages/organizations.settings.general.js"></script>
     @Html.ScriptForGooglePlacesAutoComplete()
-
     @if (!Model.HasCompletedSettingsTour)
     {
         <script type="text/javascript" src="~/Scripts/spstour.js"></script>
