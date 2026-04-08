@@ -2,7 +2,7 @@ $(document).ready(function () {
     // Prevent accidental form submission via Enter key
     $(window).keydown(function (evt) {
         if (evt.keyCode === 13) {
-            event.preventDefault();
+            evt.preventDefault();
             return false;
         }
         return true;
@@ -60,7 +60,7 @@ var AccessManagement;
                         _this.exitEditMode();
                     });
 
-                    // Save button — AJAX POST to persist changes
+                    // Save button — submit form to persist changes
                     $("#btnSave").on("click", function () {
                         _this.saveChanges();
                     });
@@ -73,7 +73,6 @@ var AccessManagement;
                     $("#btnEdit").hide();
                     $("#btnSave").show();
                     $("#btnCancel").show();
-                    this.hideAlert();
                 };
 
                 // Switch to view mode: make fields read-only, swap buttons
@@ -106,52 +105,12 @@ var AccessManagement;
                     _this.hiddenPlaceId.val(_this._originalValues["RegistrationData_PlaceId"] || "");
                 };
 
-                // AJAX POST — serialises the entire form and sends it to the server
+                // Submit the form natively — the server-side controller handles
+                // the POST and redirects back to this page on success.
                 GeneralPage.prototype.saveChanges = function () {
-                    var _this = this;
                     var $saveBtn = $("#btnSave");
-
                     $saveBtn.prop("disabled", true).text("Saving…");
-
-                    $.ajax({
-                        url: $("#generalSettingsForm").attr("action") || window.location.pathname,
-                        method: "POST",
-                        data: $("#generalSettingsForm").serialize(),
-                        success: function () {
-                            _this.exitEditMode();
-                            _this.showAlert("success", "Organization details updated successfully.");
-                        },
-                        error: function (xhr) {
-                            var message = "An error occurred while saving. Please try again.";
-                            if (xhr.status === 400) {
-                                message = "Please check your entries and try again.";
-                            }
-                            _this.showAlert("danger", message);
-                        },
-                        complete: function () {
-                            $saveBtn.prop("disabled", false).html('<i class="glyphicon glyphicon-floppy-disk"></i> Save');
-                        }
-                    });
-                };
-
-                GeneralPage.prototype.showAlert = function (type, message) {
-                    var $alert = $("#saveAlert");
-                    $alert
-                        .removeClass("alert-success alert-danger alert-info")
-                        .addClass("alert-" + type)
-                        .text(message)
-                        .show();
-
-                    // Auto-dismiss success messages after 4 seconds
-                    if (type === "success") {
-                        setTimeout(function () {
-                            $alert.fadeOut();
-                        }, 4000);
-                    }
-                };
-
-                GeneralPage.prototype.hideAlert = function () {
-                    $("#saveAlert").hide();
+                    $("#generalSettingsForm")[0].submit();
                 };
 
                 GeneralPage.prototype.clearLocationFields = function () {
