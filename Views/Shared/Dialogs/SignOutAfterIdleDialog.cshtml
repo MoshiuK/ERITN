@@ -1,8 +1,8 @@
 ﻿@using AccessManagement.Web.Mvc
 @if (!Html.IsDebug() && User.Identity.IsAuthenticated)
 {
-  var waitInterval = 10;
-  var idleTimeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
+  var waitInterval = 30;
+  var idleTimeout = (int)TimeSpan.FromMinutes(60).TotalMilliseconds;
   
   <div id="signOutAfterIdleDialog" 
        class="modal fade" 
